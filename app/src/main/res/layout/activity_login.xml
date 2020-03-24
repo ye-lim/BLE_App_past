@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center">
+    <VideoView
+        android:id="@+id/video_view"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/logo"
+       android:orientation="vertical"
+        android:gravity="bottom"
+        android:layout_marginBottom="35dp">
+        <ImageView
+            android:layout_width="350dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/logo" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:gravity="center"
+            android:layout_marginTop="-28dp"
+            android:textColor="@color/titlte_small"
+            android:text="@string/title_small"/>
+
+    </LinearLayout>
+
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:id="@+id/appbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <!--android:connect_text="dd"-->
+            <!--app:popupTheme="@style/AppTheme.PopupOverlay">-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:connect_text="로그인 화면"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:id="@+id/toolbar_title"-->
+                <!--android:textSize="20sp"-->
+                <!--/>-->
+        <!--</android.support.v7.widget.Toolbar>-->
+
+    <!--</android.support.design.widget.AppBarLayout>-->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:id="@+id/lin_login"
+        android:visibility="invisible"
+        android:background="@xml/login_background"
+        android:orientation="vertical"
+        android:gravity="center">
+            <EditText
+                android:id="@+id/userId"
+                android:layout_width="260dp"
+                android:layout_height="54dp"
+                android:hint="아이디"
+                android:visibility="invisible"
+                android:paddingLeft="30dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#ccffffff"
+                android:background="@xml/login_id"
+                android:textSize="19dp" />
+            <EditText
+                android:id="@+id/userPwd"
+                android:layout_width="260dp"
+                android:visibility="invisible"
+                android:layout_height="54dp"
+                android:layout_marginTop="15dp"
+                android:paddingLeft="30dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#ccffffff"
+                android:background="@xml/login_id"
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                android:textSize="19dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/lin_login_small"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:textColor="#E4E4E4"
+            android:textSize="19dp"
+            android:background="@xml/login_login"
+            android:text="login"/>
+        <Button
+            android:id="@+id/renewPwBtn"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:textColor="#E4E4E4"
+            android:textSize="19dp"
+            android:layout_marginLeft="40dp"
+            android:background="@xml/login_login"
+            android:text="비밀번호 재설정"/>
+        <Button
+            android:id="@+id/joinBtn"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:textColor="#E4E4E4"
+            android:textSize="19dp"
+            android:layout_marginLeft="40dp"
+            android:background="@xml/login_login"
+            android:text="회원가입"/>
+    </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+
+    <!--<android.support.design.widget.BottomNavigationView-->
+        <!--android:id="@+id/bottaom_navigation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:itemBackground="@color/colorPrimary"-->
+        <!--app:itemIconTint="@color/bottom_section_color"-->
+        <!--app:itemTextColor="@color/bottom_section_color"-->
+        <!--app:layout_anchorGravity="bottom"-->
+        <!--app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"-->
+        <!--app:menu="@menu/bottom_navigation_main" />-->
+
+</RelativeLayout>

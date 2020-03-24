@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+
+            <ImageView
+                android:layout_width="280dp"
+                android:layout_height="100dp"
+                android:src="@drawable/logo"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My Page"
+                android:textColor="#CC9900"
+                android:layout_marginBottom="10dp"
+                android:textSize="35dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="아이디"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/user_id"
+                android:layout_width="52mm"
+                android:layout_height="7mm"
+                android:background="@xml/join_main"
+                android:paddingLeft="10dp"
+                android:textSize="18dp"
+                android:textColor="@color/join_edit" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="이름"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="52mm"
+                android:layout_height="7mm"
+                android:background="@xml/join_main"
+                android:paddingLeft="10dp"
+                android:textSize="18dp"
+                android:textColor="@color/join_edit" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="비밀번호"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/user_pw"
+                android:inputType="textPassword"
+                android:layout_width="52mm"
+                android:layout_height="7mm"
+                android:background="@xml/join_main"
+                android:paddingLeft="10dp"
+                android:textSize="18dp"
+                android:textColor="@color/join_edit" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="비밀번호 확인"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                android:textSize="25dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/user_pw_ch"
+                        android:inputType="textPassword"
+                        android:layout_width="45mm"
+                        android:layout_height="7mm"
+                        android:background="@xml/join_main"
+                        android:paddingLeft="10dp"
+                        android:textSize="18dp"
+                        android:textColor="@color/join_edit"/>
+
+                    <Button
+                        android:id="@+id/pw_up_btn"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="수   정"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/white"
+                        android:background="@xml/join_main_sex"/>
+                </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="휴대전화"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                android:textSize="25dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/user_tell"
+                    android:layout_width="45mm"
+                    android:layout_height="7mm"
+                    android:background="@xml/join_main"
+                    android:paddingLeft="10dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/join_edit"/>
+
+                <Button
+                    android:id="@+id/tell_up_btn"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="수   정"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:background="@xml/join_main_sex"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="생년월일"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/user_day"
+                android:layout_width="52mm"
+                android:layout_height="7mm"
+                android:background="@xml/join_main"
+                android:paddingLeft="10dp"
+                android:textSize="18dp"
+                android:textColor="@color/join_edit" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="성별"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/user_sex"
+                android:layout_width="52mm"
+                android:layout_height="7mm"
+                android:background="@xml/join_main"
+                android:paddingLeft="10dp"
+                android:textSize="18dp"
+                android:textColor="@color/join_edit" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/su_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="완            료"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:background="@xml/join_main_sex"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

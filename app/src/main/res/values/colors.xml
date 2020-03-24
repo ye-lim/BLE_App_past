@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="first_onboard">#A7A9B0</color>
+    <color name="three_onboard">#CBB29E</color>
+    <color name="titlte_small">#444444</color>
+    <color name="약관">#3A404C</color>
+    <color name="black">#000000</color>
+    <color name="약관btn">#23A95A</color>
+    <color name="white">#ffffff</color>
+    <color name="join">#06234E</color>
+    <color name="join_edit">#4E5460</color>
+    <color name="enable">#aaaaaa</color>
+    <color name="able">#125B8F</color>
+    <color name="logo_color">#011E41</color>
+    <color name="logo_set_color">#F5CA82</color>
+</resources>
