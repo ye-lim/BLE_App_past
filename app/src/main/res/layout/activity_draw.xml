@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp">
     <TextView
+        android:id="@+id/welcome_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="안녕하세요 송서원 고객님"
@@ -27,6 +28,7 @@
         android:layout_gravity="bottom"
         />
         <Button
+            android:id="@+id/logout_btn"
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:text="LOGOUT"

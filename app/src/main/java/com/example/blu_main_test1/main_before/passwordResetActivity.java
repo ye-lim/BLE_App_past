@@ -37,6 +37,7 @@ public class passwordResetActivity extends AppCompatActivity {
 
         findViewById(R.id.sendButton).setOnClickListener(onClickListener);
 
+        /*
         //툴바 기능
         Toolbar toolbar;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -45,6 +46,8 @@ public class passwordResetActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setTitle("비밀번호 재설정");
+
+         */
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -61,7 +64,7 @@ public class passwordResetActivity extends AppCompatActivity {
     private void send() {
         String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
         if (email.length() > 0) {
-            mAuth.sendPasswordResetEmail(email)
+            FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -71,7 +74,7 @@ public class passwordResetActivity extends AppCompatActivity {
                         }
                     });
         } else {
-            Toast.makeText(passwordResetActivity.this, "이메일을 입력해 주세.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(passwordResetActivity.this, "이메일을 입력해 주세요.", Toast.LENGTH_SHORT).show();
         }
     }
 }

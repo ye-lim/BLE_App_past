@@ -5,13 +5,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -30,6 +34,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
 import java.util.regex.Pattern;
 
 
@@ -38,7 +44,7 @@ public class join_main extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "join_main";
 
-    EditText name, year, month, day, phone_number;
+    private EditText user_name, user_id, user_pw, userpwdck, year, month,day, user_tel;
     Button man, woman;
     @Override
 
@@ -48,8 +54,35 @@ public class join_main extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        man = (Button)findViewById(R.id.man);
+        woman = (Button)findViewById(R.id.woman);
+
         findViewById(R.id.idoverlap).setOnClickListener(onClickListener);
         findViewById(R.id.next).setOnClickListener(onClickListener);
+
+
+        user_name = (EditText)findViewById(R.id.user_name);
+        user_id = (EditText)findViewById(R.id.user_id);
+        user_pw = (EditText)findViewById(R.id.user_pw);
+        userpwdck = (EditText)findViewById(R.id.userpwdck);
+        year = (EditText)findViewById(R.id.year);
+        month = (EditText)findViewById(R.id.month);
+        day = (EditText)findViewById(R.id.day);
+        user_tel = (EditText)findViewById(R.id.phone_number);
+
+        user_name.addTextChangedListener(textWatcher);
+        user_id.addTextChangedListener(textWatcher);
+        user_pw.addTextChangedListener(textWatcher);
+        userpwdck.addTextChangedListener(textWatcher);
+        year.addTextChangedListener(textWatcher);
+        month.addTextChangedListener(textWatcher);
+        day.addTextChangedListener(textWatcher);
+        user_tel.addTextChangedListener(textWatcher);
+        findViewById(R.id.next).setEnabled(false);
+        findViewById(R.id.next).setFocusable(false);
+
+
+
 
         //툴바 기능
         Toolbar toolbar;
@@ -59,7 +92,38 @@ public class join_main extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setTitle("회원가입");
+
+        //textWatcher
+        //phone_number.addTextChangedListener(new ValidationTextWatcher(phone_number));
+        //editText.addTextChangedListener(new ValidationTextWatcher(editText));
     }
+
+    private final  TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            if(user_id.getText().toString().length() > 0 && user_name.getText().toString().length() > 0 && user_pw.getText().toString().length() > 0 &&
+                    userpwdck.getText().toString().length() > 0 && year.getText().toString().length() > 0 && month.getText().toString().length() > 0 &&
+                    day.getText().toString().length() > 0 && user_tel.getText().toString().length() >0) {
+
+                findViewById(R.id.next).setEnabled(true);
+                findViewById(R.id.next).setFocusable(true);
+                findViewById(R.id.next).setBackgroundColor(getResources().getColor(R.color.join));
+
+            }
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
 
     //활동 초기화 시 사용자가 현재 로그인되어 있는지 확인함.
     @Override
@@ -70,7 +134,6 @@ public class join_main extends AppCompatActivity {
         //updateUI(currentUser);
     }
 
-    int user_sex;
 
     //public void next(View v) 부분과 OnClickListener로 합침
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -79,16 +142,13 @@ public class join_main extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.idoverlap:
                     idOverlap();
+                    ifOverlap_ID = true;
                     break;
                 case R.id.next:
-                    signUp();
-                    break;
-                case R.id.man:
-                    whichsex(1);
-                    //user_sex = R.id.man;
-                    break;
-                case R.id.woman:
-                    whichsex(2);
+                    if(!ifOverlap_ID) {
+                        Toast.makeText(join_main.this, "아이디 중복확인을 해주세요.", Toast.LENGTH_SHORT).show();
+                    } else
+                        signUp();
                     break;
             }
         }
@@ -102,26 +162,21 @@ public class join_main extends AppCompatActivity {
                 man.setTextColor(R.color.white);
                 woman.setBackgroundResource(R.xml.join_main_sex2);
                 woman.setTextColor(Color.parseColor("#a606234E"));
+                whichSex = true;
                 break;
             case R.id.woman :
                 man.setBackgroundResource(R.xml.join_main_sex2);
                 man.setTextColor(Color.parseColor("#a606234E"));
                 woman.setBackgroundResource(R.xml.join_main_sex);
                 woman.setTextColor(R.color.white);
+                whichSex = false;
                 break;
         }
     }
 
-    private int whichsex(int i){
-        int sexofUser = 0;
-        if(i == 1) {
-            sexofUser = R.id.man;
-        }
-        else if(i==2){
-            sexofUser = R.id.woman;
-        }
-        return sexofUser;
-    }
+    boolean whichSex = true;
+    boolean ifOverlap_ID = false;
+
 
     //Sign up new users
     private void signUp() {
@@ -129,9 +184,12 @@ public class join_main extends AppCompatActivity {
         final String user_name=((EditText)findViewById(R.id.user_name)).getText().toString();
 
         //gender
-        //int genderGroupID = user_sex;
-        int genderGroupID = whichsex(1);
-        final String user_sex = ((Button)findViewById(genderGroupID)).getText().toString();
+        final String female = woman.getText().toString();
+        final String male =  man.getText().toString();
+        final String user_sex;
+        if (whichSex) {
+            user_sex = male;
+        } else user_sex = female;
 
         //생년월일
         final String year=((EditText)findViewById(R.id.year)).getText().toString();
@@ -143,12 +201,17 @@ public class join_main extends AppCompatActivity {
         //전화번호
         final String user_tel=((EditText) findViewById(R.id.phone_number)).getText().toString();
 
+        //아이디, 비밀번호, 비밀번호확인
         final String user_id = ((EditText)findViewById(R.id.user_id)).getText().toString();
         final String user_pw = ((EditText)findViewById(R.id.user_pw)).getText().toString();
         String passwordCheck = ((EditText)findViewById(R.id.userpwdck)).getText().toString();
 
+        //TextInputEditText password;
+        //password = (TextInputEditText) findViewById(R.id.user_pw);
+
+
         if(user_id.length() > 0 && user_pw.length() > 0 && passwordCheck.length() > 0 && user_name.length() > 0 && user_tel.length() > 0){
-            if(user_pw.equals(passwordCheck)){
+            if(user_pw.equals(passwordCheck) && checkPhoneNum(user_tel)){
                 mAuth.createUserWithEmailAndPassword(user_id, user_pw)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -159,7 +222,6 @@ public class join_main extends AppCompatActivity {
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
                                     Toast.makeText(join_main.this, "회원가입에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                                    //-showToast(join_main.this, "회원가입에 성공하였습니다.");
                                     startActivity(new Intent(join_main.this, Main_view_pager.class));
                                     //UI
                                     //updateUI(user);
@@ -199,7 +261,7 @@ public class join_main extends AppCompatActivity {
                 Toast.makeText(join_main.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
             }
         }else {
-            Toast.makeText(join_main.this, "모든 정보를 기입해 주세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(join_main.this, "모든 정보를 기입해 주세요..", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -226,7 +288,7 @@ public class join_main extends AppCompatActivity {
 
                             }
                             if (checked) {
-                                Toast.makeText(join_main.this, "사용가능한 아이디입니다", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(join_main.this, "사용가능한 아이디입니다.", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -237,7 +299,6 @@ public class join_main extends AppCompatActivity {
 
     public void userOverlap(){ //제작중
         final EditText name = ((EditText)findViewById(R.id.user_name));
-        //final EditText bd = ((EditText)findViewById(R.id.year));
         final EditText tel = ((EditText)findViewById(R.id.phone_number));
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -265,6 +326,34 @@ public class join_main extends AppCompatActivity {
                 });
     }
 
+    /*private class ValidationTextWatcher implements TextWatcher {
+        private View view;
+        private ValidationTextWatcher(View view) {
+            this.view = view;
+        }
+        public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+            //텍스트 변결 후 발생할 이벤트를 작성.
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+            //텍스트의 길이가 변경되었을 경우 발생할 이벤트를 작성
+        }
+
+        /*@Override
+        public void afterTextChanged(Editable editable) {
+            //테스트가 변경될때마다 발생할 이벤트를 작성.
+            switch (view.getId()) {
+                case R.id.phone_number:
+                    checkPhoneNum();
+                    break;
+                case R.id.user_id:
+                    checkEmail();
+                    break;
+            }
+        }*/
+    //}
+
     public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
                     "\\@" +
@@ -275,15 +364,83 @@ public class join_main extends AppCompatActivity {
                     ")+"
     );
 
-    public static final Pattern BD_PATTERN = Pattern.compile(
-            ""
+    public static final Pattern PHONE_PATTERN = Pattern.compile(
+            "^01(?:0|1|[6-9])[-]?(\\d{3}|\\d{4})[-]?(\\d{4})$"
     );
 
+    private void requestFocus(View view){
+        if (view.requestFocus()){
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+    /*private boolean validatePassword(String pwpw) {
+        if(pwpw.getText().toString().trim.isEmpty()) {
+            pass.setError("Password is required");
+            requestFocus(pwpw);
+            return false;
+        }
+        else if(pwpw.getText().toString().length() < 6) {
+            pass.setError("Password can't be less than 6 digit");
+            requestFocus(pwpw);
+            return false;
+        }
+        else pass.setErrorEnabled(false);
+        return true;
+    }*/
     private boolean checkEmail(String email) {
         return EMAIL_ADDRESS_PATTERN.matcher(email).matches();
     }
+    private boolean checkPhoneNum(String user_phone){
+        return PHONE_PATTERN.matcher(user_phone).matches();
+    }
 
-    /*public void next(View v){
+
+    /*public void textWatcher(){
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //텍스트 변경 후 발생할 이벤트를 작성.
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //텍스트의 길이가 변경되었을 경우 발생할 이벤트를 작성
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+               //테스트가 변경될때마다 발생할 이벤트를 작성.
+               if(editable.toString().length()<6){
+                    email.setError("Email");
+               } else email.setErrorEnabled(false);
+            }
+        };
+    }*/
+
+    //check validate function
+    /*private boolean checkEverything(String user_pw) {
+        boolean checkE = false;
+        if(checkPhoneNum(user_pw)) {
+            checkE = true;
+        }
+        else {
+            checkE = false;
+            Toast.makeText(join_main.this, "핸드폰 번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
+        }
+        if(checkEmail(String user_email)) {
+            checkE = true;
+        }
+        else {
+            checkE = false;
+            Toast.makeText(join_main.this, "올바른 이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show();
+        }
+        if(!isEmpty()) checkE = true;
+        else checkE = false;
+        return true;
+    }*/
+
+    /*기존코드
+    public void next(View v){
         if(v.getId()==R.id.next){
             //   if(name.getText().toString().equals("")||year.getText().toString().equals("")||month.getText().toString().equals("")||day.getText().toString().equals("")) {
             //    Toast.makeText(getApplicationContext(),"모든 내용을 입력해주세요", Toast.LENGTH_SHORT).show();
@@ -317,19 +474,3 @@ public class join_main extends AppCompatActivity {
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
     }*/
-
-/*
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
-.then(function() {
-  var provider = new firebase.auth.GoogleAuthProvider();
-  // In memory persistence will be applied to the signed in Google user
-  // even though the persistence was set to 'none' and a page redirect
-  // occurred.
-  return firebase.auth().signInWithRedirect(provider);
-})
-.catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-});
- */

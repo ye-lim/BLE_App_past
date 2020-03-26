@@ -1,117 +1,364 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-    <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-    <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical">
-
-    <android.support.v7.widget.Toolbar android:layout_height="wrap_content" android:layout_width="match_parent" app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" android:background="@color/join" android:id="@+id/toolbar"/>
-
-
-   <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:layout_marginTop="25dp" android:layout_marginLeft="20dp">
-
-    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:textSize="25dp" android:layout_marginBottom="10dp" android:textColor="@color/black" android:text="성명"/>
-
-    <EditText android:layout_height="7mm" android:layout_width="52mm" android:background="@xml/join_main" android:id="@+id/user_name" android:textSize="18dp" android:textColor="@color/join_edit" android:hint="성명을 입력해주세요" android:paddingLeft="10dp"/>
-
-</LinearLayout>
-
-
-   <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:layout_marginTop="25dp" android:layout_marginLeft="20dp">
-
-    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:textSize="25dp" android:layout_marginBottom="10dp" android:textColor="@color/black" android:text="아이디"/>
-
-
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent">
-
-    <EditText android:layout_height="7mm" android:layout_width="35mm" android:background="@xml/join_main" android:id="@+id/user_id" android:textSize="18dp" android:textColor="@color/join_edit" android:hint="아이디를 지정해주세요" android:paddingLeft="10dp"/>
-
-    <Button android:layout_height="7mm" android:layout_width="21mm" android:background="@xml/join_main_sex" android:id="@+id/idoverlap" android:layout_marginLeft="10dp" android:textSize="18dp" android:textColor="@color/white" android:text="아이디 중복 확인"/>
-
-</LinearLayout>
-
-</LinearLayout>
-
-
-   <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:layout_marginTop="25dp" android:layout_marginLeft="20dp">
-
-    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:textSize="25dp" android:layout_marginBottom="10dp" android:textColor="@color/black" android:text="비밀번호"/>
-
-    <EditText android:layout_height="7mm" android:layout_width="52mm" android:background="@xml/join_main" android:id="@+id/user_pw" android:textSize="18dp" android:textColor="@color/join_edit" android:hint="비밀번호를 지정해주세요" android:paddingLeft="10dp"/>
-
-</LinearLayout>
-
-
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:layout_marginTop="25dp" android:layout_marginLeft="20dp">
-
-    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:textSize="25dp" android:layout_marginBottom="10dp" android:textColor="@color/black" android:text="비밀번호 재입력"/>
-
-    <EditText android:layout_height="7mm" android:layout_width="52mm" android:background="@xml/join_main" android:id="@+id/userpwdck" android:textSize="18dp" android:textColor="@color/join_edit" android:hint="동일한 비밀번호를 재입력해주세요" android:paddingLeft="10dp"/>
-
-</LinearLayout>
-
-
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:layout_marginTop="25dp" android:layout_marginLeft="20dp">
-
-    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:textSize="25dp" android:layout_marginBottom="10dp" android:textColor="@color/black" android:text="성별"/>
-
-
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:gravity="center">
-
-    <Button android:layout_height="wrap_content" android:layout_width="160dp" android:background="@xml/join_main_sex" android:id="@+id/man" android:textSize="16dp" android:textColor="@color/white" android:text="남 자" android:onClick="sex"/>
-
-    <Button android:layout_height="wrap_content" android:layout_width="160dp" android:background="@xml/join_main_sex2" android:id="@+id/woman" android:layout_marginLeft="20dp" android:textSize="16dp" android:textColor="#a606234E" android:text="여 자" android:onClick="sex"/>
-
-</LinearLayout>
-
-</LinearLayout>
-
-
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:layout_marginTop="25dp" android:layout_marginLeft="20dp">
-
-    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:textSize="25dp" android:layout_marginBottom="10dp" android:textColor="@color/black" android:text="생년월일"/>
-
-
-   <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_marginRight="50dp">
-
-    <EditText android:layout_height="50dp" android:layout_width="80dp" android:background="@xml/join_main" android:id="@+id/year" android:textSize="16dp" android:textColor="@color/join_edit" android:hint="년도" android:gravity="center" android:layout_weight="1"/>
-
-    <EditText android:layout_height="50dp" android:layout_width="80dp" android:background="@xml/join_main" android:id="@+id/month" android:layout_marginLeft="10dp" android:textSize="16dp" android:textColor="@color/join_edit" android:hint="월" android:gravity="center" android:layout_weight="1"/>
-
-    <EditText android:layout_height="50dp" android:layout_width="80dp" android:background="@xml/join_main" android:id="@+id/day" android:layout_marginLeft="10dp" android:textSize="16dp" android:textColor="@color/join_edit" android:hint="일" android:gravity="center" android:layout_weight="1"/>
-
-</LinearLayout>
-
-</LinearLayout>
-
-    <!-- <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="20dp" android:layout_marginTop="25dp" android:orientation="vertical"> <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="휴대전화" android:textColor="@color/black" android:layout_marginBottom="10dp" android:textSize="25dp" /> <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginRight="50dp" > <Button android:id="@+id/sk" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:text="SKT" android:textSize="14dp" android:textColor="#06234E" android:background="#00ffffff" android:onClick="tel"/> <Button android:id="@+id/kt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginLeft="10dp" android:text="KT" android:textSize="14dp" android:textColor="@color/white" android:onClick="tel" android:background="@xml/join_main_sex"/> <Button android:id="@+id/lg" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginLeft="10dp" android:text="LG+" android:textSize="14dp" android:textColor="#06234E" android:onClick="tel" android:background="#00ffffff"/> <Button android:id="@+id/chip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginLeft="10dp" android:text="알뜰" android:textSize="14dp" android:textColor="#06234E" android:onClick="tel" android:background="#00ffffff"/> </LinearLayout> </LinearLayout> -->
-
-
-
-   <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:layout_marginTop="25dp" android:layout_marginLeft="20dp">
-
-    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:textSize="25dp" android:layout_marginBottom="10dp" android:textColor="@color/black" android:text="휴대전화"/>
-
-
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent">
-
-    <EditText android:layout_height="7mm" android:layout_width="35mm" android:background="@xml/join_main" android:id="@+id/phone_number" android:textSize="18dp" android:textColor="@color/join_edit" android:hint="ex) 010-0000-0000" android:paddingLeft="10dp"/>
-
-    <Button android:layout_height="7mm" android:layout_width="21mm" android:background="@xml/join_main_sex" android:layout_marginLeft="10dp" android:textSize="18dp" android:textColor="@color/white" android:text="인증번호 받기"/>
-
-</LinearLayout>
-
-</LinearLayout>
-
-    <!-- <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="20dp" android:layout_marginTop="25dp" android:orientation="vertical"> <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="인증번호 입력" android:textColor="@color/black" android:layout_marginBottom="10dp" android:textSize="25dp" /> <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"> <EditText android:layout_width="35mm" android:layout_height="7mm" android:background="@xml/join_main" android:paddingLeft="10dp" android:textSize="18dp" android:textColor="@color/join_edit" android:hint="인증번호를 입력해주세요"/> <Button android:layout_width="21mm" android:layout_height="7mm" android:text="확 인" android:textSize="18dp" android:layout_marginLeft="10dp" android:textColor="@color/white" android:background="@xml/join_main_sex"/> </LinearLayout> </LinearLayout> -->
-
-
-
-    <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:layout_marginTop="20dp" android:gravity="bottom">
-    <Button android:layout_height="64dp" android:layout_width="match_parent" android:background="@color/join" android:id="@+id/next" android:textSize="21dp" android:textColor="@color/white" android:text="완 료" android:onClick="next"/>
-
-</LinearLayout>
-
-</LinearLayout>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:background="@color/join"
+            android:id="@+id/toolbar"/>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="25dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:text="성명"/>
+
+            <EditText
+                android:layout_height="7mm"
+                android:layout_width="52mm"
+                android:background="@xml/join_main"
+                android:id="@+id/user_name"
+                android:textSize="18dp"
+                android:textColor="@color/join_edit"
+                android:hint="성명을 입력해주세요"
+                android:paddingLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="25dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:text="아이디"/>
+
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <EditText
+                    android:layout_height="7mm"
+                    android:layout_width="35mm"
+                    android:background="@xml/join_main"
+                    android:id="@+id/user_id"
+                    android:textSize="18dp"
+                    android:textColor="@color/join_edit"
+                    android:hint="아이디를 지정해주세요"
+                    android:paddingLeft="10dp"/>
+
+                <Button
+                    android:layout_height="7mm"
+                    android:layout_width="21mm"
+                    android:background="@xml/join_main_sex"
+                    android:id="@+id/idoverlap"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/white"
+                    android:text="아이디 중복 확인"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="25dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:text="비밀번호"/>
+
+            <EditText
+                android:layout_height="7mm"
+                android:layout_width="52mm"
+                android:background="@xml/join_main"
+                android:id="@+id/user_pw"
+                android:textSize="18dp"
+                android:textColor="@color/join_edit"
+                android:hint="비밀번호를 지정해주세요"
+                android:paddingLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="25dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:text="비밀번호 재입력"/>
+
+            <EditText
+                android:layout_height="7mm"
+                android:layout_width="52mm"
+                android:background="@xml/join_main"
+                android:id="@+id/userpwdck"
+                android:textSize="18dp"
+                android:textColor="@color/join_edit"
+                android:hint="동일한 비밀번호를 재입력해주세요"
+                android:paddingLeft="10dp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="25dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:text="성별"/>
+
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center">
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="160dp"
+                    android:background="@xml/join_main_sex"
+                    android:id="@+id/man"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:text="남 자"
+                    android:onClick="sex"/>
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="160dp"
+                    android:background="@xml/join_main_sex2"
+                    android:id="@+id/woman"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="16dp"
+                    android:textColor="#a606234E"
+                    android:text="여 자"
+                    android:onClick="sex"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="25dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:text="생년월일"/>
+
+
+            <!--생년월일 받아오기-->
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginRight="50dp">
+                <!--<DatePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/datePicker"
+                    android:layout_gravity="center_horizontal"
+                    android:datePickerMode="spinner"
+                    android:calendarViewShown="false"/>-->s
+                <EditText
+                    android:layout_height="50dp"
+                    android:layout_width="80dp"
+                    android:background="@xml/join_main"
+                    android:id="@+id/year"
+                    android:textSize="16dp"
+                    android:textColor="@color/join_edit"
+                    android:hint="년도"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_height="50dp"
+                    android:layout_width="80dp"
+                    android:background="@xml/join_main"
+                    android:id="@+id/month"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/join_edit"
+                    android:hint="월"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:layout_height="50dp"
+                    android:layout_width="80dp"
+                    android:background="@xml/join_main"
+                    android:id="@+id/day"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/join_edit"
+                    android:hint="일"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:layout_marginLeft="20dp"
+         android:layout_marginTop="25dp"
+         android:orientation="vertical">
+         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="휴대전화"
+            android:textColor="@color/black"
+            android:layout_marginBottom="10dp"
+            android:textSize="25dp" />
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp" >
+            <Button android:id="@+id/sk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SKT"
+            android:textSize="14dp"
+            android:textColor="#06234E"
+             android:background="#00ffffff"
+             android:onClick="tel"/>
+             <Button
+             android:id="@+id/kt"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:layout_marginLeft="10dp"
+             android:text="KT"
+             android:textSize="14dp"
+             android:textColor="@color/white"
+             android:onClick="tel"
+             android:background="@xml/join_main_sex"/>
+             <Button android:id="@+id/lg" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginLeft="10dp" android:text="LG+" android:textSize="14dp" android:textColor="#06234E" android:onClick="tel" android:background="#00ffffff"/> <Button android:id="@+id/chip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginLeft="10dp" android:text="알뜰" android:textSize="14dp" android:textColor="#06234E" android:onClick="tel" android:background="#00ffffff"/> </LinearLayout> </LinearLayout> -->
+
+
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="25dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:text="휴대전화"/>
+
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <EditText
+                    android:layout_height="7mm"
+                    android:layout_width="35mm"
+                    android:background="@xml/join_main"
+                    android:id="@+id/phone_number"
+                    android:textSize="18dp"
+                    android:textColor="@color/join_edit"
+                    android:hint="ex) 010-0000-0000"
+                    android:paddingLeft="10dp"/>
+
+                <Button
+                    android:layout_height="7mm"
+                    android:layout_width="21mm"
+                    android:background="@xml/join_main_sex"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/white"
+                    android:text="인증번호 받기"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="20dp" android:layout_marginTop="25dp" android:orientation="vertical"> <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="인증번호 입력" android:textColor="@color/black" android:layout_marginBottom="10dp" android:textSize="25dp" /> <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"> <EditText android:layout_width="35mm" android:layout_height="7mm" android:background="@xml/join_main" android:paddingLeft="10dp" android:textSize="18dp" android:textColor="@color/join_edit" android:hint="인증번호를 입력해주세요"/> <Button android:layout_width="21mm" android:layout_height="7mm" android:text="확 인" android:textSize="18dp" android:layout_marginLeft="10dp" android:textColor="@color/white" android:background="@xml/join_main_sex"/> </LinearLayout> </LinearLayout> -->
+
+
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="bottom">
+            <Button
+                android:layout_height="64dp"
+                android:layout_width="match_parent"
+                android:background="@color/next"
+                android:id="@+id/next"
+                android:textSize="21dp"
+                android:textColor="@color/white"
+                android:text="완 료"
+                android:onClick="next"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </ScrollView>

@@ -1,6 +1,7 @@
 package com.example.blu_main_test1.Main_page;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
@@ -52,8 +54,14 @@ import com.example.blu_main_test1.Main_page.listadapter;
 import com.example.blu_main_test1.Main_page.sampledata;
 import com.example.blu_main_test1.MypageActivity;
 import com.example.blu_main_test1.R;
+import com.example.blu_main_test1.main_before.login;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
@@ -81,6 +89,11 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
     private TextView draw_state, draw_temper, draw_version, draw_coffee_b,draw_coffee_s, draw_tea_b, draw_tea_s;
     public static TextView draw_connect;
     String amount;
+    private TextView welcome_name;
+    private Button logout_btn;
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +113,15 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
         draw_coffee_s=(TextView)findViewById(R.id.draw_coffee_s);
         draw_tea_b=(TextView)findViewById(R.id.draw_tea_b);
         draw_tea_s=(TextView)findViewById(R.id.draw_tea_s);
+
+        welcome_name=(TextView)findViewById(R.id.welcome_name);
+        logout_btn = (Button)findViewById(R.id.logout_btn);
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+
+        logout_btn.setOnClickListener(onClickListener);
+        welcome_name();
+
 
         //상단바 설정
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -267,6 +289,54 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
 
 
 
+    }
+
+    private void welcome_name(){ //사용자 이름을 가져오는 메소드
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("user_info").document(user.getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    welcome_name.setText("안녕하세요 "+document.getData().get("user_name").toString()+" 고객님");
+
+                    if (document.exists()) {
+                        //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        //  Log.d(TAG, "No such document");
+                    }
+                } else {
+                    //  Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+    }
+
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            singOut();
+            startloginActivity();
+
+        }
+    };
+
+    public void singOut(){
+        FirebaseAuth.getInstance().signOut();
+        SharedPreferences auto = getSharedPreferences("auto",Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = auto.edit();
+        editor.clear();
+        editor.commit();
+
+    }
+
+    public void startloginActivity(){
+        Intent intent = new Intent(getApplicationContext(), login.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
     //버튼기능 활성화
     @SuppressLint("ResourceAsColor")

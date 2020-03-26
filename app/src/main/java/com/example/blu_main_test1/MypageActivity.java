@@ -1,6 +1,8 @@
 package com.example.blu_main_test1;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
+import com.example.blu_main_test1.main_before.login;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,14 +32,15 @@ import java.util.List;
 
 public class MypageActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    TextView user_id;
-    TextView user_name;
-    EditText user_pw;
-    EditText user_pw_ch;
-    EditText user_tell;
-    TextView user_day;
-    TextView user_sex;
-    FirebaseUser user;
+    private TextView user_id;
+    private TextView user_name;
+    private EditText user_pw;
+    private EditText user_pw_ch;
+    private EditText user_tell;
+    private TextView user_day;
+    private TextView user_sex;
+    private FirebaseUser user;
+
 
 
 
@@ -122,11 +126,29 @@ public class MypageActivity extends AppCompatActivity {
 
         if(new_user_pw.equals(new_user_pw_ch)){
             user.updatePassword(new_user_pw);
-            startToast("비밀번호 변경에 성공하였습니다. ");
+            startToast("비밀번호 변경에 성공하였습니다. 다시 로그인 하여 주세요. ");
+            singOut();
+            startloginActivity();
+
         }else{
             startToast("비밀번호가 일치하지 않습니다.");
         }
 
+    }
+    public void singOut(){
+        FirebaseAuth.getInstance().signOut();
+        SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = auto.edit();
+        editor.clear();
+        editor.commit();
+
+    }
+
+    public void startloginActivity(){
+        Intent intent = new Intent(getApplicationContext(), login.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void tell_change(){

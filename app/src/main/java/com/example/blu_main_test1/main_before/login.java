@@ -1,6 +1,8 @@
 package com.example.blu_main_test1.main_before;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -17,11 +19,14 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.example.blu_main_test1.BackPressHandler;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
 import com.example.blu_main_test1.main_before.passwordResetActivity;
 import com.example.blu_main_test1.R;
@@ -29,6 +34,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class login extends AppCompatActivity {
@@ -37,8 +43,14 @@ public class login extends AppCompatActivity {
     private String TAG = "VideoActivity";
     private VideoView videoView;
     EditText userId, userPwd;
-    Button loginBtn, joinBtn, renewPwBtn;
+    TextView joinBtn, renewPwBtn;
+    Button loginBtn;
     LinearLayout lin_login, lin_login_small,logo;
+    CheckBox login_ch;
+    private String email, password;
+    private String loginId, loginPwd;
+    private BackPressHandler backPressHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +71,8 @@ public class login extends AppCompatActivity {
         userPwd = (EditText) findViewById(R.id.userPwd);
 
         loginBtn = (Button) findViewById(R.id.loginBtn);
-        joinBtn = (Button) findViewById(R.id.joinBtn);
-        renewPwBtn = (Button) findViewById(R.id.renewPwBtn);
+        joinBtn = (TextView) findViewById(R.id.joinBtn);
+        renewPwBtn = (TextView) findViewById(R.id.renewPwBtn);
         lin_login=(LinearLayout)findViewById(R.id.lin_login);
         lin_login_small=(LinearLayout)findViewById(R.id.lin_login_small);
         logo=(LinearLayout) findViewById(R.id.logo);
@@ -70,6 +82,13 @@ public class login extends AppCompatActivity {
         loginBtn.setOnClickListener(btnListener);
         renewPwBtn.setOnClickListener(btnListener);
         joinBtn.setOnClickListener(btnListener);
+
+        login_ch = (CheckBox)findViewById(R.id.login_ch);
+
+        backPressHandler = new BackPressHandler(this);
+
+
+
 
         //버전 호환
         if (Build.VERSION.SDK_INT > 9)
@@ -117,9 +136,19 @@ public class login extends AppCompatActivity {
         userId.setVisibility(View.VISIBLE);
         userPwd.setVisibility(View.VISIBLE);
         loginBtn.setVisibility(View.VISIBLE);
-        renewPwBtn.setVisibility(View.VISIBLE);
+       // renewPwBtn.setVisibility(View.VISIBLE);
         joinBtn.setVisibility(View.VISIBLE);
         lin_login_small.setVisibility(View.VISIBLE);
+
+        SharedPreferences auto = getSharedPreferences("auto",Activity.MODE_PRIVATE);
+        loginId = auto.getString("inputId",null);
+        loginPwd = auto.getString("inputPwd",null);
+
+        if(loginId != null && loginPwd != null){
+           Intent intent = new Intent(getApplicationContext(),com.example.blu_main_test1.Main_page.Main_view_pager.class);
+           startActivity(intent);
+            finish();
+        }
     }
 
     //로그인 버튼에 따른 설정
@@ -152,46 +181,83 @@ public class login extends AppCompatActivity {
                     }catch (Exception e) {} */
 
                 case R.id.renewPwBtn : //비밀번호 재설정
-                    startActivity(new Intent(login.this, passwordResetActivity.class));
-                    finish();
+                    Intent intent2 = new Intent(getApplicationContext(), passwordResetActivity.class);
+                    startActivity(intent2);
                     break;
 
                 case R.id.joinBtn : // 회원가입
                     //Intent intent = new Intent(getApplicationContext(),join.class); //약관 제외
                     Intent intent = new Intent(getApplicationContext(), join_main.class);
                     startActivity(intent);
-                    finish();
                     break;
             }
         }
     };
 
     private void signIn() {
-        String email = ((EditText) findViewById(R.id.userId)).getText().toString();
-        String password = ((EditText) findViewById(R.id.userPwd)).getText().toString();
+        email = ((EditText) findViewById(R.id.userId)).getText().toString();
+        password = ((EditText) findViewById(R.id.userPwd)).getText().toString();
 
-        if (email.length() > 0 && password.length() > 0) {
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                //FirebaseUser user = mAuth.getCurrentUser();
-                                //Toast.makeText(getApplicationContext(),"로그인",Toast.LENGTH_SHORT).show();
-                                Toast.makeText(login.this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), Main_view_pager.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                if (task.getException() != null) {
-                                    Toast.makeText(login.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+        if(login_ch.isChecked() == true ){
+            if (email.length() > 0 && password.length() > 0) {
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    //FirebaseUser user = mAuth.getCurrentUser();
+                                    //Toast.makeText(getApplicationContext(),"로그인",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(login.this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                                    SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
+                                    SharedPreferences.Editor autoLogin = auto.edit();
+                                    autoLogin.putString("inputId",email);
+                                    autoLogin.putString("inputPwd",password);
+                                    autoLogin.commit();
+                                    Intent intent = new Intent(getApplicationContext(), Main_view_pager.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    if (task.getException() != null) {
+                                        Toast.makeText(login.this, "일치하는 회원정보가 없습니다. ", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
+            } else {
+                Toast.makeText(login.this, "이메일 또는 비밀번호를 입력해 주세요.", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            Toast.makeText(login.this, "이메일 또는 비밀번호를 입력해 주세요.", Toast.LENGTH_SHORT).show();
+            if (email.length() > 0 && password.length() > 0) {
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    //FirebaseUser user = mAuth.getCurrentUser();
+                                    //Toast.makeText(getApplicationContext(),"로그인",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(login.this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), Main_view_pager.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    if (task.getException() != null) {
+                                        Toast.makeText(login.this, "일치하는 회원정보가 없습니다. ", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        });
+            } else {
+                Toast.makeText(login.this, "이메일 또는 비밀번호를 입력해 주세요.", Toast.LENGTH_SHORT).show();
+            }
+
         }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        backPressHandler.onBackPressed();
     }
 
         /*//jsp와 연결하는 비동기식 로그인
