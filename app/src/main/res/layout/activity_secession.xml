@@ -1,9 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecessionActivity">
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="280dp"
+                android:layout_height="100dp"
+                android:src="@drawable/logo"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="회원 탈퇴"
+                android:textColor="#000000"
+                android:layout_marginBottom="10dp"
+                android:textSize="35dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="회원탈퇴 안내사항"
+                android:textColor="#000000"
+                android:layout_marginBottom="10dp"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="- 회원 탈퇴 후 모든 회원 정보가 삭제됩니다."
+                android:textColor="#888888"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingExtra="5dp"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="- 재가입시 기존 아이디는 더 이상 사용하실 수 없습니다."
+                android:textColor="#888888"
+                android:layout_marginBottom="10dp"
+                android:lineSpacingExtra="5dp"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="본인 인증"
+                android:textColor="#000000"
+                android:layout_marginBottom="10dp"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="이메일 "
+                android:textColor="#000000"
+                android:layout_marginBottom="10dp"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/user_id"
+                android:layout_marginLeft="10dp"
+                android:layout_width="52mm"
+                android:layout_height="7mm"
+                android:background="@xml/join_main"
+                android:paddingLeft="10dp"
+                android:textSize="18dp"
+                android:textColor="@color/join_edit" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="비밀번호 확인"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/user_pw"
+                    android:inputType="textPassword"
+                    android:layout_width="43mm"
+                    android:layout_height="7mm"
+                    android:background="@xml/join_main"
+                    android:paddingLeft="10dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/join_edit"/>
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/sertification_btn"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="인   증"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:background="@xml/join_main_sex"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_gravity="bottom"
+                android:id="@+id/secession_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="회원탈퇴"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:background="#dcdcdc"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
