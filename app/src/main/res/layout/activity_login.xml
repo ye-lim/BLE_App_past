@@ -145,7 +145,7 @@
                     android:layout_height="50dp"
                     android:textColor="#999999"
                     android:textSize="15dp"
-                    android:text="비밀번호 재설정"/>
+                    android:text="비밀번호 찾기"/>
 
                 <View
                     android:layout_marginTop="5dp"

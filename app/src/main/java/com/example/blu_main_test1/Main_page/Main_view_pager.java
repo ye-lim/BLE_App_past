@@ -55,6 +55,7 @@ import com.example.blu_main_test1.Main_page.sampledata;
 import com.example.blu_main_test1.MypageActivity;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.main_before.login;
+import com.example.blu_main_test1.main_before.passwordResetActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

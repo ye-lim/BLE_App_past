@@ -1,5 +1,6 @@
 package com.example.blu_main_test1.main_before;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -18,24 +19,20 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class passwordResetActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+    private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "passwordResetActivity";
 
-    @Override
-    public void onStart(){
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_reset);
 
-        mAuth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         findViewById(R.id.sendButton).setOnClickListener(onClickListener);
+        findViewById(R.id.loginButton).setOnClickListener(onClickListener);
 
         /*
         //툴바 기능
@@ -57,19 +54,25 @@ public class passwordResetActivity extends AppCompatActivity {
                 case R.id.sendButton:
                     send();
                     break;
+                case R.id.loginButton:
+                    Intent intent = new Intent(getApplicationContext(), login.class);
+                    startActivity(intent);
+                    finish();
             }
         }
     };
 
     private void send() {
-        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
+        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString().trim();
         if (email.length() > 0) {
-            FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+            firebaseAuth.sendPasswordResetEmail(email)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(passwordResetActivity.this, "이메일을 보냈습니다.", Toast.LENGTH_SHORT).show();
+                            } else{
+                                Toast.makeText(passwordResetActivity.this, "가입된 이메일이 없습니다. 다시 확인해 주세요.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
