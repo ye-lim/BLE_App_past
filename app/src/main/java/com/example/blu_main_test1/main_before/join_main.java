@@ -91,7 +91,7 @@ public class join_main extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setTitle("회원가입");
+        actionBar.setTitle("회원가입.");
 
         //textWatcher
         //phone_number.addTextChangedListener(new ValidationTextWatcher(phone_number));
