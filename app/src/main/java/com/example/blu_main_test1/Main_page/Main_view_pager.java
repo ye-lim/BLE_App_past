@@ -54,6 +54,7 @@ import com.example.blu_main_test1.Main_page.listadapter;
 import com.example.blu_main_test1.Main_page.sampledata;
 import com.example.blu_main_test1.MypageActivity;
 import com.example.blu_main_test1.R;
+import com.example.blu_main_test1.SecessionActivity;
 import com.example.blu_main_test1.main_before.login;
 import com.example.blu_main_test1.main_before.passwordResetActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -233,6 +234,10 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                       /*  Toast.makeText(getApplicationContext(),
                                 myAdapter.getItem(position).getGrade(),
                                 Toast.LENGTH_LONG).show(); */
+                        break;
+                    case "회원 탈퇴":
+                          Intent secession = new Intent(getApplicationContext(), SecessionActivity.class);
+                          startActivity(secession);
                         break;
 
                 }
@@ -608,6 +613,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                 drawDataList.add(new sampledata("회원정보 변경"));
                 drawDataList.add(new sampledata("머신 구입하기"));
                 drawDataList.add(new sampledata("캡슐 구입하기"));
+                drawDataList.add(new sampledata("회원 탈퇴"));
             }
 
 
