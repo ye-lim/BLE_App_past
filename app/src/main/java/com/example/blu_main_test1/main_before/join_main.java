@@ -146,7 +146,7 @@ public class join_main extends AppCompatActivity {
                     break;
                 case R.id.next:
                     if(!ifOverlap_ID) {
-                        Toast.makeText(join_main.this, "아이디 중복확인을 해주세요.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(join_main.this, "아이디 중복확인을 해주세요", Toast.LENGTH_SHORT).show();
                     } else
                         signUp();
                     break;
