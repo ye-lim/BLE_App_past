@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/txtState"
+        android:textSize="34dp"
+        android:layout_width="match_parent"
+        android:text="블루투스 페어링 목록"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:text="블루투스 설정 열기"
+        android:textSize="34dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="mOnBluetoothSearch"/>
+    <Button
+        android:id="@+id/btnSearch2"
+        android:text="블투연결"
+        android:textSize="34dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="mOnBluetoothSearch2"/>
+    <Button
+        android:id="@+id/btnSearch3"
+        android:text="검색"
+        android:textSize="34dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="mOnBluetoothSearch3"/>
+    <TextView
+        android:text="다른 블루투스 기기에서 내 휴대폰을 찾을 수 있도록 합니다."
+        android:textSize="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/chkFindme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="mOnChkFindme" />
+
+
+    <TextView
+        android:text="페어링 검색 목록"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ListView
+        android:id="@+id/listDevice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
