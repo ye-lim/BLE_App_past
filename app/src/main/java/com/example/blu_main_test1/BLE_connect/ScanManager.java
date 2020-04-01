@@ -24,10 +24,10 @@ public class ScanManager {
     {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mBLEScanner = mBluetoothAdapter.getBluetoothLeScanner();
-        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled())
+        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) //사용자 디바이스가 블루투스를 지원하는지, 환경설정에서 블루투스가 활성화 되어있는지..
         {
 
-        }
+    }
         else
         {
             if (mBLEScanner == null)

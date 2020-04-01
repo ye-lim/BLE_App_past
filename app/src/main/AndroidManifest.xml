@@ -24,7 +24,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".SecessionActivity"></activity>
+
+
+
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -35,6 +37,32 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
+
+        <activity android:name=".SecessionActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".BLE_SCAN.DeviceControlActivity"
+            android:theme="@android:style/Theme.Holo.Light">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".BLE_SCAN.DeviceScanActivity"
+            android:theme="@android:style/Theme.Holo.Light">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".Main_page.Main_view_pager">
             <intent-filter>
@@ -129,7 +157,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".BLE_connect.UartService"
+            android:name=".BLE_SCAN.BluetoothLeService"
             android:enabled="true" />
     </application>
 

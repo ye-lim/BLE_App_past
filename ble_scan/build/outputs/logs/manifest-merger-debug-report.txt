@@ -1,0 +1,117 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:20:1-50:12
+INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:20:1-50:12
+INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:20:1-50:12
+MERGED from [com.android.support:support-v13:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.2.aar\c1511250c35752bc14af45ecad51af37\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\c4d0dfa11fc085548706fc87ed27067e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\fc80bc94ed1869f7ec389f147275e7c5\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\1d036ff09ab8cc174a1085931cccad25\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\ef976f3425533aaf347346cf97f54630\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\e096566691075c6c46f917138ef5fe3e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\28cf91bf064c9d18df00e41a60f16716\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\97d916dbdc9bf02410cea95d31d2d11c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\c7fbeb5f785c9f342cfea60a68932820\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\7edf5f4b86560272c82a3f1472324b72\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\24017131d0a7bbb4a22ce0288ecb529c\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\6cd3f250065709537ee33ab4d2fbeaf0\AndroidManifest.xml:17:1-24:12
+INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:20:1-50:12
+INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:20:1-50:12
+	package
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:21:5-50
+	android:versionName
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:23:5-30
+		INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+		INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:20:11-69
+	android:versionCode
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:22:5-28
+		INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+		INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+uses-feature#android.hardware.bluetooth_le
+ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:31:5-89
+	android:required
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:31:64-87
+	android:name
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:31:19-63
+uses-permission#android.permission.BLUETOOTH
+ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:33:5-67
+	android:name
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:33:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:34:5-73
+	android:name
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:34:22-71
+application
+ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:36:5-48:19
+	android:label
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:36:18-50
+	android:icon
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:37:9-45
+	android:theme
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:38:9-56
+activity#com.example.android.bluetoothlegatt.DeviceScanActivity
+ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:39:9-45:16
+	android:label
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:40:9-41
+	android:name
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:39:19-53
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:41:9-44:25
+action#android.intent.action.MAIN
+ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:42:13-64
+	android:name
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:42:21-62
+category#android.intent.category.LAUNCHER
+ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:43:13-72
+	android:name
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:43:23-70
+activity#com.example.android.bluetoothlegatt.DeviceControlActivity
+ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:46:9-58
+	android:name
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:46:19-56
+service#com.example.android.bluetoothlegatt.BluetoothLeService
+ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:47:9-77
+	android:enabled
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:47:53-75
+	android:name
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml:47:18-52
+uses-sdk
+INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+MERGED from [com.android.support:support-v13:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.2.aar\c1511250c35752bc14af45ecad51af37\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v13:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.2.aar\c1511250c35752bc14af45ecad51af37\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\c4d0dfa11fc085548706fc87ed27067e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\c4d0dfa11fc085548706fc87ed27067e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\fc80bc94ed1869f7ec389f147275e7c5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\fc80bc94ed1869f7ec389f147275e7c5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\1d036ff09ab8cc174a1085931cccad25\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\1d036ff09ab8cc174a1085931cccad25\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\ef976f3425533aaf347346cf97f54630\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\ef976f3425533aaf347346cf97f54630\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\e096566691075c6c46f917138ef5fe3e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\e096566691075c6c46f917138ef5fe3e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\28cf91bf064c9d18df00e41a60f16716\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\28cf91bf064c9d18df00e41a60f16716\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\97d916dbdc9bf02410cea95d31d2d11c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\97d916dbdc9bf02410cea95d31d2d11c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\c7fbeb5f785c9f342cfea60a68932820\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\c7fbeb5f785c9f342cfea60a68932820\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\7edf5f4b86560272c82a3f1472324b72\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\7edf5f4b86560272c82a3f1472324b72\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\24017131d0a7bbb4a22ce0288ecb529c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.0.2] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\24017131d0a7bbb4a22ce0288ecb529c\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\6cd3f250065709537ee33ab4d2fbeaf0\AndroidManifest.xml:20:5-22:41
+MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\vip\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\6cd3f250065709537ee33ab4d2fbeaf0\AndroidManifest.xml:20:5-22:41
+INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+		INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+		ADDED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml
+		INJECTED from C:\BLE_APP\public_medi_BLE-master\ble_scan\src\main\AndroidManifest.xml

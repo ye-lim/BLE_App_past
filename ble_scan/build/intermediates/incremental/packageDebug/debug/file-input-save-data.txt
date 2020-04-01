@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Tue Mar 31 14:08:58 KST 2020
+0.baseType=DIRECTORY
+0.base=C\:\\ble_test\\android-BluetoothLeGatt-master\\android-BluetoothLeGatt-master\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+0.path=classes.dex
+0.set=DEX
+count=1

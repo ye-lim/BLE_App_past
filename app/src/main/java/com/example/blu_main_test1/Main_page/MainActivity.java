@@ -45,6 +45,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.blu_main_test1.BLE_SCAN.DeviceControlActivity;
+import com.example.blu_main_test1.BLE_SCAN.DeviceScanActivity;
 import com.example.blu_main_test1.BLE_button.abstraction;
 import com.example.blu_main_test1.BLE_connect.UartService;
 import com.example.blu_main_test1.BLE_connect.connect;
@@ -138,7 +140,7 @@ public class MainActivity extends Fragment {
         blu_connect.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent= new Intent(getActivity(), connect.class);
+            Intent intent= new Intent(getActivity(), DeviceScanActivity.class);
             startActivity(intent);
         }
 

@@ -1,0 +1,4 @@
+#Tue Mar 31 14:19:41 KST 2020
+base.0=C\:\\BLE_APP\\public_medi_BLE-master\\ble_scan\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+path.0=classes.dex
+renamed.0=classes.dex

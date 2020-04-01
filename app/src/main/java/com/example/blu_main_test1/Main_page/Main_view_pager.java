@@ -141,7 +141,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
         positionView = findViewById(R.id.position_view);
         menu_icon = findViewById(R.id.menu_icon);
         //BLE 기능 활성화 유/무
-        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) { //BLE를 지원하는지 검사하는 내용.
 
             Toast.makeText(this, "BLE가 활성화 되지 않음", Toast.LENGTH_SHORT).show();
         }
