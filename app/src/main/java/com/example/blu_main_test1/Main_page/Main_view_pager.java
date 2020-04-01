@@ -912,8 +912,8 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                                         alertDialog3.show();
                                         break;
                                 }
-                                main.temper.setText(text.substring(9,11));
-                                draw_temper.setText(text.substring(9,11));
+                                main.temper.setText(text.substring(8,10));
+                                draw_temper.setText(text.substring(8,10));
                             }
                             else if(text.substring(1,6).equals("05RCL")){
                                 main.coffee_b.setText(Integer.parseInt(text.substring(6,8))*10 + "ml");
