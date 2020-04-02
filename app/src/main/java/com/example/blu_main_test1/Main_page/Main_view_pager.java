@@ -236,8 +236,8 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                                 Toast.LENGTH_LONG).show(); */
                         break;
                     case "회원 탈퇴":
-                          Intent secession = new Intent(getApplicationContext(), SecessionActivity.class);
-                          startActivity(secession);
+                        Intent secession = new Intent(getApplicationContext(), SecessionActivity.class);
+                        startActivity(secession);
                         break;
 
                 }
@@ -287,9 +287,9 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                             Log.w("FCM Log", "getInstanceId failed", task.getException());
                             return;
                         }
-                   //     String token = task.getResult().getToken();
-                   //     Log.d("FCM Log", "FCM 토큰: " + token);
-                      //  Toast.makeText(Main_view_pager.this, token, Toast.LENGTH_SHORT).show();
+                        //     String token = task.getResult().getToken();
+                        //     Log.d("FCM Log", "FCM 토큰: " + token);
+                        //  Toast.makeText(Main_view_pager.this, token, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -347,293 +347,293 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
     //버튼기능 활성화
     @SuppressLint("ResourceAsColor")
     public void ble_click(View view) {
-    switch (view.getId()){
-        //추출량 변경 버튼
-        case R.id.amount_change:
-            LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        switch (view.getId()){
+            //추출량 변경 버튼
+            case R.id.amount_change:
+                LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            final LinearLayout linear = (LinearLayout)inflater.inflate(R.layout.activity_amount_change, null);
+                final LinearLayout linear = (LinearLayout)inflater.inflate(R.layout.activity_amount_change, null);
 
-            //파라미터를 세팅해줌
-            final InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                //파라미터를 세팅해줌
+                final InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
-            LinearLayout.LayoutParams paramlinear = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams paramlinear = new LinearLayout.LayoutParams(
 
-                    LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT,
 
-                    LinearLayout.LayoutParams.MATCH_PARENT
-            );
-            back=(ImageButton)linear.findViewById(R.id.back);
-            background=(LinearLayout)linear.findViewById(R.id.background);
-            sub_background=(LinearLayout)linear.findViewById(R.id.sub_background);
-            coffee_b_amount=(EditText)linear.findViewById(R.id.coffee_b_amount);
-            coffee_s_amount=(EditText)linear.findViewById(R.id.coffee_s_amount);
-            tea_b_amount=(EditText)linear.findViewById(R.id.tea_b_amount);
-            tea_s_amount=(EditText)linear.findViewById(R.id.tea_s_amount);
-            sub_amount=(Button)linear.findViewById(R.id.sub_amount);
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                );
+                back=(ImageButton)linear.findViewById(R.id.back);
+                background=(LinearLayout)linear.findViewById(R.id.background);
+                sub_background=(LinearLayout)linear.findViewById(R.id.sub_background);
+                coffee_b_amount=(EditText)linear.findViewById(R.id.coffee_b_amount);
+                coffee_s_amount=(EditText)linear.findViewById(R.id.coffee_s_amount);
+                tea_b_amount=(EditText)linear.findViewById(R.id.tea_b_amount);
+                tea_s_amount=(EditText)linear.findViewById(R.id.tea_s_amount);
+                sub_amount=(Button)linear.findViewById(R.id.sub_amount);
 
-            //윈도우에 추가시킴
-            addContentView(linear,paramlinear);
-            //linear부분은 아무 동작 하지 않음
-            linear.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                //윈도우에 추가시킴
+                addContentView(linear,paramlinear);
+                //linear부분은 아무 동작 하지 않음
+                linear.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                }
-            });
-            //뒤로가기
-            sub_background.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    imm.hideSoftInputFromWindow(coffee_b_amount.getWindowToken(),0);
-                }
-            });
+                    }
+                });
+                //뒤로가기
+                sub_background.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        imm.hideSoftInputFromWindow(coffee_b_amount.getWindowToken(),0);
+                    }
+                });
 
-            //바탕부분 클릭시
-            background.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
-                    parentViewGroup.removeView(linear);
-                    imm.hideSoftInputFromWindow(main1_btn.getWindowToken(),0);
+                //바탕부분 클릭시
+                background.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
+                        parentViewGroup.removeView(linear);
+                        imm.hideSoftInputFromWindow(main1_btn.getWindowToken(),0);
 
-                }
-            });
-            //뒤로가기 이미지
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
-                    parentViewGroup.removeView(linear);
-                    imm.hideSoftInputFromWindow(main1_btn.getWindowToken(),0);
-                }
-            });
-
-
-            sub_amount.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-             try {
-
-                 if (coffee_b_amount.getText().toString().length() != 0) {
-                     if (Integer.parseInt(coffee_b_amount.getText().toString()) > 990) {
-                         Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                         coffee_b_amount.requestFocus();
-                         return;
-                     }
-                     String c_value = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2);
-                     String cb_amount = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2) + stringToHex(c_value);
-                     byte[] cb_value = {(byte) 0x02, (byte) 0x03};
-                     byte[] cb_temp = cb_amount.getBytes();
-                     byte[] cb_temp_data = new byte[cb_temp.length + 2];
-                     System.arraycopy(cb_value, 0, cb_temp_data, 0, 1);
-                     System.arraycopy(cb_temp, 0, cb_temp_data, 1, cb_temp.length);
-                     System.arraycopy(cb_value, 1, cb_temp_data, cb_temp.length + 1, 1);
-                     m_UartService.writeRXCharacteristic(cb_temp_data);
-                 }
+                    }
+                });
+                //뒤로가기 이미지
+                back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
+                        parentViewGroup.removeView(linear);
+                        imm.hideSoftInputFromWindow(main1_btn.getWindowToken(),0);
+                    }
+                });
 
 
-                 if (coffee_s_amount.getText().toString().length() != 0) {
-                     if (Integer.parseInt(coffee_s_amount.getText().toString()) > 990) {
-                         Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                         coffee_s_amount.requestFocus();
-                         return;
-                     }
-                     new Handler().postDelayed(new Runnable() {
-                         @Override
+                sub_amount.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
 
-                         public void run() {
-
-                             String c_value2 = "05TCS" + coffee_s_amount.getText().toString().substring(0, 2);
-                             String cs_amount = "05TCS" + coffee_s_amount.getText().toString().substring(0, 2) + stringToHex(c_value2);
-                             byte[] cs_value = {(byte) 0x02, (byte) 0x03};
-                             byte[] cs_temp = cs_amount.getBytes();
-                             byte[] cs_temp_data = new byte[cs_temp.length + 2];
-                             System.arraycopy(cs_value, 0, cs_temp_data, 0, 1);
-                             System.arraycopy(cs_temp, 0, cs_temp_data, 1, cs_temp.length);
-                             System.arraycopy(cs_value, 1, cs_temp_data, cs_temp.length + 1, 1);
-
-                             m_UartService.writeRXCharacteristic(cs_temp_data);
-                         }
-
-                     }, 1000);  // 1 초 후에 실행
-                 }
+                            if (coffee_b_amount.getText().toString().length() != 0) {
+                                if (Integer.parseInt(coffee_b_amount.getText().toString()) > 990) {
+                                    Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
+                                    coffee_b_amount.requestFocus();
+                                    return;
+                                }
+                                String c_value = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2);
+                                String cb_amount = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2) + stringToHex(c_value);
+                                byte[] cb_value = {(byte) 0x02, (byte) 0x03};
+                                byte[] cb_temp = cb_amount.getBytes();
+                                byte[] cb_temp_data = new byte[cb_temp.length + 2];
+                                System.arraycopy(cb_value, 0, cb_temp_data, 0, 1);
+                                System.arraycopy(cb_temp, 0, cb_temp_data, 1, cb_temp.length);
+                                System.arraycopy(cb_value, 1, cb_temp_data, cb_temp.length + 1, 1);
+                                m_UartService.writeRXCharacteristic(cb_temp_data);
+                            }
 
 
-                 if (tea_b_amount.getText().toString().length() != 0) {
-                     if (Integer.parseInt(tea_b_amount.getText().toString()) > 990) {
-                         Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                         tea_b_amount.requestFocus();
-                         return;
-                     }
-                     new Handler().postDelayed(new Runnable() {
-                         @Override
+                            if (coffee_s_amount.getText().toString().length() != 0) {
+                                if (Integer.parseInt(coffee_s_amount.getText().toString()) > 990) {
+                                    Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
+                                    coffee_s_amount.requestFocus();
+                                    return;
+                                }
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
 
-                         public void run() {
+                                    public void run() {
 
-                             String t_value = "05TTL" + tea_b_amount.getText().toString().substring(0, 2);
-                             String tb_amount = "05TTL" + tea_b_amount.getText().toString().substring(0, 2) + stringToHex(t_value);
-                             byte[] tb_value = {(byte) 0x02, (byte) 0x03};
-                             byte[] tb_temp = tb_amount.getBytes();
-                             byte[] tb_temp_data = new byte[tb_temp.length + 2];
-                             System.arraycopy(tb_value, 0, tb_temp_data, 0, 1);
-                             System.arraycopy(tb_temp, 0, tb_temp_data, 1, tb_temp.length);
-                             System.arraycopy(tb_value, 1, tb_temp_data, tb_temp.length + 1, 1);
-                             m_UartService.writeRXCharacteristic(tb_temp_data);
-                         }
+                                        String c_value2 = "05TCS" + coffee_s_amount.getText().toString().substring(0, 2);
+                                        String cs_amount = "05TCS" + coffee_s_amount.getText().toString().substring(0, 2) + stringToHex(c_value2);
+                                        byte[] cs_value = {(byte) 0x02, (byte) 0x03};
+                                        byte[] cs_temp = cs_amount.getBytes();
+                                        byte[] cs_temp_data = new byte[cs_temp.length + 2];
+                                        System.arraycopy(cs_value, 0, cs_temp_data, 0, 1);
+                                        System.arraycopy(cs_temp, 0, cs_temp_data, 1, cs_temp.length);
+                                        System.arraycopy(cs_value, 1, cs_temp_data, cs_temp.length + 1, 1);
 
-                     }, 1500);  // 1 초 후에 실행
-                 }
+                                        m_UartService.writeRXCharacteristic(cs_temp_data);
+                                    }
 
-
-                 if (tea_s_amount.getText().toString().length() != 0) {
-                     if (Integer.parseInt(tea_s_amount.getText().toString()) > 990) {
-                         Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                         tea_s_amount.requestFocus();
-                         return;
-                     }
-                     new Handler().postDelayed(new Runnable() {
-                         @Override
-
-                         public void run() {
-
-                             String t_value2 = "05TTS" + tea_s_amount.getText().toString().substring(0, 2);
-                             String ts_amount = "05TTS" + tea_s_amount.getText().toString().substring(0, 2) + stringToHex(t_value2);
-                             byte[] ts_value = {(byte) 0x02, (byte) 0x03};
-                             byte[] ts_temp = ts_amount.getBytes();
-                             byte[] ts_temp_data = new byte[ts_temp.length + 2];
-                             System.arraycopy(ts_value, 0, ts_temp_data, 0, 1);
-                             System.arraycopy(ts_temp, 0, ts_temp_data, 1, ts_temp.length);
-                             System.arraycopy(ts_value, 1, ts_temp_data, ts_temp.length + 1, 1);
-                             m_UartService.writeRXCharacteristic(ts_temp_data);
-                         }
-
-                     }, 2000);  // 1 초 후에 실행
-                 }
+                                }, 1000);  // 1 초 후에 실행
+                            }
 
 
-                 ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
-                 parentViewGroup.removeView(linear);
-             }catch (Exception e)
-             {
+                            if (tea_b_amount.getText().toString().length() != 0) {
+                                if (Integer.parseInt(tea_b_amount.getText().toString()) > 990) {
+                                    Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
+                                    tea_b_amount.requestFocus();
+                                    return;
+                                }
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
 
-                 Toast.makeText(getApplicationContext(),"블루투스를 재연결해 주세요",Toast.LENGTH_SHORT).show();
+                                    public void run() {
 
-             }
+                                        String t_value = "05TTL" + tea_b_amount.getText().toString().substring(0, 2);
+                                        String tb_amount = "05TTL" + tea_b_amount.getText().toString().substring(0, 2) + stringToHex(t_value);
+                                        byte[] tb_value = {(byte) 0x02, (byte) 0x03};
+                                        byte[] tb_temp = tb_amount.getBytes();
+                                        byte[] tb_temp_data = new byte[tb_temp.length + 2];
+                                        System.arraycopy(tb_value, 0, tb_temp_data, 0, 1);
+                                        System.arraycopy(tb_temp, 0, tb_temp_data, 1, tb_temp.length);
+                                        System.arraycopy(tb_value, 1, tb_temp_data, tb_temp.length + 1, 1);
+                                        m_UartService.writeRXCharacteristic(tb_temp_data);
+                                    }
+
+                                }, 1500);  // 1 초 후에 실행
+                            }
+
+
+                            if (tea_s_amount.getText().toString().length() != 0) {
+                                if (Integer.parseInt(tea_s_amount.getText().toString()) > 990) {
+                                    Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
+                                    tea_s_amount.requestFocus();
+                                    return;
+                                }
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+
+                                    public void run() {
+
+                                        String t_value2 = "05TTS" + tea_s_amount.getText().toString().substring(0, 2);
+                                        String ts_amount = "05TTS" + tea_s_amount.getText().toString().substring(0, 2) + stringToHex(t_value2);
+                                        byte[] ts_value = {(byte) 0x02, (byte) 0x03};
+                                        byte[] ts_temp = ts_amount.getBytes();
+                                        byte[] ts_temp_data = new byte[ts_temp.length + 2];
+                                        System.arraycopy(ts_value, 0, ts_temp_data, 0, 1);
+                                        System.arraycopy(ts_temp, 0, ts_temp_data, 1, ts_temp.length);
+                                        System.arraycopy(ts_value, 1, ts_temp_data, ts_temp.length + 1, 1);
+                                        m_UartService.writeRXCharacteristic(ts_temp_data);
+                                    }
+
+                                }, 2000);  // 1 초 후에 실행
+                            }
+
+
+                            ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
+                            parentViewGroup.removeView(linear);
+                        }catch (Exception e)
+                        {
+
+                            Toast.makeText(getApplicationContext(),"블루투스를 재연결해 주세요",Toast.LENGTH_SHORT).show();
+
                         }
+                    }
 
-            });
+                });
 
-            break;
-        case R.id.state_start:
-            if(connect.IsConnect) {
-                String start = "01WB8";
-                byte[] value = {(byte) 0x02, (byte) 0x03};
-                byte[] temp = start.getBytes();
-                byte[] temp_data = new byte[temp.length + 2];
-                System.arraycopy(value, 0, temp_data, 0, 1);
-                System.arraycopy(temp, 0, temp_data, 1, temp.length);
-                System.arraycopy(value, 1, temp_data, temp.length + 1, 1);
-                m_UartService.writeRXCharacteristic(temp_data);
-            }
-            break;
-        case R.id.low_start:
-            if(connect.IsConnect) {
-                String low_start = "01PB1";
-                byte[] low_value = {(byte) 0x02, (byte) 0x03};
-                byte[] low_temp = low_start.getBytes();
-                byte[] low_temp_data = new byte[low_temp.length + 2];
-                System.arraycopy(low_value, 0, low_temp_data, 0, 1);
-                System.arraycopy(low_temp, 0, low_temp_data, 1, low_temp.length);
-                System.arraycopy(low_value, 1, low_temp_data, low_temp.length + 1, 1);
-                m_UartService.writeRXCharacteristic(low_temp_data);
-            }
-            break;
-
-        case R.id.amount_stop:
-            if(connect.IsConnect) {
-                String stop_start = "01SB4";
-                byte[] stop_value = {(byte) 0x02, (byte) 0x03};
-                byte[] stop_temp = stop_start.getBytes();
-                byte[] stop_temp_data = new byte[stop_temp.length + 2];
-                System.arraycopy(stop_value, 0, stop_temp_data, 0, 1);
-                System.arraycopy(stop_temp, 0, stop_temp_data, 1, stop_temp.length);
-                System.arraycopy(stop_value, 1, stop_temp_data, stop_temp.length + 1, 1);
-                m_UartService.writeRXCharacteristic(stop_temp_data);
-            }
+                break;
+            case R.id.state_start:
+                if(connect.IsConnect) {
+                    String start = "01WB8";
+                    byte[] value = {(byte) 0x02, (byte) 0x03};
+                    byte[] temp = start.getBytes();
+                    byte[] temp_data = new byte[temp.length + 2];
+                    System.arraycopy(value, 0, temp_data, 0, 1);
+                    System.arraycopy(temp, 0, temp_data, 1, temp.length);
+                    System.arraycopy(value, 1, temp_data, temp.length + 1, 1);
+                    m_UartService.writeRXCharacteristic(temp_data);
+                }
+                break;
+            case R.id.low_start:
+                if(connect.IsConnect) {
+                    String low_start = "01PB1";
+                    byte[] low_value = {(byte) 0x02, (byte) 0x03};
+                    byte[] low_temp = low_start.getBytes();
+                    byte[] low_temp_data = new byte[low_temp.length + 2];
+                    System.arraycopy(low_value, 0, low_temp_data, 0, 1);
+                    System.arraycopy(low_temp, 0, low_temp_data, 1, low_temp.length);
+                    System.arraycopy(low_value, 1, low_temp_data, low_temp.length + 1, 1);
+                    m_UartService.writeRXCharacteristic(low_temp_data);
+                }
                 break;
 
-    }
+            case R.id.amount_stop:
+                if(connect.IsConnect) {
+                    String stop_start = "01SB4";
+                    byte[] stop_value = {(byte) 0x02, (byte) 0x03};
+                    byte[] stop_temp = stop_start.getBytes();
+                    byte[] stop_temp_data = new byte[stop_temp.length + 2];
+                    System.arraycopy(stop_value, 0, stop_temp_data, 0, 1);
+                    System.arraycopy(stop_temp, 0, stop_temp_data, 1, stop_temp.length);
+                    System.arraycopy(stop_value, 1, stop_temp_data, stop_temp.length + 1, 1);
+                    m_UartService.writeRXCharacteristic(stop_temp_data);
+                }
+                break;
+
+        }
     }
 
     public static String stringToHex(String s) {
         int ch2=0;
         for (int i = 0; i < s.length(); i++) {
             byte ch=(byte)s.charAt( i );
-             ch2+=(byte)ch;
+            ch2+=(byte)ch;
         }
         String s5=Integer.toHexString(ch2);
         return s5.substring(s5.length()-2,s5.length());
     }
 
 
-            //시본바 크기만큼 view를 늘려서 메뉴를 기본바 하단으로 이동
-            private void dealStatusBar() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    int statusBarHeight = getStatusBarHeight();
-                    ViewGroup.LayoutParams lp = positionView.getLayoutParams();
-                    lp.height = statusBarHeight;
-                    positionView.setLayoutParams(lp);
-                }
-            }
-            //핸드폰 상단 status bar 높이를 얻는 메소드
-            private int getStatusBarHeight() {
-                Class<?> c = null;
-                Object obj = null;
-                Field field = null;
-                int x = 0, statusBarHeight = 0;
-                try {
-                    c = Class.forName("com.android.internal.R$dimen");
-                    obj = c.newInstance();
-                    field = c.getField("status_bar_height");
-                    x = Integer.parseInt(field.get(obj).toString());
-                    statusBarHeight = getResources().getDimensionPixelSize(x);
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
-                return statusBarHeight;
-            }
+    //시본바 크기만큼 view를 늘려서 메뉴를 기본바 하단으로 이동
+    private void dealStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            int statusBarHeight = getStatusBarHeight();
+            ViewGroup.LayoutParams lp = positionView.getLayoutParams();
+            lp.height = statusBarHeight;
+            positionView.setLayoutParams(lp);
+        }
+    }
+    //핸드폰 상단 status bar 높이를 얻는 메소드
+    private int getStatusBarHeight() {
+        Class<?> c = null;
+        Object obj = null;
+        Field field = null;
+        int x = 0, statusBarHeight = 0;
+        try {
+            c = Class.forName("com.android.internal.R$dimen");
+            obj = c.newInstance();
+            field = c.getField("status_bar_height");
+            x = Integer.parseInt(field.get(obj).toString());
+            statusBarHeight = getResources().getDimensionPixelSize(x);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return statusBarHeight;
+    }
 
 
-            private void InitializeMovieData() {
-                drawDataList = new ArrayList<sampledata>();
+    private void InitializeMovieData() {
+        drawDataList = new ArrayList<sampledata>();
 
-                drawDataList.add(new sampledata("공지사항"));
-                drawDataList.add(new sampledata("회사소개"));
-                drawDataList.add(new sampledata("회원정보 변경"));
-                drawDataList.add(new sampledata("머신 구입하기"));
-                drawDataList.add(new sampledata("캡슐 구입하기"));
-                drawDataList.add(new sampledata("회원 탈퇴"));
-            }
+        drawDataList.add(new sampledata("공지사항"));
+        drawDataList.add(new sampledata("회사소개"));
+        drawDataList.add(new sampledata("회원정보 변경"));
+        drawDataList.add(new sampledata("머신 구입하기"));
+        drawDataList.add(new sampledata("캡슐 구입하기"));
+        drawDataList.add(new sampledata("회원 탈퇴"));
+    }
 
 
 
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()){
-                    case R.id.main1_btn :
-                        viewPager.setCurrentItem(0,true);
-                        main1_btn.setTextColor(Color.parseColor("#125B8F"));
-                        main2_btn.setTextColor(Color.parseColor("#AAAAAA"));
-                        break;
-                    case R.id.main2_btn :
-                        viewPager.setCurrentItem(1,true);
-                        main1_btn.setTextColor(Color.parseColor("#aaaaaa"));
-                        main2_btn.setTextColor(Color.parseColor("#125B8F"));
-                        break;
-                }
-            }
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.main1_btn :
+                viewPager.setCurrentItem(0,true);
+                main1_btn.setTextColor(Color.parseColor("#125B8F"));
+                main2_btn.setTextColor(Color.parseColor("#AAAAAA"));
+                break;
+            case R.id.main2_btn :
+                viewPager.setCurrentItem(1,true);
+                main1_btn.setTextColor(Color.parseColor("#aaaaaa"));
+                main2_btn.setTextColor(Color.parseColor("#125B8F"));
+                break;
+        }
+    }
 
 
     //UART service connected/disconnected
@@ -658,9 +658,9 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onDestroy() {
-       for(int i=0;i<6;i++){
-           mTimer[i].cancel();
-       }
+        for(int i=0;i<6;i++){
+            mTimer[i].cancel();
+        }
         unbindService(mServiceConnection);
         super.onDestroy();
     }
@@ -805,7 +805,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-       private final BroadcastReceiver UARTStatusChangeReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver UARTStatusChangeReceiver = new BroadcastReceiver() {
 
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
         public void onReceive(final Context context, Intent intent) {
@@ -986,4 +986,3 @@ class FragmentAdapter extends FragmentPagerAdapter {
         fragments.add(fragment);
     }
 }
-

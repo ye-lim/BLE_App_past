@@ -78,7 +78,7 @@ public class connect extends AppCompatActivity {
         task = new readTask();
 
 
-           task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         file = new File(getFilesDir(), "uuiddata.dat");
         if(file.exists()) {
@@ -128,11 +128,11 @@ public class connect extends AppCompatActivity {
                     Toast.makeText(connect.this,"이미 연결중입니다.", Toast.LENGTH_SHORT).show();
                     return ;
                 }
-               else
-                IsConnect = false;
+                else
+                    IsConnect = false;
 
 
-               for(int i = 0; i < qu.size();i++)
+                for(int i = 0; i < qu.size();i++)
                 {
                     if(qu.get(i).getUuid().equals(uuid))
                     {
@@ -489,7 +489,7 @@ public class connect extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onResume() {
-     //   new readTask().execute();
+        //   new readTask().execute();
         if(m_Scan != null)
         {
             m_Scan.ScanLeDevice(true);

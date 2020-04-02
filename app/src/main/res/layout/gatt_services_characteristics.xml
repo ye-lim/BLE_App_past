@@ -65,7 +65,25 @@
             android:text="@string/no_data"
             android:textSize="18sp"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/mainButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#17233d"
+            android:textColor="#FFFFFF"
+            android:text="메인페이지 돌아가기" />
+
+    </LinearLayout>
     <ExpandableListView android:id="@+id/gatt_services_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+
 </LinearLayout>
