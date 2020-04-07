@@ -46,14 +46,14 @@ import java.util.ArrayList;
  * Activity for scanning and displaying available Bluetooth LE devices.
  */
 public class DeviceScanActivity extends ListActivity {
-    private LeDeviceListAdapter mLeDeviceListAdapter;
-    private BluetoothAdapter mBluetoothAdapter;
-    private boolean mScanning;
-    private Handler mHandler;
+    private LeDeviceListAdapter mLeDeviceListAdapter; //스캔 리스트 어댑터
+    private BluetoothAdapter mBluetoothAdapter; //블루투스 어댑터
+    private boolean mScanning; //스캐닝 확인 값
+    private Handler mHandler; // 핸들러
 
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
-    private static final long SCAN_PERIOD = 10000;
+    private static final long SCAN_PERIOD = 10000; //스캔주기
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
@@ -64,6 +64,7 @@ public class DeviceScanActivity extends ListActivity {
 
         // Use this check to determine whether BLE is supported on the device.  Then you can
         // selectively disable BLE-related features.
+        //블루투스가 BLE를 지원하는 지 검사하는 로직
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();
             finish();
@@ -71,6 +72,7 @@ public class DeviceScanActivity extends ListActivity {
 
         // Initializes a Bluetooth adapter.  For API level 18 and above, get a reference to
         // BluetoothAdapter through BluetoothManager.
+        // 블루투스 어댑터 생성. api 18 이상 가능.
         final BluetoothManager bluetoothManager =
                 (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
@@ -80,6 +82,11 @@ public class DeviceScanActivity extends ListActivity {
             Toast.makeText(this, R.string.error_bluetooth_not_supported, Toast.LENGTH_SHORT).show();
             finish();
             return;
+        }
+        if (DeviceControlActivity.mConnected){
+            Intent intent = new Intent(getApplicationContext(),DeviceControlActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -121,25 +128,27 @@ public class DeviceScanActivity extends ListActivity {
 
         // Ensures Bluetooth is enabled on the device.  If Bluetooth is not currently enabled,
         // fire an intent to display a dialog asking the user to grant permission to enable it.
+        //블루투스가 사용가능 상태인지 체크하고 아니라면 그 기능을 키도록함.
         if (!mBluetoothAdapter.isEnabled()) {
             if (!mBluetoothAdapter.isEnabled()) {
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-            }
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT); //사용자가 어떤 요청을 보내 왔는지 구분하기 위해
+            }                      //첫번째 인자 : 실행할 데이터가 담긴 인텐트 객체, 두 번째 인자는 어떤 요청인지 구별하기 위한 상수.
         }
 
         // Initializes list view adapter.
+        // list view adapter를 생성
         mLeDeviceListAdapter = new LeDeviceListAdapter();
         setListAdapter(mLeDeviceListAdapter);
-        scanLeDevice(true);
+        scanLeDevice(true); //스캔 시작.
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) { // 블루투스 사용 허용 다이얼로그 결과
         // User chose not to enable Bluetooth.
         if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
-            finish();
-            return;
+            finish();           //인자 reqiestCpde : startActivityForResult를 호출할 때 넘겨준 요청 상수가 담긴다. 이 값을 통해서 어떤 액티비티에서 온 값인지 판별.
+            return;             // resultCode : 창에서 어떤 버튼을 눌렀는지에 대한 결과값이 담김. data: 새로운 창에서 인텐트를 보냈다면 그 인텐트가 이곳에 담김.
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -153,37 +162,39 @@ public class DeviceScanActivity extends ListActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position);
+    @Override                // l은 listView객체이고, v는 부모 객체, position은 클릭된 아이템의 위치, id는 그 아이템의 고유 번호.
+    protected void onListItemClick(ListView l, View v, int position, long id) { //각 아이템을 클릭했을 때
+        final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position); // 그 위치의 디바이스
         if (device == null) return;
         final Intent intent = new Intent(this, DeviceControlActivity.class);
         intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, device.getName());
         intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
-        if (mScanning) {
+        if (mScanning) { //스캔 중지
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
             mScanning = false;
         }
-        startActivity(intent);
+        startActivity(intent); //DeviceControlActivity 엶
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void scanLeDevice(final boolean enable) {
         if (enable) {
             // Stops scanning after a pre-defined scan period.
+            //스캔 주기가 지나면 스캔을 그만두게 함.
             mHandler.postDelayed(new Runnable() {
                 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
                 @Override
                 public void run() {
                     mScanning = false;
                     mBluetoothAdapter.stopLeScan(mLeScanCallback);
-                    invalidateOptionsMenu();
+                    invalidateOptionsMenu();  // onCreateOptionsMenu 메소드를 다시 호출해줌.
                 }
             }, SCAN_PERIOD);
-
+            // 스캔 시작
             mScanning = true;
-            mBluetoothAdapter.startLeScan(mLeScanCallback);
+            mBluetoothAdapter.startLeScan(mLeScanCallback); //ble장치를 스캔해 그 결과를 mLeScanCallBack 콜백 함수에 넘겨주며 호출한다.
         } else {
+            //스캔을 멈춤.
             mScanning = false;
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
         }
@@ -191,6 +202,7 @@ public class DeviceScanActivity extends ListActivity {
     }
 
     // Adapter for holding devices found through scanning.
+    //스캐닝을 통해 찾은 디바이스를 담을 어댑터.
     private class LeDeviceListAdapter extends BaseAdapter {
         private ArrayList<BluetoothDevice> mLeDevices;
         private LayoutInflater mInflator;
@@ -257,7 +269,7 @@ public class DeviceScanActivity extends ListActivity {
     }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     // Device scan callback.
-    private BluetoothAdapter.LeScanCallback mLeScanCallback =
+    private BluetoothAdapter.LeScanCallback mLeScanCallback = //새로운 장치가 발견될때마다 onLeScan을 호출.
             new BluetoothAdapter.LeScanCallback() {
 
                 @Override

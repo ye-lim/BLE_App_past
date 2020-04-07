@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.blu_main_test1.BLE_SCAN.BluetoothLeService;
 import com.example.blu_main_test1.BLE_SCAN.DeviceScanActivity;
 import com.example.blu_main_test1.BLE_button.abstraction;
 import com.example.blu_main_test1.BLE_connect.UartService;
@@ -122,6 +123,12 @@ public class MainActivity extends Fragment {
         });
 
     return view;
+    }
+
+    @Override
+    public void onDestroy() { //서비스를 해제
+        super.onDestroy();
+
     }
 
 

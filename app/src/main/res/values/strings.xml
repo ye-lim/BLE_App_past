@@ -12,7 +12,7 @@
     <string name="msg">exam-msg</string>
 
     <!-- ble 스캔 -->
-    <string name="ble_not_supported">BLE is not supported</string>
+    <string name="ble_not_supported">BLE 기능을 지원하지 않습니다.</string>
     <string name="label_data">데이터:</string>
     <string name="label_device_address">장치 주소:</string>
     <string name="label_state">상 태 :</string>

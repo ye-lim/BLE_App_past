@@ -19,12 +19,15 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.blu_main_test1.BLE_SCAN.SampleGattAttributes;
 import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static com.example.blu_main_test1.BLE_SCAN.BluetoothLeService.UUID_HEART_RATE_MEASUREMENT;
 
 public class UartService extends Service {
     private final static String TAG = UartService.class.getSimpleName();
@@ -379,5 +382,23 @@ public class UartService extends Service {
         if (m_BluetoothGatt == null) return null;
 
         return m_BluetoothGatt.getServices();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public void setCharacteristicNotification(BluetoothGattCharacteristic characteristic,
+                                              boolean enabled) {
+        if (m_BluetoothAdapter == null || m_BluetoothGatt == null) {
+            Log.w(TAG, "BluetoothAdapter not initialized");
+            return;
+        }
+        m_BluetoothGatt.setCharacteristicNotification(characteristic, enabled);
+
+        // This is specific to Heart Rate Measurement.
+        if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
+            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
+                    UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
+            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+            m_BluetoothGatt.writeDescriptor(descriptor);
+        }
     }
 }

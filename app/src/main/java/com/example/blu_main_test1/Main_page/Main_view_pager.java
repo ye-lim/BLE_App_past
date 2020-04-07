@@ -45,6 +45,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.blu_main_test1.BLE_SCAN.BluetoothLeService;
+import com.example.blu_main_test1.BLE_SCAN.DeviceControlActivity;
 import com.example.blu_main_test1.BLE_connect.UartService;
 import com.example.blu_main_test1.BLE_connect.connect;
 import com.example.blu_main_test1.Main_page.Main_page2.Main_page_2;
@@ -97,6 +99,13 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
     private FirebaseUser user;
 
 
+    private BluetoothLeService mBluetoothLeService;
+    private final static String TAG = DeviceControlActivity.class.getSimpleName();
+    private String mDeviceAddress;
+
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_viewpager);
@@ -123,6 +132,8 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
 
         logout_btn.setOnClickListener(onClickListener);
         welcome_name();
+        Intent intent = new Intent(getApplicationContext(), BluetoothLeService.class);
+       // bindService(intent,mServiceConnection,Context.BIND_AUTO_CREATE);
 
 
         //상단바 설정

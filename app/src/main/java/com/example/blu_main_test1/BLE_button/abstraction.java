@@ -29,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.blu_main_test1.BLE_SCAN.BluetoothLeService;
+import com.example.blu_main_test1.BLE_SCAN.DeviceControlActivity;
 import com.example.blu_main_test1.BLE_connect.UartService;
 import com.example.blu_main_test1.BLE_connect.connect;
 import com.example.blu_main_test1.Main_page.MainActivity;
@@ -40,7 +42,7 @@ import java.lang.reflect.Field;
 public class abstraction extends AppCompatActivity {
     ImageButton back;
     View positionView;
-    UartService m_UartService;
+    BluetoothLeService m_UartService;
     AppCompatDialog progressDialog;
 
 
@@ -68,7 +70,7 @@ public class abstraction extends AppCompatActivity {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(UartService.ACTION_DATA_AVAILABLE);
 
-        Intent bindIntent = new Intent(getApplicationContext(), UartService.class);
+        Intent bindIntent = new Intent(getApplicationContext(), BluetoothLeService.class);
         bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
 
 
@@ -167,7 +169,7 @@ public class abstraction extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.rong_coffee:
-                    if(connect.IsConnect) {
+                    if(DeviceControlActivity.mConnected){
                         String rong_coffee = "03ECL37";
                         byte[] rong_coffee_value = {(byte) 0x02, (byte) 0x03};
                         byte[] rong_coffee__temp = rong_coffee.getBytes();
@@ -180,6 +182,8 @@ public class abstraction extends AppCompatActivity {
                     } else{
                         startToast("블루투스가 연결 되어 있지 않습니다.");
                     }
+
+
 
                     break;
 
@@ -277,11 +281,12 @@ public class abstraction extends AppCompatActivity {
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
         public void onServiceConnected(ComponentName className, IBinder rawBinder) {
-            m_UartService = ((UartService.LocalBinder) rawBinder).getService();
+            m_UartService = ((BluetoothLeService.LocalBinder) rawBinder).getService();
 
             //Log.d(TAG, "onServiceConnected m_UartService= " + m_UartService);
             if (!m_UartService.initialize()) {
                 //Log.e(TAG, "Unable to initialize Bluetooth");
+
             }
         }
 

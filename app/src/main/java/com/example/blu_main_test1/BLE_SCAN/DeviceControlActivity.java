@@ -38,6 +38,9 @@ import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 
+import com.example.blu_main_test1.BLE_connect.UartService;
+import com.example.blu_main_test1.Main_page.MainActivity;
+import com.example.blu_main_test1.Main_page.Main_view_pager;
 import com.example.blu_main_test1.R;
 
 import java.util.ArrayList;
@@ -64,25 +67,26 @@ public class DeviceControlActivity extends Activity {
     private BluetoothLeService mBluetoothLeService;
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics =
             new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
-    private boolean mConnected = false;
+    public static boolean mConnected = false;
     private BluetoothGattCharacteristic mNotifyCharacteristic;
 
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
 
     // Code to manage Service lifecycle.
+    //서비스가 연결됐을 때, 안됐을 때 관리
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
 
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
         @Override
-        public void onServiceConnected(ComponentName componentName, IBinder service) {
-            mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
-            if (!mBluetoothLeService.initialize()) {
+        public void onServiceConnected(ComponentName componentName, IBinder service) { //연결이 되었다면
+            mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService(); //또 다른 파일인 BluetoothLeService 클래스로 만들어진 변수 mBluetoothLeservice에
+            if (!mBluetoothLeService.initialize()) {                                        //BluetoothLeService객체를 받아오게 하는 getSerVice()로 초기화 시킴.
                 Log.e(TAG, "Unable to initialize Bluetooth");
                 finish();
             }
             // Automatically connects to the device upon successful start-up initialization.
-            mBluetoothLeService.connect(mDeviceAddress);
+            mBluetoothLeService.connect(mDeviceAddress); //장치를 연결시시킴 connect함수는 BluetoothLeService에 구현되어있음.
         }
 
         @Override
@@ -97,24 +101,24 @@ public class DeviceControlActivity extends Activity {
     // ACTION_GATT_SERVICES_DISCOVERED: discovered GATT services.
     // ACTION_DATA_AVAILABLE: received data from the device.  This can be a result of read
     //                        or notification operations.
-    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() { //BroadcastReceiver는  연결상태와 데이터들을 받아오는 역할을 한다.
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
         @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
+        public void onReceive(Context context, Intent intent) { //BluetoothLeService에서 sendBroadcast를 했을 때 호출.
+            final String action = intent.getAction(); //BluetoothLeService로부터 장치와 연결유뮤 상황을 action에 넣어 보내줌.
+            if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) { //연결 성공
                 mConnected = true;
-                updateConnectionState(R.string.connected);
-                invalidateOptionsMenu();
-            } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
+                updateConnectionState(R.string.connected);//연결됨을 ui에서 표시
+                invalidateOptionsMenu(); //onCreateOptionsMenu 호출
+            } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) { //연결 실패
                 mConnected = false;
                 updateConnectionState(R.string.disconnected);
                 invalidateOptionsMenu();
                 clearUI();
-            } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
+            } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) { //GATT 서비스 발견
                 // Show all the supported services and characteristics on the user interface.
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
-            } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
+            } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) { //BLE장치에서 받은 데이터가 사용가능.
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
@@ -166,7 +170,7 @@ public class DeviceControlActivity extends Activity {
         setContentView(R.layout.gatt_services_characteristics);
 
         final Intent intent = getIntent();
-        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
+        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME); //DeviceScanActivity에서 인텐트로 같이 넘어온 장치 이름과 주소를 추출.
         mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
 
         // Sets up UI references.
@@ -177,33 +181,47 @@ public class DeviceControlActivity extends Activity {
         mDataField = (TextView) findViewById(R.id.data_value);
 
         getActionBar().setTitle(mDeviceName);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-    }
+        getActionBar().setDisplayHomeAsUpEnabled(true); //액션바의 앱 아이콘 옆에 화살표를 만들어 전의 액티비티로 돌아갈 수 있게 함.
+        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class); //서비스와 특성들을 불러오고 특성을 눌렀을때 mDataField에 데이터를 불러 오도록하기 위해
+        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE); //인텐트를 만들고 그것으로 서비스를 실행시킴.
+
+
+
+        findViewById(R.id.mainButton).setOnClickListener(onClickListener);
+    }  //서비스를 실행시키고 요청을 하게 되면, 요청에 대한 결과를 mServiceConnection함수에서 받아와 활용할 수 있음. 세번째 인자는 바인딩의 옵션을 설정하는 flags를 설정.
+
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getApplicationContext(), com.example.blu_main_test1.Main_page.Main_view_pager.class);
+            startActivity(intent);
+        }
+    };
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter()); //브로드캐스트 등록
         if (mBluetoothLeService != null) {
-            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+            final boolean result = mBluetoothLeService.connect(mDeviceAddress); // 연결
             Log.d(TAG, "Connect request result=" + result);
         }
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause() { //리시버를 해제
         super.onPause();
         unregisterReceiver(mGattUpdateReceiver);
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy() { //서비스를 해제
         super.onDestroy();
-        unbindService(mServiceConnection);
+        unbindService(mServiceConnection); //unbindService()를 호출하면 연결이 끊기고 서비스에 연결된 컴포넌트가 하나도 남지 않게 되면서 안드로이드 시스템이 서비스를 소멸.
         mBluetoothLeService = null;
+        mConnected = false;
     }
 
     @Override
@@ -238,12 +256,12 @@ public class DeviceControlActivity extends Activity {
 
     private void updateConnectionState(final int resourceId) {
         runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mConnectionState.setText(resourceId);
-            }
-        });
-    }
+        @Override
+        public void run() {
+            mConnectionState.setText(resourceId);
+        }
+    });
+}
 
     private void displayData(String data) {
         if (data != null) {
