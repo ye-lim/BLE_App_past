@@ -3,6 +3,7 @@ package com.example.blu_main_test1.BLE_connect;
 //주석
 //주석2
 //주석3
+//주석주석주석주석주석주석주석주섣주석
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
