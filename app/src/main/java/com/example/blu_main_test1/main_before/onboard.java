@@ -9,10 +9,14 @@ import android.support.v4.content.ContextCompat;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.blu_main_test1.Main_page.MainActivity;
+import com.example.blu_main_test1.Main_page.Main_view_pager;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.main_before.login;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
+
+import javax.crypto.Mac;
 
 
 public class onboard extends AppIntro {
@@ -36,7 +40,7 @@ public class onboard extends AppIntro {
             prefs.edit().putBoolean("isFirstRun",false).apply();
         }
         else{
-            Intent newIntent = new Intent(getApplicationContext(), login.class);
+            Intent newIntent = new Intent(getApplicationContext(), Machine_main.class);
             startActivity(newIntent);
 
         }
@@ -55,7 +59,7 @@ public class onboard extends AppIntro {
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-        Intent intent=new Intent(getApplicationContext(),login.class);
+        Intent intent=new Intent(getApplicationContext(),Machine_main.class);
         startActivity(intent);
         finish();
     }
@@ -63,7 +67,7 @@ public class onboard extends AppIntro {
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
-        Intent intent=new Intent(getApplicationContext(),login.class);
+        Intent intent=new Intent(getApplicationContext(), Machine_main.class);
         startActivity(intent);
         finish();
     }
