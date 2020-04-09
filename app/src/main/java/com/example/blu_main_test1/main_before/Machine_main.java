@@ -39,7 +39,6 @@ public class Machine_main extends AppCompatActivity {
 
         backPressHandler = new BackPressHandler(this);
 
-        //버전 호환
         if (Build.VERSION.SDK_INT > 9)
         {
             StrictMode.ThreadPolicy policy = new
