@@ -1,32 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="#17233d"
+    android:orientation="vertical"
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:padding="10dp"
-        android:gravity="center"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="350dp"
-            android:layout_height="120dp"
-            android:src="@drawable/logo" />
-        <Button
-            android:id="@+id/BLE_Btn"
+        android:layout_height="match_parent"
+        android:id="@+id/textview"
+        android:orientation="vertical"
+        android:gravity="bottom" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="50dp"
+            android:layout_marginTop="-10dp"
+            android:text="Bluetooth로  "
+            android:textColor="#FFFFFF"/>
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bluetooth"
-            android:textColor="#17233d" />
+            android:textSize="35dp"
+            android:paddingBottom="25dp"
+            android:paddingLeft="50dp"
+            android:layout_marginTop="-10dp"
+            android:text="머신과 연동하기"
+            android:textColor="#FFFFFF"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:paddingBottom="85dp"
+            android:paddingLeft="50dp"
+            android:layout_marginTop="-10dp"
+            android:text="Bluetooth 머신 연결시 간편하게 머신 조작 가능! "
+            android:textColor="#FFFFFF"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_marginTop="50dp"
+        android:background="@xml/machine_bluetooth_background"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:layout_marginLeft="45dp"
+            android:text="연동하시겠습니까?"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center">
+            <Button
+                android:id="@+id/BLE_Btn"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="8dp"
+                android:text="연동하기"
+                android:textColor="#FFFFFF"
+                android:background="@xml/login_id"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
         <Button
             android:id="@+id/login_Btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
             android:text="Sign in"
-            android:textColor="#17233d"/>
+            android:textColor="#FFFFFF"
+            android:background="@xml/login_id"/>
+        </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
+    <ImageView
+        android:id="@+id/machine_image"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginBottom="280dp"
+        android:src="@drawable/machine"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true" />
+</RelativeLayout>

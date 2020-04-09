@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Bluetooth main page xml-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<gradient
+    android:endColor="#FFFFFF"
+    android:centerColor="#FFFFFF"
+    android:startColor="#FFFFFF"
+    android:angle="270" />
+<corners
+    android:bottomLeftRadius="0dp"
+    android:bottomRightRadius="0dp"
+    android:topLeftRadius="28dp"
+    android:topRightRadius="28dp" />
+<padding
+    android:left="0dp"
+    android:top="0dp"
+    android:right="0dp"
+    android:bottom="0dp"/>
+</shape>
