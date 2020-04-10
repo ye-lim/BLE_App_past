@@ -37,9 +37,11 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.blu_main_test1.BLE_button.abstraction;
 import com.example.blu_main_test1.BLE_connect.UartService;
+import com.example.blu_main_test1.BLE_connect.connect;
 import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
 import com.example.blu_main_test1.MypageActivity;
@@ -184,6 +186,7 @@ public class DeviceControlActivity extends Activity {
 
         findViewById(R.id.amount_start).setOnClickListener(onClickListener);
         findViewById(R.id.product_amount).setOnClickListener(onClickListener);
+        findViewById(R.id.state_start).setOnClickListener(onClickListener);
 
 
     }  //서비스를 실행시키고 요청을 하게 되면, 요청에 대한 결과를 mServiceConnection함수에서 받아와 활용할 수 있음. 세번째 인자는 바인딩의 옵션을 설정하는 flags를 설정.
@@ -202,10 +205,44 @@ public class DeviceControlActivity extends Activity {
                     startActivity(intent_product);
                     break;
 
+                case R.id.state_start:
+                    if(mConnected) {
+                        String start = "01WB8";
+                        byte[] value = {(byte) 0x02, (byte) 0x03};
+                        byte[] temp = start.getBytes();
+                        byte[] temp_data = new byte[temp.length + 2];
+                        System.arraycopy(value, 0, temp_data, 0, 1);
+                        System.arraycopy(temp, 0, temp_data, 1, temp.length);
+                        System.arraycopy(value, 1, temp_data, temp.length + 1, 1);
+                        mBluetoothLeService.writeRXCharacteristic(temp_data);
+                        startToast("머신 예열");
+                    }else{
+                        startToast("블루투스가 연결 되어 있지 않습니다.");
+                    }
+                    break;
+
+                case R.id.low_start:
+                    if(mConnected) {
+                        String low_start = "01PB1";
+                        byte[] low_value = {(byte) 0x02, (byte) 0x03};
+                        byte[] low_temp = low_start.getBytes();
+                        byte[] low_temp_data = new byte[low_temp.length + 2];
+                        System.arraycopy(low_value, 0, low_temp_data, 0, 1);
+                        System.arraycopy(low_temp, 0, low_temp_data, 1, low_temp.length);
+                        System.arraycopy(low_value, 1, low_temp_data, low_temp.length + 1, 1);
+                        mBluetoothLeService.writeRXCharacteristic(low_temp_data);
+                        startToast("절전 모드");
+                    }else{
+                        startToast("블루투스가 연결 되어 있지 않습니다.");
+                    }
+                    break;
 
             }
         }
     };
+    private void startToast(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
 
 
 
@@ -330,4 +367,5 @@ public class DeviceControlActivity extends Activity {
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
     }
+
 }

@@ -188,7 +188,7 @@ public class abstraction extends AppCompatActivity {
                     break;
 
                 case R.id.presso:
-                    if(connect.IsConnect) {
+                    if(DeviceControlActivity.mConnected) {
                         String presso_start = "03ECS3E";
                         byte[] presso_value = {(byte) 0x02, (byte) 0x03};
                         byte[] presso_temp = presso_start.getBytes();
@@ -206,7 +206,7 @@ public class abstraction extends AppCompatActivity {
 
                 case R.id.tea_big:
 
-                    if(connect.IsConnect) {
+                    if(DeviceControlActivity.mConnected) {
                         String tea_big_start = "03ETL48";
                         byte[] tea_big_value = {(byte) 0x02, (byte) 0x03};
                         byte[] tea_big_temp = tea_big_start.getBytes();
@@ -224,7 +224,7 @@ public class abstraction extends AppCompatActivity {
 
                 case R.id.tea_small:
 
-                    if(connect.IsConnect) {
+                    if(DeviceControlActivity.mConnected) {
                         String tea_small_start = "03ETS4F";
                         byte[] tea_small_value = {(byte) 0x02, (byte) 0x03};
                         byte[] tea_small_temp = tea_small_start.getBytes();
