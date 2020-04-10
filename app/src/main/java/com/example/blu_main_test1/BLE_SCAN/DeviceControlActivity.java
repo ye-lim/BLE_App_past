@@ -38,9 +38,11 @@ import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 
+import com.example.blu_main_test1.BLE_button.abstraction;
 import com.example.blu_main_test1.BLE_connect.UartService;
 import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
+import com.example.blu_main_test1.MypageActivity;
 import com.example.blu_main_test1.R;
 
 import java.util.ArrayList;
@@ -180,9 +182,30 @@ public class DeviceControlActivity extends Activity {
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE); //인텐트를 만들고 그것으로 서비스를 실행시킴.
 
 
+        findViewById(R.id.amount_start).setOnClickListener(onClickListener);
+        findViewById(R.id.product_amount).setOnClickListener(onClickListener);
+
 
     }  //서비스를 실행시키고 요청을 하게 되면, 요청에 대한 결과를 mServiceConnection함수에서 받아와 활용할 수 있음. 세번째 인자는 바인딩의 옵션을 설정하는 flags를 설정.
 
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.amount_start:
+                    Intent intent=new Intent(getApplicationContext(), abstraction.class);
+                    startActivity(intent);
+                    break;
+
+                case R.id.product_amount:
+                    Intent intent_product=new Intent(getApplicationContext(), com.example.blu_main_test1.Main_page.Main_page2.product_amount.class);
+                    startActivity(intent_product);
+                    break;
+
+
+            }
+        }
+    };
 
 
 
