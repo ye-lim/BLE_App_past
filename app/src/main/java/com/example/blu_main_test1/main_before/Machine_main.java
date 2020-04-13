@@ -67,8 +67,4 @@ public class Machine_main extends AppCompatActivity {
         }
     };
 
-    @Override
-    public void onBackPressed(){
-        backPressHandler.onBackPressed();
-    }
 }
