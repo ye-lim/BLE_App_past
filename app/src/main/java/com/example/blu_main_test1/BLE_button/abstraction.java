@@ -279,7 +279,7 @@ public class abstraction extends AppCompatActivity {
 
     //UART service connected/disconnected
     private ServiceConnection mServiceConnection = new ServiceConnection() {
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
         public void onServiceConnected(ComponentName className, IBinder rawBinder) {
             m_UartService = ((BluetoothLeService.LocalBinder) rawBinder).getService();
 
@@ -290,7 +290,7 @@ public class abstraction extends AppCompatActivity {
             }
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
         public void onServiceDisconnected(ComponentName classname) {
             if(m_UartService != null) {
                 m_UartService.disconnect();

@@ -77,9 +77,9 @@ public class BluetoothLeService extends Service {
 
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) { //연결 상태가 바뀌면 호출됨.
             String intentAction;
@@ -109,7 +109,7 @@ public class BluetoothLeService extends Service {
             }
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt,
                                          BluetoothGattCharacteristic characteristic,
@@ -119,7 +119,7 @@ public class BluetoothLeService extends Service {
             }
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,  //서비스안의 특성의 값이 바뀔 때 호출됨.
                                             BluetoothGattCharacteristic characteristic) {
@@ -132,7 +132,7 @@ public class BluetoothLeService extends Service {
         sendBroadcast(intent);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     private void broadcastUpdate(final String action,
                                  final BluetoothGattCharacteristic characteristic) {
         final Intent intent = new Intent(action);
@@ -177,7 +177,7 @@ public class BluetoothLeService extends Service {
         return mBinder;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     @Override
     public boolean onUnbind(Intent intent) {
         // After using a given device, you should make sure that BluetoothGatt.close() is called
@@ -194,7 +194,7 @@ public class BluetoothLeService extends Service {
      *
      * @return Return true if the initialization is successful.
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     public boolean initialize() { //이 메소드는 블루투스 어댑터를 형성하고 초기화 하는 작업을 함. (어댑터는 블루투스매니저로 만들 수 있음)
         // For API level 18 and above, get a reference to BluetoothAdapter through
         // BluetoothManager.
@@ -225,7 +225,7 @@ public class BluetoothLeService extends Service {
      *         {@code BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt, int, int)}
      *         callback.
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     public boolean connect(final String address) {
         if (mBluetoothAdapter == null || address == null) {
             Log.w(TAG, "BluetoothAdapter not initialized or unspecified address.");
@@ -264,7 +264,7 @@ public class BluetoothLeService extends Service {
      * {@code BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt, int, int)}
      * callback.
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     public void disconnect() {
         if (mBluetoothAdapter == null || mBluetoothGatt == null) {
             Log.w(TAG, "BluetoothAdapter not initialized");
@@ -277,7 +277,7 @@ public class BluetoothLeService extends Service {
      * After using a given BLE device, the app must call this method to ensure resources are
      * released properly.
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     public void close() {
         if (mBluetoothGatt == null) {
             return;
@@ -293,7 +293,7 @@ public class BluetoothLeService extends Service {
      *
      * @param characteristic The characteristic to read from.
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     public void readCharacteristic(BluetoothGattCharacteristic characteristic) { //이 메소드는 연결된 ble장치의 특성을 읽어오라는 명령을 내린다.
         if (mBluetoothAdapter == null || mBluetoothGatt == null) {
             Log.w(TAG, "BluetoothAdapter not initialized");
@@ -308,7 +308,7 @@ public class BluetoothLeService extends Service {
      * @param characteristic Characteristic to act on.
      * @param enabled If true, enable notification.  False otherwise.
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     public void setCharacteristicNotification(BluetoothGattCharacteristic characteristic,
                                               boolean enabled) {
         if (mBluetoothAdapter == null || mBluetoothGatt == null) {
@@ -332,14 +332,14 @@ public class BluetoothLeService extends Service {
      *
      * @return A {@code List} of supported services.
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     public List<BluetoothGattService> getSupportedGattServices() { //ble장치에서 제공되는 서비스들을 받아올 수 있도록 해줌.
         if (mBluetoothGatt == null) return null;
 
         return mBluetoothGatt.getServices();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     public void writeRXCharacteristic(byte[] value)
     {
         BluetoothGattService RxService = mBluetoothGatt.getService(RX_SERVICE_UUID);

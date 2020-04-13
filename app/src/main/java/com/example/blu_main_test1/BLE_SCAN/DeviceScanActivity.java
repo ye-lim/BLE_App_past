@@ -55,7 +55,7 @@ public class DeviceScanActivity extends ListActivity {
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000; //스캔주기
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +106,7 @@ public class DeviceScanActivity extends ListActivity {
         return true;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -121,7 +121,7 @@ public class DeviceScanActivity extends ListActivity {
         return true;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -153,7 +153,7 @@ public class DeviceScanActivity extends ListActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -161,7 +161,6 @@ public class DeviceScanActivity extends ListActivity {
         mLeDeviceListAdapter.clear();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override                // l은 listView객체이고, v는 부모 객체, position은 클릭된 아이템의 위치, id는 그 아이템의 고유 번호.
     protected void onListItemClick(ListView l, View v, int position, long id) { //각 아이템을 클릭했을 때
         final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position); // 그 위치의 디바이스
@@ -176,7 +175,7 @@ public class DeviceScanActivity extends ListActivity {
         startActivity(intent); //DeviceControlActivity 엶
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     private void scanLeDevice(final boolean enable) {
         if (enable) {
             // Stops scanning after a pre-defined scan period.
@@ -267,7 +266,7 @@ public class DeviceScanActivity extends ListActivity {
             return view;
         }
     }
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     // Device scan callback.
     private BluetoothAdapter.LeScanCallback mLeScanCallback = //새로운 장치가 발견될때마다 onLeScan을 호출.
             new BluetoothAdapter.LeScanCallback() {

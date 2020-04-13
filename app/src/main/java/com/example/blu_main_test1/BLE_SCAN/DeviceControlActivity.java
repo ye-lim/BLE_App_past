@@ -80,7 +80,7 @@ public class DeviceControlActivity extends Activity {
     //서비스가 연결됐을 때, 안됐을 때 관리
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
 
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder service) { //연결이 되었다면
             mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService(); //또 다른 파일인 BluetoothLeService 클래스로 만들어진 변수 mBluetoothLeservice에
@@ -133,7 +133,7 @@ public class DeviceControlActivity extends Activity {
     // list of supported characteristic features.
     private final ExpandableListView.OnChildClickListener servicesListClickListner =
             new ExpandableListView.OnChildClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
                 @Override
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
                                             int childPosition, long id) {
@@ -187,7 +187,8 @@ public class DeviceControlActivity extends Activity {
         findViewById(R.id.amount_start).setOnClickListener(onClickListener);
         findViewById(R.id.product_amount).setOnClickListener(onClickListener);
         findViewById(R.id.state_start).setOnClickListener(onClickListener);
-
+        findViewById(R.id.low_start).setOnClickListener(onClickListener);
+        findViewById(R.id.amount_stop).setOnClickListener(onClickListener);
 
     }  //서비스를 실행시키고 요청을 하게 되면, 요청에 대한 결과를 mServiceConnection함수에서 받아와 활용할 수 있음. 세번째 인자는 바인딩의 옵션을 설정하는 flags를 설정.
 
@@ -237,6 +238,22 @@ public class DeviceControlActivity extends Activity {
                     }
                     break;
 
+                case R.id.amount_stop:
+                    if(mConnected) {
+                        String stop_start = "01SB4";
+                        byte[] stop_value = {(byte) 0x02, (byte) 0x03};
+                        byte[] stop_temp = stop_start.getBytes();
+                        byte[] stop_temp_data = new byte[stop_temp.length + 2];
+                        System.arraycopy(stop_value, 0, stop_temp_data, 0, 1);
+                        System.arraycopy(stop_temp, 0, stop_temp_data, 1, stop_temp.length);
+                        System.arraycopy(stop_value, 1, stop_temp_data, stop_temp.length + 1, 1);
+                        mBluetoothLeService.writeRXCharacteristic(stop_temp_data);
+                        startToast("추출 중지");
+                    }else{
+                        startToast("블루투스가 연결 되어 있지 않습니다.");
+                    }
+                    break;
+
             }
         }
     };
@@ -246,7 +263,7 @@ public class DeviceControlActivity extends Activity {
 
 
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -284,7 +301,7 @@ public class DeviceControlActivity extends Activity {
         return true;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
@@ -315,7 +332,7 @@ public class DeviceControlActivity extends Activity {
     // Demonstrates how to iterate through the supported GATT Services/Characteristics.
     // In this sample, we populate the data structure that is bound to the ExpandableListView
     // on the UI.
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+
     private void displayGattServices(List<BluetoothGattService> gattServices) {
         if (gattServices == null) return;
         String uuid = null;
