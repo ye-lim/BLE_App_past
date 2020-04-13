@@ -55,8 +55,6 @@ public class autoScrollAdapter extends PagerAdapter  {
                 }
             }
         });
-
-
         return v;
     }
 

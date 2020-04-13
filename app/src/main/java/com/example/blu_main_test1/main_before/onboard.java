@@ -40,7 +40,7 @@ public class onboard extends AppIntro {
             prefs.edit().putBoolean("isFirstRun",false).apply();
         }
         else{
-            Intent newIntent = new Intent(getApplicationContext(), Machine_main.class);
+            Intent newIntent = new Intent(getApplicationContext(), theMainPage.class);
             startActivity(newIntent);
 
         }
@@ -59,7 +59,7 @@ public class onboard extends AppIntro {
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-        Intent intent=new Intent(getApplicationContext(),Machine_main.class);
+        Intent intent=new Intent(getApplicationContext(),theMainPage.class);
         startActivity(intent);
         finish();
     }
@@ -67,7 +67,7 @@ public class onboard extends AppIntro {
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
-        Intent intent=new Intent(getApplicationContext(), Machine_main.class);
+        Intent intent=new Intent(getApplicationContext(), theMainPage.class);
         startActivity(intent);
         finish();
     }

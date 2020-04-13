@@ -112,19 +112,19 @@ public class Main_page_2 extends Fragment implements View.OnClickListener {
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.product1:
+            case R.id.product1: //전통
                 Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("http://medipresso.com/category/%EC%A0%84%ED%86%B5%ED%8B%B0%EC%BA%A1%EC%8A%90/32/"));
                 startActivity(intent);
                 break;
-            case R.id.product2:
+            case R.id.product2: //한
                 Intent intent2=new Intent(Intent.ACTION_VIEW, Uri.parse("http://medipresso.com/category/%ED%95%9C%EC%B0%A8%ED%8B%B0%EC%BA%A1%EC%8A%90/33/"));
                 startActivity(intent2);
                 break;
-            case R.id.product3:
+            case R.id.product3: //블렌드티
                 Intent intent3=new Intent(Intent.ACTION_VIEW, Uri.parse("http://medipresso.com/category/%EB%B8%94%EB%A0%8C%EB%93%9C%ED%8B%B0%EC%BA%A1%EC%8A%90/45/"));
                 startActivity(intent3);
                 break;
-            case R.id.product4:
+            case R.id.product4: //머신
                 Intent intent4=new Intent(Intent.ACTION_VIEW, Uri.parse("http://medipresso.com/category/%EB%A9%94%EB%94%94%ED%94%84%EB%A0%88%EC%86%8C-%EB%A8%B8%EC%8B%A0/24/"));
                 startActivity(intent4);
                 break;

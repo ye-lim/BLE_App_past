@@ -96,7 +96,7 @@ public class BluetoothLeService extends Service {
                 intentAction = ACTION_GATT_DISCONNECTED;
                 mConnectionState = STATE_DISCONNECTED;
                 Log.i(TAG, "Disconnected from GATT server.");
-                broadcastUpdate(intentAction); //바뀐 연결 상태가 연결된건지, 끊긴건지에 따라 Action을 설정하고 위 함수로 그 상태를 DeviceControlActiviy에 방송해 알린다.
+                broadcastUpdate(intentAction); //바뀐 연결 상태가 연결된건지, 끊긴건지에 따라 Action을 설정하고 위 함수로 그 상태를 DeviceControlActivity에 방송해 알린다.
             }
         }
 
