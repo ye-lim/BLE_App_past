@@ -251,7 +251,11 @@ public class BluetoothLeService extends Service {
         }
         // We want to directly connect to the device, so we are setting the autoConnect
         // parameter to false.
-        mBluetoothGatt = device.connectGatt(this, false, mGattCallback); //디바이스와 연결을 시도
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mBluetoothGatt = device.connectGatt(this, false, mGattCallback, BluetoothDevice.TRANSPORT_LE); //디바이스와 연결을 시도
+        } else {
+            mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
+        }
         Log.d(TAG, "Trying to create a new connection.");
         mBluetoothDeviceAddress = address;
         mConnectionState = STATE_CONNECTING;
