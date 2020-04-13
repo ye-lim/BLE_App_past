@@ -38,7 +38,7 @@ import com.example.blu_main_test1.Main_page.Main_view_pager;
 import com.example.blu_main_test1.R;
 
 import java.lang.reflect.Field;
-
+//주석 테스트
 public class abstraction extends AppCompatActivity {
     ImageButton back;
     View positionView;
