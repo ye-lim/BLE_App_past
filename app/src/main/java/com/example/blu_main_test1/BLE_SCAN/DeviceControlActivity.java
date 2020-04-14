@@ -30,6 +30,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,6 +51,8 @@ import com.example.blu_main_test1.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * For a given BLE device, this Activity provides the user interface to connect, display data,
@@ -63,7 +66,13 @@ public class DeviceControlActivity extends Activity {
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
 
+    private TextView stateView;
+    private TextView temperView;
     private TextView mConnectionState;
+    private Timer mTimer[] = new Timer[6];
+
+
+    private String text;
     private String mDeviceName;
     private String mDeviceAddress;
     //private ExpandableListView mGattServicesList;
@@ -105,12 +114,15 @@ public class DeviceControlActivity extends Activity {
     //                        or notification operations.
     private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() { //BroadcastReceiver는  연결상태와 데이터들을 받아오는 역할을 한다.
         @Override
-        public void onReceive(Context context, Intent intent) { //BluetoothLeService에서 sendBroadcast를 했을 때 호출.
-            final String action = intent.getAction(); //BluetoothLeService로부터 장치와 연결유뮤 상황을 action에 넣어 보내줌.
+        public void onReceive(final Context context, Intent intent) { //BluetoothLeService에서 sendBroadcast를 했을 때 호출.
+            String action = intent.getAction(); //BluetoothLeService로부터 장치와 연결유뮤 상황을 action에 넣어 보내줌.
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) { //연결 성공
                 mConnected = true;
                 updateConnectionState(R.string.connected);//연결됨을 ui에서 표시
                 invalidateOptionsMenu(); //onCreateOptionsMenu 호출
+                if(mConnected){
+                    mTimer[0].schedule(new State(), 1000, 15000);
+                }
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) { //연결 실패
                 mConnected = false;
                 updateConnectionState(R.string.disconnected);
@@ -120,7 +132,31 @@ public class DeviceControlActivity extends Activity {
                 // Show all the supported services and characteristics on the user interface.
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) { //BLE장치에서 받은 데이터가 사용가능.
-
+                final byte[] txValue = intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA);
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        try {
+                            //string형식으로 리스트 뷰에 표현
+                            text = new String(txValue, "UTF-8");
+                            if (text.substring(1, 6).equals("07RST")) {
+                                switch (text.substring(6, 8)) {
+                                    case "00":
+                                        stateView.setText("절전모드");
+                                        break;
+                                    case "10":
+                                        stateView.setText("가열중");
+                                        break;
+                                    case "20":
+                                        stateView.setText("추출대기");
+                                        break;
+                                }
+                                temperView.setText(text.substring(8,10));
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         }
     };
@@ -187,6 +223,15 @@ public class DeviceControlActivity extends Activity {
         findViewById(R.id.state_start).setOnClickListener(onClickListener);
         findViewById(R.id.low_start).setOnClickListener(onClickListener);
 
+        for(int i =0; i<6;i++){
+            mTimer[i] = new Timer();
+        }
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter()); //브로드캐스트 등록
+        if (mBluetoothLeService != null) {
+            final boolean result = mBluetoothLeService.connect(mDeviceAddress); // 연결
+            Log.d(TAG, "Connect request result=" + result);
+        }
+
 
     }  //서비스를 실행시키고 요청을 하게 되면, 요청에 대한 결과를 mServiceConnection함수에서 받아와 활용할 수 있음. 세번째 인자는 바인딩의 옵션을 설정하는 flags를 설정.
 
@@ -248,17 +293,13 @@ public class DeviceControlActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter()); //브로드캐스트 등록
-        if (mBluetoothLeService != null) {
-            final boolean result = mBluetoothLeService.connect(mDeviceAddress); // 연결
-            Log.d(TAG, "Connect request result=" + result);
-        }
+
     }
 
     @Override
     protected void onPause() { //리시버를 해제
         super.onPause();
-        unregisterReceiver(mGattUpdateReceiver);
+      //  unregisterReceiver(mGattUpdateReceiver);
     }
 
     @Override
@@ -362,6 +403,30 @@ public class DeviceControlActivity extends Activity {
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
+    }
+
+
+    class State extends TimerTask {
+        @Override
+        public void run() {
+            if(mConnected) {
+                if (mBluetoothLeService != null) {
+
+                    String TL_amount, basic_state;
+                    byte[] value = {(byte) 0x02, (byte) 0x03};
+
+                    basic_state = "03QST5B"; //현재 상태질의
+
+                    byte[] state = basic_state.getBytes();
+                    byte[] state_data = new byte[state.length + 2];
+
+                    System.arraycopy(value, 0, state_data, 0, 1);
+                    System.arraycopy(state, 0, state_data, 1, state.length);
+                    System.arraycopy(value, 1, state_data, state.length + 1, 1);
+                    mBluetoothLeService.writeRXCharacteristic(state_data);
+                }
+            }
+        }
     }
 
 }
