@@ -28,10 +28,12 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -70,20 +72,24 @@ public class BluetoothLeService extends Service {
 
     public final static UUID UUID_HEART_RATE_MEASUREMENT =
             UUID.fromString(SampleGattAttributes.HEART_RATE_MEASUREMENT);
+    public static final UUID CCCD = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
 
     public static final UUID RX_SERVICE_UUID = UUID.fromString("6e400001-b5a3-f393-e0a9-e50e24dcca9e");
     public static final UUID RX_CHAR_UUID = UUID.fromString("6e400002-b5a3-f393-e0a9-e50e24dcca9e");
     public static final UUID TX_CHAR_UUID = UUID.fromString("6e400003-b5a3-f393-e0a9-e50e24dcca9e");
 
+    public static  boolean  m_is_Disconnect_Intentional = false;
+
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
-
+    //콜백 함수를 통해서 ble 장치의 연결 및 처리에 관련된 기능들을 처리 할 수 있음.
     private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
 
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) { //연결 상태가 바뀌면 호출됨.
             super.onConnectionStateChange(gatt, status, newState);
             String intentAction;
+
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 intentAction = ACTION_GATT_CONNECTED;
                 mConnectionState = STATE_CONNECTED;
@@ -92,12 +98,18 @@ public class BluetoothLeService extends Service {
                 // Attempts to discover services after successful connection.
                 Log.i(TAG, "Attempting to start service discovery:" +
                         mBluetoothGatt.discoverServices());
+                m_is_Disconnect_Intentional = false;
 
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                intentAction = ACTION_GATT_DISCONNECTED;
-                mConnectionState = STATE_DISCONNECTED;
-                Log.i(TAG, "Disconnected from GATT server.");
-                broadcastUpdate(intentAction); //바뀐 연결 상태가 연결된건지, 끊긴건지에 따라 Action을 설정하고 위 함수로 그 상태를 DeviceControlActivity에 방송해 알린다.
+                if(m_is_Disconnect_Intentional == false) {
+                    connect(mBluetoothDeviceAddress);
+                }
+                else {
+                    intentAction = ACTION_GATT_DISCONNECTED;
+                    mConnectionState = STATE_DISCONNECTED;
+                    Log.i(TAG, "Disconnected from GATT server.");
+                    broadcastUpdate(intentAction);
+                }
             }
         }
 
@@ -118,6 +130,7 @@ public class BluetoothLeService extends Service {
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
             }
+
         }
 
 
@@ -125,12 +138,13 @@ public class BluetoothLeService extends Service {
         public void onCharacteristicChanged(BluetoothGatt gatt,  //서비스안의 특성의 값이 바뀔 때 호출됨.
                                             BluetoothGattCharacteristic characteristic) {
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
+
         }
     };
 
     private void broadcastUpdate(final String action) {
         final Intent intent = new Intent(action);
-        sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
 
@@ -138,11 +152,13 @@ public class BluetoothLeService extends Service {
                                  final BluetoothGattCharacteristic characteristic) {
         final Intent intent = new Intent(action);
 
-        if(TX_CHAR_UUID.equals(characteristic.getUuid())) {
-            //Log.d(TAG, String.format("Received TX: %d", characteristic.getValue() ));
+        // This is handling for the notification on TX Character of NUS service
+        if (TX_CHAR_UUID.equals(characteristic.getUuid())) {
+
+            // Log.d(TAG, String.format("Received TX: %d",characteristic.getValue() ));
             intent.putExtra(EXTRA_DATA, characteristic.getValue());
         }
-        sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     public class LocalBinder extends Binder { //각각 독립된 프로세서들을 연결해 주는 역할.(서비스의 기능을 이용할 수 있도록 제공하는 것)
@@ -253,6 +269,7 @@ public class BluetoothLeService extends Service {
             Log.w(TAG, "BluetoothAdapter not initialized");
             return;
         }
+        m_is_Disconnect_Intentional = true;
         mBluetoothGatt.disconnect();
     }
 
@@ -265,6 +282,7 @@ public class BluetoothLeService extends Service {
         if (mBluetoothGatt == null) {
             return;
         }
+        mBluetoothDeviceAddress = null;
         mBluetoothGatt.close();
         mBluetoothGatt = null;
     }
@@ -323,6 +341,35 @@ public class BluetoothLeService extends Service {
     }
 
 
+    public void enableTXNotification()
+    {
+    	/*
+    	if (m_BluetoothGatt == null) {
+    		showMessage("m_BluetoothGatt null" + m_BluetoothGatt);
+    		broadcastUpdate(DEVICE_DOES_NOT_SUPPORT_UART);
+    		return;
+    	}
+    		*/
+        BluetoothGattService RxService = mBluetoothGatt.getService(RX_SERVICE_UUID);
+        if (RxService == null) {
+            showMessage("Rx service not found!");
+            broadcastUpdate(DEVICE_DOES_NOT_SUPPORT_UART);
+            return;
+        }
+        BluetoothGattCharacteristic TxChar = RxService.getCharacteristic(TX_CHAR_UUID);
+        if (TxChar == null) {
+            showMessage("Tx charateristic not found!");
+            broadcastUpdate(DEVICE_DOES_NOT_SUPPORT_UART);
+            return;
+        }
+        mBluetoothGatt.setCharacteristicNotification(TxChar,true);
+
+        BluetoothGattDescriptor descriptor = TxChar.getDescriptor(CCCD);
+        descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+        mBluetoothGatt.writeDescriptor(descriptor);
+
+    }
+
     public void writeRXCharacteristic(byte[] value)
     {
         BluetoothGattService RxService = mBluetoothGatt.getService(RX_SERVICE_UUID);
@@ -350,5 +397,8 @@ public class BluetoothLeService extends Service {
 
     private void showMessage(String msg) {
         Log.e(TAG, msg);
+    }
+    private void startToast(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 }

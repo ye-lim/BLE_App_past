@@ -19,6 +19,7 @@ import com.example.blu_main_test1.BLE_SCAN.BluetoothLeService;
 import com.example.blu_main_test1.BLE_SCAN.DeviceScanActivity;
 import com.example.blu_main_test1.BLE_button.abstraction;
 import com.example.blu_main_test1.BLE_connect.UartService;
+import com.example.blu_main_test1.BLE_connect.connect;
 import com.example.blu_main_test1.R;
 
 
