@@ -87,6 +87,7 @@ public class BluetoothLeService extends Service {
 
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) { //연결 상태가 바뀌면 호출됨.
+            super.onConnectionStateChange(gatt, status, newState);
             String intentAction;
 
             if (newState == BluetoothProfile.STATE_CONNECTED) {
