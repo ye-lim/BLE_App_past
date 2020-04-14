@@ -157,8 +157,6 @@ public class BluetoothLeService extends Service {
 
             // Log.d(TAG, String.format("Received TX: %d",characteristic.getValue() ));
             intent.putExtra(EXTRA_DATA, characteristic.getValue());
-        } else {
-
         }
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }

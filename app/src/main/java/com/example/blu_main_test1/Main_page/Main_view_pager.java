@@ -85,7 +85,8 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
     private Main_page_2 main_page_2;
     private TabLayout tabLayout;
     private String text,action;
-    UartService m_UartService;
+    //UartService m_UartService;
+    BluetoothLeService bluetoothLeService;
     private Timer mTimer[]=new Timer[6];
     private ImageButton amount_change,back,amount_start,product_amount,state_start,amount_stop,low_start;
     private EditText coffee_b_amount,coffee_s_amount,tea_b_amount,tea_s_amount;
@@ -190,9 +191,9 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
         }
         //데이터 받는걸 확인
         final IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(UartService.ACTION_DATA_AVAILABLE);
+        intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
 
-        Intent bindIntent = new Intent(getApplicationContext(), UartService.class);
+        Intent bindIntent = new Intent(getApplicationContext(), BluetoothLeService.class);
         bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(UARTStatusChangeReceiver, intentFilter);
 
@@ -440,7 +441,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                                 System.arraycopy(cb_value, 0, cb_temp_data, 0, 1);
                                 System.arraycopy(cb_temp, 0, cb_temp_data, 1, cb_temp.length);
                                 System.arraycopy(cb_value, 1, cb_temp_data, cb_temp.length + 1, 1);
-                                m_UartService.writeRXCharacteristic(cb_temp_data);
+                                bluetoothLeService.writeRXCharacteristic(cb_temp_data);
                             }
 
 
@@ -464,7 +465,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                                         System.arraycopy(cs_temp, 0, cs_temp_data, 1, cs_temp.length);
                                         System.arraycopy(cs_value, 1, cs_temp_data, cs_temp.length + 1, 1);
 
-                                        m_UartService.writeRXCharacteristic(cs_temp_data);
+                                        bluetoothLeService.writeRXCharacteristic(cs_temp_data);
                                     }
 
                                 }, 1000);  // 1 초 후에 실행
@@ -490,7 +491,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                                         System.arraycopy(tb_value, 0, tb_temp_data, 0, 1);
                                         System.arraycopy(tb_temp, 0, tb_temp_data, 1, tb_temp.length);
                                         System.arraycopy(tb_value, 1, tb_temp_data, tb_temp.length + 1, 1);
-                                        m_UartService.writeRXCharacteristic(tb_temp_data);
+                                        bluetoothLeService.writeRXCharacteristic(tb_temp_data);
                                     }
 
                                 }, 1500);  // 1 초 후에 실행
@@ -516,7 +517,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                                         System.arraycopy(ts_value, 0, ts_temp_data, 0, 1);
                                         System.arraycopy(ts_temp, 0, ts_temp_data, 1, ts_temp.length);
                                         System.arraycopy(ts_value, 1, ts_temp_data, ts_temp.length + 1, 1);
-                                        m_UartService.writeRXCharacteristic(ts_temp_data);
+                                        bluetoothLeService.writeRXCharacteristic(ts_temp_data);
                                     }
 
                                 }, 2000);  // 1 초 후에 실행
@@ -545,7 +546,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                     System.arraycopy(value, 0, temp_data, 0, 1);
                     System.arraycopy(temp, 0, temp_data, 1, temp.length);
                     System.arraycopy(value, 1, temp_data, temp.length + 1, 1);
-                    m_UartService.writeRXCharacteristic(temp_data);
+                    bluetoothLeService.writeRXCharacteristic(temp_data);
                 }
                 break;
             case R.id.low_start:
@@ -557,7 +558,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                     System.arraycopy(low_value, 0, low_temp_data, 0, 1);
                     System.arraycopy(low_temp, 0, low_temp_data, 1, low_temp.length);
                     System.arraycopy(low_value, 1, low_temp_data, low_temp.length + 1, 1);
-                    m_UartService.writeRXCharacteristic(low_temp_data);
+                    bluetoothLeService.writeRXCharacteristic(low_temp_data);
                 }
                 break;
 
@@ -570,7 +571,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                     System.arraycopy(stop_value, 0, stop_temp_data, 0, 1);
                     System.arraycopy(stop_temp, 0, stop_temp_data, 1, stop_temp.length);
                     System.arraycopy(stop_value, 1, stop_temp_data, stop_temp.length + 1, 1);
-                    m_UartService.writeRXCharacteristic(stop_temp_data);
+                    bluetoothLeService.writeRXCharacteristic(stop_temp_data);
                 }
                 break;
 
@@ -651,18 +652,18 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
         public void onServiceConnected(ComponentName className, IBinder rawBinder) {
-            m_UartService = ((UartService.LocalBinder) rawBinder).getService();
+            bluetoothLeService = ((BluetoothLeService.LocalBinder) rawBinder).getService();
 
             //Log.d(TAG, "onServiceConnected m_UartService= " + m_UartService);
-            if (!m_UartService.initialize()) {
+            if (!bluetoothLeService.initialize()) {
                 //Log.e(TAG, "Unable to initialize Bluetooth");
             }
         }
 
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
         public void onServiceDisconnected(ComponentName classname) {
-            if(m_UartService != null) {
-                m_UartService.disconnect();
+            if(bluetoothLeService != null) {
+                bluetoothLeService.disconnect();
             }
         }
     };
@@ -681,7 +682,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
         @Override
         public void run() {
             if(connect.IsConnect) {
-                if (m_UartService != null) {
+                if (bluetoothLeService != null) {
 
                     String TL_amount, basic_state;
                     byte[] value = {(byte) 0x02, (byte) 0x03};
@@ -693,7 +694,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                     System.arraycopy(value, 0, temp_data, 0, 1);
                     System.arraycopy(temp, 0, temp_data, 1, temp.length);
                     System.arraycopy(value, 1, temp_data, temp.length + 1, 1);
-                    m_UartService.writeRXCharacteristic(temp_data);
+                    bluetoothLeService.writeRXCharacteristic(temp_data);
 
                 }
             }
@@ -704,7 +705,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
         @Override
         public void run() {
             if(connect.IsConnect) {
-                if (m_UartService != null) {
+                if (bluetoothLeService != null) {
 
                     String TL_amount, basic_state;
                     byte[] value = {(byte) 0x02, (byte) 0x03};
@@ -717,7 +718,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                     System.arraycopy(value, 0, state_data, 0, 1);
                     System.arraycopy(state, 0, state_data, 1, state.length);
                     System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    m_UartService.writeRXCharacteristic(state_data);
+                    bluetoothLeService.writeRXCharacteristic(state_data);
                 }
             }
         }
@@ -728,7 +729,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
         @Override
         public void run() {
             if(connect.IsConnect) {
-                if (m_UartService != null) {
+                if (bluetoothLeService != null) {
 
                     String TL_amount, basic_state;
                     byte[] value = {(byte) 0x02, (byte) 0x03};
@@ -741,7 +742,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                     System.arraycopy(value, 0, state_data, 0, 1);
                     System.arraycopy(state, 0, state_data, 1, state.length);
                     System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    m_UartService.writeRXCharacteristic(state_data);
+                    bluetoothLeService.writeRXCharacteristic(state_data);
                 }
             }
         }
@@ -751,7 +752,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
         @Override
         public void run() {
             if(connect.IsConnect) {
-                if (m_UartService != null) {
+                if (bluetoothLeService != null) {
 
                     String TL_amount, basic_state;
                     byte[] value = {(byte) 0x02, (byte) 0x03};
@@ -764,7 +765,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                     System.arraycopy(value, 0, state_data, 0, 1);
                     System.arraycopy(state, 0, state_data, 1, state.length);
                     System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    m_UartService.writeRXCharacteristic(state_data);
+                    bluetoothLeService.writeRXCharacteristic(state_data);
                 }
             }
         }
@@ -774,7 +775,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
         @Override
         public void run() {
             if(connect.IsConnect) {
-                if (m_UartService != null) {
+                if (bluetoothLeService != null) {
 
                     String TL_amount, basic_state;
                     byte[] value = {(byte) 0x02, (byte) 0x03};
@@ -787,7 +788,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                     System.arraycopy(value, 0, state_data, 0, 1);
                     System.arraycopy(state, 0, state_data, 1, state.length);
                     System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    m_UartService.writeRXCharacteristic(state_data);
+                    bluetoothLeService.writeRXCharacteristic(state_data);
                 }
             }
         }
@@ -797,7 +798,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
         @Override
         public void run() {
             if(connect.IsConnect) {
-                if (m_UartService != null) {
+                if (bluetoothLeService != null) {
 
                     String TL_amount, basic_state;
                     byte[] value = {(byte) 0x02, (byte) 0x03};
@@ -810,7 +811,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                     System.arraycopy(value, 0, state_data, 0, 1);
                     System.arraycopy(state, 0, state_data, 1, state.length);
                     System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    m_UartService.writeRXCharacteristic(state_data);
+                    bluetoothLeService.writeRXCharacteristic(state_data);
                 }
             }
         }
@@ -818,12 +819,11 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
 
     private final BroadcastReceiver UARTStatusChangeReceiver = new BroadcastReceiver() {
 
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
         public void onReceive(final Context context, Intent intent) {
             String action = intent.getAction();
             final MainActivity main=new MainActivity();
-            if (action.equals(UartService.ACTION_DATA_AVAILABLE)) {
-                final byte[] txValue = intent.getByteArrayExtra(UartService.EXTRA_DATA);
+            if (action.equals(BluetoothLeService.ACTION_DATA_AVAILABLE)) {
+                final byte[] txValue = intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA);
                 runOnUiThread(new Runnable() {
                     public void run() {
                         try {
@@ -867,7 +867,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                                                         System.arraycopy(value,0,temp_data,0,1);
                                                         System.arraycopy(temp,0,temp_data,1,temp.length);
                                                         System.arraycopy(value,1,temp_data,temp.length+1,1);
-                                                        m_UartService.writeRXCharacteristic(temp_data);
+                                                        bluetoothLeService.writeRXCharacteristic(temp_data);
 
                                                         dialog.cancel();
                                                     }
@@ -897,7 +897,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                                                         System.arraycopy(value,0,temp_data,0,1);
                                                         System.arraycopy(temp,0,temp_data,1,temp.length);
                                                         System.arraycopy(value,1,temp_data,temp.length+1,1);
-                                                        m_UartService.writeRXCharacteristic(temp_data);
+                                                        bluetoothLeService.writeRXCharacteristic(temp_data);
 
                                                         dialog.cancel();
                                                     }
