@@ -1,9 +1,19 @@
 package com.example.blu_main_test1.Main_page.Main_page2;
 
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
@@ -11,15 +21,21 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.blu_main_test1.BLE_SCAN.BluetoothLeService;
+import com.example.blu_main_test1.BLE_SCAN.DeviceControlActivity;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.amount_change_viewpager.CommonFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,10 +75,14 @@ import com.google.firebase.database.DatabaseError;
 
 
 
-public class
-product_amount extends FragmentActivity {
+public class product_amount extends FragmentActivity {
     ViewPager viewPager;
-    ImageButton top_btn, bottom_btn;
+    BluetoothLeService bluetoothLeService;
+    AppCompatDialog progressDialog;
+
+    Button press_button;
+    ImageButton top_btn, bottom_btn, back;
+
     private List<CommonFragment> fragments = new ArrayList<>();
     private final String[] textArray = {"쌍화","체감", "십전", "부기", "가월"
             , "쾌청", "휴안", "청공", "당감", "온기", "루이보스", "캐모마일", "히비스커스"};
@@ -72,14 +92,10 @@ product_amount extends FragmentActivity {
             "assets://gawol.png", "assets://kwaecheong.png", "assets://huyuan.png", "assets://cheonggong.png", "assets://danggam.png","assets://ongi.png",
             "assets://rooibos.png","assets://chamomile.png","assets://hibi.png"};
     ImageView image;
-    String imageview;
-    TextView name, amount, origin, kind;
-    ArrayList<String> db_result=new ArrayList<>();
-
-    ImageButton back;
     View positionView;
 
-   ProgressBar pgb ;
+    TextView name, amount, origin, kind;
+    ProgressBar pgb ;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +107,8 @@ product_amount extends FragmentActivity {
         viewPager = findViewById(R.id.view_pager);
         top_btn=findViewById(R.id.top_btn);
         bottom_btn=findViewById(R.id.bottom_btn);
+        press_button=(Button)findViewById(R.id.press_button);
+
         kind=(TextView)findViewById(R.id.kind);
         name=(TextView)findViewById(R.id.name);
         amount=(TextView)findViewById(R.id.amount);
@@ -100,6 +118,7 @@ product_amount extends FragmentActivity {
 
         top_btn.setOnClickListener(top_move);
         bottom_btn.setOnClickListener(bottom_move);
+        press_button.setOnClickListener(onClickListener);
 
 
         pgb.setVisibility(View.VISIBLE);
@@ -116,10 +135,16 @@ product_amount extends FragmentActivity {
             }
         }
 
-     //  new CustomTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,textArray[viewPager.getCurrentItem()]);
-      value();
+        // new CustomTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,textArray[viewPager.getCurrentItem()]);
+        value();
         // new CustomTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         dealStatusBar(); // 상태 표시줄 높이 조정
+
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
+
+        Intent bindIntent = new Intent(getApplicationContext(), BluetoothLeService.class);
+        bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
 
         viewPager.setOffscreenPageLimit(4);
 
@@ -181,6 +206,30 @@ product_amount extends FragmentActivity {
             ImageLoader.getInstance().displayImage(imageArray[viewPager.getCurrentItem()], image);
         }
     };
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.press_button:
+                    if(DeviceControlActivity.mConnected){
+                        String press_btn = "03ETL48"; //수정 필요
+                        byte[] press_btn_value = {(byte) 0x02, (byte) 0x03 };
+                        byte[] press_btn__temp = press_btn.getBytes();
+                        byte[] press_btn_temp_data = new byte[press_btn__temp.length + 2];
+                        System.arraycopy(press_btn_value, 0, press_btn_temp_data, 0, 1);
+                        System.arraycopy(press_btn__temp, 0, press_btn_temp_data, 1, press_btn__temp.length);
+                        System.arraycopy(press_btn_value, 1, press_btn_temp_data, press_btn__temp.length + 1, 1);
+                        bluetoothLeService.writeRXCharacteristic(press_btn_temp_data);
+                        startProgress();
+                    } else {
+                        Toast.makeText(product_amount.this, "블루투스가 연결 되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+    };
+
+
     private void fillViewPager() {
         for (int i = 0; i < 13; i++) {
             // 13개 생성
@@ -360,4 +409,97 @@ product_amount extends FragmentActivity {
         return statusBarHeight;
     }
 
+    public void progressON(Activity activity, String message) {
+
+        if (activity == null || activity.isFinishing()) {
+            return;
+        }
+
+
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressSET(message);
+        } else {
+
+            progressDialog = new AppCompatDialog(activity);
+            progressDialog.setCancelable(false);
+            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            progressDialog.setContentView(R.layout.loading);
+            progressDialog.show();
+
+        }
+
+
+        final ImageView img_loading_frame = (ImageView) progressDialog.findViewById(R.id.iv_frame_loading);
+        final AnimationDrawable frameAnimation = (AnimationDrawable) img_loading_frame.getBackground();
+        img_loading_frame.post(new Runnable() {
+            @Override
+            public void run() {
+                frameAnimation.start();
+            }
+        });
+
+        TextView tv_progress_message = (TextView) progressDialog.findViewById(R.id.tv_progress_message);
+        if (!TextUtils.isEmpty(message)) {
+            tv_progress_message.setText(message);
+        }
+
+
     }
+
+    public void progressSET(String message) {
+
+        if (progressDialog == null || !progressDialog.isShowing()) {
+            return;
+        }
+
+
+        TextView tv_progress_message = (TextView) progressDialog.findViewById(R.id.tv_progress_message);
+        if (!TextUtils.isEmpty(message)) {
+            tv_progress_message.setText(message);
+        }
+
+    }
+
+    public void progressOFF() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+
+    public void startProgress() {
+        progressON(this,"추출중.....");
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressOFF();
+            }
+        },3500);
+    }
+
+    private ServiceConnection mServiceConnection = new ServiceConnection() {
+
+        public void onServiceConnected(ComponentName className, IBinder rawBinder) {
+            bluetoothLeService = ((BluetoothLeService.LocalBinder) rawBinder).getService();
+
+            if (!bluetoothLeService.initialize()) {
+            }
+        }
+
+
+        public void onServiceDisconnected(ComponentName classname) {
+            if(bluetoothLeService != null) {
+                bluetoothLeService.disconnect();
+            }
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        unbindService(mServiceConnection);
+        super.onDestroy();
+    }
+}
+
+

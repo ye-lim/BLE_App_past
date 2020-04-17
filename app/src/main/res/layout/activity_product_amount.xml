@@ -138,6 +138,7 @@
                 />
         </LinearLayout>
         <Button
+            android:id="@+id/press_button"
             android:layout_width="200dp"
             android:layout_height="55dp"
             android:text="추출하기"
