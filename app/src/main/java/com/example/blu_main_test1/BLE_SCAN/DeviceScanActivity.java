@@ -173,6 +173,7 @@ public class DeviceScanActivity extends ListActivity {
             mScanning = false;
         }
         startActivity(intent); //DeviceControlActivity 엶
+
     }
 
 

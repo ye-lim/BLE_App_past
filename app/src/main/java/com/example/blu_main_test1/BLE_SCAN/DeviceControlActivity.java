@@ -29,15 +29,23 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,12 +78,18 @@ public class DeviceControlActivity extends Activity {
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
 
+
+    private ImageButton back;
+    private EditText coffee_b_amount,coffee_s_amount,tea_b_amount,tea_s_amount;
+    private LinearLayout background,sub_background;
+    public Button sub_amount;
+
     private TextView stateView;
     private TextView temperView;
     private TextView mConnectionState;
     private Timer mTimer[] = new Timer[6];
 
-
+    private Boolean inflateView = false;
     private String text;
     private String mDeviceName;
     private String mDeviceAddress;
@@ -88,6 +102,7 @@ public class DeviceControlActivity extends Activity {
 
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
+    private LinearLayout linear;
 
     // Code to manage Service lifecycle.
     //서비스가 연결됐을 때, 안됐을 때 관리
@@ -312,11 +327,14 @@ public class DeviceControlActivity extends Activity {
         findViewById(R.id.product_amount).setOnClickListener(onClickListener);
         findViewById(R.id.state_start).setOnClickListener(onClickListener);
         findViewById(R.id.low_start).setOnClickListener(onClickListener);
+        findViewById(R.id.amount_start).setOnClickListener(onClickListener);
+        findViewById(R.id.amount_change).setOnClickListener(onClickListener);
+        findViewById(R.id.amount_stop).setOnClickListener(onClickListener);
 
         for(int i =0; i<6;i++){
             mTimer[i] = new Timer();
         }
-        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter()); //브로드캐스트 등록
+
         if (mBluetoothLeService != null) {
             final boolean result = mBluetoothLeService.connect(mDeviceAddress); // 연결
             Log.d(TAG, "Connect request result=" + result);
@@ -372,9 +390,214 @@ public class DeviceControlActivity extends Activity {
                     }
                     break;
 
+                case R.id.amount_stop:
+                    if(mConnected) {
+                        String stop_start = "01SB4";
+                        byte[] stop_value = {(byte) 0x02, (byte) 0x03};
+                        byte[] stop_temp = stop_start.getBytes();
+                        byte[] stop_temp_data = new byte[stop_temp.length + 2];
+                        System.arraycopy(stop_value, 0, stop_temp_data, 0, 1);
+                        System.arraycopy(stop_temp, 0, stop_temp_data, 1, stop_temp.length);
+                        System.arraycopy(stop_value, 1, stop_temp_data, stop_temp.length + 1, 1);
+                        mBluetoothLeService.writeRXCharacteristic(stop_temp_data);
+                        startToast("추출 중지");
+                    }else{
+                        startToast("블루투스가 연결 되어 있지 않습니다.");
+                    }
+                    break;
+
+                case R.id.amount_change:
+                    inflateView = true;
+                    LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+                    linear = (LinearLayout)inflater.inflate(R.layout.activity_amount_change, null);
+
+                    LinearLayout.LayoutParams paramlinear = new LinearLayout.LayoutParams(
+
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+
+                            LinearLayout.LayoutParams.MATCH_PARENT
+                    );
+
+                    back=(ImageButton)linear.findViewById(R.id.back);
+                    background=(LinearLayout)linear.findViewById(R.id.background);
+                    sub_background=(LinearLayout)linear.findViewById(R.id.sub_background);
+                    coffee_b_amount=(EditText)linear.findViewById(R.id.coffee_b_amount);
+                    coffee_s_amount=(EditText)linear.findViewById(R.id.coffee_s_amount);
+                    tea_b_amount=(EditText)linear.findViewById(R.id.tea_b_amount);
+                    tea_s_amount=(EditText)linear.findViewById(R.id.tea_s_amount);
+                    sub_amount=(Button)linear.findViewById(R.id.sub_amount);
+
+
+
+                    //윈도우에 추가시킴
+                    addContentView(linear,paramlinear);
+                    //linear부분은 아무 동작 하지 않음
+                    linear.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+                    //뒤로가기
+                    sub_background.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
+                            parentViewGroup.removeView(linear);
+                        }
+                    });
+
+
+                    //바탕부분 클릭시
+                    background.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
+                            parentViewGroup.removeView(linear);
+
+
+                        }
+                    });
+                    //뒤로가기 이미지
+                    back.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
+                            parentViewGroup.removeView(linear);
+
+                        }
+                    });
+
+
+                    sub_amount.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+                                if (coffee_b_amount.getText().toString().length() != 0) {
+                                    if (Integer.parseInt(coffee_b_amount.getText().toString()) > 990) {
+                                        Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
+                                        coffee_b_amount.requestFocus();
+                                        return;
+                                    }
+                                    String c_value = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2);
+                                    String cb_amount = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2) + stringToHex(c_value);
+                                    byte[] cb_value = {(byte) 0x02, (byte) 0x03};
+                                    byte[] cb_temp = cb_amount.getBytes();
+                                    byte[] cb_temp_data = new byte[cb_temp.length + 2];
+                                    System.arraycopy(cb_value, 0, cb_temp_data, 0, 1);
+                                    System.arraycopy(cb_temp, 0, cb_temp_data, 1, cb_temp.length);
+                                    System.arraycopy(cb_value, 1, cb_temp_data, cb_temp.length + 1, 1);
+                                    mBluetoothLeService.writeRXCharacteristic(cb_temp_data);
+                                }
+
+
+                                if (coffee_s_amount.getText().toString().length() != 0) {
+                                    if (Integer.parseInt(coffee_s_amount.getText().toString()) > 990) {
+                                        Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
+                                        coffee_s_amount.requestFocus();
+                                        return;
+                                    }
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                            String c_value2 = "05TCS" + coffee_s_amount.getText().toString().substring(0, 2);
+                                            String cs_amount = "05TCS" + coffee_s_amount.getText().toString().substring(0, 2) + stringToHex(c_value2);
+                                            byte[] cs_value = {(byte) 0x02, (byte) 0x03};
+                                            byte[] cs_temp = cs_amount.getBytes();
+                                            byte[] cs_temp_data = new byte[cs_temp.length + 2];
+                                            System.arraycopy(cs_value, 0, cs_temp_data, 0, 1);
+                                            System.arraycopy(cs_temp, 0, cs_temp_data, 1, cs_temp.length);
+                                            System.arraycopy(cs_value, 1, cs_temp_data, cs_temp.length + 1, 1);
+
+                                            mBluetoothLeService.writeRXCharacteristic(cs_temp_data);
+                                        }
+
+                                    }, 1000);  // 1 초 후에 실행
+                                }
+
+
+                                if (tea_b_amount.getText().toString().length() != 0) {
+                                    if (Integer.parseInt(tea_b_amount.getText().toString()) > 990) {
+                                        Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
+                                        tea_b_amount.requestFocus();
+                                        return;
+                                    }
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                            String t_value = "05TTL" + tea_b_amount.getText().toString().substring(0, 2);
+                                            String tb_amount = "05TTL" + tea_b_amount.getText().toString().substring(0, 2) + stringToHex(t_value);
+                                            byte[] tb_value = {(byte) 0x02, (byte) 0x03};
+                                            byte[] tb_temp = tb_amount.getBytes();
+                                            byte[] tb_temp_data = new byte[tb_temp.length + 2];
+                                            System.arraycopy(tb_value, 0, tb_temp_data, 0, 1);
+                                            System.arraycopy(tb_temp, 0, tb_temp_data, 1, tb_temp.length);
+                                            System.arraycopy(tb_value, 1, tb_temp_data, tb_temp.length + 1, 1);
+                                            mBluetoothLeService.writeRXCharacteristic(tb_temp_data);
+                                        }
+
+                                    }, 1500);  // 1 초 후에 실행
+                                }
+
+
+                                if (tea_s_amount.getText().toString().length() != 0) {
+                                    if (Integer.parseInt(tea_s_amount.getText().toString()) > 990) {
+                                        Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
+                                        tea_s_amount.requestFocus();
+                                        return;
+                                    }
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+
+                                        public void run() {
+
+                                            String t_value2 = "05TTS" + tea_s_amount.getText().toString().substring(0, 2);
+                                            String ts_amount = "05TTS" + tea_s_amount.getText().toString().substring(0, 2) + stringToHex(t_value2);
+                                            byte[] ts_value = {(byte) 0x02, (byte) 0x03};
+                                            byte[] ts_temp = ts_amount.getBytes();
+                                            byte[] ts_temp_data = new byte[ts_temp.length + 2];
+                                            System.arraycopy(ts_value, 0, ts_temp_data, 0, 1);
+                                            System.arraycopy(ts_temp, 0, ts_temp_data, 1, ts_temp.length);
+                                            System.arraycopy(ts_value, 1, ts_temp_data, ts_temp.length + 1, 1);
+                                            mBluetoothLeService.writeRXCharacteristic(ts_temp_data);
+                                        }
+
+                                    }, 2000);  // 1 초 후에 실행
+                                }
+
+
+                                ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
+                                parentViewGroup.removeView(linear);
+                            }catch (Exception e)
+                            {
+
+                                Toast.makeText(getApplicationContext(),"블루투스를 재연결해 주세요",Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                    });
+
+                    break;
+
+
             }
         }
     };
+
+    public static String stringToHex(String s) {
+        int ch2=0;
+        for (int i = 0; i < s.length(); i++) {
+            byte ch=(byte)s.charAt( i );
+            ch2+=(byte)ch;
+        }
+        String s5=Integer.toHexString(ch2);
+        return s5.substring(s5.length()-2,s5.length());
+    }
     private void startToast(String msg){
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
@@ -384,18 +607,22 @@ public class DeviceControlActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter()); //브로드캐스트 등록
     }
 
     @Override
     protected void onPause() { //리시버를 해제
         super.onPause();
-        unregisterReceiver(mGattUpdateReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mGattUpdateReceiver);
+
     }
 
     @Override
     protected void onDestroy() { //서비스를 해제
         super.onDestroy();
+        for(int i=0;i<6;i++){
+            mTimer[i].cancel();
+        }
         unbindService(mServiceConnection); //unbindService()를 호출하면 연결이 끊기고 서비스에 연결된 컴포넌트가 하나도 남지 않게 되면서 안드로이드 시스템이 서비스를 소멸.
         mBluetoothLeService = null;
         mConnected = false;
@@ -529,7 +756,7 @@ public class DeviceControlActivity extends Activity {
 
         @Override
         public void run() {
-            if(DeviceControlActivity.mConnected) {
+            if(mConnected) {
                 if (mBluetoothLeService != null) {
 
                     String TL_amount, basic_state;
@@ -548,6 +775,18 @@ public class DeviceControlActivity extends Activity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed(){
+        if(inflateView){ //추출량 변화 view 에서 뒤로가기 버튼을 눌렀을 경우 액티비티가 종료되지 않고 뷰만 종료되도록
+            ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
+            parentViewGroup.removeView(linear);
+            inflateView = false;
+        }else{
+            super.onBackPressed();
+        }
+    }
+
 
 }
 
