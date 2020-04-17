@@ -129,6 +129,8 @@ public class DeviceControlActivity extends Activity {
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) { //연결 실패
                 mConnected = false;
                 updateConnectionState(R.string.disconnected);
+                stateView.setText("");
+                temperView.setText("");
                 invalidateOptionsMenu();
 
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) { //GATT 서비스 발견
