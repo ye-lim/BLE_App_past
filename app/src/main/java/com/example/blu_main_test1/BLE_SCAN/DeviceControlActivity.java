@@ -522,14 +522,14 @@ public class DeviceControlActivity extends Activity {
     }
 
 
-}
+
 
 
     class Tea_large extends TimerTask {
 
         @Override
         public void run() {
-            if(mConnected) {
+            if(DeviceControlActivity.mConnected) {
                 if (mBluetoothLeService != null) {
 
                     String TL_amount, basic_state;
@@ -548,8 +548,6 @@ public class DeviceControlActivity extends Activity {
             }
         }
     }
-
-
 
 }
 
