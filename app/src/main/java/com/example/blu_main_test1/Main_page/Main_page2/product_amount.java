@@ -179,13 +179,13 @@ public class product_amount extends FragmentActivity {
                     for(QueryDocumentSnapshot document : task.getResult())
                     {
                         //해당 value값 불러옴
-                            amount.setText(document.getData().get("amount").toString());
-                            origin.setText(document.getData().get("product_origin").toString());
-                    pgb.setVisibility(View.GONE);
+                        amount.setText(document.getData().get("amount").toString());
+                        origin.setText(document.getData().get("product_origin").toString());
+                        pgb.setVisibility(View.GONE);
                     }
 
                 }
-               else{
+                else{
                     Log.d("err","err");
                 }
             }
@@ -249,7 +249,7 @@ public class product_amount extends FragmentActivity {
                 fragment.bindData(textArray[position % textArray.length],textArray2[position%textArray.length]);
                 ImageLoader.getInstance().displayImage(imageArray[viewPager.getCurrentItem()], image);
 
-            // new CustomTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                // new CustomTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 value();
                 kind.setText(textArray2[viewPager.getCurrentItem()]);
                 name.setText(textArray[viewPager.getCurrentItem()]);
@@ -278,8 +278,8 @@ public class product_amount extends FragmentActivity {
                 kind.setText(textArray2[viewPager.getCurrentItem()]);
                 name.setText(textArray[viewPager.getCurrentItem()]);
 
-           //   new CustomTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            value();
+                //   new CustomTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                value();
             }
 
             @Override
@@ -501,5 +501,3 @@ public class product_amount extends FragmentActivity {
         super.onDestroy();
     }
 }
-
-
