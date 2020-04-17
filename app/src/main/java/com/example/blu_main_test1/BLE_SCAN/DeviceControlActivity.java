@@ -323,6 +323,7 @@ public class DeviceControlActivity extends Activity {
         }
 
 
+
     }  //서비스를 실행시키고 요청을 하게 되면, 요청에 대한 결과를 mServiceConnection함수에서 받아와 활용할 수 있음. 세번째 인자는 바인딩의 옵션을 설정하는 flags를 설정.
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -496,6 +497,7 @@ public class DeviceControlActivity extends Activity {
     }
 
 
+
     class State extends TimerTask {
         @Override
         public void run() {
@@ -518,6 +520,10 @@ public class DeviceControlActivity extends Activity {
             }
         }
     }
+
+
+}
+
 
     class Tea_large extends TimerTask {
 
@@ -546,3 +552,4 @@ public class DeviceControlActivity extends Activity {
 
 
 }
+

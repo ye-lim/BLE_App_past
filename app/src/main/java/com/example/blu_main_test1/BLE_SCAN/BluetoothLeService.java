@@ -87,6 +87,7 @@ public class BluetoothLeService extends Service {
         //콜백 메서드는 다른 함수에 인수로 넣을 수 있는 메서드. 보통 on으로 시작하는 것들이 콜백함수이다.
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) { //연결 상태가 바뀌면 호출됨.
+            super.onConnectionStateChange(gatt, status, newState);
 
             String intentAction;
 
@@ -157,8 +158,6 @@ public class BluetoothLeService extends Service {
 
             // Log.d(TAG, String.format("Received TX: %d",characteristic.getValue() ));
             intent.putExtra(EXTRA_DATA, characteristic.getValue());
-        } else {
-
         }
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
