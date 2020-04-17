@@ -23,6 +23,7 @@ import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -31,6 +32,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -155,6 +157,87 @@ public class DeviceControlActivity extends Activity {
                                     case "20":
                                         stateView.setText("추출대기");
                                         break;
+                                    case "91":
+                                        android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(getApplicationContext());
+                                        // 제목셋팅
+                                        alertDialogBuilder.setTitle("에러 발생");
+                                        // AlertDialog 셋팅
+                                        alertDialogBuilder .setMessage("머신 내부 온도가 너무 높습니다. 절전모드 하시겠습니까?")
+                                                .setCancelable(false)
+                                                .setPositiveButton("아니요", new DialogInterface.OnClickListener() {
+                                                    public void onClick( DialogInterface dialog, int id) {
+                                                        // 다이얼로그를 취소한다
+                                                        dialog.cancel();
+
+                                                    }
+                                                })
+                                                .setNegativeButton("예", new DialogInterface.OnClickListener() {
+                                                    public void onClick( DialogInterface dialog, int id) {
+
+                                                        String start = "01PB1";
+                                                        byte [] value={(byte)0x02,(byte)0x03};
+                                                        byte[] temp=start.getBytes();
+                                                        byte[] temp_data= new byte[temp.length+2];
+                                                        System.arraycopy(value,0,temp_data,0,1);
+                                                        System.arraycopy(temp,0,temp_data,1,temp.length);
+                                                        System.arraycopy(value,1,temp_data,temp.length+1,1);
+                                                        mBluetoothLeService.writeRXCharacteristic(temp_data);
+
+                                                        dialog.cancel();
+                                                    }
+                                                }); // 다이얼로그 생성
+                                        android.support.v7.app.AlertDialog alertDialog = alertDialogBuilder.create(); // 다이얼로그 보여주기
+                                        alertDialog.show();
+                                        break;
+                                    case "92":
+                                        android.support.v7.app.AlertDialog.Builder alertDialogBuilder2 = new android.support.v7.app.AlertDialog.Builder(getApplicationContext());
+                                        // 제목셋팅
+                                        alertDialogBuilder2.setTitle("에러 발생");
+                                        // AlertDialog 셋팅
+                                        alertDialogBuilder2 .setMessage("온도퓨즈가 단선되었습니다. 고객센터로 문의주세요")
+                                                .setCancelable(false)
+                                                .setPositiveButton("아니요", new DialogInterface.OnClickListener() {
+                                                    public void onClick( DialogInterface dialog, int id) {
+                                                        // 다이얼로그를 취소한다
+                                                        dialog.cancel();
+                                                    }
+                                                })
+                                                .setNegativeButton("예", new DialogInterface.OnClickListener() {
+                                                    public void onClick( DialogInterface dialog, int id) {
+                                                        String start = "01PB1";
+                                                        byte [] value={(byte)0x02,(byte)0x03};
+                                                        byte[] temp=start.getBytes();
+                                                        byte[] temp_data= new byte[temp.length+2];
+                                                        System.arraycopy(value,0,temp_data,0,1);
+                                                        System.arraycopy(temp,0,temp_data,1,temp.length);
+                                                        System.arraycopy(value,1,temp_data,temp.length+1,1);
+                                                        mBluetoothLeService.writeRXCharacteristic(temp_data);
+
+                                                        dialog.cancel();
+                                                    }
+                                                }); // 다이얼로그 생성
+                                        android.support.v7.app.AlertDialog alertDialog2 = alertDialogBuilder2.create(); // 다이얼로그 보여주기
+                                        alertDialog2.show();
+                                        break;
+                                    case "93":
+                                        android.support.v7.app.AlertDialog.Builder alertDialogBuilder3 = new android.support.v7.app.AlertDialog.Builder(getApplicationContext());
+                                        // 제목셋팅
+                                        alertDialogBuilder3.setTitle("에러 발생");
+                                        // AlertDialog 셋팅
+                                        alertDialogBuilder3 .setMessage("물 보충이 필요합니다.")
+                                                .setCancelable(false)
+                                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                    public void onClick( DialogInterface dialog, int id) {
+                                                        // 다이얼로그를 취소한다
+                                                        dialog.cancel();
+                                                    }
+                                                });
+                                        // 다이얼로그 생성
+                                        AlertDialog alertDialog3 = alertDialogBuilder3.create(); // 다이얼로그 보여주기
+                                        alertDialog3.show();
+                                        break;
+
+
                                 }
                                 temperView.setText(text.substring(8,10));
                             }
@@ -306,7 +389,7 @@ public class DeviceControlActivity extends Activity {
     @Override
     protected void onPause() { //리시버를 해제
         super.onPause();
-      //  unregisterReceiver(mGattUpdateReceiver);
+        unregisterReceiver(mGattUpdateReceiver);
     }
 
     @Override
