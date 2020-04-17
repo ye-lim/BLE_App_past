@@ -84,10 +84,11 @@ public class BluetoothLeService extends Service {
     // connection change and services discovered.
     //콜백 함수를 통해서 ble 장치의 연결 및 처리에 관련된 기능들을 처리 할 수 있음.
     private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
-
+        //콜백 메서드는 다른 함수에 인수로 넣을 수 있는 메서드. 보통 on으로 시작하는 것들이 콜백함수이다.
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) { //연결 상태가 바뀌면 호출됨.
             super.onConnectionStateChange(gatt, status, newState);
+
             String intentAction;
 
             if (newState == BluetoothProfile.STATE_CONNECTED) {
@@ -135,7 +136,7 @@ public class BluetoothLeService extends Service {
 
 
         @Override
-        public void onCharacteristicChanged(BluetoothGatt gatt,  //서비스안의 특성의 값이 바뀔 때 호출됨.
+        public void onCharacteristicChanged(BluetoothGatt gatt,  //서비스안의 특성의 값이 바뀔 때 호출됨. 수신 (사전에 Notification 권한 설정을 해주어야함).
                                             BluetoothGattCharacteristic characteristic) {
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
 
