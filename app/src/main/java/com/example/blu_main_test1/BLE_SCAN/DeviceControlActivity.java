@@ -48,6 +48,8 @@ import com.example.blu_main_test1.Main_page.Main_view_pager;
 import com.example.blu_main_test1.MypageActivity;
 import com.example.blu_main_test1.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -121,7 +123,8 @@ public class DeviceControlActivity extends Activity {
                 updateConnectionState(R.string.connected);//연결됨을 ui에서 표시
                 invalidateOptionsMenu(); //onCreateOptionsMenu 호출
                 if(mConnected){
-                    mTimer[0].schedule(new State(), 1000, 15000);
+                    mTimer[0].schedule(new Tea_large(), 1000, 15000);
+                    mTimer[1].schedule(new State(), 1500, 15000);
                 }
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) { //연결 실패
                 mConnected = false;
@@ -131,6 +134,7 @@ public class DeviceControlActivity extends Activity {
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) { //GATT 서비스 발견
                 // Show all the supported services and characteristics on the user interface.
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
+                mBluetoothLeService.enableTXNotification();
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) { //BLE장치에서 받은 데이터가 사용가능.
                 final byte[] txValue = intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA);
                 runOnUiThread(new Runnable() {
@@ -210,7 +214,8 @@ public class DeviceControlActivity extends Activity {
         // Sets up UI references.
         //((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
-
+        stateView = (TextView) findViewById(R.id.state);
+        temperView = (TextView) findViewById(R.id.temper);
 
         getActionBar().setTitle(mDeviceName);
         getActionBar().setDisplayHomeAsUpEnabled(true); //액션바의 앱 아이콘 옆에 화살표를 만들어 전의 액티비티로 돌아갈 수 있게 함.
@@ -428,5 +433,31 @@ public class DeviceControlActivity extends Activity {
             }
         }
     }
+
+    class Tea_large extends TimerTask {
+
+        @Override
+        public void run() {
+            if(mConnected) {
+                if (mBluetoothLeService != null) {
+
+                    String TL_amount, basic_state;
+                    byte[] value = {(byte) 0x02, (byte) 0x03};
+                    TL_amount = "03QTL54";  //현재
+
+                    byte[] temp = TL_amount.getBytes();
+                    byte[] temp_data = new byte[temp.length + 2];
+
+                    System.arraycopy(value, 0, temp_data, 0, 1);
+                    System.arraycopy(temp, 0, temp_data, 1, temp.length);
+                    System.arraycopy(value, 1, temp_data, temp.length + 1, 1);
+                    mBluetoothLeService.writeRXCharacteristic(temp_data);
+
+                }
+            }
+        }
+    }
+
+
 
 }
