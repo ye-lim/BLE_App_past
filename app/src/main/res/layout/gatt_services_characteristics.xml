@@ -100,7 +100,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="연결 안됨"
+                    android:text="연 결 안 됨"
                     android:textColor="@color/white"
                     android:textSize="16dp"
                     android:textStyle="bold"

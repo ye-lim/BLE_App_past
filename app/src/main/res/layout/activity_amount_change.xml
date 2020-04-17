@@ -16,35 +16,40 @@
         android:orientation="vertical"
         android:id="@+id/sub_background"
         tools:ignore="MissingConstraints">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:orientation="vertical">
-        <ImageButton
-            android:id="@+id/back"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:background="@drawable/back"
-            android:layout_gravity="right"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="추출량 변경"
-            android:textSize="30dp"
-            android:textColor="#ffffff" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Coffee"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="10dp"
-            />
+            <ImageButton
+                android:id="@+id/back"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:background="@drawable/back"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="추출량 변경"
+                android:textSize="30dp"
+                android:textColor="#ffffff" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coffee"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="10dp"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,7 +77,8 @@
                     android:textColor="#3A404C"
                     android:background="@xml/amount_ch_edit"
                     android:maxLength="3"
-                    android:backgroundTint="#ffffff"/>
+                    android:backgroundTint="#ffffff"
+                    android:hint="0~999"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,7 +116,8 @@
                     android:imeOptions="actionNext"
                     android:maxLength="3"
                     android:textColor="#3A404C"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:hint="0~999"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -157,7 +164,8 @@
                     android:digits="0123456789"
                     android:imeOptions="actionNext"
                     android:background="@xml/amount_ch_edit"
-                    android:backgroundTint="#ffffff"/>
+                    android:backgroundTint="#ffffff"
+                    android:hint="0~999"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -195,7 +203,8 @@
                     android:digits="0123456789"
                     android:imeOptions="actionNext"
                     android:background="@xml/amount_ch_edit"
-                    android:backgroundTint="#ffffff"/>
+                    android:backgroundTint="#ffffff"
+                    android:hint="0~999"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -205,7 +214,9 @@
                     android:text="ml"
                     android:layout_marginLeft="10dp"/>
             </LinearLayout>
+
             <Button
+                android:layout_marginBottom="10dp"
                 android:id="@+id/sub_amount"
                 android:layout_width="250dp"
                 android:layout_height="45dp"
@@ -217,5 +228,9 @@
                 android:backgroundTint="#F3CA7E"
                 android:textColor="#011E41"/>
         </LinearLayout>
+
+        </ScrollView>
+
     </LinearLayout>
+
 </LinearLayout>
