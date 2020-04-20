@@ -192,6 +192,16 @@ public class product_amount extends FragmentActivity {
         });
     }
 
+    public static String stringToHex(String s){
+        int ch2 = 0;
+        for (int i = 0; i < s.length(); i++){
+            byte ch=(byte)s.charAt(i);
+            ch2+=(byte)ch;
+        }
+        String s5 = Integer.toHexString(ch2);
+        return s5.substring(s5.length()-2, s5.length());
+    }
+
     View.OnClickListener top_move=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -212,15 +222,31 @@ public class product_amount extends FragmentActivity {
             switch (v.getId()) {
                 case R.id.press_button:
                     if(DeviceControlActivity.mConnected){
-                        String press_btn = "03ETL48"; //수정 필요
-                        byte[] press_btn_value = {(byte) 0x02, (byte) 0x03 };
-                        byte[] press_btn__temp = press_btn.getBytes();
-                        byte[] press_btn_temp_data = new byte[press_btn__temp.length + 2];
-                        System.arraycopy(press_btn_value, 0, press_btn_temp_data, 0, 1);
-                        System.arraycopy(press_btn__temp, 0, press_btn_temp_data, 1, press_btn__temp.length);
-                        System.arraycopy(press_btn_value, 1, press_btn_temp_data, press_btn__temp.length + 1, 1);
-                        bluetoothLeService.writeRXCharacteristic(press_btn_temp_data);
-                        startProgress();
+
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        CollectionReference result = db.collection("BLE_APP");
+                        Query query = result.whereEqualTo("product_name", textArray[viewPager.getCurrentItem()]);
+                        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()) {
+                                    for(QueryDocumentSnapshot document : task.getResult()) {
+                                        String press_value = "05TTL" + document.getData().get("amount").toString().substring(0,2);
+                                        String press_amount = "05TTL" + document.getData().get("amount").toString().substring(0,2) + stringToHex(press_value);
+
+                                        byte[] press_btn_value = {(byte) 0x02, (byte) 0x03 };
+                                        byte[] press_btn__temp = press_amount.getBytes();
+                                        byte[] press_btn_temp_data = new byte[press_btn__temp.length + 2];
+                                        System.arraycopy(press_btn_value, 0, press_btn_temp_data, 0, 1);
+                                        System.arraycopy(press_btn__temp, 0, press_btn_temp_data, 1, press_btn__temp.length);
+                                        System.arraycopy(press_btn_value, 1, press_btn_temp_data, press_btn__temp.length + 1, 1);
+                                        bluetoothLeService.writeRXCharacteristic(press_btn_temp_data);
+                                        startProgress();
+
+                                    }
+                                } else Log.d("err", "err");
+                            }
+                        });
                     } else {
                         Toast.makeText(product_amount.this, "블루투스가 연결 되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
                     }
