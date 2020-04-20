@@ -392,7 +392,7 @@ public class BluetoothLeService extends Service {
         Log.d(TAG, "write TXchar - status=" + status + new String(value));
         //머신에 write실패시
         if(status==false){
-            Toast.makeText(getApplicationContext(),"다시 시도해주세요",Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(),"다시 시도해주세요",Toast.LENGTH_SHORT).show();
         }
     }
 

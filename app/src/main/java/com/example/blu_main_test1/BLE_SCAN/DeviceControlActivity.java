@@ -27,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,6 +58,7 @@ import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
 import com.example.blu_main_test1.MypageActivity;
 import com.example.blu_main_test1.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
@@ -103,6 +105,7 @@ public class DeviceControlActivity extends Activity {
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
     private LinearLayout linear;
+    private String autoAddress;
 
     // Code to manage Service lifecycle.
     //서비스가 연결됐을 때, 안됐을 때 관리
@@ -117,6 +120,7 @@ public class DeviceControlActivity extends Activity {
             }
             // Automatically connects to the device upon successful start-up initialization.
             mBluetoothLeService.connect(mDeviceAddress); //장치를 연결시킴 connect함수는 BluetoothLeService에 구현되어있음.
+
         }
 
         @Override
@@ -308,8 +312,11 @@ public class DeviceControlActivity extends Activity {
         setContentView(R.layout.gatt_services_characteristics);
 
         final Intent intent = getIntent();
-        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME); //DeviceScanActivity에서 인텐트로 같이 넘어온 장치 이름과 주소를 추출.
-        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+       // mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME); //DeviceScanActivity에서 인텐트로 같이 넘어온 장치 이름과 주소를 추출.
+       // mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+        SharedPreferences autodevice = getSharedPreferences("autodevice", Activity.MODE_PRIVATE);
+        mDeviceAddress = autodevice.getString("address",null);
+        mDeviceName = autodevice.getString("devicename",null);
 
         // Sets up UI references.
         //((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
@@ -649,6 +656,10 @@ public class DeviceControlActivity extends Activity {
                 return true;
             case R.id.menu_disconnect:
                 mBluetoothLeService.disconnect();
+                SharedPreferences autodevice = getSharedPreferences("autodevice",Activity.MODE_PRIVATE);
+                SharedPreferences.Editor autoconnect = autodevice.edit();
+                autoconnect.clear();
+                autoconnect.commit();
                 return true;
             case android.R.id.home:
                 onBackPressed();

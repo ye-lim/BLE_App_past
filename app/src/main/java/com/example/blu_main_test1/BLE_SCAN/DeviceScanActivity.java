@@ -23,6 +23,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -54,6 +55,8 @@ public class DeviceScanActivity extends ListActivity {
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000; //스캔주기
+
+    private String mDeviceAddress, mDeviceName;
 
 
     @Override
@@ -166,13 +169,24 @@ public class DeviceScanActivity extends ListActivity {
         final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position); // 그 위치의 디바이스
         if (device == null) return;
         final Intent intent = new Intent(this, DeviceControlActivity.class);
-        intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, device.getName());
-        intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
+        //intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, device.getName());
+       // intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
+        mDeviceName = device.getName();
+        mDeviceAddress = device.getAddress();
+        SharedPreferences autodevice = getSharedPreferences("autodevice", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor autoconnect = autodevice.edit();
+        autoconnect.putString("address",mDeviceAddress);
+        autoconnect.putString("devicename",mDeviceName);
+        autoconnect.commit();
+
+
+
         if (mScanning) { //스캔 중지
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
             mScanning = false;
         }
         startActivity(intent); //DeviceControlActivity 엶
+        finish();
 
     }
 
