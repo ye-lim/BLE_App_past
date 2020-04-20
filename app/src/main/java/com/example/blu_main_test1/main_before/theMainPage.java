@@ -1,6 +1,8 @@
 package com.example.blu_main_test1.main_before;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -10,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.example.blu_main_test1.BLE_SCAN.DeviceControlActivity;
 import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_page2.Main_page_2;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
@@ -19,6 +22,8 @@ import com.example.blu_main_test1.BackPressHandler;
 public class theMainPage extends AppCompatActivity {
     Button to_BLE, to_shop;
     private BackPressHandler backPressHandler;
+    private String mDeviceName;
+    private String mDeviceAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -57,8 +62,18 @@ public class theMainPage extends AppCompatActivity {
         public void onClick(View view){
             switch(view.getId()) {
                 case R.id.to_BLE:
-                    Intent intent = new Intent(getApplicationContext(), Machine_main.class);
-                    startActivity(intent);
+                    SharedPreferences autodevice = getSharedPreferences("autodevice", Activity.MODE_PRIVATE);
+                    mDeviceAddress = autodevice.getString("address",null);
+                    mDeviceName = autodevice.getString("devicename",null);
+
+                    if( mDeviceAddress != null && mDeviceName != null ){
+                        Intent intent1 = new Intent(getApplicationContext(), DeviceControlActivity.class);
+                        startActivity(intent1);
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), Machine_main.class);
+                        startActivity(intent);
+                    }
+
                     break;
                 case R.id.to_shop:
                     Intent intent2 = new Intent(getApplication(), Main_view_pager.class);

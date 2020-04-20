@@ -58,6 +58,7 @@ public class Machine_main extends AppCompatActivity {
                 case R.id.BLE_Btn:
                     Intent intent = new Intent(getApplicationContext(), DeviceScanActivity.class);
                     startActivity(intent);
+                    finish();
                     break;
                 case R.id.login_Btn:
                     Intent intent2 = new Intent(getApplication(), login.class);
