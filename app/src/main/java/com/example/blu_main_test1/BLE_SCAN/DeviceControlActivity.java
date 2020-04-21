@@ -175,9 +175,11 @@ public class DeviceControlActivity extends Activity {
                                         break;
                                     case "10":
                                         stateView.setText("가열중");
+
                                         break;
                                     case "20":
                                         stateView.setText("추출대기");
+
                                         break;
                                     case "91":
                                         android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(getApplicationContext());
