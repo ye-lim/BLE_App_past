@@ -318,6 +318,8 @@ public class BluetoothLeService extends Service {
             return;
         }
         mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
+
+
     }
 
     /**
@@ -359,7 +361,7 @@ public class BluetoothLeService extends Service {
 
         BluetoothGattDescriptor descriptor = TxChar.getDescriptor(CCCD);
         descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-        descriptor.setValue(BluetoothGattDescriptor.ENABLE_INDICATION_VALUE);
+        //descriptor.setValue(BluetoothGattDescriptor.ENABLE_INDICATION_VALUE);
         mBluetoothGatt.writeDescriptor(descriptor);
 
     }

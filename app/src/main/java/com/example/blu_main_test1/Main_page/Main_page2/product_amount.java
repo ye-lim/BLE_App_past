@@ -251,6 +251,18 @@ public class product_amount extends FragmentActivity {
                         Toast.makeText(product_amount.this, "블루투스가 연결 되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
                     }
                     break;
+
+                case R.id.stop_Btn:
+                    String stop_start = "01SB4";
+                    byte[] stop_value = {(byte) 0x02, (byte) 0x03};
+                    byte[] stop_temp = stop_start.getBytes();
+                    byte[] stop_temp_data = new byte[stop_temp.length + 2];
+                    System.arraycopy(stop_value, 0, stop_temp_data, 0, 1);
+                    System.arraycopy(stop_temp, 0, stop_temp_data, 1, stop_temp.length);
+                    System.arraycopy(stop_value, 1, stop_temp_data, stop_temp.length + 1, 1);
+                    bluetoothLeService.writeRXCharacteristic(stop_temp_data);
+                    progressOFF();
+                    Toast.makeText(product_amount.this, "추출 중지 되었습니다.", Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -468,6 +480,8 @@ public class product_amount extends FragmentActivity {
         if (!TextUtils.isEmpty(message)) {
             tv_progress_message.setText(message);
         }
+        Button stop_btn = (Button)progressDialog.findViewById(R.id.stop_Btn);
+        stop_btn.setOnClickListener(onClickListener);
 
 
     }

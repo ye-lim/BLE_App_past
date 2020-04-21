@@ -24,9 +24,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="추출중..."
-
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#ffffff"/>
+
+        <Button
+            android:id="@+id/stop_Btn"
+            android:onClick="stopclicked"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:text="추출 중지"
+            android:textColor="#FFFFFF"
+            android:background="@xml/login_id"/>
+
 
     </LinearLayout>
 </RelativeLayout>
