@@ -24,6 +24,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,7 +43,7 @@ import java.lang.reflect.Field;
 public class abstraction extends AppCompatActivity {
     ImageButton back;
     View positionView;
-    BluetoothLeService m_UartService;
+    BluetoothLeService mBluetoothLeService;
     AppCompatDialog progressDialog;
 
 
@@ -127,6 +128,9 @@ public class abstraction extends AppCompatActivity {
         if (!TextUtils.isEmpty(message)) {
             tv_progress_message.setText(message);
         }
+        Button stop_btn = (Button)progressDialog.findViewById(R.id.stop_Btn);
+        stop_btn.setOnClickListener(onClickListener);
+
 
 
     }
@@ -160,7 +164,9 @@ public class abstraction extends AppCompatActivity {
             public void run() {
                 progressOFF();
             }
-        },3500);
+        },35000);
+
+
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -177,7 +183,7 @@ public class abstraction extends AppCompatActivity {
                         System.arraycopy(rong_coffee_value, 0, rong_coffee_temp_data, 0, 1);
                         System.arraycopy(rong_coffee__temp, 0, rong_coffee_temp_data, 1, rong_coffee__temp.length);
                         System.arraycopy(rong_coffee_value, 1, rong_coffee_temp_data, rong_coffee__temp.length + 1, 1);
-                        m_UartService.writeRXCharacteristic(rong_coffee_temp_data);
+                        mBluetoothLeService.writeRXCharacteristic(rong_coffee_temp_data);
                         startProgress();
                     } else{
                         startToast("블루투스가 연결 되어 있지 않습니다.");
@@ -196,7 +202,7 @@ public class abstraction extends AppCompatActivity {
                         System.arraycopy(presso_value, 0, presso_temp_data, 0, 1);
                         System.arraycopy(presso_temp, 0, presso_temp_data, 1, presso_temp.length);
                         System.arraycopy(presso_value, 1, presso_temp_data, presso_temp.length + 1, 1);
-                        m_UartService.writeRXCharacteristic(presso_temp_data);
+                        mBluetoothLeService.writeRXCharacteristic(presso_temp_data);
                         startProgress();
                     } else{
                         startToast("블루투스가 연결 되어 있지 않습니다.");
@@ -214,7 +220,7 @@ public class abstraction extends AppCompatActivity {
                         System.arraycopy(tea_big_value, 0, tea_big_temp_data, 0, 1);
                         System.arraycopy(tea_big_temp, 0, tea_big_temp_data, 1, tea_big_temp.length);
                         System.arraycopy(tea_big_value, 1, tea_big_temp_data, tea_big_temp.length + 1, 1);
-                        m_UartService.writeRXCharacteristic(tea_big_temp_data);
+                        mBluetoothLeService.writeRXCharacteristic(tea_big_temp_data);
                         startProgress();
                     } else{
                         startToast("블루투스가 연결 되어 있지 않습니다.");
@@ -232,12 +238,24 @@ public class abstraction extends AppCompatActivity {
                         System.arraycopy(tea_small_value, 0, tea_small_temp_data, 0, 1);
                         System.arraycopy(tea_small_temp, 0, tea_small_temp_data, 1, tea_small_temp.length);
                         System.arraycopy(tea_small_value, 1, tea_small_temp_data, tea_small_temp.length + 1, 1);
-                        m_UartService.writeRXCharacteristic(tea_small_temp_data);
+                        mBluetoothLeService.writeRXCharacteristic(tea_small_temp_data);
                         startProgress();
                     } else{
                         startToast("블루투스가 연결 되어 있지 않습니다.");
                     }
                     break;
+
+                case R.id.stop_Btn:
+                    String stop_start = "01SB4";
+                    byte[] stop_value = {(byte) 0x02, (byte) 0x03};
+                    byte[] stop_temp = stop_start.getBytes();
+                    byte[] stop_temp_data = new byte[stop_temp.length + 2];
+                    System.arraycopy(stop_value, 0, stop_temp_data, 0, 1);
+                    System.arraycopy(stop_temp, 0, stop_temp_data, 1, stop_temp.length);
+                    System.arraycopy(stop_value, 1, stop_temp_data, stop_temp.length + 1, 1);
+                    mBluetoothLeService.writeRXCharacteristic(stop_temp_data);
+                    progressOFF();
+                    startToast("추출 중지되었습니다 .");
             }
         }
     };
@@ -281,10 +299,10 @@ public class abstraction extends AppCompatActivity {
     private ServiceConnection mServiceConnection = new ServiceConnection() {
 
         public void onServiceConnected(ComponentName className, IBinder rawBinder) {
-            m_UartService = ((BluetoothLeService.LocalBinder) rawBinder).getService();
+            mBluetoothLeService = ((BluetoothLeService.LocalBinder) rawBinder).getService();
 
             //Log.d(TAG, "onServiceConnected m_UartService= " + m_UartService);
-            if (!m_UartService.initialize()) {
+            if (!mBluetoothLeService.initialize()) {
                 //Log.e(TAG, "Unable to initialize Bluetooth");
 
             }
@@ -292,8 +310,8 @@ public class abstraction extends AppCompatActivity {
 
 
         public void onServiceDisconnected(ComponentName classname) {
-            if(m_UartService != null) {
-                m_UartService.disconnect();
+            if(mBluetoothLeService != null) {
+                mBluetoothLeService.disconnect();
             }
         }
     };

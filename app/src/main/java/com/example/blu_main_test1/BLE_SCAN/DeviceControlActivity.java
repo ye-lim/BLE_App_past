@@ -105,7 +105,6 @@ public class DeviceControlActivity extends Activity {
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
     private LinearLayout linear;
-    private String autoAddress;
 
     // Code to manage Service lifecycle.
     //서비스가 연결됐을 때, 안됐을 때 관리
@@ -146,6 +145,10 @@ public class DeviceControlActivity extends Activity {
                 if(mConnected){
                     mTimer[0].schedule(new Tea_large(), 1000, 15000);
                     mTimer[1].schedule(new State(), 1500, 15000);
+                    mTimer[2].schedule(new Tea_small(), 2000, 15000);
+                    mTimer[3].schedule(new Coffee_large(), 2500, 15000);
+                    mTimer[4].schedule(new Coffee_small(), 3000, 15000);
+
                 }
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) { //연결 실패
                 mConnected = false;
@@ -782,6 +785,76 @@ public class DeviceControlActivity extends Activity {
                     System.arraycopy(value, 1, temp_data, temp.length + 1, 1);
                     mBluetoothLeService.writeRXCharacteristic(temp_data);
 
+                }
+            }
+        }
+    }
+
+    class Tea_small extends TimerTask {
+
+        @Override
+        public void run() {
+            if(mConnected) {
+                if (mBluetoothLeService != null) {
+
+                    String TL_amount, basic_state;
+                    byte[] value = {(byte) 0x02, (byte) 0x03};
+
+                    basic_state = "03QTS5B"; //현재 상태질의
+
+                    byte[] state = basic_state.getBytes();
+                    byte[] state_data = new byte[state.length + 2];
+
+                    System.arraycopy(value, 0, state_data, 0, 1);
+                    System.arraycopy(state, 0, state_data, 1, state.length);
+                    System.arraycopy(value, 1, state_data, state.length + 1, 1);
+                    mBluetoothLeService.writeRXCharacteristic(state_data);
+                }
+            }
+        }
+    }
+    class Coffee_large extends TimerTask {
+
+        @Override
+        public void run() {
+            if(mConnected) {
+                if (mBluetoothLeService != null) {
+
+                    String TL_amount, basic_state;
+                    byte[] value = {(byte) 0x02, (byte) 0x03};
+
+                    basic_state = "03QCL43"; //현재 상태질의
+
+                    byte[] state = basic_state.getBytes();
+                    byte[] state_data = new byte[state.length + 2];
+
+                    System.arraycopy(value, 0, state_data, 0, 1);
+                    System.arraycopy(state, 0, state_data, 1, state.length);
+                    System.arraycopy(value, 1, state_data, state.length + 1, 1);
+                    mBluetoothLeService.writeRXCharacteristic(state_data);
+                }
+            }
+        }
+    }
+    class Coffee_small extends TimerTask {
+        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+        @Override
+        public void run() {
+            if(mConnected) {
+                if (mBluetoothLeService != null) {
+
+                    String TL_amount, basic_state;
+                    byte[] value = {(byte) 0x02, (byte) 0x03};
+
+                    basic_state = "03QCS4A"; //현재 상태질의
+
+                    byte[] state = basic_state.getBytes();
+                    byte[] state_data = new byte[state.length + 2];
+
+                    System.arraycopy(value, 0, state_data, 0, 1);
+                    System.arraycopy(state, 0, state_data, 1, state.length);
+                    System.arraycopy(value, 1, state_data, state.length + 1, 1);
+                    mBluetoothLeService.writeRXCharacteristic(state_data);
                 }
             }
         }
