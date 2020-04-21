@@ -18,6 +18,7 @@ package com.example.blu_main_test1.BLE_SCAN;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
@@ -32,9 +33,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AlertDialog;
+//import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -179,88 +182,64 @@ public class DeviceControlActivity extends Activity {
                                         break;
                                     case "20":
                                         stateView.setText("추출대기");
-
                                         break;
                                     case "91":
-                                        android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(getApplicationContext());
-                                        // 제목셋팅
-                                        alertDialogBuilder.setTitle("에러 발생");
-                                        // AlertDialog 셋팅
-                                        alertDialogBuilder .setMessage("머신 내부 온도가 너무 높습니다. 절전모드 하시겠습니까?")
-                                                .setCancelable(false)
-                                                .setPositiveButton("아니요", new DialogInterface.OnClickListener() {
-                                                    public void onClick( DialogInterface dialog, int id) {
-                                                        // 다이얼로그를 취소한다
-                                                        dialog.cancel();
+                                        AlertDialog.Builder alert_confirm = new AlertDialog.Builder(DeviceControlActivity.this);
+                                        alert_confirm.setMessage("머신 내부 온도가 너무 높습니다. 절전모드 하시겠습니까?").setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                String start = "01PB1";
+                                                byte [] value={(byte)0x02,(byte)0x03};
+                                                byte[] temp=start.getBytes();
+                                                byte[] temp_data= new byte[temp.length+2];
+                                                System.arraycopy(value,0,temp_data,0,1);
+                                                System.arraycopy(temp,0,temp_data,1,temp.length);
+                                                System.arraycopy(value,1,temp_data,temp.length+1,1);
+                                                mBluetoothLeService.writeRXCharacteristic(temp_data);
+                                                startToast("절전모드");
+                                            }
+                                        });
+                                        alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
 
-                                                    }
-                                                })
-                                                .setNegativeButton("예", new DialogInterface.OnClickListener() {
-                                                    public void onClick( DialogInterface dialog, int id) {
-
-                                                        String start = "01PB1";
-                                                        byte [] value={(byte)0x02,(byte)0x03};
-                                                        byte[] temp=start.getBytes();
-                                                        byte[] temp_data= new byte[temp.length+2];
-                                                        System.arraycopy(value,0,temp_data,0,1);
-                                                        System.arraycopy(temp,0,temp_data,1,temp.length);
-                                                        System.arraycopy(value,1,temp_data,temp.length+1,1);
-                                                        mBluetoothLeService.writeRXCharacteristic(temp_data);
-
-                                                        dialog.cancel();
-                                                    }
-                                                }); // 다이얼로그 생성
-                                        android.support.v7.app.AlertDialog alertDialog = alertDialogBuilder.create(); // 다이얼로그 보여주기
-                                        alertDialog.show();
+                                            }
+                                        });
+                                        alert_confirm.show();
                                         break;
                                     case "92":
-                                        android.support.v7.app.AlertDialog.Builder alertDialogBuilder2 = new android.support.v7.app.AlertDialog.Builder(getApplicationContext());
-                                        // 제목셋팅
-                                        alertDialogBuilder2.setTitle("에러 발생");
-                                        // AlertDialog 셋팅
-                                        alertDialogBuilder2 .setMessage("온도퓨즈가 단선되었습니다. 고객센터로 문의주세요")
-                                                .setCancelable(false)
-                                                .setPositiveButton("아니요", new DialogInterface.OnClickListener() {
-                                                    public void onClick( DialogInterface dialog, int id) {
-                                                        // 다이얼로그를 취소한다
-                                                        dialog.cancel();
-                                                    }
-                                                })
-                                                .setNegativeButton("예", new DialogInterface.OnClickListener() {
-                                                    public void onClick( DialogInterface dialog, int id) {
-                                                        String start = "01PB1";
-                                                        byte [] value={(byte)0x02,(byte)0x03};
-                                                        byte[] temp=start.getBytes();
-                                                        byte[] temp_data= new byte[temp.length+2];
-                                                        System.arraycopy(value,0,temp_data,0,1);
-                                                        System.arraycopy(temp,0,temp_data,1,temp.length);
-                                                        System.arraycopy(value,1,temp_data,temp.length+1,1);
-                                                        mBluetoothLeService.writeRXCharacteristic(temp_data);
-
-                                                        dialog.cancel();
-                                                    }
-                                                }); // 다이얼로그 생성
-                                        android.support.v7.app.AlertDialog alertDialog2 = alertDialogBuilder2.create(); // 다이얼로그 보여주기
-                                        alertDialog2.show();
+                                        AlertDialog.Builder alert_confirm2 = new AlertDialog.Builder(DeviceControlActivity.this);
+                                        alert_confirm2.setMessage("온도퓨즈가 단선되었습니다. 고객센터로 문의주세요. ").setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                String start = "01PB1";
+                                                byte [] value={(byte)0x02,(byte)0x03};
+                                                byte[] temp=start.getBytes();
+                                                byte[] temp_data= new byte[temp.length+2];
+                                                System.arraycopy(value,0,temp_data,0,1);
+                                                System.arraycopy(temp,0,temp_data,1,temp.length);
+                                                System.arraycopy(value,1,temp_data,temp.length+1,1);
+                                                mBluetoothLeService.writeRXCharacteristic(temp_data);
+                                                startToast("절전모드");
+                                            }
+                                        });
+                                        alert_confirm2.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                            }
+                                        });
+                                        alert_confirm2.show();
                                         break;
                                     case "93":
-                                        android.support.v7.app.AlertDialog.Builder alertDialogBuilder3 = new android.support.v7.app.AlertDialog.Builder(getApplicationContext());
-                                        // 제목셋팅
-                                        alertDialogBuilder3.setTitle("에러 발생");
-                                        // AlertDialog 셋팅
-                                        alertDialogBuilder3 .setMessage("물 보충이 필요합니다.")
-                                                .setCancelable(false)
-                                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                                    public void onClick( DialogInterface dialog, int id) {
-                                                        // 다이얼로그를 취소한다
-                                                        dialog.cancel();
-                                                    }
-                                                });
-                                        // 다이얼로그 생성
-                                        AlertDialog alertDialog3 = alertDialogBuilder3.create(); // 다이얼로그 보여주기
-                                        alertDialog3.show();
-                                        break;
+                                        AlertDialog.Builder alert_confirm3 = new AlertDialog.Builder(DeviceControlActivity.this);
+                                        alert_confirm3.setMessage("물 보충이 필요합니다.").setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
 
+                                            }
+                                        });
+                                        alert_confirm3.show();
+                                        break;
 
                                 }
                                 temperView.setText(text.substring(8,10));
@@ -317,8 +296,8 @@ public class DeviceControlActivity extends Activity {
         setContentView(R.layout.gatt_services_characteristics);
 
         final Intent intent = getIntent();
-       // mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME); //DeviceScanActivity에서 인텐트로 같이 넘어온 장치 이름과 주소를 추출.
-       // mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+        // mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME); //DeviceScanActivity에서 인텐트로 같이 넘어온 장치 이름과 주소를 추출.
+        // mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
         SharedPreferences autodevice = getSharedPreferences("autodevice", Activity.MODE_PRIVATE);
         mDeviceAddress = autodevice.getString("address",null);
         mDeviceName = autodevice.getString("devicename",null);
@@ -334,8 +313,6 @@ public class DeviceControlActivity extends Activity {
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class); //서비스와 특성들을 불러오고 특성을 눌렀을때 mDataField에 데이터를 불러 오도록하기 위해
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE); //인텐트를 만들고 그것으로 서비스를 실행시킴.
 
-
-        findViewById(R.id.amount_start).setOnClickListener(onClickListener);
         findViewById(R.id.product_amount).setOnClickListener(onClickListener);
         findViewById(R.id.state_start).setOnClickListener(onClickListener);
         findViewById(R.id.low_start).setOnClickListener(onClickListener);
@@ -875,4 +852,3 @@ public class DeviceControlActivity extends Activity {
 
 
 }
-
