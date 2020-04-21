@@ -18,7 +18,6 @@ import com.example.blu_main_test1.BackPressHandler;
 
 public class Machine_main extends AppCompatActivity {
     Button BLE_Btn, login_Btn;
-    ImageButton back;
     private BackPressHandler backPressHandler;
 
     @Override
@@ -35,11 +34,9 @@ public class Machine_main extends AppCompatActivity {
 
         BLE_Btn = (Button) findViewById(R.id.BLE_Btn);
         login_Btn = (Button) findViewById(R.id.login_Btn);
-        back = findViewById(R.id.back);
 
         BLE_Btn.setOnClickListener(btnListener);
         login_Btn.setOnClickListener(btnListener);
-        back.setOnClickListener(btnListener);
 
         backPressHandler = new BackPressHandler(this);
 
@@ -68,8 +65,6 @@ public class Machine_main extends AppCompatActivity {
                     Intent intent2 = new Intent(getApplication(), login.class);
                     startActivity(intent2);
                     break;
-                case R.id.back:
-                    finish();
             }
         }
     };
