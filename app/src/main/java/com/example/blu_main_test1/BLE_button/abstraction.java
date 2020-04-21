@@ -45,7 +45,7 @@ public class abstraction extends AppCompatActivity {
     View positionView;
     BluetoothLeService mBluetoothLeService;
     AppCompatDialog progressDialog;
-
+    private String text;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,10 +89,34 @@ public class abstraction extends AppCompatActivity {
         findViewById(R.id.tea_big).setOnClickListener(onClickListener); //tea대 리스서
         findViewById(R.id.tea_small).setOnClickListener(onClickListener); //tea스몰 리스너
 
-
-
-
     }
+
+    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() { //BroadcastReceiver는  연결상태와 데이터들을 받아오는 역할을 한다.
+        @Override
+        public void onReceive(final Context context, Intent intent) { //BluetoothLeService에서 sendBroadcast를 했을 때 호출.
+            String action = intent.getAction(); //BluetoothLeService로부터 장치와 연결유뮤 상황을 action에 넣어 보내줌.
+              if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) { //BLE장치에서 받은 데이터가 사용가능.
+                final byte[] txValue = intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA);
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        try {
+                            //string형식으로 리스트 뷰에 표현
+                            text = new String(txValue, "UTF-8");
+                            if (text.substring(1, 6).equals("07RST")) {
+                                switch (text.substring(6, 8)) {
+                                    case "20": //추출 대기 상태
+                                        progressOFF();
+                                        break;
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        }
+    };
 
 
     public void progressON(Activity activity, String message) {
@@ -159,13 +183,12 @@ public class abstraction extends AppCompatActivity {
     public void startProgress() {
         progressON(this,"추출중.....");
 
-        new Handler().postDelayed(new Runnable() {
+       /* new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 progressOFF();
             }
-        },35000);
-
+        },35000); */
 
     }
 
@@ -315,6 +338,21 @@ public class abstraction extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mGattUpdateReceiver, intentFilter); //브로드캐스트 등록
+    }
+
+    @Override
+    protected void onPause() { //리시버를 해제
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mGattUpdateReceiver);
+
+    }
 
     @Override
     public void onDestroy() {

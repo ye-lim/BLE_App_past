@@ -1,6 +1,7 @@
 package com.example.blu_main_test1.Main_page.Main_page2;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDialog;
@@ -79,6 +81,7 @@ public class product_amount extends FragmentActivity {
     ViewPager viewPager;
     BluetoothLeService bluetoothLeService;
     AppCompatDialog progressDialog;
+    private String text;
 
     Button press_button;
     ImageButton top_btn, bottom_btn, back;
@@ -162,6 +165,34 @@ public class product_amount extends FragmentActivity {
 
 
     }
+
+    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() { //BroadcastReceiver는  연결상태와 데이터들을 받아오는 역할을 한다.
+        @Override
+        public void onReceive(final Context context, Intent intent) { //BluetoothLeService에서 sendBroadcast를 했을 때 호출.
+            String action = intent.getAction(); //BluetoothLeService로부터 장치와 연결유뮤 상황을 action에 넣어 보내줌.
+            if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) { //BLE장치에서 받은 데이터가 사용가능.
+                final byte[] txValue = intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA);
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        try {
+                            //string형식으로 리스트 뷰에 표현
+                            text = new String(txValue, "UTF-8");
+                            if (text.substring(1, 6).equals("07RST")) {
+                                switch (text.substring(6, 8)) {
+                                    case "20": //추출대기상태
+                                        progressOFF();
+                                        break;
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        }
+    };
+
     //firebase를 이용하여 cloud db에 있는 정보를 가져옴
     public void value()
     {
@@ -510,12 +541,12 @@ public class product_amount extends FragmentActivity {
     public void startProgress() {
         progressON(this,"추출중.....");
 
-        new Handler().postDelayed(new Runnable() {
+      /*  new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 progressOFF();
             }
-        },3500);
+        },3500); */
     }
 
     private ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -539,5 +570,20 @@ public class product_amount extends FragmentActivity {
     public void onDestroy() {
         unbindService(mServiceConnection);
         super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mGattUpdateReceiver, intentFilter); //브로드캐스트 등록
+    }
+
+    @Override
+    protected void onPause() { //리시버를 해제
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mGattUpdateReceiver);
+
     }
 }
