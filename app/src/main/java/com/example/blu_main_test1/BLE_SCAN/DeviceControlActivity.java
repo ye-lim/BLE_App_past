@@ -317,8 +317,8 @@ public class DeviceControlActivity extends Activity {
         setContentView(R.layout.gatt_services_characteristics);
 
         final Intent intent = getIntent();
-       // mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME); //DeviceScanActivity에서 인텐트로 같이 넘어온 장치 이름과 주소를 추출.
-       // mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+        // mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME); //DeviceScanActivity에서 인텐트로 같이 넘어온 장치 이름과 주소를 추출.
+        // mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
         SharedPreferences autodevice = getSharedPreferences("autodevice", Activity.MODE_PRIVATE);
         mDeviceAddress = autodevice.getString("address",null);
         mDeviceName = autodevice.getString("devicename",null);
@@ -333,9 +333,7 @@ public class DeviceControlActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true); //액션바의 앱 아이콘 옆에 화살표를 만들어 전의 액티비티로 돌아갈 수 있게 함.
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class); //서비스와 특성들을 불러오고 특성을 눌렀을때 mDataField에 데이터를 불러 오도록하기 위해
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE); //인텐트를 만들고 그것으로 서비스를 실행시킴.
-
-
-        findViewById(R.id.amount_start).setOnClickListener(onClickListener);
+        
         findViewById(R.id.product_amount).setOnClickListener(onClickListener);
         findViewById(R.id.state_start).setOnClickListener(onClickListener);
         findViewById(R.id.low_start).setOnClickListener(onClickListener);
@@ -875,4 +873,3 @@ public class DeviceControlActivity extends Activity {
 
 
 }
-
