@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:orientation="vertical"
             tools:ignore="MissingConstraints">
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:orientation="vertical">
 
             <TextView
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical">
 
             <TextView
@@ -71,7 +71,7 @@
                 android:textColor="#888888"
                 android:layout_marginBottom="10dp"
                 android:lineSpacingExtra="5dp"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -81,7 +81,7 @@
                 android:textColor="#888888"
                 android:layout_marginBottom="10dp"
                 android:lineSpacingExtra="5dp"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -155,22 +155,21 @@
                     android:background="@xml/join_main_sex"/>
             </LinearLayout>
 
-            <Button
-                android:layout_gravity="bottom"
-                android:id="@+id/secession_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                android:text="회원탈퇴"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:textColor="@color/white"
-                android:background="#dcdcdc"/>
-
         </LinearLayout>
+        <Button
+            android:layout_gravity="bottom"
+            android:id="@+id/secession_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:text="회원탈퇴"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:background="#dcdcdc"/>
 
     </LinearLayout>
 
