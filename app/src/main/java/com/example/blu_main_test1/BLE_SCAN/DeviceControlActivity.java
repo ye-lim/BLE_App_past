@@ -243,7 +243,19 @@ public class DeviceControlActivity extends Activity {
 
                                 }
                                 temperView.setText(text.substring(8,10));
+                            } else if(text.substring(1,6).equals("05RCL")){
+                                coffee_b_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml"); //ml은 안뜸, 페이지 나갔다 다시 들어오면 유지 x 
                             }
+                            else if(text.substring(1,6).equals("05RCS")){
+                                coffee_s_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml");
+                            }
+                            else if(text.substring(1,6).equals("05RTL")){
+                                tea_b_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml");
+                            }
+                            else if(text.substring(1,6).equals("05RTS")){
+                                tea_s_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml");
+                            }
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
