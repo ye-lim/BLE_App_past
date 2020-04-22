@@ -48,8 +48,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,7 +88,8 @@ public class DeviceControlActivity extends Activity {
 
     private ImageButton back;
     private EditText coffee_b_amount,coffee_s_amount,tea_b_amount,tea_s_amount;
-    private LinearLayout background,sub_background;
+    private LinearLayout background;
+    private FrameLayout sub_background;
     public Button sub_amount;
 
     private TextView stateView;
@@ -108,6 +111,7 @@ public class DeviceControlActivity extends Activity {
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
     private LinearLayout linear;
+    private ProgressBar pgb;
 
     // Code to manage Service lifecycle.
     //서비스가 연결됐을 때, 안됐을 때 관리
@@ -178,7 +182,6 @@ public class DeviceControlActivity extends Activity {
                                         break;
                                     case "10":
                                         stateView.setText("가열중");
-
                                         break;
                                     case "20":
                                         stateView.setText("추출대기");
@@ -244,16 +247,20 @@ public class DeviceControlActivity extends Activity {
                                 }
                                 temperView.setText(text.substring(8,10));
                             } else if(text.substring(1,6).equals("05RCL")){
-                                coffee_b_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml"); //ml은 안뜸, 페이지 나갔다 다시 들어오면 유지 x 
+                                coffee_b_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml"); //ml은 안뜸, 페이지 나갔다 다시 들어오면 유지 x
+                                pgb.setVisibility(View.GONE);
                             }
                             else if(text.substring(1,6).equals("05RCS")){
                                 coffee_s_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml");
+                                pgb.setVisibility(View.GONE);
                             }
                             else if(text.substring(1,6).equals("05RTL")){
                                 tea_b_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml");
+                                pgb.setVisibility(View.GONE);
                             }
                             else if(text.substring(1,6).equals("05RTS")){
                                 tea_s_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml");
+                                pgb.setVisibility(View.GONE);
                             }
 
                         } catch (Exception e) {
@@ -422,12 +429,14 @@ public class DeviceControlActivity extends Activity {
 
                     back=(ImageButton)linear.findViewById(R.id.back);
                     background=(LinearLayout)linear.findViewById(R.id.background);
-                    sub_background=(LinearLayout)linear.findViewById(R.id.sub_background);
+                    sub_background=(FrameLayout)linear.findViewById(R.id.sub_background);
                     coffee_b_amount=(EditText)linear.findViewById(R.id.coffee_b_amount);
                     coffee_s_amount=(EditText)linear.findViewById(R.id.coffee_s_amount);
                     tea_b_amount=(EditText)linear.findViewById(R.id.tea_b_amount);
                     tea_s_amount=(EditText)linear.findViewById(R.id.tea_s_amount);
                     sub_amount=(Button)linear.findViewById(R.id.sub_amount);
+                    pgb = (ProgressBar)linear.findViewById(R.id.progressBar3);
+                    pgb.setVisibility(View.VISIBLE);
 
 
 
