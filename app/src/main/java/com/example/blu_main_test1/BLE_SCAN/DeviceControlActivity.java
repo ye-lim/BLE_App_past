@@ -91,11 +91,11 @@ public class DeviceControlActivity extends Activity {
     private LinearLayout background;
     private FrameLayout sub_background;
     public Button sub_amount;
-
+    private TextView versionView;
     private TextView stateView;
     private TextView temperView;
     private TextView mConnectionState;
-    private Timer mTimer[] = new Timer[6];
+    private Timer mTimer[]=new Timer[6];
 
     private Boolean inflateView = false;
     private String text;
@@ -150,13 +150,17 @@ public class DeviceControlActivity extends Activity {
                 updateConnectionState(R.string.connected);//연결됨을 ui에서 표시
                 invalidateOptionsMenu(); //onCreateOptionsMenu 호출
                 if(mConnected){
-                    mTimer[0].schedule(new Tea_large(), 1000, 15000);
-                    mTimer[1].schedule(new State(), 1500, 15000);
-                    mTimer[2].schedule(new Tea_small(), 2000, 15000);
-                    mTimer[3].schedule(new Coffee_large(), 2500, 15000);
-                    mTimer[4].schedule(new Coffee_small(), 3000, 15000);
+                    mTimer[0].schedule(new State(), 1000, 10000);
+                    Handler delayHandler = new Handler();
+                    delayHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Version();
+                        }
+                    },1500);
 
                 }
+
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) { //연결 실패
                 mConnected = false;
                 updateConnectionState(R.string.disconnected);
@@ -247,20 +251,22 @@ public class DeviceControlActivity extends Activity {
                                 }
                                 temperView.setText(text.substring(8,10));
                             } else if(text.substring(1,6).equals("05RCL")){
-                                coffee_b_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml"); //ml은 안뜸, 페이지 나갔다 다시 들어오면 유지 x
-                                pgb.setVisibility(View.GONE);
+                                coffee_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10)); //ml은 안뜸, 페이지 나갔다 다시 들어오면 유지 x
+
                             }
                             else if(text.substring(1,6).equals("05RCS")){
-                                coffee_s_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml");
-                                pgb.setVisibility(View.GONE);
+                                coffee_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
+
                             }
                             else if(text.substring(1,6).equals("05RTL")){
-                                tea_b_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml");
-                                pgb.setVisibility(View.GONE);
+                                tea_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
+
                             }
                             else if(text.substring(1,6).equals("05RTS")){
-                                tea_s_amount.setText(Integer.parseInt(text.substring(6,8))*10+"ml");
+                                tea_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
                                 pgb.setVisibility(View.GONE);
+                            } else if(text.substring(1,6).equals("0FRVE")){
+                                versionView.setText(text.substring(6,18));
                             }
 
                         } catch (Exception e) {
@@ -326,6 +332,7 @@ public class DeviceControlActivity extends Activity {
         mConnectionState = (TextView) findViewById(R.id.connection_state);
         stateView = (TextView) findViewById(R.id.state);
         temperView = (TextView) findViewById(R.id.temper);
+        versionView = (TextView)findViewById(R.id.draw_version);
 
         getActionBar().setTitle(mDeviceName);
         getActionBar().setDisplayHomeAsUpEnabled(true); //액션바의 앱 아이콘 옆에 화살표를 만들어 전의 액티비티로 돌아갈 수 있게 함.
@@ -339,9 +346,11 @@ public class DeviceControlActivity extends Activity {
         findViewById(R.id.amount_change).setOnClickListener(onClickListener);
         findViewById(R.id.amount_stop).setOnClickListener(onClickListener);
 
-        for(int i =0; i<6;i++){
+
+        for(int i=0;i<6;i++){
             mTimer[i] = new Timer();
         }
+
 
         if (mBluetoothLeService != null) {
             final boolean result = mBluetoothLeService.connect(mDeviceAddress); // 연결
@@ -420,6 +429,33 @@ public class DeviceControlActivity extends Activity {
 
                     linear = (LinearLayout)inflater.inflate(R.layout.activity_amount_change, null);
 
+
+                    Coffee_large();
+
+                    Handler delayHandler = new Handler();
+                    delayHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Coffee_small();
+                        }
+                    },500);
+                    Handler delayHandler2 = new Handler();
+                    delayHandler2.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Tea_large();
+                        }
+                    },1000);
+                    Handler delayHandler3 = new Handler();
+                    delayHandler3.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Tea_small();
+                        }
+                    },1500);
+
+
+
                     LinearLayout.LayoutParams paramlinear = new LinearLayout.LayoutParams(
 
                             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -440,6 +476,7 @@ public class DeviceControlActivity extends Activity {
 
 
 
+
                     //윈도우에 추가시킴
                     addContentView(linear,paramlinear);
                     //linear부분은 아무 동작 하지 않음
@@ -455,6 +492,7 @@ public class DeviceControlActivity extends Activity {
                         public void onClick(View v) {
                             ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
                             parentViewGroup.removeView(linear);
+
                         }
                     });
 
@@ -500,6 +538,7 @@ public class DeviceControlActivity extends Activity {
                                     System.arraycopy(cb_temp, 0, cb_temp_data, 1, cb_temp.length);
                                     System.arraycopy(cb_value, 1, cb_temp_data, cb_temp.length + 1, 1);
                                     mBluetoothLeService.writeRXCharacteristic(cb_temp_data);
+
                                 }
 
 
@@ -579,9 +618,10 @@ public class DeviceControlActivity extends Activity {
                                     }, 2000);  // 1 초 후에 실행
                                 }
 
-
                                 ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
                                 parentViewGroup.removeView(linear);
+
+
                             }catch (Exception e)
                             {
 
@@ -618,6 +658,7 @@ public class DeviceControlActivity extends Activity {
     protected void onResume() {
         super.onResume();
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter()); //브로드캐스트 등록
+
     }
 
     @Override
@@ -630,9 +671,9 @@ public class DeviceControlActivity extends Activity {
     @Override
     protected void onDestroy() { //서비스를 해제
         super.onDestroy();
-        for(int i=0;i<6;i++){
-            mTimer[i].cancel();
-        }
+
+        mTimer[0].cancel();
+
         unbindService(mServiceConnection); //unbindService()를 호출하면 연결이 끊기고 서비스에 연결된 컴포넌트가 하나도 남지 않게 되면서 안드로이드 시스템이 서비스를 소멸.
         mBluetoothLeService = null;
         mConnected = false;
@@ -766,10 +807,8 @@ public class DeviceControlActivity extends Activity {
 
 
 
-    class Tea_large extends TimerTask {
+    public void Tea_large()  {
 
-        @Override
-        public void run() {
             if(mConnected) {
                 if (mBluetoothLeService != null) {
 
@@ -787,36 +826,29 @@ public class DeviceControlActivity extends Activity {
 
                 }
             }
-        }
     }
 
-    class Tea_small extends TimerTask {
 
-        @Override
-        public void run() {
-            if(mConnected) {
-                if (mBluetoothLeService != null) {
+    public void Tea_small(){
+        if(mConnected) {
+            if (mBluetoothLeService != null) {
+                String TL_amount, basic_state;
+                byte[] value = {(byte) 0x02, (byte) 0x03};
 
-                    String TL_amount, basic_state;
-                    byte[] value = {(byte) 0x02, (byte) 0x03};
+                basic_state = "03QTS5B"; //현재 상태질의
 
-                    basic_state = "03QTS5B"; //현재 상태질의
+                byte[] state = basic_state.getBytes();
+                byte[] state_data = new byte[state.length + 2];
 
-                    byte[] state = basic_state.getBytes();
-                    byte[] state_data = new byte[state.length + 2];
-
-                    System.arraycopy(value, 0, state_data, 0, 1);
-                    System.arraycopy(state, 0, state_data, 1, state.length);
-                    System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    mBluetoothLeService.writeRXCharacteristic(state_data);
-                }
+                System.arraycopy(value, 0, state_data, 0, 1);
+                System.arraycopy(state, 0, state_data, 1, state.length);
+                System.arraycopy(value, 1, state_data, state.length + 1, 1);
+                mBluetoothLeService.writeRXCharacteristic(state_data);
             }
         }
     }
-    class Coffee_large extends TimerTask {
+    public void Coffee_large() {
 
-        @Override
-        public void run() {
             if(mConnected) {
                 if (mBluetoothLeService != null) {
 
@@ -834,12 +866,10 @@ public class DeviceControlActivity extends Activity {
                     mBluetoothLeService.writeRXCharacteristic(state_data);
                 }
             }
-        }
     }
-    class Coffee_small extends TimerTask {
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-        @Override
-        public void run() {
+
+    public void Coffee_small() {
+
             if(mConnected) {
                 if (mBluetoothLeService != null) {
 
@@ -856,6 +886,23 @@ public class DeviceControlActivity extends Activity {
                     System.arraycopy(value, 1, state_data, state.length + 1, 1);
                     mBluetoothLeService.writeRXCharacteristic(state_data);
                 }
+            }
+    }
+
+
+    public void  Version(){
+        if(mConnected) {
+            if (mBluetoothLeService != null) {
+
+                String TL_amount, basic_state;
+                byte[] value = {(byte) 0x02, (byte) 0x03};
+                basic_state = "03QVE4F"; //현재 상태질의
+                byte[] state = basic_state.getBytes();
+                byte[] state_data = new byte[state.length + 2];
+                System.arraycopy(value, 0, state_data, 0, 1);
+                System.arraycopy(state, 0, state_data, 1, state.length);
+                System.arraycopy(value, 1, state_data, state.length + 1, 1);
+                mBluetoothLeService.writeRXCharacteristic(state_data);
             }
         }
     }
