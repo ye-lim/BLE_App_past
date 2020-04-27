@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
-   android:id="@+id/background"
+    android:id="@+id/background"
     android:background="#80404040">
 
     <FrameLayout
@@ -21,227 +21,327 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/back"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:background="@drawable/back"
-                android:layout_gravity="right"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="추출량 변경"
-                android:textSize="30dp"
-                android:textColor="#ffffff" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Coffee"
-                android:textSize="24dp"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:layout_marginTop="25dp"
-                android:layout_marginLeft="10dp"
-                />
-
-            <TextView
-                android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="룽고"
-                android:textSize="18dp"
-                android:textColor="#ccffffff"
-                />
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp">
+                android:layout_marginLeft="40dp"
+                android:orientation="vertical">
 
-                <SeekBar
-                    android:id="@+id/seek_coffee_big"
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:max="35" />
-
-                <TextView
-                    android:id="@+id/coffee_b_amount"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:textSize="20dp"
-                    android:gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#3A404C"
-                    android:background="@xml/amount_ch_edit"
-                    android:backgroundTint="#ffffff" />
+                <ImageButton
+                    android:id="@+id/back"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/back" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:text="ml" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="에스프레소"
-                android:textColor="#ccffffff"
-                android:textSize="18dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <SeekBar
-                    android:id="@+id/seek_coffee_small"
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:max="35" />
-
-                <TextView
-                    android:id="@+id/coffee_s_amount"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:textSize="20dp"
-                    android:gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#3A404C"
-                    android:background="@xml/amount_ch_edit"
-                    android:backgroundTint="#ffffff" />
+                    android:text="추출량 변경"
+                    android:textColor="#ffffff"
+                    android:textSize="30dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:text="ml" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tea"
-                android:textSize="24dp"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:layout_marginTop="25dp"
-                android:layout_marginLeft="25dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="대"
-                android:textSize="18dp"
-                android:textColor="#ccffffff"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp">
-
-                <SeekBar
-                    android:id="@+id/seek_Tea_big"
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:max="35" />
-
-                <TextView
-                    android:id="@+id/tea_b_amount"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:textSize="20dp"
-                    android:gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
-                    android:textColor="#3A404C"
-                    android:background="@xml/amount_ch_edit"
-                    android:backgroundTint="#ffffff"/>
+                    android:layout_marginTop="25dp"
+                    android:text="Coffee"
+                    android:textColor="#ffffff"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:text="ml" />
-            </LinearLayout>
+                    android:layout_marginTop="20dp"
+                    android:text="룽고"
+                    android:textColor="#ccffffff"
+                    android:textSize="18dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="소"
-                android:textSize="18dp"
-                android:textColor="#ccffffff"
-                />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp">
-
-                <SeekBar
-                    android:id="@+id/seek_Tea_small"
-                    android:layout_width="220dp"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="35" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tea_s_amount"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:textSize="20dp"
-                    android:gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#3A404C"
-                    android:background="@xml/amount_ch_edit"
-                    android:backgroundTint="#ffffff"/>
+                    <SeekBar
+                        android:id="@+id/seek_coffee_big"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:max="35" />
+
+                    <RelativeLayout
+                        android:layout_width="220dp"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/seek_coffee_big">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="30"
+                            android:textColor="#ffffff"
+                            android:textSize="11dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:text="350"
+                            android:textColor="#ffffff"
+                            android:textSize="11dp" />
+
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/coffee_b_amount"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/seek_coffee_big"
+                        android:background="@xml/amount_ch_edit"
+                        android:backgroundTint="#ffffff"
+                        android:gravity="center_horizontal"
+                        android:textColor="#3A404C"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/coffee_b_amount"
+                        android:text="ml"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:text="ml" />
+                    android:text="에스프레소"
+                    android:textColor="#ccffffff"
+                    android:textSize="18dp" />
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <SeekBar
+                        android:id="@+id/seek_coffee_small"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:max="35" />
+
+                    <RelativeLayout
+                        android:layout_width="220dp"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/seek_coffee_small">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="30"
+                            android:textColor="#ffffff"
+                            android:textSize="11dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:text="350"
+                            android:textColor="#ffffff"
+                            android:textSize="11dp" />
+
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/coffee_s_amount"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/seek_coffee_small"
+                        android:background="@xml/amount_ch_edit"
+                        android:backgroundTint="#ffffff"
+                        android:gravity="center_horizontal"
+                        android:textColor="#3A404C"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/coffee_s_amount"
+                        android:text="ml"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:text="Tea"
+                    android:textColor="#ffffff"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="대"
+                    android:textColor="#ccffffff"
+                    android:textSize="18dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <SeekBar
+                        android:id="@+id/seek_Tea_big"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:max="35" />
+
+                    <RelativeLayout
+                        android:layout_width="220dp"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/seek_Tea_big">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="30"
+                            android:textColor="#ffffff"
+                            android:textSize="11dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:text="350"
+                            android:textColor="#ffffff"
+                            android:textSize="11dp" />
+
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tea_b_amount"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/seek_Tea_big"
+                        android:background="@xml/amount_ch_edit"
+                        android:backgroundTint="#ffffff"
+                        android:gravity="center_horizontal"
+                        android:textColor="#3A404C"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tea_b_amount"
+                        android:text="ml"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="소"
+                    android:textColor="#ccffffff"
+                    android:textSize="18dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <SeekBar
+                        android:id="@+id/seek_Tea_small"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:max="35" />
+
+                    <RelativeLayout
+                        android:layout_width="220dp"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/seek_Tea_small">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="30"
+                            android:textColor="#ffffff"
+                            android:textSize="11dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:text="350"
+                            android:textColor="#ffffff"
+                            android:textSize="11dp" />
+
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tea_s_amount"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/seek_Tea_small"
+                        android:background="@xml/amount_ch_edit"
+                        android:backgroundTint="#ffffff"
+                        android:gravity="center_horizontal"
+                        android:textColor="#3A404C"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tea_s_amount"
+                        android:text="ml"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/sub_amount"
+                    android:layout_width="250dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@xml/login_id"
+                    android:backgroundTint="#F3CA7E"
+                    android:text="적용하기"
+                    android:textColor="#011E41"
+                    android:textSize="20dp" />
             </LinearLayout>
-
-            <Button
-                android:layout_marginBottom="10dp"
-                android:id="@+id/sub_amount"
-                android:layout_width="250dp"
-                android:layout_height="45dp"
-                android:text="적용하기"
-                android:textSize="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@xml/login_id"
-                android:backgroundTint="#F3CA7E"
-                android:textColor="#011E41"/>
-        </LinearLayout>
 
         </ScrollView>
 
