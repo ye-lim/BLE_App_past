@@ -89,7 +89,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
     BluetoothLeService bluetoothLeService;
     private Timer mTimer[]=new Timer[6];
     private ImageButton amount_change,back,amount_start,product_amount,state_start,amount_stop,low_start;
-    private EditText coffee_b_amount,coffee_s_amount,tea_b_amount,tea_s_amount;
+    private TextView coffee_b_amount,coffee_s_amount,tea_b_amount,tea_s_amount;
     private LinearLayout background,sub_background;
     private TextView draw_state, draw_temper, draw_version, draw_coffee_b,draw_coffee_s, draw_tea_b, draw_tea_s;
     public static TextView draw_connect;
@@ -378,10 +378,10 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                 back=(ImageButton)linear.findViewById(R.id.back);
                 background=(LinearLayout)linear.findViewById(R.id.background);
                 sub_background=(LinearLayout)linear.findViewById(R.id.sub_background);
-                coffee_b_amount=(EditText)linear.findViewById(R.id.coffee_b_amount);
-                coffee_s_amount=(EditText)linear.findViewById(R.id.coffee_s_amount);
-                tea_b_amount=(EditText)linear.findViewById(R.id.tea_b_amount);
-                tea_s_amount=(EditText)linear.findViewById(R.id.tea_s_amount);
+                coffee_b_amount=(TextView)linear.findViewById(R.id.coffee_b_amount);
+                coffee_s_amount=(TextView)linear.findViewById(R.id.coffee_s_amount);
+                tea_b_amount=(TextView)linear.findViewById(R.id.tea_b_amount);
+                tea_s_amount=(TextView)linear.findViewById(R.id.tea_s_amount);
                 sub_amount=(Button)linear.findViewById(R.id.sub_amount);
 
                 //윈도우에 추가시킴

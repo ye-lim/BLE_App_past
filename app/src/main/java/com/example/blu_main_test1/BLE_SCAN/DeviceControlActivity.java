@@ -52,6 +52,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,7 +88,7 @@ public class DeviceControlActivity extends Activity {
 
 
     private ImageButton back;
-    private EditText coffee_b_amount,coffee_s_amount,tea_b_amount,tea_s_amount;
+    private TextView coffee_b_amount,coffee_s_amount,tea_b_amount,tea_s_amount;
     private LinearLayout background;
     private FrameLayout sub_background;
     public Button sub_amount;
@@ -95,7 +96,7 @@ public class DeviceControlActivity extends Activity {
     private TextView stateView;
     private TextView temperView;
     private TextView mConnectionState;
-    private Timer mTimer[]=new Timer[6];
+    private Timer mTimer;
 
     private Boolean inflateView = false;
     private String text;
@@ -112,6 +113,8 @@ public class DeviceControlActivity extends Activity {
     private final String LIST_UUID = "UUID";
     private LinearLayout linear;
     private ProgressBar pgb;
+    private int coffee_big_number,coffee_small_number,tea_big_number,tea_small_number;
+    private SeekBar sb_c_b,sb_c_s,sb_t_b,sb_t_s;
 
     // Code to manage Service lifecycle.
     //서비스가 연결됐을 때, 안됐을 때 관리
@@ -150,7 +153,7 @@ public class DeviceControlActivity extends Activity {
                 updateConnectionState(R.string.connected);//연결됨을 ui에서 표시
                 invalidateOptionsMenu(); //onCreateOptionsMenu 호출
                 if(mConnected){
-                    mTimer[0].schedule(new State(), 1000, 10000);
+                    mTimer.schedule(new State(), 1000, 10000);
                     Handler delayHandler = new Handler();
                     delayHandler.postDelayed(new Runnable() {
                         @Override
@@ -252,18 +255,23 @@ public class DeviceControlActivity extends Activity {
                                 temperView.setText(text.substring(8,10));
                             } else if(text.substring(1,6).equals("05RCL")){
                                 coffee_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10)); //ml은 안뜸, 페이지 나갔다 다시 들어오면 유지 x
+                                sb_c_b.setProgress((Integer.parseInt(text.substring(6,8))));
+
 
                             }
                             else if(text.substring(1,6).equals("05RCS")){
                                 coffee_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
+                                sb_c_s.setProgress((Integer.parseInt(text.substring(6,8))));
 
                             }
                             else if(text.substring(1,6).equals("05RTL")){
                                 tea_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
+                                sb_t_b.setProgress((Integer.parseInt(text.substring(6,8))));
 
                             }
                             else if(text.substring(1,6).equals("05RTS")){
                                 tea_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
+                                sb_t_s.setProgress((Integer.parseInt(text.substring(6,8))));
                                 pgb.setVisibility(View.GONE);
                             } else if(text.substring(1,6).equals("0FRVE")){
                                 versionView.setText(text.substring(6,18));
@@ -347,9 +355,7 @@ public class DeviceControlActivity extends Activity {
         findViewById(R.id.amount_stop).setOnClickListener(onClickListener);
 
 
-        for(int i=0;i<6;i++){
-            mTimer[i] = new Timer();
-        }
+        mTimer = new Timer();
 
 
         if (mBluetoothLeService != null) {
@@ -466,13 +472,124 @@ public class DeviceControlActivity extends Activity {
                     back=(ImageButton)linear.findViewById(R.id.back);
                     background=(LinearLayout)linear.findViewById(R.id.background);
                     sub_background=(FrameLayout)linear.findViewById(R.id.sub_background);
-                    coffee_b_amount=(EditText)linear.findViewById(R.id.coffee_b_amount);
-                    coffee_s_amount=(EditText)linear.findViewById(R.id.coffee_s_amount);
-                    tea_b_amount=(EditText)linear.findViewById(R.id.tea_b_amount);
-                    tea_s_amount=(EditText)linear.findViewById(R.id.tea_s_amount);
+                    coffee_b_amount=(TextView) linear.findViewById(R.id.coffee_b_amount);
+                    coffee_s_amount=(TextView)linear.findViewById(R.id.coffee_s_amount);
+                    tea_b_amount=(TextView)linear.findViewById(R.id.tea_b_amount);
+                    tea_s_amount=(TextView)linear.findViewById(R.id.tea_s_amount);
                     sub_amount=(Button)linear.findViewById(R.id.sub_amount);
                     pgb = (ProgressBar)linear.findViewById(R.id.progressBar3);
                     pgb.setVisibility(View.VISIBLE);
+
+                    sb_c_b = (SeekBar)linear.findViewById(R.id.seek_coffee_big);
+                    sb_c_s = (SeekBar)linear.findViewById(R.id.seek_coffee_small);
+                    sb_t_b = (SeekBar)linear.findViewById(R.id.seek_Tea_big);
+                    sb_t_s = (SeekBar)linear.findViewById(R.id.seek_Tea_small);
+
+                    sb_c_b.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { //롱고 시크바
+
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+                            coffee_big_number = seekBar.getProgress();
+                        }
+
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+                            coffee_big_number = seekBar.getProgress();
+                        }
+
+                        public void onProgressChanged(SeekBar seekBar, int progress,
+                                                      boolean fromUser) {
+                            if(progress >= 10){
+                                coffee_b_amount.setText(""+(progress*10));
+                            }else{
+                                coffee_b_amount.setText("0"+(progress*10));
+                                if(progress <= 3){
+                                    progress = 3;
+                                    coffee_b_amount.setText("0"+(progress*10));
+
+                                }
+                            }
+
+                        }
+                    });
+
+                    sb_c_s.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { //에스프레소 시크바
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+                            coffee_small_number = seekBar.getProgress();
+                        }
+
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+                            coffee_small_number = seekBar.getProgress();
+                        }
+
+
+                        public void onProgressChanged(SeekBar seekBar, int progress,
+                                                      boolean fromUser) {
+                            if(progress >= 10){
+                                coffee_s_amount.setText(""+(progress*10));
+                            }else{
+                                coffee_s_amount.setText("0"+(progress*10));
+                                if(progress <= 3){
+                                    progress = 3;
+                                    coffee_s_amount.setText("0"+(progress*10));
+
+                                }
+                            }
+
+                        }
+                    });
+
+                    sb_t_b.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { //티대 시크바
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+                            tea_big_number = seekBar.getProgress();
+                        }
+
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+                            tea_big_number = seekBar.getProgress();
+                        }
+
+
+                        public void onProgressChanged(SeekBar seekBar, int progress,
+                                                      boolean fromUser) {
+                            if(progress >= 10){
+                                tea_b_amount.setText(""+(progress*10));
+                            }else{
+                                tea_b_amount.setText("0"+(progress*10));
+                                if(progress <= 3){
+                                    progress = 3;
+                                    tea_b_amount.setText("0"+(progress*10));
+
+                                }
+                            }
+
+                        }
+                    });
+
+                    sb_t_s.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { //티소 시크바
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+                            tea_small_number = seekBar.getProgress();
+                        }
+
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+                            tea_small_number = seekBar.getProgress();
+                        }
+
+
+                        public void onProgressChanged(SeekBar seekBar, int progress,
+                                                      boolean fromUser) {
+                            if(progress >= 10){
+                                tea_s_amount.setText(""+(progress*10));
+                            }else{
+                                tea_s_amount.setText("0"+(progress*10));
+                                if(progress <= 3){
+                                    progress = 3;
+                                    tea_s_amount.setText("0"+(progress*10));
+
+                                }
+                            }
+
+                        }
+                    });
+
+
 
 
 
@@ -672,7 +789,7 @@ public class DeviceControlActivity extends Activity {
     protected void onDestroy() { //서비스를 해제
         super.onDestroy();
 
-        mTimer[0].cancel();
+        mTimer.cancel();
 
         unbindService(mServiceConnection); //unbindService()를 호출하면 연결이 끊기고 서비스에 연결된 컴포넌트가 하나도 남지 않게 되면서 안드로이드 시스템이 서비스를 소멸.
         mBluetoothLeService = null;
