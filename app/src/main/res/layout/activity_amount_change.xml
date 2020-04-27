@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:orientation="vertical">
+
             <ImageButton
                 android:id="@+id/back"
                 android:layout_width="60dp"
@@ -50,83 +51,90 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginLeft="10dp"
                 />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="70dp"
-                android:layout_marginTop="20dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="룽고"
-                    android:textSize="18dp"
-                    android:textColor="#ccffffff"
-                    />
-                <EditText
-                    android:id="@+id/coffee_b_amount"
-                    android:layout_width="140dp"
-                    android:layout_height="30dp"
-                    android:textSize="20dp"
-                    android:inputType="number"
-                    android:digits="0123456789"
-                    android:imeOptions="actionNext"
-                    android:gravity="center_horizontal"
-                    android:layout_marginLeft="70dp"
-                    android:textColor="#3A404C"
-                    android:background="@xml/amount_ch_edit"
-                    android:maxLength="3"
-                    android:backgroundTint="#ffffff"
-                    android:hint="0~999"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:text="ml"
-                    android:layout_marginLeft="10dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="에스프레소"
-                    android:textSize="18dp"
-                    android:layout_marginLeft="50dp"
-                    android:textColor="#ccffffff"
-                    />
 
-                <EditText
-                    android:id="@+id/coffee_s_amount"
-                    android:layout_width="140dp"
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="룽고"
+                android:textSize="18dp"
+                android:textColor="#ccffffff"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+
+                <SeekBar
+                    android:id="@+id/seek_coffee_big"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:max="35" />
+
+                <TextView
+                    android:id="@+id/coffee_b_amount"
+                    android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="42dp"
-                    android:background="@xml/amount_ch_edit"
-                    android:backgroundTint="#ffffff"
-                    android:gravity="center_horizontal"
-                    android:inputType="number"
-                    android:digits="0123456789"
-                    android:imeOptions="actionNext"
-                    android:maxLength="3"
-                    android:textColor="#3A404C"
                     android:textSize="20dp"
-                    android:hint="0~999"/>
+                    android:gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#3A404C"
+                    android:background="@xml/amount_ch_edit"
+                    android:backgroundTint="#ffffff" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:text="ml"
-                    android:layout_marginLeft="10dp"/>
+                    android:text="ml" />
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="에스프레소"
+                android:textColor="#ccffffff"
+                android:textSize="18dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <SeekBar
+                    android:id="@+id/seek_coffee_small"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:max="35" />
+
+                <TextView
+                    android:id="@+id/coffee_s_amount"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:textSize="20dp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#3A404C"
+                    android:background="@xml/amount_ch_edit"
+                    android:backgroundTint="#ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:text="ml" />
+            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -137,82 +145,88 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginLeft="25dp"
                 />
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="79dp"
-                android:gravity="center_vertical"
-                android:layout_marginTop="20dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="대"
-                    android:textSize="18dp"
-                    android:textColor="#ccffffff"
-                    />
-                <EditText
-                    android:id="@+id/tea_b_amount"
-                    android:layout_width="140dp"
-                    android:layout_height="30dp"
-                    android:textSize="20dp"
-                    android:gravity="center_horizontal"
-                    android:layout_marginLeft="77dp"
-                    android:textColor="#3A404C"
-                    android:maxLength="3"
-                    android:inputType="number"
-                    android:digits="0123456789"
-                    android:imeOptions="actionNext"
-                    android:background="@xml/amount_ch_edit"
-                    android:backgroundTint="#ffffff"
-                    android:hint="0~999"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:text="ml"
-                    android:layout_marginLeft="10dp"/>
-            </LinearLayout>
+                android:text="대"
+                android:textSize="18dp"
+                android:textColor="#ccffffff"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
+
+                <SeekBar
+                    android:id="@+id/seek_Tea_big"
+                    android:layout_width="220dp"
                     android:layout_height="wrap_content"
-                    android:text="소"
-                    android:textSize="18dp"
-                    android:layout_marginLeft="50dp"
-                    android:textColor="#ccffffff"
-                    />
-                <EditText
-                    android:id="@+id/tea_s_amount"
-                    android:layout_width="140dp"
+                    android:max="35" />
+
+                <TextView
+                    android:id="@+id/tea_b_amount"
+                    android:layout_width="50dp"
                     android:layout_height="30dp"
                     android:textSize="20dp"
                     android:gravity="center_horizontal"
-                    android:layout_marginLeft="76dp"
+                    android:layout_marginLeft="10dp"
                     android:textColor="#3A404C"
-                    android:maxLength="3"
-                    android:inputType="number"
-                    android:digits="0123456789"
-                    android:imeOptions="actionNext"
                     android:background="@xml/amount_ch_edit"
-                    android:backgroundTint="#ffffff"
-                    android:hint="0~999"/>
+                    android:backgroundTint="#ffffff"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:text="ml"
-                    android:layout_marginLeft="10dp"/>
+                    android:text="ml" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="소"
+                android:textSize="18dp"
+                android:textColor="#ccffffff"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp">
+
+                <SeekBar
+                    android:id="@+id/seek_Tea_small"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:max="35" />
+
+                <TextView
+                    android:id="@+id/tea_s_amount"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:textSize="20dp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#3A404C"
+                    android:background="@xml/amount_ch_edit"
+                    android:backgroundTint="#ffffff"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:text="ml" />
+
             </LinearLayout>
 
             <Button

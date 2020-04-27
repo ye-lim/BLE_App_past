@@ -89,13 +89,5 @@
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
-    <ImageView
-        android:id="@+id/machine_image"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginBottom="280dp"
-        android:src="@drawable/machine_circle"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:adjustViewBounds="true" />
+
 </RelativeLayout>
