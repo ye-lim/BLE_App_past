@@ -35,6 +35,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -150,7 +151,7 @@ public class DeviceScanActivity extends ListActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) { // 블루투스 사용 허용 다이얼로그 결과
         // User chose not to enable Bluetooth.
         if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
-            finish();           //인자 reqiestCpde : startActivityForResult를 호출할 때 넘겨준 요청 상수가 담긴다. 이 값을 통해서 어떤 액티비티에서 온 값인지 판별.
+            finish();           //인자 requestCpde : startActivityForResult를 호출할 때 넘겨준 요청 상수가 담긴다. 이 값을 통해서 어떤 액티비티에서 온 값인지 판별.
             return;             // resultCode : 창에서 어떤 버튼을 눌렀는지에 대한 결과값이 담김. data: 새로운 창에서 인텐트를 보냈다면 그 인텐트가 이곳에 담김.
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -219,12 +220,12 @@ public class DeviceScanActivity extends ListActivity {
     //스캐닝을 통해 찾은 디바이스를 담을 어댑터.
     private class LeDeviceListAdapter extends BaseAdapter {
         private ArrayList<BluetoothDevice> mLeDevices;
-        private LayoutInflater mInflator;
+        private LayoutInflater mInflater;
 
         public LeDeviceListAdapter() {
             super();
             mLeDevices = new ArrayList<BluetoothDevice>();
-            mInflator = DeviceScanActivity.this.getLayoutInflater();
+            mInflater = DeviceScanActivity.this.getLayoutInflater();
         }
 
         public void addDevice(BluetoothDevice device) {
@@ -256,29 +257,29 @@ public class DeviceScanActivity extends ListActivity {
             return i;
         }
 
+
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             ViewHolder viewHolder;
             // General ListView optimization code.
-            if (view == null) {
-                view = mInflator.inflate(R.layout.listitem_device, null);
-                viewHolder = new ViewHolder();
-                viewHolder.deviceAddress = (TextView) view.findViewById(R.id.device_address);
-                viewHolder.deviceName = (TextView) view.findViewById(R.id.device_name);
-                view.setTag(viewHolder);
-            } else {
-                viewHolder = (ViewHolder) view.getTag();
-            }
+                if (view == null) {
+                    view = (LinearLayout) mInflater.inflate(R.layout.listitem_device, null); //기존 : listitem_device.xml
+                    viewHolder = new ViewHolder();
+                    viewHolder.deviceAddress = (TextView) view.findViewById(R.id.device_address);
+                    viewHolder.deviceName = (TextView) view.findViewById(R.id.device_name);
+                    view.setTag(viewHolder);
+                } else {
+                    viewHolder = (ViewHolder) view.getTag();
+                }
 
-            BluetoothDevice device = mLeDevices.get(i);
-            final String deviceName = device.getName();
-            if (deviceName != null && deviceName.length() > 0)
-                viewHolder.deviceName.setText(deviceName);
-            else
-                viewHolder.deviceName.setText(R.string.unknown_device);
-            viewHolder.deviceAddress.setText(device.getAddress());
 
-            return view;
+                BluetoothDevice device = mLeDevices.get(i);
+                final String deviceName = device.getName();
+                if (deviceName != null && deviceName.length() > 0) {
+                    viewHolder.deviceName.setText(deviceName);
+                    viewHolder.deviceAddress.setText(device.getAddress().substring(12, 17));
+                }
+                return view;
         }
     }
 
