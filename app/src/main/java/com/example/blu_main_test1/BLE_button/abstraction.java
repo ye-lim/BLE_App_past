@@ -32,8 +32,6 @@ import android.widget.Toast;
 
 import com.example.blu_main_test1.BLE_SCAN.BluetoothLeService;
 import com.example.blu_main_test1.BLE_SCAN.DeviceControlActivity;
-import com.example.blu_main_test1.BLE_connect.UartService;
-import com.example.blu_main_test1.BLE_connect.connect;
 import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
 import com.example.blu_main_test1.R;
@@ -69,7 +67,6 @@ public class abstraction extends AppCompatActivity {
         dealStatusBar(); // 상태 표시줄 높이 조정
 
         final IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(UartService.ACTION_DATA_AVAILABLE);
 
         Intent bindIntent = new Intent(getApplicationContext(), BluetoothLeService.class);
         bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
