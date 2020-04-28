@@ -47,8 +47,6 @@ import android.widget.Toast;
 
 import com.example.blu_main_test1.BLE_SCAN.BluetoothLeService;
 import com.example.blu_main_test1.BLE_SCAN.DeviceControlActivity;
-import com.example.blu_main_test1.BLE_connect.UartService;
-import com.example.blu_main_test1.BLE_connect.connect;
 import com.example.blu_main_test1.Main_page.Main_page2.Main_page_2;
 import com.example.blu_main_test1.Main_page.MainActivity;
 
@@ -181,14 +179,6 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
 
 
         //ble 연결이 완료 되면 머신의 세부상태 모두 호출
-        if(connect.IsConnect) {
-            mTimer[0].schedule(new Tea_large(), 1000, 15000);
-            mTimer[1].schedule(new State(), 1500, 15000);
-            mTimer[2].schedule(new Tea_small(), 2000, 15000);
-            mTimer[3].schedule(new Coffee_large(), 2500, 15000);
-            mTimer[4].schedule(new Coffee_small(), 3000, 15000);
-            mTimer[5].schedule(new version(), 3500, 15000);
-        }
         //데이터 받는걸 확인
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
@@ -537,44 +527,6 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
                 });
 
                 break;
-            case R.id.state_start:
-                if(connect.IsConnect) {
-                    String start = "01WB8";
-                    byte[] value = {(byte) 0x02, (byte) 0x03};
-                    byte[] temp = start.getBytes();
-                    byte[] temp_data = new byte[temp.length + 2];
-                    System.arraycopy(value, 0, temp_data, 0, 1);
-                    System.arraycopy(temp, 0, temp_data, 1, temp.length);
-                    System.arraycopy(value, 1, temp_data, temp.length + 1, 1);
-                    bluetoothLeService.writeRXCharacteristic(temp_data);
-                }
-                break;
-            case R.id.low_start:
-                if(connect.IsConnect) {
-                    String low_start = "01PB1";
-                    byte[] low_value = {(byte) 0x02, (byte) 0x03};
-                    byte[] low_temp = low_start.getBytes();
-                    byte[] low_temp_data = new byte[low_temp.length + 2];
-                    System.arraycopy(low_value, 0, low_temp_data, 0, 1);
-                    System.arraycopy(low_temp, 0, low_temp_data, 1, low_temp.length);
-                    System.arraycopy(low_value, 1, low_temp_data, low_temp.length + 1, 1);
-                    bluetoothLeService.writeRXCharacteristic(low_temp_data);
-                }
-                break;
-
-            case R.id.amount_stop:
-                if(connect.IsConnect) {
-                    String stop_start = "01SB4";
-                    byte[] stop_value = {(byte) 0x02, (byte) 0x03};
-                    byte[] stop_temp = stop_start.getBytes();
-                    byte[] stop_temp_data = new byte[stop_temp.length + 2];
-                    System.arraycopy(stop_value, 0, stop_temp_data, 0, 1);
-                    System.arraycopy(stop_temp, 0, stop_temp_data, 1, stop_temp.length);
-                    System.arraycopy(stop_value, 1, stop_temp_data, stop_temp.length + 1, 1);
-                    bluetoothLeService.writeRXCharacteristic(stop_temp_data);
-                }
-                break;
-
         }
     }
 
@@ -677,145 +629,7 @@ public class Main_view_pager extends AppCompatActivity implements View.OnClickLi
         super.onDestroy();
     }
 
-    class Tea_large extends TimerTask {
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-        @Override
-        public void run() {
-            if(connect.IsConnect) {
-                if (bluetoothLeService != null) {
 
-                    String TL_amount, basic_state;
-                    byte[] value = {(byte) 0x02, (byte) 0x03};
-                    TL_amount = "03QTL54";  //현재
-
-                    byte[] temp = TL_amount.getBytes();
-                    byte[] temp_data = new byte[temp.length + 2];
-
-                    System.arraycopy(value, 0, temp_data, 0, 1);
-                    System.arraycopy(temp, 0, temp_data, 1, temp.length);
-                    System.arraycopy(value, 1, temp_data, temp.length + 1, 1);
-                    bluetoothLeService.writeRXCharacteristic(temp_data);
-
-                }
-            }
-        }
-    }
-    class State extends TimerTask {
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-        @Override
-        public void run() {
-            if(connect.IsConnect) {
-                if (bluetoothLeService != null) {
-
-                    String TL_amount, basic_state;
-                    byte[] value = {(byte) 0x02, (byte) 0x03};
-
-                    basic_state = "03QST5B"; //현재 상태질의
-
-                    byte[] state = basic_state.getBytes();
-                    byte[] state_data = new byte[state.length + 2];
-
-                    System.arraycopy(value, 0, state_data, 0, 1);
-                    System.arraycopy(state, 0, state_data, 1, state.length);
-                    System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    bluetoothLeService.writeRXCharacteristic(state_data);
-                }
-            }
-        }
-    }
-
-    class Tea_small extends TimerTask {
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-        @Override
-        public void run() {
-            if(connect.IsConnect) {
-                if (bluetoothLeService != null) {
-
-                    String TL_amount, basic_state;
-                    byte[] value = {(byte) 0x02, (byte) 0x03};
-
-                    basic_state = "03QTS5B"; //현재 상태질의
-
-                    byte[] state = basic_state.getBytes();
-                    byte[] state_data = new byte[state.length + 2];
-
-                    System.arraycopy(value, 0, state_data, 0, 1);
-                    System.arraycopy(state, 0, state_data, 1, state.length);
-                    System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    bluetoothLeService.writeRXCharacteristic(state_data);
-                }
-            }
-        }
-    }
-    class Coffee_large extends TimerTask {
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-        @Override
-        public void run() {
-            if(connect.IsConnect) {
-                if (bluetoothLeService != null) {
-
-                    String TL_amount, basic_state;
-                    byte[] value = {(byte) 0x02, (byte) 0x03};
-
-                    basic_state = "03QCL43"; //현재 상태질의
-
-                    byte[] state = basic_state.getBytes();
-                    byte[] state_data = new byte[state.length + 2];
-
-                    System.arraycopy(value, 0, state_data, 0, 1);
-                    System.arraycopy(state, 0, state_data, 1, state.length);
-                    System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    bluetoothLeService.writeRXCharacteristic(state_data);
-                }
-            }
-        }
-    }
-    class Coffee_small extends TimerTask {
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-        @Override
-        public void run() {
-            if(connect.IsConnect) {
-                if (bluetoothLeService != null) {
-
-                    String TL_amount, basic_state;
-                    byte[] value = {(byte) 0x02, (byte) 0x03};
-
-                    basic_state = "03QCS4A"; //현재 상태질의
-
-                    byte[] state = basic_state.getBytes();
-                    byte[] state_data = new byte[state.length + 2];
-
-                    System.arraycopy(value, 0, state_data, 0, 1);
-                    System.arraycopy(state, 0, state_data, 1, state.length);
-                    System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    bluetoothLeService.writeRXCharacteristic(state_data);
-                }
-            }
-        }
-    }
-    class version extends TimerTask {
-        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-        @Override
-        public void run() {
-            if(connect.IsConnect) {
-                if (bluetoothLeService != null) {
-
-                    String TL_amount, basic_state;
-                    byte[] value = {(byte) 0x02, (byte) 0x03};
-
-                    basic_state = "03QVE4F"; //현재 상태질의
-
-                    byte[] state = basic_state.getBytes();
-                    byte[] state_data = new byte[state.length + 2];
-
-                    System.arraycopy(value, 0, state_data, 0, 1);
-                    System.arraycopy(state, 0, state_data, 1, state.length);
-                    System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    bluetoothLeService.writeRXCharacteristic(state_data);
-                }
-            }
-        }
-    }
 
     private final BroadcastReceiver UARTStatusChangeReceiver = new BroadcastReceiver() {
 

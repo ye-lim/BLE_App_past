@@ -18,14 +18,10 @@ import android.widget.TextView;
 import com.example.blu_main_test1.BLE_SCAN.BluetoothLeService;
 import com.example.blu_main_test1.BLE_SCAN.DeviceScanActivity;
 import com.example.blu_main_test1.BLE_button.abstraction;
-import com.example.blu_main_test1.BLE_connect.UartService;
-import com.example.blu_main_test1.BLE_connect.connect;
 import com.example.blu_main_test1.R;
 
 
 public class MainActivity extends Fragment {
-
-    UartService m_UartService;
 
    private ImageButton blu_connect, amount_change,back,amount_start,product_amount,state_start,amount_stop,low_start;
 

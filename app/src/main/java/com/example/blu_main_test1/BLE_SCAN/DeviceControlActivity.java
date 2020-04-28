@@ -59,8 +59,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.blu_main_test1.BLE_button.abstraction;
-import com.example.blu_main_test1.BLE_connect.UartService;
-import com.example.blu_main_test1.BLE_connect.connect;
 import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
 import com.example.blu_main_test1.MypageActivity;
