@@ -446,21 +446,21 @@ public class DeviceControlActivity extends Activity {
                         public void run() {
                             Coffee_small();
                         }
-                    },300);
+                    },400);
                     Handler delayHandler2 = new Handler();
                     delayHandler2.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             Tea_large();
                         }
-                    },600);
+                    },800);
                     Handler delayHandler3 = new Handler();
                     delayHandler3.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             Tea_small();
                         }
-                    },900);
+                    },1200);
 
 
 
@@ -646,108 +646,113 @@ public class DeviceControlActivity extends Activity {
                                 alert_confirm2.setMessage("추출량을 변경 하시겠습니까?  ").setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        if (coffee_b_amount.getText().toString().length() != 0) {
-                                            if (Integer.parseInt(coffee_b_amount.getText().toString()) > 990) {
-                                                Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                                                coffee_b_amount.requestFocus();
-                                                return;
-                                            }
-                                            String c_value = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2);
-                                            String cb_amount = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2) + stringToHex(c_value);
-                                            byte[] cb_value = {(byte) 0x02, (byte) 0x03};
-                                            byte[] cb_temp = cb_amount.getBytes();
-                                            byte[] cb_temp_data = new byte[cb_temp.length + 2];
-                                            System.arraycopy(cb_value, 0, cb_temp_data, 0, 1);
-                                            System.arraycopy(cb_temp, 0, cb_temp_data, 1, cb_temp.length);
-                                            System.arraycopy(cb_value, 1, cb_temp_data, cb_temp.length + 1, 1);
-                                            mBluetoothLeService.writeRXCharacteristic(cb_temp_data);
-                                            pgb2.setVisibility(View.VISIBLE);
-
-                                        }
-
-
-                                        if (coffee_s_amount.getText().toString().length() != 0) {
-                                            if (Integer.parseInt(coffee_s_amount.getText().toString()) > 990) {
-                                                Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                                                coffee_s_amount.requestFocus();
-                                                return;
-                                            }
-                                            new Handler().postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-
-                                                    String c_value2 = "05TCS" + coffee_s_amount.getText().toString().substring(0, 2);
-                                                    String cs_amount = "05TCS" + coffee_s_amount.getText().toString().substring(0, 2) + stringToHex(c_value2);
-                                                    byte[] cs_value = {(byte) 0x02, (byte) 0x03};
-                                                    byte[] cs_temp = cs_amount.getBytes();
-                                                    byte[] cs_temp_data = new byte[cs_temp.length + 2];
-                                                    System.arraycopy(cs_value, 0, cs_temp_data, 0, 1);
-                                                    System.arraycopy(cs_temp, 0, cs_temp_data, 1, cs_temp.length);
-                                                    System.arraycopy(cs_value, 1, cs_temp_data, cs_temp.length + 1, 1);
-
-                                                    mBluetoothLeService.writeRXCharacteristic(cs_temp_data);
+                                        if (mConnected) {
+                                            if (coffee_b_amount.getText().toString().length() != 0) {
+                                                if (Integer.parseInt(coffee_b_amount.getText().toString()) > 990) {
+                                                    Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
+                                                    coffee_b_amount.requestFocus();
+                                                    return;
                                                 }
+                                                String c_value = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2);
+                                                String cb_amount = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2) + stringToHex(c_value);
+                                                byte[] cb_value = {(byte) 0x02, (byte) 0x03};
+                                                byte[] cb_temp = cb_amount.getBytes();
+                                                byte[] cb_temp_data = new byte[cb_temp.length + 2];
+                                                System.arraycopy(cb_value, 0, cb_temp_data, 0, 1);
+                                                System.arraycopy(cb_temp, 0, cb_temp_data, 1, cb_temp.length);
+                                                System.arraycopy(cb_value, 1, cb_temp_data, cb_temp.length + 1, 1);
+                                                mBluetoothLeService.writeRXCharacteristic(cb_temp_data);
+                                                pgb2.setVisibility(View.VISIBLE);
 
-                                            }, 1000);  // 1 초 후에 실행
-                                        }
-
-
-                                        if (tea_b_amount.getText().toString().length() != 0) {
-                                            if (Integer.parseInt(tea_b_amount.getText().toString()) > 990) {
-                                                Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                                                tea_b_amount.requestFocus();
-                                                return;
                                             }
-                                            new Handler().postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
 
-                                                    String t_value = "05TTL" + tea_b_amount.getText().toString().substring(0, 2);
-                                                    String tb_amount = "05TTL" + tea_b_amount.getText().toString().substring(0, 2) + stringToHex(t_value);
-                                                    byte[] tb_value = {(byte) 0x02, (byte) 0x03};
-                                                    byte[] tb_temp = tb_amount.getBytes();
-                                                    byte[] tb_temp_data = new byte[tb_temp.length + 2];
-                                                    System.arraycopy(tb_value, 0, tb_temp_data, 0, 1);
-                                                    System.arraycopy(tb_temp, 0, tb_temp_data, 1, tb_temp.length);
-                                                    System.arraycopy(tb_value, 1, tb_temp_data, tb_temp.length + 1, 1);
-                                                    mBluetoothLeService.writeRXCharacteristic(tb_temp_data);
+
+                                            if (coffee_s_amount.getText().toString().length() != 0) {
+                                                if (Integer.parseInt(coffee_s_amount.getText().toString()) > 990) {
+                                                    Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
+                                                    coffee_s_amount.requestFocus();
+                                                    return;
                                                 }
+                                                new Handler().postDelayed(new Runnable() {
+                                                    @Override
+                                                    public void run() {
 
-                                            }, 1500);  // 1 초 후에 실행
-                                        }
+                                                        String c_value2 = "05TCS" + coffee_s_amount.getText().toString().substring(0, 2);
+                                                        String cs_amount = "05TCS" + coffee_s_amount.getText().toString().substring(0, 2) + stringToHex(c_value2);
+                                                        byte[] cs_value = {(byte) 0x02, (byte) 0x03};
+                                                        byte[] cs_temp = cs_amount.getBytes();
+                                                        byte[] cs_temp_data = new byte[cs_temp.length + 2];
+                                                        System.arraycopy(cs_value, 0, cs_temp_data, 0, 1);
+                                                        System.arraycopy(cs_temp, 0, cs_temp_data, 1, cs_temp.length);
+                                                        System.arraycopy(cs_value, 1, cs_temp_data, cs_temp.length + 1, 1);
 
+                                                        mBluetoothLeService.writeRXCharacteristic(cs_temp_data);
+                                                    }
 
-                                        if (tea_s_amount.getText().toString().length() != 0) {
-                                            if (Integer.parseInt(tea_s_amount.getText().toString()) > 990) {
-                                                Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                                                tea_s_amount.requestFocus();
-                                                return;
+                                                }, 1000);  // 1 초 후에 실행
                                             }
-                                            new Handler().postDelayed(new Runnable() {
-                                                @Override
 
-                                                public void run() {
 
-                                                    String t_value2 = "05TTS" + tea_s_amount.getText().toString().substring(0, 2);
-                                                    String ts_amount = "05TTS" + tea_s_amount.getText().toString().substring(0, 2) + stringToHex(t_value2);
-                                                    byte[] ts_value = {(byte) 0x02, (byte) 0x03};
-                                                    byte[] ts_temp = ts_amount.getBytes();
-                                                    byte[] ts_temp_data = new byte[ts_temp.length + 2];
-                                                    System.arraycopy(ts_value, 0, ts_temp_data, 0, 1);
-                                                    System.arraycopy(ts_temp, 0, ts_temp_data, 1, ts_temp.length);
-                                                    System.arraycopy(ts_value, 1, ts_temp_data, ts_temp.length + 1, 1);
-                                                    mBluetoothLeService.writeRXCharacteristic(ts_temp_data);
-                                                    pgb2.setVisibility(View.GONE);
-                                                    startToast("추출량이 변경 되었습니다. ");
+                                            if (tea_b_amount.getText().toString().length() != 0) {
+                                                if (Integer.parseInt(tea_b_amount.getText().toString()) > 990) {
+                                                    Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
+                                                    tea_b_amount.requestFocus();
+                                                    return;
                                                 }
+                                                new Handler().postDelayed(new Runnable() {
+                                                    @Override
+                                                    public void run() {
 
-                                            }, 2000);  // 1 초 후에 실행
+                                                        String t_value = "05TTL" + tea_b_amount.getText().toString().substring(0, 2);
+                                                        String tb_amount = "05TTL" + tea_b_amount.getText().toString().substring(0, 2) + stringToHex(t_value);
+                                                        byte[] tb_value = {(byte) 0x02, (byte) 0x03};
+                                                        byte[] tb_temp = tb_amount.getBytes();
+                                                        byte[] tb_temp_data = new byte[tb_temp.length + 2];
+                                                        System.arraycopy(tb_value, 0, tb_temp_data, 0, 1);
+                                                        System.arraycopy(tb_temp, 0, tb_temp_data, 1, tb_temp.length);
+                                                        System.arraycopy(tb_value, 1, tb_temp_data, tb_temp.length + 1, 1);
+                                                        mBluetoothLeService.writeRXCharacteristic(tb_temp_data);
+                                                    }
+
+                                                }, 1500);  // 1 초 후에 실행
+                                            }
+
+
+                                            if (tea_s_amount.getText().toString().length() != 0) {
+                                                if (Integer.parseInt(tea_s_amount.getText().toString()) > 990) {
+                                                    Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
+                                                    tea_s_amount.requestFocus();
+                                                    return;
+                                                }
+                                                new Handler().postDelayed(new Runnable() {
+                                                    @Override
+
+                                                    public void run() {
+
+                                                        String t_value2 = "05TTS" + tea_s_amount.getText().toString().substring(0, 2);
+                                                        String ts_amount = "05TTS" + tea_s_amount.getText().toString().substring(0, 2) + stringToHex(t_value2);
+                                                        byte[] ts_value = {(byte) 0x02, (byte) 0x03};
+                                                        byte[] ts_temp = ts_amount.getBytes();
+                                                        byte[] ts_temp_data = new byte[ts_temp.length + 2];
+                                                        System.arraycopy(ts_value, 0, ts_temp_data, 0, 1);
+                                                        System.arraycopy(ts_temp, 0, ts_temp_data, 1, ts_temp.length);
+                                                        System.arraycopy(ts_value, 1, ts_temp_data, ts_temp.length + 1, 1);
+                                                        mBluetoothLeService.writeRXCharacteristic(ts_temp_data);
+                                                        pgb2.setVisibility(View.GONE);
+                                                        startToast("추출량이 변경 되었습니다. ");
+                                                    }
+
+                                                }, 2000);  // 1 초 후에 실행
+                                            }
+
+                                            ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
+                                            parentViewGroup.removeView(linear);
+                                        }else{
+                                            startToast("블루투스를 재연결해 주세요");
                                         }
-
-                                        ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
-                                        parentViewGroup.removeView(linear);
                                     }
-                                });
+                            });
+
                                 alert_confirm2.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
