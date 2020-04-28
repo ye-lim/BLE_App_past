@@ -70,19 +70,22 @@
                     android:orientation="horizontal">
 
                     <SeekBar
+                        android:layout_centerVertical="true"
                         android:id="@+id/seek_coffee_big"
                         android:layout_width="220dp"
                         android:layout_height="wrap_content"
                         android:max="35" />
 
                     <View
-                        android:layout_marginTop="5dp"
+                        android:layout_centerVertical="true"
                         android:layout_width="3dp"
                         android:layout_height="19dp"
                         android:background="#ffffff"
                         android:layout_marginLeft="70dp"/>
 
+
                     <View
+                        android:layout_centerVertical="true"
                         android:layout_marginTop="5dp"
                         android:layout_width="3dp"
                         android:layout_height="19dp"
@@ -90,6 +93,7 @@
                         android:layout_marginLeft="125dp"/>
 
                     <View
+                        android:layout_centerVertical="true"
                         android:layout_marginTop="5dp"
                         android:layout_width="3dp"
                         android:layout_height="19dp"
@@ -99,6 +103,7 @@
 
 
                     <RelativeLayout
+                        android:layout_marginTop="15dp"
                         android:layout_width="220dp"
                         android:layout_height="match_parent"
                         android:layout_below="@+id/seek_coffee_big">
@@ -137,9 +142,6 @@
                             android:textColor="#ffffff"
                             android:textSize="11dp" />
 
-
-
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -151,7 +153,10 @@
 
                     </RelativeLayout>
 
+
+
                     <TextView
+                        android:layout_marginTop="15dp"
                         android:id="@+id/coffee_b_amount"
                         android:layout_width="50dp"
                         android:layout_height="30dp"
@@ -164,6 +169,7 @@
                         android:textSize="20dp" />
 
                     <TextView
+                        android:layout_marginTop="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/coffee_b_amount"
@@ -175,6 +181,7 @@
                 </RelativeLayout>
 
                 <TextView
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="에스프레소"
