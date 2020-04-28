@@ -76,7 +76,7 @@ public class theMainPage extends AppCompatActivity {
 
                     break;
                 case R.id.to_shop:
-                    Intent intent2 = new Intent(getApplication(), Main_view_pager.class);
+                    Intent intent2 = new Intent(getApplication(), login.class); //임의로 해둠
                     startActivity(intent2);
                     break;
             }
