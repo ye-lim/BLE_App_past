@@ -262,8 +262,8 @@ public class product_amount extends FragmentActivity {
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if(task.isSuccessful()) {
                                     for(QueryDocumentSnapshot document : task.getResult()) {
-                                        String press_value = "05TTL" + document.getData().get("amount").toString().substring(0,2);
-                                        String press_amount = "05TTL" + document.getData().get("amount").toString().substring(0,2) + stringToHex(press_value);
+                                        String press_value = "04ET" + document.getData().get("amount").toString().substring(0,2);
+                                        String press_amount = "04ET" + document.getData().get("amount").toString().substring(0,2) + stringToHex(press_value);
 
                                         byte[] press_btn_value = {(byte) 0x02, (byte) 0x03 };
                                         byte[] press_btn__temp = press_amount.getBytes();
