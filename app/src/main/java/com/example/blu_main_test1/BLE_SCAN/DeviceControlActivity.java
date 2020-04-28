@@ -65,6 +65,7 @@ import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
 import com.example.blu_main_test1.MypageActivity;
 import com.example.blu_main_test1.R;
+import com.example.blu_main_test1.main_before.Machine_main;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
@@ -254,6 +255,7 @@ public class DeviceControlActivity extends Activity {
 
                                 }
                                 temperView.setText(text.substring(8,10));
+                                pgb2.setVisibility(View.GONE);
                             } else if(text.substring(1,6).equals("05RCL")){
                                 coffee_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10)); //ml은 안뜸, 페이지 나갔다 다시 들어오면 유지 x
                                 sb_c_b.setProgress((Integer.parseInt(text.substring(6,8))));
@@ -343,7 +345,7 @@ public class DeviceControlActivity extends Activity {
         temperView = (TextView) findViewById(R.id.temper);
         versionView = (TextView)findViewById(R.id.draw_version);
         pgb2 = (ProgressBar)findViewById(R.id.progressBar4);
-        pgb2.setVisibility(View.GONE);
+        pgb2.setVisibility(View.VISIBLE);
 
         getActionBar().setTitle(mDeviceName);
         getActionBar().setDisplayHomeAsUpEnabled(true); //액션바의 앱 아이콘 옆에 화살표를 만들어 전의 액티비티로 돌아갈 수 있게 함.
@@ -837,11 +839,28 @@ public class DeviceControlActivity extends Activity {
                 mBluetoothLeService.connect(mDeviceAddress);
                 return true;
             case R.id.menu_disconnect:
-                mBluetoothLeService.disconnect();
-                SharedPreferences autodevice = getSharedPreferences("autodevice",Activity.MODE_PRIVATE);
-                SharedPreferences.Editor autoconnect = autodevice.edit();
-                autoconnect.clear();
-                autoconnect.commit();
+                AlertDialog.Builder alert_confirm = new AlertDialog.Builder(DeviceControlActivity.this);
+                alert_confirm.setMessage("머신과의 연결을 끊으시겠습니까?").setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mBluetoothLeService.disconnect();
+                        SharedPreferences autodevice = getSharedPreferences("autodevice",Activity.MODE_PRIVATE);
+                        SharedPreferences.Editor autoconnect = autodevice.edit();
+                        autoconnect.clear();
+                        autoconnect.commit();
+                        Intent intent = new Intent(getApplicationContext(), Machine_main.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                alert_confirm.show();
+
                 return true;
             case android.R.id.home:
                 onBackPressed();
