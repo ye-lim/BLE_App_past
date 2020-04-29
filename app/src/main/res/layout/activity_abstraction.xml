@@ -1,129 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-<LinearLayout
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/logo_color">
-    <View
-        android:id="@+id/position_view"
-        android:layout_width="1px"
-        android:layout_height="1px" />
+    android:layout_height="wrap_content">
+
+
+
+
+    <FrameLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:background="@color/logo_color">
 
+
+        <View
+            android:id="@+id/position_view"
+            android:layout_width="1px"
+            android:layout_height="1px" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#F5CA82"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-            <ImageButton
-                android:id="@+id/back"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="left"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/back"/>
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Coffee"
-                android:textColor="@color/white"
-                android:textSize="33dp"
-                android:layout_marginTop="-5dp"/>
-            <Button
-                android:id="@+id/rong_coffee"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@xml/login_login"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#F5CA82"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/back"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/back"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coffee"
+                    android:textColor="@color/white"
+                    android:textSize="33dp"
+                    android:layout_marginTop="-5dp"/>
+                <Button
+                    android:id="@+id/rong_coffee"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@xml/login_login"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="180dp"
+                    android:text="룽고"
+                    android:textStyle="bold"
+                    android:textSize="27dp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="#011E41"
+                    android:layout_marginRight="-8dp"
+                    />
+                <Button
+                    android:id="@+id/presso"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:background="@xml/login_login"
+                    android:layout_gravity="right"
+                    android:textStyle="bold"
+                    android:layout_marginTop="150dp"
+                    android:text="에스프레소"
+                    android:textColor="@color/white"
+                    android:textSize="25dp"
+                    android:backgroundTint="#011E41"
+                    android:layout_marginRight="-8dp"
+                    />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="right"
-                android:layout_marginTop="180dp"
-                android:text="룽고"
-                android:textStyle="bold"
-                android:textSize="27dp"
-                android:textColor="@color/white"
-                android:backgroundTint="#011E41"
-                android:layout_marginRight="-8dp"
-                />
-            <Button
-                android:id="@+id/presso"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:background="@xml/login_login"
-                android:layout_gravity="right"
-                android:textStyle="bold"
-                android:layout_marginTop="150dp"
-                android:text="에스프레소"
-                android:textColor="@color/white"
-                android:textSize="25dp"
-                android:backgroundTint="#011E41"
-                android:layout_marginRight="-8dp"
-                />
+                android:background="#011E41"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                >
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tea"
+                    android:textColor="@color/white"
+                    android:textSize="33dp"
+                    android:layout_marginTop="50dp"/>
+                <Button
+                    android:id="@+id/tea_big"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@xml/login_login"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="30dp"
+                    android:text="Tea - 대"
+                    android:textStyle="bold"
+                    android:textSize="27dp"
+                    android:backgroundTint="#F5CA82"
+                    android:layout_marginLeft="-8dp"
+                    />
+                <Button
+                    android:id="@+id/tea_small"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:background="@xml/login_login"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="170dp"
+                    android:text="Tea - 소"
+                    android:textStyle="bold"
+                    android:textSize="25dp"
+                    android:backgroundTint="#F5CA82"
+                    android:layout_marginLeft="-8dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/special_char1"
+            android:textSize="33dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/white"/>
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:background="#011E41"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tea"
-                android:textColor="@color/white"
-                android:textSize="33dp"
-                android:layout_marginTop="50dp"/>
-            <Button
-                android:id="@+id/tea_big"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@xml/login_login"
-                android:layout_gravity="left"
-                android:layout_marginTop="30dp"
-                android:text="Tea - 대"
-                android:textStyle="bold"
-                android:textSize="27dp"
-                android:backgroundTint="#F5CA82"
-                android:layout_marginLeft="-8dp"
-                />
-            <Button
-                android:id="@+id/tea_small"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:background="@xml/login_login"
-                android:layout_gravity="left"
-                android:layout_marginTop="170dp"
-                android:text="Tea - 소"
-                android:textStyle="bold"
-                android:textSize="25dp"
-                android:backgroundTint="#F5CA82"
-                android:layout_marginLeft="-8dp"
-                />
-        </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/special_char1"
-        android:textSize="33dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:textColor="@color/white"/>
-</LinearLayout>
-</FrameLayout>
+    </FrameLayout>
+</ScrollView>
