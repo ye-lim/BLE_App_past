@@ -154,6 +154,7 @@ public class DeviceControlActivity extends Activity {
                 invalidateOptionsMenu(); //onCreateOptionsMenu 호출
                 if(mConnected){
                     mTimer.schedule(new State(), 1000, 10000);
+
                     Handler delayHandler = new Handler();
                     delayHandler.postDelayed(new Runnable() {
                         @Override
@@ -344,6 +345,40 @@ public class DeviceControlActivity extends Activity {
         versionView = (TextView)findViewById(R.id.draw_version);
         pgb2 = (ProgressBar)findViewById(R.id.progressBar4);
         pgb2.setVisibility(View.VISIBLE);
+
+        Handler delayHandler = new Handler();
+
+        delayHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(stateView.getText().toString().length() == 0 && !DeviceControlActivity.this.isFinishing()){
+                    AlertDialog.Builder alert_confirm = new AlertDialog.Builder(DeviceControlActivity.this);
+                    alert_confirm.setMessage("주변에 머신을 찾을 수 없습니다. 재연결 하시겠습니까?").setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            SharedPreferences autodevice = getSharedPreferences("autodevice",Activity.MODE_PRIVATE);
+                            SharedPreferences.Editor autoconnect = autodevice.edit();
+                            autoconnect.clear();
+                            autoconnect.commit();
+                            Intent intent = new Intent(getApplicationContext(), Machine_main.class);
+                            startActivity(intent);
+                            finish();
+
+                        }
+                    });
+                    alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    alert_confirm.show();
+                }
+            }
+        },15000);
+
+
+
 
         getActionBar().setTitle(mDeviceName);
         getActionBar().setDisplayHomeAsUpEnabled(true); //액션바의 앱 아이콘 옆에 화살표를 만들어 전의 액티비티로 돌아갈 수 있게 함.
