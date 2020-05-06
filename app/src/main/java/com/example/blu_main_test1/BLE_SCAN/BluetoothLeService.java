@@ -16,6 +16,7 @@
 
 package com.example.blu_main_test1.BLE_SCAN;
 
+import android.app.Activity;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -27,6 +28,8 @@ import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Binder;
@@ -36,6 +39,10 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
+import android.app.AlertDialog;
+
+import com.example.blu_main_test1.MyAlert;
+import com.example.blu_main_test1.main_before.Machine_main;
 
 import java.util.List;
 import java.util.UUID;
@@ -80,6 +87,8 @@ public class BluetoothLeService extends Service {
 
     public static  boolean  m_is_Disconnect_Intentional = false;
 
+    public static boolean connect_state = false;
+
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
     //콜백 함수를 통해서 ble 장치의 연결 및 처리에 관련된 기능들을 처리 할 수 있음.
@@ -100,12 +109,20 @@ public class BluetoothLeService extends Service {
                 Log.i(TAG, "Attempting to start service discovery:" +
                         mBluetoothGatt.discoverServices());
                 m_is_Disconnect_Intentional = false;
+                connect_state = false;
+
 
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+
                 if(m_is_Disconnect_Intentional == false) {
                     connect(mBluetoothDeviceAddress);
+                } if(connect_state==false){ //연결이 끊켰을 때 최초 1 회만 다이얼로그 창이 뜨도록 설정
+                    Intent intent = new Intent(getApplicationContext(), MyAlert.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 }
                 else {
+
                     intentAction = ACTION_GATT_DISCONNECTED;
                     mConnectionState = STATE_DISCONNECTED;
                     Log.i(TAG, "Disconnected from GATT server.");
