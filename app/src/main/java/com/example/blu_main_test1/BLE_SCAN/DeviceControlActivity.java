@@ -61,6 +61,7 @@ import android.widget.Toast;
 import com.example.blu_main_test1.BLE_button.abstraction;
 import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
+import com.example.blu_main_test1.MyAlert;
 import com.example.blu_main_test1.MypageActivity;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.main_before.Machine_main;
@@ -153,7 +154,7 @@ public class DeviceControlActivity extends Activity {
                 updateConnectionState(R.string.connected);//연결됨을 ui에서 표시
                 invalidateOptionsMenu(); //onCreateOptionsMenu 호출
                 if(mConnected){
-                    mTimer.schedule(new State(), 1000, 10000);
+                    mTimer.schedule(new State(), 2000, 10000);
 
                     Handler delayHandler = new Handler();
                     delayHandler.postDelayed(new Runnable() {
@@ -161,16 +162,19 @@ public class DeviceControlActivity extends Activity {
                         public void run() {
                             Version();
                         }
-                    },1500);
+                    },2500);
 
                 }
 
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) { //연결 실패
                 mConnected = false;
-                updateConnectionState(R.string.disconnected);
-                stateView.setText("");
-                temperView.setText("");
-                invalidateOptionsMenu();
+               // updateConnectionState(R.string.disconnected);
+              //  stateView.setText("");
+              //  temperView.setText("");
+              //  invalidateOptionsMenu();
+                Intent intent2 = new Intent(getApplicationContext(), MyAlert.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent2);
 
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) { //GATT 서비스 발견
                 // Show all the supported services and characteristics on the user interface.
@@ -786,7 +790,7 @@ public class DeviceControlActivity extends Activity {
                                             startToast("블루투스를 재연결해 주세요");
                                         }
                                     }
-                            });
+                                });
 
                                 alert_confirm2.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                                     @Override
@@ -876,6 +880,7 @@ public class DeviceControlActivity extends Activity {
                 alert_confirm.setMessage("머신과의 연결을 끊으시겠습니까?").setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
                         mBluetoothLeService.disconnect();
                         SharedPreferences autodevice = getSharedPreferences("autodevice",Activity.MODE_PRIVATE);
                         SharedPreferences.Editor autoconnect = autodevice.edit();
@@ -883,7 +888,6 @@ public class DeviceControlActivity extends Activity {
                         autoconnect.commit();
                         Intent intent = new Intent(getApplicationContext(), Machine_main.class);
                         startActivity(intent);
-                        finish();
                     }
                 });
                 alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -999,23 +1003,23 @@ public class DeviceControlActivity extends Activity {
 
     public void Tea_large()  {
 
-            if(mConnected) {
-                if (mBluetoothLeService != null) {
+        if(mConnected) {
+            if (mBluetoothLeService != null) {
 
-                    String TL_amount, basic_state;
-                    byte[] value = {(byte) 0x02, (byte) 0x03};
-                    TL_amount = "03QTL54";  //현재
+                String TL_amount, basic_state;
+                byte[] value = {(byte) 0x02, (byte) 0x03};
+                TL_amount = "03QTL54";  //현재
 
-                    byte[] temp = TL_amount.getBytes();
-                    byte[] temp_data = new byte[temp.length + 2];
+                byte[] temp = TL_amount.getBytes();
+                byte[] temp_data = new byte[temp.length + 2];
 
-                    System.arraycopy(value, 0, temp_data, 0, 1);
-                    System.arraycopy(temp, 0, temp_data, 1, temp.length);
-                    System.arraycopy(value, 1, temp_data, temp.length + 1, 1);
-                    mBluetoothLeService.writeRXCharacteristic(temp_data);
+                System.arraycopy(value, 0, temp_data, 0, 1);
+                System.arraycopy(temp, 0, temp_data, 1, temp.length);
+                System.arraycopy(value, 1, temp_data, temp.length + 1, 1);
+                mBluetoothLeService.writeRXCharacteristic(temp_data);
 
-                }
             }
+        }
     }
 
 
@@ -1039,44 +1043,44 @@ public class DeviceControlActivity extends Activity {
     }
     public void Coffee_large() {
 
-            if(mConnected) {
-                if (mBluetoothLeService != null) {
+        if(mConnected) {
+            if (mBluetoothLeService != null) {
 
-                    String TL_amount, basic_state;
-                    byte[] value = {(byte) 0x02, (byte) 0x03};
+                String TL_amount, basic_state;
+                byte[] value = {(byte) 0x02, (byte) 0x03};
 
-                    basic_state = "03QCL43"; //현재 상태질의
+                basic_state = "03QCL43"; //현재 상태질의
 
-                    byte[] state = basic_state.getBytes();
-                    byte[] state_data = new byte[state.length + 2];
+                byte[] state = basic_state.getBytes();
+                byte[] state_data = new byte[state.length + 2];
 
-                    System.arraycopy(value, 0, state_data, 0, 1);
-                    System.arraycopy(state, 0, state_data, 1, state.length);
-                    System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    mBluetoothLeService.writeRXCharacteristic(state_data);
-                }
+                System.arraycopy(value, 0, state_data, 0, 1);
+                System.arraycopy(state, 0, state_data, 1, state.length);
+                System.arraycopy(value, 1, state_data, state.length + 1, 1);
+                mBluetoothLeService.writeRXCharacteristic(state_data);
             }
+        }
     }
 
     public void Coffee_small() {
 
-            if(mConnected) {
-                if (mBluetoothLeService != null) {
+        if(mConnected) {
+            if (mBluetoothLeService != null) {
 
-                    String TL_amount, basic_state;
-                    byte[] value = {(byte) 0x02, (byte) 0x03};
+                String TL_amount, basic_state;
+                byte[] value = {(byte) 0x02, (byte) 0x03};
 
-                    basic_state = "03QCS4A"; //현재 상태질의
+                basic_state = "03QCS4A"; //현재 상태질의
 
-                    byte[] state = basic_state.getBytes();
-                    byte[] state_data = new byte[state.length + 2];
+                byte[] state = basic_state.getBytes();
+                byte[] state_data = new byte[state.length + 2];
 
-                    System.arraycopy(value, 0, state_data, 0, 1);
-                    System.arraycopy(state, 0, state_data, 1, state.length);
-                    System.arraycopy(value, 1, state_data, state.length + 1, 1);
-                    mBluetoothLeService.writeRXCharacteristic(state_data);
-                }
+                System.arraycopy(value, 0, state_data, 0, 1);
+                System.arraycopy(state, 0, state_data, 1, state.length);
+                System.arraycopy(value, 1, state_data, state.length + 1, 1);
+                mBluetoothLeService.writeRXCharacteristic(state_data);
             }
+        }
     }
 
 

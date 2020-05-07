@@ -109,25 +109,16 @@ public class BluetoothLeService extends Service {
                 Log.i(TAG, "Attempting to start service discovery:" +
                         mBluetoothGatt.discoverServices());
                 m_is_Disconnect_Intentional = false;
-                connect_state = false;
+
 
 
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                connect(mBluetoothDeviceAddress);
+                intentAction = ACTION_GATT_DISCONNECTED;
+                mConnectionState = STATE_DISCONNECTED;
+                Log.i(TAG, "Disconnected from GATT server.");
+                broadcastUpdate(intentAction);
 
-                if(m_is_Disconnect_Intentional == false) {
-                    connect(mBluetoothDeviceAddress);
-                } if(connect_state==false){ //연결이 끊켰을 때 최초 1 회만 다이얼로그 창이 뜨도록 설정
-                    Intent intent = new Intent(getApplicationContext(), MyAlert.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
-                else {
-
-                    intentAction = ACTION_GATT_DISCONNECTED;
-                    mConnectionState = STATE_DISCONNECTED;
-                    Log.i(TAG, "Disconnected from GATT server.");
-                    broadcastUpdate(intentAction);
-                }
             }
         }
 
