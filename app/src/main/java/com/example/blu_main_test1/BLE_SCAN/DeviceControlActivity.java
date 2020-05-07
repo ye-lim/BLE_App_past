@@ -61,7 +61,7 @@ import android.widget.Toast;
 import com.example.blu_main_test1.BLE_button.abstraction;
 import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
-import com.example.blu_main_test1.MyAlert;
+
 import com.example.blu_main_test1.MypageActivity;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.main_before.Machine_main;
@@ -168,13 +168,23 @@ public class DeviceControlActivity extends Activity {
 
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) { //연결 실패
                 mConnected = false;
-               // updateConnectionState(R.string.disconnected);
-              //  stateView.setText("");
-              //  temperView.setText("");
-              //  invalidateOptionsMenu();
-                Intent intent2 = new Intent(getApplicationContext(), MyAlert.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent2);
+                AlertDialog.Builder alert_confirm = new AlertDialog.Builder(DeviceControlActivity.this);
+                alert_confirm.setMessage("블루투스 환경이 원활하지 않습니다. \n머신상태를 확인해 주세요").setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                        Intent intent = new Intent(getApplicationContext(), DeviceControlActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
+                });
+                alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                });
+                alert_confirm.show();
 
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) { //GATT 서비스 발견
                 // Show all the supported services and characteristics on the user interface.
