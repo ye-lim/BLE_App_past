@@ -41,7 +41,7 @@ import android.util.Log;
 import android.widget.Toast;
 import android.app.AlertDialog;
 
-import com.example.blu_main_test1.MyAlert;
+
 import com.example.blu_main_test1.main_before.Machine_main;
 
 import java.util.List;
