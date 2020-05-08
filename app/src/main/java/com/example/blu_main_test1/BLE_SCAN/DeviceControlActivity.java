@@ -19,6 +19,10 @@ package com.example.blu_main_test1.BLE_SCAN;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
@@ -29,45 +33,35 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.LocalBroadcastManager;
-//import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.blu_main_test1.BLE_button.abstraction;
-import com.example.blu_main_test1.Main_page.MainActivity;
-import com.example.blu_main_test1.Main_page.Main_view_pager;
-
-import com.example.blu_main_test1.MypageActivity;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.main_before.Machine_main;
-import com.google.firebase.auth.FirebaseAuth;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -202,6 +196,7 @@ public class DeviceControlActivity extends Activity {
                 final byte[] txValue = intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA);
                 runOnUiThread(new Runnable() {
                     public void run() {
+                        boolean waiting = true;
                         try {
                             //string형식으로 리스트 뷰에 표현
                             text = new String(txValue, "UTF-8");
@@ -215,6 +210,7 @@ public class DeviceControlActivity extends Activity {
                                         break;
                                     case "20":
                                         stateView.setText("추출대기");
+                                        createNotification();
                                         break;
                                     case "91":
                                         AlertDialog.Builder alert_confirm = new AlertDialog.Builder(DeviceControlActivity.this);
@@ -426,6 +422,45 @@ public class DeviceControlActivity extends Activity {
 
 
     }  //서비스를 실행시키고 요청을 하게 되면, 요청에 대한 결과를 mServiceConnection함수에서 받아와 활용할 수 있음. 세번째 인자는 바인딩의 옵션을 설정하는 flags를 설정.
+
+    //Service Notification
+    private void createNotification() {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Intent notificationIntent = new Intent(this, DeviceControlActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id");
+
+        builder.setSmallIcon(R.drawable.launcher_icon);
+        builder.setContentTitle("MEDIPRESSO");
+        builder.setContentText("추출 준비가 완료되었습니다.");
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setDefaults(Notification.DEFAULT_SOUND);
+        builder.setContentIntent(pendingIntent);
+        builder.setAutoCancel(true); //사용자가 탭 클릭시 자동 제거
+
+        //알림 표시, OREO API 26 이상에서는 channel 필요
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel("channel_id", "channel_name", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("channel Description");
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.GREEN);
+            notificationChannel.enableVibration(true);
+            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+
+            //Register the channel with the system; you can't change the importance or other notification behaviours after this
+            notificationManager.notify(1, builder.build()); //고유숫자로 notification 동작시킴
+
+            NotificationManager nM = getSystemService(NotificationManager.class);
+            nM.createNotificationChannel(notificationChannel);
+        }
+    }
+    private void removeNotification() { //오류 수정중
+        NotificationManagerCompat.from(this).cancel(1);
+    }
+
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
