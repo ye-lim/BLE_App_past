@@ -105,7 +105,7 @@
                         android:paddingBottom="15dp"
                         android:text="메디프레소 사이트"
                         android:textColor="#646464"/>
-                    <!-- image없어서 임시로 Textview 해둠 -->
+                    <!-- image없어서 임시로 Textview 해둠  -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="200dp"/>
