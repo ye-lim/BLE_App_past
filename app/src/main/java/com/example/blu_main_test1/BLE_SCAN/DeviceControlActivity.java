@@ -97,7 +97,7 @@ public class DeviceControlActivity extends Activity {
     private TextView stateView;
     private TextView temperView;
     private TextView mConnectionState;
-    private Timer mTimer;
+    private Timer tmr;
 
     private Boolean inflateView = false;
     private String text;
@@ -154,8 +154,7 @@ public class DeviceControlActivity extends Activity {
                 updateConnectionState(R.string.connected);//연결됨을 ui에서 표시
                 invalidateOptionsMenu(); //onCreateOptionsMenu 호출
                 if(mConnected){
-                    mTimer.schedule(new State(), 2000, 10000);
-
+                    tempTask();
                     Handler delayHandler = new Handler();
                     delayHandler.postDelayed(new Runnable() {
                         @Override
@@ -416,7 +415,7 @@ public class DeviceControlActivity extends Activity {
         findViewById(R.id.amount_stop).setOnClickListener(onClickListener);
 
 
-        mTimer = new Timer();
+
 
 
         if (mBluetoothLeService != null) {
@@ -492,6 +491,7 @@ public class DeviceControlActivity extends Activity {
 
                 case R.id.amount_change:
                     inflateView = true;
+                    tmr.cancel();
                     LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     linear = (LinearLayout) inflater.inflate(R.layout.activity_amount_change, null);
 
@@ -668,6 +668,7 @@ public class DeviceControlActivity extends Activity {
                     sub_background.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            tempTask();
                             ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
                             parentViewGroup.removeView(linear);
 
@@ -679,6 +680,7 @@ public class DeviceControlActivity extends Activity {
                     background.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            tempTask();
                             ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
                             parentViewGroup.removeView(linear);
 
@@ -689,6 +691,7 @@ public class DeviceControlActivity extends Activity {
                     back.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            tempTask();
                             ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
                             parentViewGroup.removeView(linear);
 
@@ -802,7 +805,7 @@ public class DeviceControlActivity extends Activity {
 
                                                 }, 2000);  // 1 초 후에 실행
                                             }
-
+                                            tempTask();
                                             ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
                                             parentViewGroup.removeView(linear);
                                         }else{
@@ -867,8 +870,8 @@ public class DeviceControlActivity extends Activity {
     @Override
     protected void onDestroy() { //서비스를 해제
         super.onDestroy();
+        tmr.cancel();
 
-        mTimer.cancel();
 
         unbindService(mServiceConnection); //unbindService()를 호출하면 연결이 끊기고 서비스에 연결된 컴포넌트가 하나도 남지 않게 되면서 안드로이드 시스템이 서비스를 소멸.
         mBluetoothLeService = null;
@@ -1123,6 +1126,7 @@ public class DeviceControlActivity extends Activity {
     @Override
     public void onBackPressed(){
         if(inflateView){ //추출량 변화 view 에서 뒤로가기 버튼을 눌렀을 경우 액티비티가 종료되지 않고 뷰만 종료되도록
+            tempTask();
             ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
             parentViewGroup.removeView(linear);
             inflateView = false;
@@ -1130,6 +1134,13 @@ public class DeviceControlActivity extends Activity {
             super.onBackPressed();
         }
     }
+
+    public void tempTask(){
+        tmr = new Timer();
+        tmr.schedule(new State(), 2000, 10000);
+    }
+
+
 
 
 }
