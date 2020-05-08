@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillViewport="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/logo_color">
+        <View
+            android:id="@+id/position_view"
+            android:layout_width="1px"
+            android:layout_height="1px" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="70dp"
+                android:layout_marginLeft="70dp"
+                android:layout_gravity="center"
+                android:src="@drawable/logo_white_wide"/>
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="#011E41"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="7dp"
+                    android:background="@xml/round_edge"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="30dp"
+                        android:paddingBottom="15dp"
+                        android:text="My Machine"
+                        android:textStyle="bold"
+                        android:textColor="#011E41"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:paddingBottom="15dp"
+                        android:text="내 메디프레소 머신"
+                        android:textColor="#646464"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="200dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:src="@drawable/machine_circle"/>
+                    <Button
+                        android:id="@+id/to_BLE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="40dp"
+                        android:backgroundTint="#FECD07"
+                        android:text="동작하러 가기"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@xml/round_edge"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:textSize="30dp"
+                        android:paddingBottom="15dp"
+                        android:text="Site"
+                        android:textStyle="bold"
+                        android:textColor="#011E41"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:paddingBottom="15dp"
+                        android:text="메디프레소 사이트"
+                        android:textColor="#646464"/>
+                    <!-- image없어서 임시로 Textview 해둠  -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="200dp"/>
+                    <Button
+                        android:id="@+id/to_shop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="40dp"
+                        android:backgroundTint="#FECD07"
+                        android:text="구경하러가기"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+</ScrollView>

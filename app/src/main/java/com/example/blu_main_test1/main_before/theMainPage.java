@@ -35,7 +35,7 @@ public class theMainPage extends AppCompatActivity {
                     WindowManager.LayoutParams.   FLAG_TRANSLUCENT_STATUS);
         }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_the_main_page);
+        setContentView(R.layout.activity_mainpage);
 
         to_BLE = (Button) findViewById(R.id.to_BLE);
         to_shop = (Button) findViewById(R.id.to_shop);
