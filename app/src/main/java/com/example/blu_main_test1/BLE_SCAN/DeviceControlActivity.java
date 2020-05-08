@@ -110,6 +110,7 @@ public class DeviceControlActivity extends Activity {
     private ProgressBar pgb,pgb2;
     private int coffee_big_number,coffee_small_number,tea_big_number,tea_small_number;
     private SeekBar sb_c_b,sb_c_s,sb_t_b,sb_t_s;
+    private boolean waiting = false;
 
     // Code to manage Service lifecycle.
     //서비스가 연결됐을 때, 안됐을 때 관리
@@ -196,7 +197,6 @@ public class DeviceControlActivity extends Activity {
                 final byte[] txValue = intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA);
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        boolean waiting = true;
                         try {
                             //string형식으로 리스트 뷰에 표현
                             text = new String(txValue, "UTF-8");
@@ -204,13 +204,17 @@ public class DeviceControlActivity extends Activity {
                                 switch (text.substring(6, 8)) {
                                     case "00":
                                         stateView.setText("절전모드");
+                                        waiting = true;
                                         break;
                                     case "10":
                                         stateView.setText("가열중");
                                         break;
                                     case "20":
                                         stateView.setText("추출대기");
-                                        createNotification();
+                                        if(waiting){
+                                            createNotification();
+                                            waiting = false;
+                                        }
                                         break;
                                     case "91":
                                         AlertDialog.Builder alert_confirm = new AlertDialog.Builder(DeviceControlActivity.this);
