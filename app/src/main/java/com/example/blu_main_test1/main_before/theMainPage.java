@@ -3,6 +3,7 @@ package com.example.blu_main_test1.main_before;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -76,8 +77,8 @@ public class theMainPage extends AppCompatActivity {
 
                     break;
                 case R.id.to_shop:
-                    Intent intent2 = new Intent(getApplication(), login.class); //임의로 해둠
-                    startActivity(intent2);
+                    Intent shop = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.m.medipresso.com/product/list_thumb.html?cate_no=46"));
+                    startActivity(shop);
                     break;
             }
         }
