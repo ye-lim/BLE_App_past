@@ -35,10 +35,13 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
@@ -61,6 +64,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.blu_main_test1.BLE_button.abstraction;
+import com.example.blu_main_test1.Main_page.Main_page2.product_amount;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.main_before.Machine_main;
 
@@ -213,9 +217,20 @@ public class DeviceControlActivity extends Activity {
                                     case "20":
                                         stateView.setText("추출대기");
                                         if(waiting){
-                                            createNotification();
-                                            waiting = false;
+                                            if(isActivityTop()){
+                                                AudioManager audio = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+                                                if(audio.getRingerMode()==AudioManager.RINGER_MODE_VIBRATE){ //휴대폰이 진동일 경우만
+                                                    Vibrator vibe = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+                                                    vibe.vibrate(500);
+                                                }
+                                                startToast("추출 준비가 완료되었습니다.");
+                                            }else{
+                                                createNotification();
+                                            }
+
                                         }
+                                        waiting = false;
+
                                         break;
                                     case "91":
                                         AlertDialog.Builder alert_confirm = new AlertDialog.Builder(DeviceControlActivity.this);
@@ -433,8 +448,14 @@ public class DeviceControlActivity extends Activity {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         Intent notificationIntent = new Intent(this, DeviceControlActivity.class);
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notificationIntent.setAction(Intent.ACTION_MAIN);
+        notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        //notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+       // notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id");
 
@@ -464,9 +485,6 @@ public class DeviceControlActivity extends Activity {
             NotificationManager nM = getSystemService(NotificationManager.class);
             nM.createNotificationChannel(notificationChannel);
         }
-    }
-    private void removeNotification() { //오류 수정중
-        NotificationManagerCompat.from(this).cancel(1);
     }
 
 
