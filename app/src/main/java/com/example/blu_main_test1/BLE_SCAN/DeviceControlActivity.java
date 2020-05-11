@@ -18,6 +18,7 @@ package com.example.blu_main_test1.BLE_SCAN;
 
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -432,7 +433,7 @@ public class DeviceControlActivity extends Activity {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         Intent notificationIntent = new Intent(this, DeviceControlActivity.class);
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+       // notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id");
@@ -442,8 +443,11 @@ public class DeviceControlActivity extends Activity {
         builder.setContentText("추출 준비가 완료되었습니다.");
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setDefaults(Notification.DEFAULT_SOUND);
-        builder.setContentIntent(pendingIntent);
         builder.setAutoCancel(true); //사용자가 탭 클릭시 자동 제거
+        builder.setContentIntent(pendingIntent);
+
+
+
 
         //알림 표시, OREO API 26 이상에서는 channel 필요
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -464,6 +468,19 @@ public class DeviceControlActivity extends Activity {
     private void removeNotification() { //오류 수정중
         NotificationManagerCompat.from(this).cancel(1);
     }
+
+
+    private boolean isActivityTop(){ //현재 실행중인 액티비티를 확인하는 메소드
+        ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> info;
+        info = activityManager.getRunningTasks(1);
+        if(info.get(0).topActivity.getClassName().equals(DeviceControlActivity.this.getClass().getName())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -899,18 +916,16 @@ public class DeviceControlActivity extends Activity {
 
     }
 
-    @Override
-    protected void onPause() { //리시버를 해제
-        super.onPause();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mGattUpdateReceiver);
-
-    }
 
     @Override
     protected void onDestroy() { //서비스를 해제
         super.onDestroy();
-        tmr.cancel();
 
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mGattUpdateReceiver);
+
+        if(tmr!=null){
+            tmr.cancel();
+        }
 
         unbindService(mServiceConnection); //unbindService()를 호출하면 연결이 끊기고 서비스에 연결된 컴포넌트가 하나도 남지 않게 되면서 안드로이드 시스템이 서비스를 소멸.
         mBluetoothLeService = null;
