@@ -11,12 +11,10 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <LinearLayout
                 android:id="@+id/top_view"
                 android:layout_width="match_parent"
@@ -164,31 +162,45 @@
                                 android:text="연결끊기"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
-
-
                         </LinearLayout>
-
                     </LinearLayout>
-
-
                 </LinearLayout>
-
-
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/main_text"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_below="@+id/top_view"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@xml/round_edge"
-                android:gravity="center"
-                android:text="머신을 취향에 맞게 자유롭게 조절해 보세요."
-                android:textSize="15dp" />
-
-
+                android:layout_height="0dp"
+                android:layout_weight="0.5">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.5"
+                            android:background="#091f3f"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.5"
+                            android:background="#ebebeb"/>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/main_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@xml/round_edge"
+                        android:gravity="center"
+                        android:text="머신을 취향에 맞게 자유롭게 조절해 보세요."
+                        android:textSize="15dp" />
+                </RelativeLayout>
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/bottom_view"
                 android:layout_width="match_parent"
