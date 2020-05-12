@@ -12,12 +12,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.blu_main_test1.BLE_SCAN.DeviceScanActivity;
-import com.example.blu_main_test1.Main_page.Main_view_pager;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.BackPressHandler;
 
 public class Machine_main extends AppCompatActivity {
     Button BLE_Btn;
+    ImageButton btn_back;
     private BackPressHandler backPressHandler;
 
     @Override
@@ -33,7 +33,9 @@ public class Machine_main extends AppCompatActivity {
         setContentView(R.layout.activity_machine);
 
         BLE_Btn = (Button) findViewById(R.id.BLE_Btn);
+        btn_back = (ImageButton) findViewById(R.id.btn_back);
         BLE_Btn.setOnClickListener(btnListener);
+        btn_back.setOnClickListener(btnListener);
 
         backPressHandler = new BackPressHandler(this);
 
@@ -57,8 +59,14 @@ public class Machine_main extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                     break;
+                case R.id.btn_back:
+                    Intent intent2 = new Intent(getApplicationContext(), theMainPage.class);
+                    startActivity(intent2);
+                    finish();
+                    break;
             }
         }
     };
+
 
 }
