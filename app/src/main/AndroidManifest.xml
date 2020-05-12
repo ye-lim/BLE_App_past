@@ -45,7 +45,6 @@
         </activity>
         <activity
             android:name=".BLE_SCAN.DeviceControlActivity"
-            android:theme="@android:style/Theme.Holo.Light"
             android:parentActivityName=".main_before.theMainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
