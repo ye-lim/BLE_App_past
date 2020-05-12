@@ -1,88 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#17233d"
     android:orientation="vertical"
-    android:gravity="center">
-
+    android:gravity="center"
+    android:weightSum="10">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/textview"
-        android:orientation="vertical"
-        android:gravity="bottom" >
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="35dp"
-            android:paddingBottom="15dp"
-            android:paddingLeft="50dp"
-            android:layout_marginTop="-10dp"
-            android:text="Bluetooth로  "
-            android:textColor="#FFFFFF"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="35dp"
-            android:paddingBottom="25dp"
-            android:paddingLeft="50dp"
-            android:layout_marginTop="-10dp"
-            android:text="머신과 연동하기"
-            android:textColor="#FFFFFF"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:paddingBottom="5dp"
-            android:paddingLeft="50dp"
-            android:layout_marginTop="-10dp"
-            android:text="블루투스 연동 시 간편하게 머신을 이용하실 수 있습니다."
-            android:textColor="#FFFFFF"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:paddingLeft="50dp"
-            android:text="이용에 앞서 블루투스와 위치 권한을 허용해주세요."
-            android:paddingBottom="65dp"
-            android:textColor="#FFFFFF"/>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
+        android:layout_height="0dp"
+        android:layout_weight="0.7"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:layout_marginTop="50dp"
-        android:background="@xml/machine_bluetooth_background"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.12"
+            android:paddingLeft="5dp"
+            android:background="@drawable/back" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.76"
+            android:text="내 머신"
+            android:textSize="25dp"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.12"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.8"
         android:orientation="vertical">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="75dp"
-            android:layout_marginLeft="45dp"
-            android:layout_marginBottom="14dp"
-            android:text="연동하시겠습니까?"
-            android:textColor="#000000"
-            android:textSize="25dp"/>
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:gravity="center">
-            <Button
-                android:id="@+id/BLE_Btn"
-                android:layout_width="300dp"
-                android:layout_height="70dp"
-                android:text="연동하기"
-                android:textColor="#FFFFFF"
-                android:background="@xml/login_id"/>
-        </LinearLayout>
+            android:layout_marginBottom="5dp"
+            android:text="Bluetooth로  "
+            android:textSize="40dp"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:text="머신과 연동하기"
+            android:textSize="40dp"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
-</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.35"
+        android:textSize="15dp"
+        android:text="블루투스 연동 시 간편하게 머신을 이용하실 수 있습니다."
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.35"
+        android:textSize="15dp"
+        android:text="이용에 앞서 블루투스와 위치 권한을 허용해주세요."
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:text="GIF 들어갈 곳 "
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_gravity="center"
+        android:src="@drawable/machine_circle"/>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"/>
+        <Button
+            android:id="@+id/BLE_Btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:text="연동하기"
+            android:textSize="25dp"
+            android:background="#FECD07"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"/>
+</LinearLayout>
