@@ -1,372 +1,472 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2013 The Android Open Source Project
 
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/control_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#091f3f">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#17233d"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/top_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_marginTop="20dp"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="내  머신"
-                    android:textColor="@color/white"
-                    android:textSize="30dp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/draw_version"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold"/>
-
-                <ImageView
-                    android:layout_width="183dp"
-                    android:layout_height="83dp"
-                    android:src="@drawable/machine"
-                    android:layout_marginTop="20dp"/>
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:background="#091f3f"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_marginTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.12"
+                        android:background="@drawable/back"
+                        android:paddingLeft="5dp" />
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="블루투스"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.76"
+                        android:text="내 머신"
+                        android:textAlignment="center"
+                        android:textColor="#FFFFFF"
+                        android:textSize="25dp" />
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="머신 상태"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="머신 온도"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.12" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@xml/round_edge"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="10.0">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2.5"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="블루투스"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/connection_state"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center"
+                                android:text="연결안됨"
+                                android:textColor="@color/yellow"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
 
 
-                    <TextView
-                        android:id="@+id/connection_state"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="연 결 안 됨"
-                        android:textColor="@color/white"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="40dp"
+                                android:gravity="center"
+                                android:text="머신상태"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/state"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:id="@+id/state"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textColor="@color/yellow"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/temper"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:weightSum="10.0">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="6"
+                                android:src="@drawable/machine01" />
+
+                            <TextView
+                                android:id="@+id/draw_version"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="1"
+                                android:color="#646464"
+                                android:gravity="center"
+                                android:textSize="10dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2.5"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <Button
+                                android:id="@+id/disconnect"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@xml/disconnect"
+                                android:text="연결끊기"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/main_text"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/top_view"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@xml/round_edge"
+                android:gravity="center"
+                android:text="머신을 취향에 맞게 자유롭게 조절해 보세요."
+                android:textSize="15dp" />
 
 
             <LinearLayout
-                android:layout_marginTop="30dp"
+                android:id="@+id/bottom_view"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:background="@xml/machine_bluetooth_background"
-                android:orientation="vertical">
+                android:layout_height="0dp"
+                android:layout_weight="6"
+                android:background="#ebebeb">
 
-                <LinearLayout
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/state_start"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="20dp"
-                        app:cardBackgroundColor="#EAEAEA"
-                        app:cardElevation="10dp">
-
-                        <ImageView
-                            android:layout_width="110dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@drawable/icon2"/>
-
-                    </android.support.v7.widget.CardView>
-
-
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/low_start"
-                        android:layout_marginLeft="15dp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="20dp"
-                        app:cardBackgroundColor="#EAEAEA"
-                        app:cardElevation="10dp">
-
-                        <ImageView
-                            android:layout_width="110dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@drawable/icon3"/>
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/amount_start"
-                        android:layout_marginLeft="15dp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="20dp"
-                        app:cardBackgroundColor="#EAEAEA"
-                        app:cardElevation="10dp">
-
-                        <ImageView
-                            android:layout_width="110dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@drawable/icon1"/>
-
-                    </android.support.v7.widget.CardView>
-
-
-                </LinearLayout>
-
-                <LinearLayout
+                <RelativeLayout
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="10.0">
+                        <!-- 1번째줄 -->
+                        <LinearLayout
+                            android:layout_margin="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3.4"
+                            android:gravity="center_horizontal"
+                            android:weightSum="10.0">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4.5"
+                                android:background="@xml/round_edge"
+                                android:orientation="vertical"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/state_start"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"/>
+
+                                <TextView
+                                    android:gravity="center"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="예열"
+                                    android:textColor="#676767"
+                                    android:textStyle="bold"
+                                    android:textSize="15dp"/>
 
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="예열"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="절전 모드"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="추출"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/product_amount"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="20dp"
-                        app:cardBackgroundColor="#EAEAEA"
-                        app:cardElevation="10dp">
-
-                        <ImageView
-                            android:layout_width="110dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@drawable/icon5"/>
-
-                    </android.support.v7.widget.CardView>
 
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/amount_change"
-                        android:layout_marginLeft="15dp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="20dp"
-                        app:cardBackgroundColor="#EAEAEA"
-                        app:cardElevation="10dp">
+                            </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="110dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/icon5"/>
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"/>
 
-                    </android.support.v7.widget.CardView>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4.5"
+                                android:background="@xml/round_edge"
+                                android:orientation="vertical"
+                                android:gravity="center_vertical">
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/amount_stop"
-                        android:layout_marginLeft="15dp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="20dp"
-                        app:cardBackgroundColor="#EAEAEA"
-                        app:cardElevation="10dp">
+                                <ImageView
+                                    android:id="@+id/low_start"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"/>
 
-                        <ImageView
-                            android:layout_width="110dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@drawable/icon7"/>
+                                <TextView
+                                    android:gravity="center"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="절전모드"
+                                    android:textColor="#676767"
+                                    android:textStyle="bold"
+                                    android:textSize="15dp"/>
 
-                    </android.support.v7.widget.CardView>
+                            </LinearLayout>
+
+                        </LinearLayout>
+                        <!-- 2번째줄 -->
+                        <LinearLayout
+                            android:layout_margin="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3.4"
+                            android:gravity="center_horizontal"
+                            android:weightSum="10.0">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4.5"
+                                android:background="@xml/round_edge"
+                                android:orientation="horizontal"
+                                android:weightSum="10.0">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="8.5"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/amount_start"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="60dp"/>
+
+                                    <TextView
+                                        android:layout_marginLeft="15dp"
+                                        android:gravity="center"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="일반추출"
+                                        android:textColor="#676767"
+                                        android:textStyle="bold"
+                                        android:textSize="15dp"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.5"
+                                    android:orientation="vertical"
+                                    android:gravity="center_vertical">
+
+                                    <ImageView
+                                        android:layout_marginRight="5dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/arrow"/>
+
+                                </LinearLayout>
 
 
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_marginTop="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4.5"
+                                android:background="@xml/round_edge"
+                                android:orientation="horizontal"
+                                android:weightSum="10.0">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="8.5"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/product_amount"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="60dp"/>
+
+                                    <TextView
+                                        android:layout_marginLeft="15dp"
+                                        android:gravity="center"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="제품별추출"
+                                        android:textColor="#676767"
+                                        android:textStyle="bold"
+                                        android:textSize="15dp"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.5"
+                                    android:orientation="vertical"
+                                    android:gravity="center_vertical">
+
+                                    <ImageView
+                                        android:layout_marginRight="5dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/arrow"/>
+
+                                </LinearLayout>
 
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="제품별 추출"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="추출량 변화"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        </LinearLayout>
+                        <!-- 3번째줄 -->
+                        <LinearLayout
+                            android:layout_margin="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3.4"
+                            android:gravity="center_horizontal"
+                            android:weightSum="10.0">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="추출 중지"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4.5"
+                                android:background="@xml/round_edge"
+                                android:orientation="horizontal"
+                                android:weightSum="10.0">
 
-                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="8.5"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/amount_change"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="60dp"/>
+
+                                    <TextView
+                                        android:layout_marginLeft="15dp"
+                                        android:gravity="center"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="추출량변화"
+                                        android:textColor="#676767"
+                                        android:textStyle="bold"
+                                        android:textSize="15dp"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.5"
+                                    android:orientation="vertical"
+                                    android:gravity="center_vertical">
+
+                                    <ImageView
+                                        android:layout_marginRight="5dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/arrow"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4.5"
+                                android:background="@xml/round_edge">
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -380,5 +480,7 @@
 
     </FrameLayout>
 
-</ScrollView>
+
+
+</RelativeLayout>
 

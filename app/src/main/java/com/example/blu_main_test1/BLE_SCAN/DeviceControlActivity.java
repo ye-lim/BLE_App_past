@@ -94,7 +94,7 @@ public class DeviceControlActivity extends Activity {
     public Button sub_amount;
     private TextView versionView;
     private TextView stateView;
-    private TextView temperView;
+   // private TextView temperView;
     private TextView mConnectionState;
     private Timer tmr;
 
@@ -188,7 +188,7 @@ public class DeviceControlActivity extends Activity {
 
                                 }
                             });
-                            alert_confirm.show();
+                              //  alert_confirm.show();
                         }
                     }
                 },5000);
@@ -291,7 +291,7 @@ public class DeviceControlActivity extends Activity {
                                         break;
 
                                 }
-                                temperView.setText(text.substring(8,10));
+                                //temperView.setText(text.substring(8,10));
                                 pgb2.setVisibility(View.GONE);
                             } else if(text.substring(1,6).equals("05RCL")){
                                 coffee_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10)); //ml은 안뜸, 페이지 나갔다 다시 들어오면 유지 x
@@ -379,7 +379,7 @@ public class DeviceControlActivity extends Activity {
         //((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
         stateView = (TextView) findViewById(R.id.state);
-        temperView = (TextView) findViewById(R.id.temper);
+       // temperView = (TextView) findViewById(R.id.temper);
         versionView = (TextView)findViewById(R.id.draw_version);
         pgb2 = (ProgressBar)findViewById(R.id.progressBar4);
         pgb2.setVisibility(View.VISIBLE);
@@ -418,8 +418,8 @@ public class DeviceControlActivity extends Activity {
 
 
 
-        getActionBar().setTitle(mDeviceName);
-        getActionBar().setDisplayHomeAsUpEnabled(true); //액션바의 앱 아이콘 옆에 화살표를 만들어 전의 액티비티로 돌아갈 수 있게 함.
+      //  getActionBar().setTitle(mDeviceName);
+      //  getActionBar().setDisplayHomeAsUpEnabled(true); //액션바의 앱 아이콘 옆에 화살표를 만들어 전의 액티비티로 돌아갈 수 있게 함.
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class); //서비스와 특성들을 불러오고 특성을 눌렀을때 mDataField에 데이터를 불러 오도록하기 위해
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE); //인텐트를 만들고 그것으로 서비스를 실행시킴.
 
@@ -428,7 +428,7 @@ public class DeviceControlActivity extends Activity {
         findViewById(R.id.low_start).setOnClickListener(onClickListener);
         findViewById(R.id.amount_start).setOnClickListener(onClickListener);
         findViewById(R.id.amount_change).setOnClickListener(onClickListener);
-        findViewById(R.id.amount_stop).setOnClickListener(onClickListener);
+        findViewById(R.id.disconnect).setOnClickListener(onClickListener);
 
 
 
@@ -515,6 +515,30 @@ public class DeviceControlActivity extends Activity {
                     startActivity(intent_product);
                     break;
 
+                case R.id.disconnect:
+                    AlertDialog.Builder alert_confirm = new AlertDialog.Builder(DeviceControlActivity.this);
+                    alert_confirm.setMessage("머신과의 연결을 끊으시겠습니까?").setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                            mBluetoothLeService.disconnect();
+                            SharedPreferences autodevice = getSharedPreferences("autodevice",Activity.MODE_PRIVATE);
+                            SharedPreferences.Editor autoconnect = autodevice.edit();
+                            autoconnect.clear();
+                            autoconnect.commit();
+                            Intent intent = new Intent(getApplicationContext(), Machine_main.class);
+                            startActivity(intent);
+                        }
+                    });
+                    alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    alert_confirm.show();
+
+                    break;
                 case R.id.state_start:
                     if(mConnected) {
                         String start = "01WB8";
@@ -542,22 +566,6 @@ public class DeviceControlActivity extends Activity {
                         System.arraycopy(low_value, 1, low_temp_data, low_temp.length + 1, 1);
                         mBluetoothLeService.writeRXCharacteristic(low_temp_data);
                         startToast("절전 모드");
-                    }else{
-                        startToast("블루투스가 연결 되어 있지 않습니다.");
-                    }
-                    break;
-
-                case R.id.amount_stop:
-                    if(mConnected) {
-                        String stop_start = "01SB4";
-                        byte[] stop_value = {(byte) 0x02, (byte) 0x03};
-                        byte[] stop_temp = stop_start.getBytes();
-                        byte[] stop_temp_data = new byte[stop_temp.length + 2];
-                        System.arraycopy(stop_value, 0, stop_temp_data, 0, 1);
-                        System.arraycopy(stop_temp, 0, stop_temp_data, 1, stop_temp.length);
-                        System.arraycopy(stop_value, 1, stop_temp_data, stop_temp.length + 1, 1);
-                        mBluetoothLeService.writeRXCharacteristic(stop_temp_data);
-                        startToast("추출 중지");
                     }else{
                         startToast("블루투스가 연결 되어 있지 않습니다.");
                     }
