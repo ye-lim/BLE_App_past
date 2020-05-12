@@ -29,11 +29,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -301,5 +304,40 @@ public class DeviceScanActivity extends ListActivity {
     static class ViewHolder {
         TextView deviceName;
         TextView deviceAddress;
+    }
+
+    //BottomSheetListView
+    public class BottomSheetListView extends ListView {
+        public BottomSheetListView (Context context, AttributeSet p_attrs) {
+            super (context, p_attrs);
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(MotionEvent ev) {
+            return true;
+        }
+
+        @Override
+        public boolean onTouchEvent(MotionEvent ev) {
+            if (canScrollVertically(this)) {
+                getParent().requestDisallowInterceptTouchEvent(true);
+            }
+            return super.onTouchEvent(ev);
+        }
+
+        public boolean canScrollVertically (AbsListView view) {
+            boolean canScroll = false;
+
+            if (view !=null && view.getChildCount ()> 0) {
+                boolean isOnTop = view.getFirstVisiblePosition() != 0 || view.getChildAt(0).getTop() != 0;
+                boolean isAllItemsVisible = isOnTop && view.getLastVisiblePosition() == view.getChildCount();
+
+                if (isOnTop || isAllItemsVisible) {
+                    canScroll = true;
+                }
+            }
+
+            return  canScroll;
+        }
     }
 }
