@@ -83,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1.5"
-        android:src="@drawable/future_gif"
+        android:src="@drawable/future__gif"
         android:layout_margin="20dp"
         android:textColor="#FFFFFF"/>
     <LinearLayout
