@@ -79,18 +79,18 @@
         android:text="이용에 앞서 블루투스와 위치 권한을 허용해주세요."
         android:textAlignment="center"
         android:textColor="#FFFFFF"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:src="@drawable/future_gif"
+        android:layout_margin="20dp"
+        android:textColor="#FFFFFF"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.3"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:text="GIF 들어갈 곳 "
-        android:textSize="25dp"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
