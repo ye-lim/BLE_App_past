@@ -16,6 +16,7 @@
 
 package com.example.blu_main_test1.BLE_SCAN;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
@@ -28,7 +29,10 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,6 +48,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.blu_main_test1.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -69,8 +75,6 @@ public class DeviceScanActivity extends ListActivity {
         getActionBar().setTitle(R.string.title_devices);
         mHandler = new Handler();
 
-        // Use this check to determine whether BLE is supported on the device.  Then you can
-        // selectively disable BLE-related features.
         //블루투스가 BLE를 지원하는 지 검사하는 로직
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();
@@ -90,6 +94,7 @@ public class DeviceScanActivity extends ListActivity {
             finish();
             return;
         }
+
         if (DeviceControlActivity.mConnected){
             Intent intent = new Intent(getApplicationContext(),DeviceControlActivity.class);
             startActivity(intent);
@@ -97,9 +102,11 @@ public class DeviceScanActivity extends ListActivity {
         }
     }
 
+
+    //menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu); //(R.menu.main, menu)
         if (!mScanning) {
             menu.findItem(R.id.menu_stop).setVisible(false);
             menu.findItem(R.id.menu_scan).setVisible(true);
@@ -128,7 +135,6 @@ public class DeviceScanActivity extends ListActivity {
         return true;
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -144,10 +150,9 @@ public class DeviceScanActivity extends ListActivity {
         }
 
         // Initializes list view adapter.
-        // list view adapter를 생성
         mLeDeviceListAdapter = new LeDeviceListAdapter();
         setListAdapter(mLeDeviceListAdapter);
-        scanLeDevice(true); //스캔 시작.
+        scanLeDevice(true); //start scanning
     }
 
     @Override
@@ -173,8 +178,6 @@ public class DeviceScanActivity extends ListActivity {
         final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position); // 그 위치의 디바이스
         if (device == null) return;
         final Intent intent = new Intent(this, DeviceControlActivity.class);
-        //intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, device.getName());
-       // intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
         mDeviceName = device.getName();
         mDeviceAddress = device.getAddress();
         SharedPreferences autodevice = getSharedPreferences("autodevice", Activity.MODE_PRIVATE);
@@ -183,13 +186,11 @@ public class DeviceScanActivity extends ListActivity {
         autoconnect.putString("devicename",mDeviceName);
         autoconnect.commit();
 
-
-
         if (mScanning) { //스캔 중지
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
             mScanning = false;
         }
-        startActivity(intent); //DeviceControlActivity 엶
+        startActivity(intent);
         finish();
 
     }
@@ -200,7 +201,6 @@ public class DeviceScanActivity extends ListActivity {
             // Stops scanning after a pre-defined scan period.
             //스캔 주기가 지나면 스캔을 그만두게 함.
             mHandler.postDelayed(new Runnable() {
-                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
                 @Override
                 public void run() {
                     mScanning = false;
@@ -231,8 +231,10 @@ public class DeviceScanActivity extends ListActivity {
         }
 
         public void addDevice(BluetoothDevice device) {
-            if(!mLeDevices.contains(device)) {
-                mLeDevices.add(device);
+            if(!mLeDevices.contains(device) && device.getName() != null){
+                if (device.getName().equals("MEDIPRESSO")) {
+                    mLeDevices.add(device);
+                }
             }
         }
 
@@ -262,26 +264,16 @@ public class DeviceScanActivity extends ListActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            ViewHolder viewHolder;
             BluetoothDevice device = mLeDevices.get(i);
-            final String deviceName = device.getName();
 
-            // General ListView optimization code.
-            if (view == null) {
-                view = (LinearLayout) mInflater.inflate(R.layout.listitem_device, null); //기존 : listitem_device.xml
-                viewHolder = new ViewHolder();
-                viewHolder.deviceAddress = (TextView) view.findViewById(R.id.device_address);
-                viewHolder.deviceName = (TextView) view.findViewById(R.id.device_name);
-                view.setTag(viewHolder);
-            } else {
-                viewHolder = (ViewHolder) view.getTag();
+            if(view ==null) {
+                view = mInflater.inflate(R.layout.listitem_device, viewGroup, false);
             }
-            //if (deviceName != null && deviceName.length() > 0) {
-            if (deviceName != null && deviceName.equals("MEDIPRESSO")) {
-                viewHolder.deviceName.setText(deviceName);
-                viewHolder.deviceAddress.setText(device.getAddress().substring(12, 17));
-            }
-            return view;
+                TextView deviceAddress = view.findViewById(R.id.device_address);
+                TextView deviceName = view.findViewById(R.id.device_name);
+                deviceName.setText(device.getName());
+                deviceAddress.setText(device.getAddress().substring(12,17));
+                return view;
         }
     }
 
@@ -300,44 +292,4 @@ public class DeviceScanActivity extends ListActivity {
                     });
                 }
             };
-
-    static class ViewHolder {
-        TextView deviceName;
-        TextView deviceAddress;
-    }
-
-    //BottomSheetListView
-    public class BottomSheetListView extends ListView {
-        public BottomSheetListView (Context context, AttributeSet p_attrs) {
-            super (context, p_attrs);
-        }
-
-        @Override
-        public boolean onInterceptTouchEvent(MotionEvent ev) {
-            return true;
-        }
-
-        @Override
-        public boolean onTouchEvent(MotionEvent ev) {
-            if (canScrollVertically(this)) {
-                getParent().requestDisallowInterceptTouchEvent(true);
-            }
-            return super.onTouchEvent(ev);
-        }
-
-        public boolean canScrollVertically (AbsListView view) {
-            boolean canScroll = false;
-
-            if (view !=null && view.getChildCount ()> 0) {
-                boolean isOnTop = view.getFirstVisiblePosition() != 0 || view.getChildAt(0).getTop() != 0;
-                boolean isAllItemsVisible = isOnTop && view.getLastVisiblePosition() == view.getChildCount();
-
-                if (isOnTop || isAllItemsVisible) {
-                    canScroll = true;
-                }
-            }
-
-            return  canScroll;
-        }
-    }
 }
