@@ -44,9 +44,12 @@ import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -66,7 +69,9 @@ import android.widget.Toast;
 import com.example.blu_main_test1.BLE_button.abstraction;
 import com.example.blu_main_test1.Main_page.Main_page2.product_amount;
 import com.example.blu_main_test1.R;
+import com.example.blu_main_test1.amount_change_fragment;
 import com.example.blu_main_test1.main_before.Machine_main;
+import com.example.blu_main_test1.main_before.theMainPage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,7 +85,7 @@ import java.util.TimerTask;
  * communicates with {@code BluetoothLeService}, which in turn interacts with the
  * Bluetooth LE API.
  */
-public class DeviceControlActivity extends Activity {
+public class DeviceControlActivity extends AppCompatActivity {
     private final static String TAG = DeviceControlActivity.class.getSimpleName();
 
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
@@ -97,6 +102,7 @@ public class DeviceControlActivity extends Activity {
    // private TextView temperView;
     private TextView mConnectionState;
     private Timer tmr;
+    private LinearLayout device_con_view;
 
     private Boolean inflateView = false;
     private String text;
@@ -171,7 +177,7 @@ public class DeviceControlActivity extends Activity {
                 delayHandler2.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if(!mConnected){
+                        if(!mConnected&& !DeviceControlActivity.this.isFinishing()){
                             AlertDialog.Builder alert_confirm = new AlertDialog.Builder(DeviceControlActivity.this);
                             alert_confirm.setMessage("블루투스 환경이 원활하지 않습니다. \n머신상태를 확인해 주세요").setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                 @Override
@@ -188,7 +194,7 @@ public class DeviceControlActivity extends Activity {
 
                                 }
                             });
-                              //  alert_confirm.show();
+                                alert_confirm.show();
                         }
                     }
                 },5000);
@@ -375,6 +381,9 @@ public class DeviceControlActivity extends Activity {
         mDeviceAddress = autodevice.getString("address",null);
         mDeviceName = autodevice.getString("devicename",null);
 
+        device_con_view = findViewById(R.id.device_con_view);
+
+
         // Sets up UI references.
         //((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
@@ -429,6 +438,7 @@ public class DeviceControlActivity extends Activity {
         findViewById(R.id.amount_start).setOnClickListener(onClickListener);
         findViewById(R.id.amount_change).setOnClickListener(onClickListener);
         findViewById(R.id.disconnect).setOnClickListener(onClickListener);
+        findViewById(R.id.back).setOnClickListener(onClickListener);
 
 
 
@@ -514,6 +524,11 @@ public class DeviceControlActivity extends Activity {
                     Intent intent_product=new Intent(getApplicationContext(), com.example.blu_main_test1.Main_page.Main_page2.product_amount.class);
                     startActivity(intent_product);
                     break;
+                case R.id.back :
+                    Intent intent2 = new Intent(getApplicationContext(), theMainPage.class);
+                    startActivity(intent2);
+                    finish();
+                    break;
 
                 case R.id.disconnect:
                     AlertDialog.Builder alert_confirm = new AlertDialog.Builder(DeviceControlActivity.this);
@@ -572,350 +587,11 @@ public class DeviceControlActivity extends Activity {
                     break;
 
                 case R.id.amount_change:
-                    inflateView = true;
-                    tmr.cancel();
-                    LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    linear = (LinearLayout) inflater.inflate(R.layout.activity_amount_change, null);
-
-
-                    Coffee_large();
-
-                    Handler delayHandler = new Handler();
-                    delayHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Coffee_small();
-                        }
-                    },400);
-                    Handler delayHandler2 = new Handler();
-                    delayHandler2.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Tea_large();
-                        }
-                    },800);
-                    Handler delayHandler3 = new Handler();
-                    delayHandler3.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Tea_small();
-                        }
-                    },1200);
-
-
-
-                    LinearLayout.LayoutParams paramlinear = new LinearLayout.LayoutParams(
-
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-
-                            LinearLayout.LayoutParams.MATCH_PARENT
-                    );
-
-                    back=(ImageButton)linear.findViewById(R.id.back);
-                    background=(LinearLayout)linear.findViewById(R.id.background);
-                    sub_background=(FrameLayout)linear.findViewById(R.id.sub_background);
-                    coffee_b_amount=(TextView) linear.findViewById(R.id.coffee_b_amount);
-                    coffee_s_amount=(TextView)linear.findViewById(R.id.coffee_s_amount);
-                    tea_b_amount=(TextView)linear.findViewById(R.id.tea_b_amount);
-                    tea_s_amount=(TextView)linear.findViewById(R.id.tea_s_amount);
-                    sub_amount=(Button)linear.findViewById(R.id.sub_amount);
-                    pgb = (ProgressBar)linear.findViewById(R.id.progressBar3);
-                    pgb.setVisibility(View.VISIBLE);
-
-                    sb_c_b = (SeekBar)linear.findViewById(R.id.seek_coffee_big);
-                    sb_c_s = (SeekBar)linear.findViewById(R.id.seek_coffee_small);
-                    sb_t_b = (SeekBar)linear.findViewById(R.id.seek_Tea_big);
-                    sb_t_s = (SeekBar)linear.findViewById(R.id.seek_Tea_small);
-
-
-                    sb_c_b.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { //롱고 시크바
-
-                        public void onStopTrackingTouch(SeekBar seekBar) {
-                            coffee_big_number = seekBar.getProgress();
-                        }
-
-                        public void onStartTrackingTouch(SeekBar seekBar) {
-                            coffee_big_number = seekBar.getProgress();
-                        }
-
-                        public void onProgressChanged(SeekBar seekBar, int progress,
-                                                      boolean fromUser) {
-                            if(progress >= 10){
-                                coffee_b_amount.setText(""+(progress*10));
-                            }else{
-                                coffee_b_amount.setText("0"+(progress*10));
-                                if(progress <= 3){
-                                    progress = 3;
-                                    coffee_b_amount.setText("0"+(progress*10));
-
-                                }
-                            }
-
-                        }
-                    });
-
-                    sb_c_s.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { //에스프레소 시크바
-                        public void onStopTrackingTouch(SeekBar seekBar) {
-                            coffee_small_number = seekBar.getProgress();
-                        }
-
-                        public void onStartTrackingTouch(SeekBar seekBar) {
-                            coffee_small_number = seekBar.getProgress();
-                        }
-
-
-                        public void onProgressChanged(SeekBar seekBar, int progress,
-                                                      boolean fromUser) {
-                            if(progress >= 10){
-                                coffee_s_amount.setText(""+(progress*10));
-                            }else{
-                                coffee_s_amount.setText("0"+(progress*10));
-                                if(progress <= 3){
-                                    progress = 3;
-                                    coffee_s_amount.setText("0"+(progress*10));
-
-                                }
-                            }
-
-                        }
-                    });
-
-                    sb_t_b.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { //티대 시크바
-                        public void onStopTrackingTouch(SeekBar seekBar) {
-                            tea_big_number = seekBar.getProgress();
-                        }
-
-                        public void onStartTrackingTouch(SeekBar seekBar) {
-                            tea_big_number = seekBar.getProgress();
-                        }
-
-
-                        public void onProgressChanged(SeekBar seekBar, int progress,
-                                                      boolean fromUser) {
-                            if(progress >= 10){
-                                tea_b_amount.setText(""+(progress*10));
-                            }else{
-                                tea_b_amount.setText("0"+(progress*10));
-                                if(progress <= 3){
-                                    progress = 3;
-                                    tea_b_amount.setText("0"+(progress*10));
-
-                                }
-                            }
-
-                        }
-                    });
-
-                    sb_t_s.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { //티소 시크바
-                        public void onStopTrackingTouch(SeekBar seekBar) {
-                            tea_small_number = seekBar.getProgress();
-                        }
-
-                        public void onStartTrackingTouch(SeekBar seekBar) {
-                            tea_small_number = seekBar.getProgress();
-                        }
-
-
-                        public void onProgressChanged(SeekBar seekBar, int progress,
-                                                      boolean fromUser) {
-                            if(progress >= 10){
-                                tea_s_amount.setText(""+(progress*10));
-                            }else{
-                                tea_s_amount.setText("0"+(progress*10));
-                                if(progress <= 3){
-                                    progress = 3;
-                                    tea_s_amount.setText("0"+(progress*10));
-
-                                }
-                            }
-
-                        }
-                    });
-
-
-
-
-
-
-                    //윈도우에 추가시킴
-                    addContentView(linear,paramlinear);
-                    //linear부분은 아무 동작 하지 않음
-                    linear.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                        }
-                    });
-                    //뒤로가기
-                    sub_background.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            tempTask();
-                            ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
-                            parentViewGroup.removeView(linear);
-
-                        }
-                    });
-
-
-                    //바탕부분 클릭시
-                    background.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            tempTask();
-                            ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
-                            parentViewGroup.removeView(linear);
-
-
-                        }
-                    });
-                    //뒤로가기 이미지
-                    back.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            tempTask();
-                            ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
-                            parentViewGroup.removeView(linear);
-
-                        }
-                    });
-
-
-                    sub_amount.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            try {
-                                AlertDialog.Builder alert_confirm2 = new AlertDialog.Builder(DeviceControlActivity.this);
-                                alert_confirm2.setMessage("추출량을 변경 하시겠습니까?  ").setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        if (mConnected) {
-                                            if (coffee_b_amount.getText().toString().length() != 0) {
-                                                if (Integer.parseInt(coffee_b_amount.getText().toString()) > 990) {
-                                                    Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                                                    coffee_b_amount.requestFocus();
-                                                    return;
-                                                }
-                                                String c_value = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2);
-                                                String cb_amount = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2) + stringToHex(c_value);
-                                                byte[] cb_value = {(byte) 0x02, (byte) 0x03};
-                                                byte[] cb_temp = cb_amount.getBytes();
-                                                byte[] cb_temp_data = new byte[cb_temp.length + 2];
-                                                System.arraycopy(cb_value, 0, cb_temp_data, 0, 1);
-                                                System.arraycopy(cb_temp, 0, cb_temp_data, 1, cb_temp.length);
-                                                System.arraycopy(cb_value, 1, cb_temp_data, cb_temp.length + 1, 1);
-                                                mBluetoothLeService.writeRXCharacteristic(cb_temp_data);
-                                                pgb2.setVisibility(View.VISIBLE);
-
-                                            }
-
-
-                                            if (coffee_s_amount.getText().toString().length() != 0) {
-                                                if (Integer.parseInt(coffee_s_amount.getText().toString()) > 990) {
-                                                    Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                                                    coffee_s_amount.requestFocus();
-                                                    return;
-                                                }
-                                                new Handler().postDelayed(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-
-                                                        String c_value2 = "05TCS" + coffee_s_amount.getText().toString().substring(0, 2);
-                                                        String cs_amount = "05TCS" + coffee_s_amount.getText().toString().substring(0, 2) + stringToHex(c_value2);
-                                                        byte[] cs_value = {(byte) 0x02, (byte) 0x03};
-                                                        byte[] cs_temp = cs_amount.getBytes();
-                                                        byte[] cs_temp_data = new byte[cs_temp.length + 2];
-                                                        System.arraycopy(cs_value, 0, cs_temp_data, 0, 1);
-                                                        System.arraycopy(cs_temp, 0, cs_temp_data, 1, cs_temp.length);
-                                                        System.arraycopy(cs_value, 1, cs_temp_data, cs_temp.length + 1, 1);
-
-                                                        mBluetoothLeService.writeRXCharacteristic(cs_temp_data);
-                                                    }
-
-                                                }, 1000);  // 1 초 후에 실행
-                                            }
-
-
-                                            if (tea_b_amount.getText().toString().length() != 0) {
-                                                if (Integer.parseInt(tea_b_amount.getText().toString()) > 990) {
-                                                    Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                                                    tea_b_amount.requestFocus();
-                                                    return;
-                                                }
-                                                new Handler().postDelayed(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-
-                                                        String t_value = "05TTL" + tea_b_amount.getText().toString().substring(0, 2);
-                                                        String tb_amount = "05TTL" + tea_b_amount.getText().toString().substring(0, 2) + stringToHex(t_value);
-                                                        byte[] tb_value = {(byte) 0x02, (byte) 0x03};
-                                                        byte[] tb_temp = tb_amount.getBytes();
-                                                        byte[] tb_temp_data = new byte[tb_temp.length + 2];
-                                                        System.arraycopy(tb_value, 0, tb_temp_data, 0, 1);
-                                                        System.arraycopy(tb_temp, 0, tb_temp_data, 1, tb_temp.length);
-                                                        System.arraycopy(tb_value, 1, tb_temp_data, tb_temp.length + 1, 1);
-                                                        mBluetoothLeService.writeRXCharacteristic(tb_temp_data);
-                                                    }
-
-                                                }, 1500);  // 1 초 후에 실행
-                                            }
-
-
-                                            if (tea_s_amount.getText().toString().length() != 0) {
-                                                if (Integer.parseInt(tea_s_amount.getText().toString()) > 990) {
-                                                    Toast.makeText(getApplicationContext(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                                                    tea_s_amount.requestFocus();
-                                                    return;
-                                                }
-                                                new Handler().postDelayed(new Runnable() {
-                                                    @Override
-
-                                                    public void run() {
-
-                                                        String t_value2 = "05TTS" + tea_s_amount.getText().toString().substring(0, 2);
-                                                        String ts_amount = "05TTS" + tea_s_amount.getText().toString().substring(0, 2) + stringToHex(t_value2);
-                                                        byte[] ts_value = {(byte) 0x02, (byte) 0x03};
-                                                        byte[] ts_temp = ts_amount.getBytes();
-                                                        byte[] ts_temp_data = new byte[ts_temp.length + 2];
-                                                        System.arraycopy(ts_value, 0, ts_temp_data, 0, 1);
-                                                        System.arraycopy(ts_temp, 0, ts_temp_data, 1, ts_temp.length);
-                                                        System.arraycopy(ts_value, 1, ts_temp_data, ts_temp.length + 1, 1);
-                                                        mBluetoothLeService.writeRXCharacteristic(ts_temp_data);
-                                                        pgb2.setVisibility(View.GONE);
-                                                        startToast("추출량이 변경 되었습니다. ");
-                                                    }
-
-                                                }, 2000);  // 1 초 후에 실행
-                                            }
-                                            tempTask();
-                                            ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
-                                            parentViewGroup.removeView(linear);
-                                        }else{
-                                            startToast("블루투스를 재연결해 주세요");
-                                        }
-                                    }
-                                });
-
-                                alert_confirm2.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                    }
-                                });
-                                alert_confirm2.show();
-
-                            }catch (Exception e)
-                            {
-
-                                Toast.makeText(getApplicationContext(),"블루투스를 재연결해 주세요",Toast.LENGTH_SHORT).show();
-
-                            }
-                        }
-
-                    });
-
+                    device_con_view.setVisibility(View.GONE);
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_view, new amount_change_fragment()).commit();
                     break;
-
-
             }
         }
     };
