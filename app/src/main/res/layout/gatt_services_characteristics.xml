@@ -19,7 +19,7 @@
                 android:id="@+id/top_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4"
+                android:layout_weight="3.5"
                 android:background="#091f3f"
                 android:orientation="vertical">
 
@@ -83,7 +83,7 @@
                                 android:gravity="center"
                                 android:text="블루투스"
                                 android:textColor="@color/black"
-                                android:textSize="15dp"
+                                android:textSize="12dp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -94,28 +94,28 @@
                                 android:gravity="center"
                                 android:text="연결안됨"
                                 android:textColor="@color/yellow"
-                                android:textSize="12dp"
+                                android:textSize="10dp"
                                 android:textStyle="bold" />
 
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="40dp"
+                                android:layout_marginTop="20dp"
                                 android:gravity="center"
                                 android:text="머신상태"
                                 android:textColor="@color/black"
-                                android:textSize="15dp"
+                                android:textSize="12dp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:layout_marginTop="10dp"
                                 android:id="@+id/state"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
                                 android:gravity="center"
                                 android:textColor="@color/yellow"
-                                android:textSize="12dp"
+                                android:textSize="10dp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -156,11 +156,11 @@
                             <Button
                                 android:id="@+id/disconnect"
                                 android:layout_width="match_parent"
-                                android:layout_height="100dp"
+                                android:layout_height="80dp"
                                 android:layout_marginRight="10dp"
                                 android:background="@xml/disconnect"
                                 android:text="연결끊기"
-                                android:textSize="15dp"
+                                android:textSize="13dp"
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
@@ -195,13 +195,13 @@
                     <TextView
                         android:id="@+id/main_text"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="25dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:background="@xml/round_edge"
                         android:gravity="center"
                         android:text="머신을 취향에 맞게 자유롭게 조절해 보세요."
-                        android:textSize="15dp" />
+                        android:textSize="11dp" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -209,7 +209,7 @@
                 android:id="@+id/bottom_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="6"
+                android:layout_weight="6.5"
                 android:background="#ebebeb">
 
                 <RelativeLayout
@@ -217,7 +217,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginBottom="15dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
