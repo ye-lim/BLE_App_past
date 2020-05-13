@@ -101,7 +101,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     private TextView stateView;
    // private TextView temperView;
     private TextView mConnectionState;
-    private Timer tmr;
+    public static Timer tmr;
     private LinearLayout device_con_view;
 
     private Boolean inflateView = false;
@@ -109,7 +109,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     private String mDeviceName;
     private String mDeviceAddress;
     //private ExpandableListView mGattServicesList;
-    private BluetoothLeService mBluetoothLeService;
+    public static BluetoothLeService mBluetoothLeService;
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics =
             new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
     public static boolean mConnected = false;
@@ -741,7 +741,7 @@ public class DeviceControlActivity extends AppCompatActivity {
 
     }
 
-    private static IntentFilter makeGattUpdateIntentFilter() {
+    public static IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED);
@@ -779,7 +779,7 @@ public class DeviceControlActivity extends AppCompatActivity {
 
 
 
-    public void Tea_large()  {
+    public static void Tea_large()  {
 
         if(mConnected) {
             if (mBluetoothLeService != null) {
@@ -801,7 +801,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     }
 
 
-    public void Tea_small(){
+    public static void Tea_small(){
         if(mConnected) {
             if (mBluetoothLeService != null) {
                 String TL_amount, basic_state;
@@ -819,7 +819,7 @@ public class DeviceControlActivity extends AppCompatActivity {
             }
         }
     }
-    public void Coffee_large() {
+    public static void Coffee_large() {
 
         if(mConnected) {
             if (mBluetoothLeService != null) {
@@ -840,7 +840,7 @@ public class DeviceControlActivity extends AppCompatActivity {
         }
     }
 
-    public void Coffee_small() {
+    public static void Coffee_small() {
 
         if(mConnected) {
             if (mBluetoothLeService != null) {
