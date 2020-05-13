@@ -44,6 +44,7 @@ import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
@@ -76,6 +77,7 @@ import com.example.blu_main_test1.main_before.theMainPage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -91,6 +93,8 @@ public class DeviceControlActivity extends AppCompatActivity {
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
 
+    public static Stack<Fragment> fragmentStack;
+    public static Fragment amount_fragment;
 
     private ImageButton back;
     private TextView coffee_b_amount,coffee_s_amount,tea_b_amount,tea_s_amount;
@@ -102,7 +106,7 @@ public class DeviceControlActivity extends AppCompatActivity {
    // private TextView temperView;
     private TextView mConnectionState;
     public static Timer tmr;
-    private LinearLayout device_con_view;
+    public static LinearLayout device_con_view;
 
     private Boolean inflateView = false;
     private String text;
@@ -118,7 +122,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
     private LinearLayout linear;
-    private ProgressBar pgb,pgb2;
+    public static ProgressBar pgb,pgb2;
     private int coffee_big_number,coffee_small_number,tea_big_number,tea_small_number;
     private SeekBar sb_c_b,sb_c_s,sb_t_b,sb_t_s;
     private boolean waiting = false;
@@ -590,7 +594,10 @@ public class DeviceControlActivity extends AppCompatActivity {
                     device_con_view.setVisibility(View.GONE);
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_view, new amount_change_fragment()).commit();
+                    amount_fragment = new amount_change_fragment();
+                    fragmentStack = new Stack<>();
+                    fragmentStack.push(amount_fragment);
+                    fragmentTransaction.replace(R.id.fragment_view, amount_fragment).commit();
                     break;
             }
         }
@@ -752,7 +759,7 @@ public class DeviceControlActivity extends AppCompatActivity {
 
 
 
-    class State extends TimerTask {
+    public static class State extends TimerTask {
         @Override
         public void run() {
             if(mConnected) {
@@ -881,17 +888,17 @@ public class DeviceControlActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        if(inflateView){ //추출량 변화 view 에서 뒤로가기 버튼을 눌렀을 경우 액티비티가 종료되지 않고 뷰만 종료되도록
+        if(!fragmentStack.isEmpty()){ //추출량 변화 view 에서 뒤로가기 버튼을 눌렀을 경우 액티비티가 종료되지 않고 뷰만 종료되도록
             tempTask();
-            ViewGroup parentViewGroup = (ViewGroup) linear.getParent();
-            parentViewGroup.removeView(linear);
-            inflateView = false;
+            Fragment nextFragmet = fragmentStack.pop();
+            getSupportFragmentManager().beginTransaction().remove(nextFragmet).commit();
+            device_con_view.setVisibility(View.VISIBLE);
         }else{
             super.onBackPressed();
         }
     }
 
-    public void tempTask(){
+    public static void tempTask(){
         tmr = new Timer();
         tmr.schedule(new State(), 2000, 10000);
     }
