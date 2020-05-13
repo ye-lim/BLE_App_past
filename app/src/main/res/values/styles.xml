@@ -10,7 +10,7 @@
     <style name="join" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#b3ffffff</item>  <!--타이틀바-->
-        <item name="colorPrimaryDark">@color/join</item> <!--상태바-->
+        <item name="colorPrimaryDark">#000000</item> <!--상태바-->
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 

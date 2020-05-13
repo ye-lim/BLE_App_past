@@ -45,6 +45,7 @@
         </activity>
         <activity
             android:name=".BLE_SCAN.DeviceControlActivity"
+            android:theme="@style/join"
             android:parentActivityName=".main_before.theMainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
