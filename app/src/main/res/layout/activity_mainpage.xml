@@ -34,7 +34,7 @@
                 android:layout_height="0px"
                 android:layout_weight="6"
                 android:layout_marginTop="20dp"
-                android:background="#011E41"
+                android:background="#091f3f"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:weightSum="1">
