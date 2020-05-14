@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="Bluetooth로  "
-                android:textSize="40dp"
+                android:textSize="38dp"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"/>
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-10dp"
                 android:text="머신과 연동하기"
-                android:textSize="40dp"
+                android:textSize="38dp"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"/>
         </LinearLayout>
@@ -85,8 +85,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:src="@drawable/future__gif"
+            android:layout_weight="1"
+            android:src="@drawable/bluetooth_connecting"
             android:layout_margin="20dp"
             android:textColor="#FFFFFF"/>
         <LinearLayout
@@ -101,7 +101,7 @@
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
             android:layout_gravity="center"
-            android:src="@drawable/machine_circle"/>
+            android:src="@drawable/machine_image"/>
 
         <LinearLayout
             android:layout_width="match_parent"
