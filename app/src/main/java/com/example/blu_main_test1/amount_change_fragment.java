@@ -124,24 +124,13 @@ public class amount_change_fragment extends Fragment {
 
             public void onProgressChanged(SeekBar seekBar, int progress,
                                           boolean fromUser) {
-                if (progress >= 10) {
-                    coffee_b_amount.setText("" + (progress * 10));
+                if (progress >= 7) {
+                    coffee_b_amount.setText("" + (progress * 10+30));
                 } else {
-                    coffee_b_amount.setText("0" + (progress * 10));
-                    if (progress <= 3) {
-                        if (progress == 3) {
-                            progress = 6;
-                            coffee_b_amount.setText("0" + (progress * 10));
-                        } else if(progress == 2){
-                            progress =5;
-                            coffee_b_amount.setText("0" + (progress * 10));
-                        } else if(progress == 1){
-                            progress = 4;
-                            coffee_b_amount.setText("0" + (progress * 10));
-                        }else{
-                            progress = 3;
-                            coffee_b_amount.setText("0" + (progress * 10));
-                        }
+                    coffee_b_amount.setText("0" + (progress * 10+30));
+                    if (progress == 0) {
+                        progress = 3;
+                        coffee_b_amount.setText("0" + (progress * 10));
                     }
                 }
             }
@@ -159,24 +148,13 @@ public class amount_change_fragment extends Fragment {
 
             public void onProgressChanged(SeekBar seekBar, int progress,
                                           boolean fromUser) {
-                if (progress >= 10) {
-                    coffee_s_amount.setText("" + (progress * 10));
+                if (progress >= 7) {
+                    coffee_s_amount.setText("" + (progress * 10+30));
                 } else {
-                    coffee_s_amount.setText("0" + (progress * 10));
-                    if (progress <= 3) {
-                        if (progress == 3) {
-                            progress = 6;
-                            coffee_s_amount.setText("0" + (progress * 10));
-                        } else if(progress == 2){
-                            progress =5;
-                            coffee_s_amount.setText("0" + (progress * 10));
-                        } else if(progress == 1){
-                            progress = 4;
-                            coffee_s_amount.setText("0" + (progress * 10));
-                        }else{
-                            progress = 3;
-                            coffee_s_amount.setText("0" + (progress * 10));
-                        }
+                    coffee_s_amount.setText("0" + (progress * 10+30));
+                    if (progress == 0) {
+                        progress = 3;
+                        coffee_s_amount.setText("0" + (progress * 10));
                     }
                 }
 
@@ -195,24 +173,13 @@ public class amount_change_fragment extends Fragment {
 
             public void onProgressChanged(SeekBar seekBar, int progress,
                                           boolean fromUser) {
-                if (progress >= 10) {
-                    tea_b_amount.setText("" + (progress * 10));
+                if (progress >= 7) {
+                    tea_b_amount.setText("" + (progress * 10+30));
                 } else {
-                    tea_b_amount.setText("0" + (progress * 10));
-                    if (progress <= 3) {
-                        if (progress == 3) {
-                            progress = 6;
-                            tea_b_amount.setText("0" + (progress * 10));
-                        } else if(progress == 2){
-                            progress =5;
-                            tea_b_amount.setText("0" + (progress * 10));
-                        } else if(progress == 1){
-                            progress = 4;
-                            tea_b_amount.setText("0" + (progress * 10));
-                        }else{
-                            progress = 3;
-                            tea_b_amount.setText("0" + (progress * 10));
-                        }
+                    tea_b_amount.setText("0" + (progress * 10+30));
+                    if (progress == 0) {
+                        progress = 3;
+                        tea_b_amount.setText("0" + (progress * 10));
                     }
                 }
 
@@ -231,24 +198,14 @@ public class amount_change_fragment extends Fragment {
 
             public void onProgressChanged(SeekBar seekBar, int progress,
                                           boolean fromUser) {
-                if (progress >= 10) {
-                    tea_s_amount.setText("" + (progress * 10));
+                if (progress >= 7) {
+                    tea_s_amount.setText("" + (progress * 10+30));
+
                 } else {
-                    tea_s_amount.setText("0" + (progress * 10));
-                    if (progress <= 3) {
-                        if (progress == 3) {
-                            progress = 6;
-                            tea_s_amount.setText("0" + (progress * 10));
-                        } else if(progress == 2){
-                            progress =5;
-                            tea_s_amount.setText("0" + (progress * 10));
-                        } else if(progress == 1){
-                            progress = 4;
-                            tea_s_amount.setText("0" + (progress * 10));
-                        }else{
-                            progress = 3;
-                            tea_s_amount.setText("0" + (progress * 10));
-                        }
+                    tea_s_amount.setText("0" + (progress * 10+30));
+                    if (progress == 0) {
+                        progress = 3;
+                        tea_s_amount.setText("0" + (progress * 10));
                     }
                 }
 
@@ -271,7 +228,7 @@ public class amount_change_fragment extends Fragment {
                                         coffee_b_amount.requestFocus();
                                         return;
                                     }
-                                   // int coffee_b_amount_ex = Integer.parseInt(coffee_b_amount.getText().toString().substring(0, 2)+02); //임시
+                                    //int coffee_b_amount_ex = Integer.parseInt(coffee_b_amount.getText().toString().substring(0, 2)); //임시
                                     String c_value = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2); //기존
                                     //String c_value = Integer.toString(coffee_b_amount_ex); //임시
                                     String cb_amount = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2) + DeviceControlActivity.stringToHex(c_value);//기존

@@ -314,7 +314,7 @@ public class DeviceControlActivity extends AppCompatActivity {
                                     amount_change_fragment.coffee_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
                                 }
                               //  amount_change_fragment.coffee_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10)); //ml은 안뜸, 페이지 나갔다 다시 들어오면 유지 x
-                                amount_change_fragment.sb_c_b.setProgress((Integer.parseInt(text.substring(6,8))));
+                                amount_change_fragment.sb_c_b.setProgress((Integer.parseInt(text.substring(6,8))-3));
 
 
                             }
@@ -326,7 +326,7 @@ public class DeviceControlActivity extends AppCompatActivity {
                                     amount_change_fragment.coffee_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
                                 }
                                // amount_change_fragment.coffee_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
-                                amount_change_fragment.sb_c_s.setProgress((Integer.parseInt(text.substring(6,8))));
+                                amount_change_fragment.sb_c_s.setProgress((Integer.parseInt(text.substring(6,8))-3));
 
                             }
                             else if(text.substring(1,6).equals("05RTL")){
@@ -337,7 +337,7 @@ public class DeviceControlActivity extends AppCompatActivity {
                                     amount_change_fragment.tea_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
                                 }
                                 //amount_change_fragment.tea_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
-                                amount_change_fragment. sb_t_b.setProgress((Integer.parseInt(text.substring(6,8))));
+                                amount_change_fragment. sb_t_b.setProgress((Integer.parseInt(text.substring(6,8))-3));
 
                             }
                             else if(text.substring(1,6).equals("05RTS")){
@@ -348,7 +348,7 @@ public class DeviceControlActivity extends AppCompatActivity {
                                     amount_change_fragment.tea_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
                                 }
                                // amount_change_fragment.tea_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
-                                amount_change_fragment.sb_t_s.setProgress((Integer.parseInt(text.substring(6,8))));
+                                amount_change_fragment.sb_t_s.setProgress((Integer.parseInt(text.substring(6,8))-3));
                                 amount_change_fragment.pgb.setVisibility(View.GONE);
                             } else if(text.substring(1,6).equals("0FRVE")){
                                 versionView.setText(text.substring(6,18));
