@@ -106,6 +106,7 @@ public class DeviceControlActivity extends AppCompatActivity {
    // private TextView temperView;
     private TextView mConnectionState;
     public static Timer tmr;
+    public static Timer set_tmr;
     public static LinearLayout device_con_view;
 
     private Boolean inflateView = false;
@@ -164,7 +165,8 @@ public class DeviceControlActivity extends AppCompatActivity {
                 updateConnectionState(R.string.connected);//연결됨을 ui에서 표시
                 invalidateOptionsMenu(); //onCreateOptionsMenu 호출
                 if(mConnected){
-                    tempTask();
+                    set_tmr = new Timer();
+                    set_tmr.schedule(new State(), 1000, 10000);
                     Handler delayHandler = new Handler();
                     delayHandler.postDelayed(new Runnable() {
                         @Override
@@ -304,23 +306,48 @@ public class DeviceControlActivity extends AppCompatActivity {
                                 //temperView.setText(text.substring(8,10));
                                 pgb2.setVisibility(View.GONE);
                             } else if(text.substring(1,6).equals("05RCL")){
-                                amount_change_fragment.coffee_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10)); //ml은 안뜸, 페이지 나갔다 다시 들어오면 유지 x
+                                int amount_change_in = Integer.parseInt(text.substring(6,8))*10;
+                                String amount_change_st;
+                                if(amount_change_in < 100){
+                                    amount_change_fragment.coffee_b_amount.setText("0"+amount_change_in);
+                                }else{
+                                    amount_change_fragment.coffee_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
+                                }
+                              //  amount_change_fragment.coffee_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10)); //ml은 안뜸, 페이지 나갔다 다시 들어오면 유지 x
                                 amount_change_fragment.sb_c_b.setProgress((Integer.parseInt(text.substring(6,8))));
 
 
                             }
                             else if(text.substring(1,6).equals("05RCS")){
-                                amount_change_fragment.coffee_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
+                                int amount_change_in = Integer.parseInt(text.substring(6,8))*10;
+                                if(amount_change_in < 100){
+                                    amount_change_fragment.coffee_s_amount.setText("0"+amount_change_in);
+                                }else{
+                                    amount_change_fragment.coffee_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
+                                }
+                               // amount_change_fragment.coffee_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
                                 amount_change_fragment.sb_c_s.setProgress((Integer.parseInt(text.substring(6,8))));
 
                             }
                             else if(text.substring(1,6).equals("05RTL")){
-                                amount_change_fragment.tea_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
+                                int amount_change_in = Integer.parseInt(text.substring(6,8))*10;
+                                if(amount_change_in < 100){
+                                    amount_change_fragment.tea_b_amount.setText("0"+amount_change_in);
+                                }else{
+                                    amount_change_fragment.tea_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
+                                }
+                                //amount_change_fragment.tea_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
                                 amount_change_fragment. sb_t_b.setProgress((Integer.parseInt(text.substring(6,8))));
 
                             }
                             else if(text.substring(1,6).equals("05RTS")){
-                                amount_change_fragment.tea_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
+                                int amount_change_in = Integer.parseInt(text.substring(6,8))*10;
+                                if(amount_change_in < 100){
+                                    amount_change_fragment.tea_s_amount.setText("0"+amount_change_in);
+                                }else{
+                                    amount_change_fragment.tea_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
+                                }
+                               // amount_change_fragment.tea_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6,8))*10));
                                 amount_change_fragment.sb_t_s.setProgress((Integer.parseInt(text.substring(6,8))));
                                 amount_change_fragment.pgb.setVisibility(View.GONE);
                             } else if(text.substring(1,6).equals("0FRVE")){
@@ -900,7 +927,7 @@ public class DeviceControlActivity extends AppCompatActivity {
 
     public static void tempTask(){
         tmr = new Timer();
-        tmr.schedule(new State(), 2000, 10000);
+        tmr.schedule(new State(), 3000, 10000);
     }
 
 
