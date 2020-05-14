@@ -47,14 +47,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.8"
+            android:layout_weight="1.4"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="Bluetooth로  "
-                android:textSize="38dp"
+                android:textSize="35dp"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"/>
             <TextView
@@ -62,15 +62,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-10dp"
                 android:text="머신과 연동하기"
-                android:textSize="38dp"
+                android:textSize="35dp"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.35"
-            android:textSize="15dp"
+            android:textSize="14dp"
             android:text="블루투스 연동 시 간편하게 머신을 이용하실 수 있습니다."
             android:textAlignment="center"
             android:textColor="#FFFFFF"/>
@@ -78,30 +82,64 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.35"
-            android:textSize="15dp"
+            android:textSize="14dp"
             android:text="이용에 앞서 블루투스와 위치 권한을 허용해주세요."
             android:textAlignment="center"
-            android:textColor="#FFFFFF"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:src="@drawable/bluetooth_connecting"
-            android:layout_margin="20dp"
             android:textColor="#FFFFFF"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"/>
-
+            android:layout_weight="0.5"/>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"/>
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:src="@drawable/bluetooth_connecting"
+            android:textColor="#FFFFFF"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"/>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            android:layout_gravity="center"
-            android:src="@drawable/machine_image"/>
+            android:layout_weight="0.5"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.3"
+            android:weightSum="1"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_gravity="center"
+                android:src="@drawable/machine_image"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,7 +149,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="1">
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"/>
@@ -121,9 +159,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"
                 android:text="연동하기"
-                android:textSize="25dp"
-                android:background="#FECD07"/>
-            <TextView
+                android:textSize="20dp"
+                android:background="@xml/main_bnt" />
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"/>
