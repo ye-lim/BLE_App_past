@@ -626,6 +626,10 @@ public class DeviceControlActivity extends AppCompatActivity {
                     fragmentStack = new Stack<>();
                     fragmentStack.push(amount_fragment);
                     fragmentTransaction.replace(R.id.fragment_view, amount_fragment).commit();
+                    set_tmr.cancel();
+                    if(tmr!=null){
+                        tmr.cancel();
+                    }
                     break;
             }
         }
