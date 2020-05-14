@@ -45,10 +45,10 @@ import java.util.Timer;
 public class amount_change_fragment extends Fragment {
 
     public Button sub_amount;
-    private TextView coffee_b_amount,coffee_s_amount,tea_b_amount,tea_s_amount;
-    private ProgressBar pgb;
+    public static TextView coffee_b_amount,coffee_s_amount,tea_b_amount,tea_s_amount;
+    public static ProgressBar pgb;
     private int coffee_big_number,coffee_small_number,tea_big_number,tea_small_number;
-    private SeekBar sb_c_b,sb_c_s,sb_t_b,sb_t_s;
+    public static SeekBar sb_c_b,sb_c_s,sb_t_b,sb_t_s;
     private String text;
 
     public amount_change_fragment() {
@@ -354,47 +354,8 @@ public class amount_change_fragment extends Fragment {
             }
 
         });
+
     }
-
-
-
-    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() { //BroadcastReceiver는  연결상태와 데이터들을 받아오는 역할을 한다.
-        @Override
-        public void onReceive(final Context context, Intent intent) { //BluetoothLeService에서 sendBroadcast를 했을 때 호출.
-            String action = intent.getAction(); //BluetoothLeService로부터 장치와 연결유뮤 상황을 action에 넣어 보내줌.
-            if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) { //BLE장치에서 받은 데이터가 사용가능.
-                final byte[] txValue = intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA);
-                try {
-                    //string형식으로 리스트 뷰에 표현
-                    text = new String(txValue, "UTF-8");
-                    if (text.substring(1, 6).equals("05RCL")) {
-                        coffee_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6, 8)) * 10)); //ml은 안뜸, 페이지 나갔다 다시 들어오면 유지 x
-                        sb_c_b.setProgress((Integer.parseInt(text.substring(6, 8))));
-
-
-                    } else if (text.substring(1, 6).equals("05RCS")) {
-                        coffee_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6, 8)) * 10));
-                        sb_c_s.setProgress((Integer.parseInt(text.substring(6, 8))));
-
-                    } else if (text.substring(1, 6).equals("05RTL")) {
-                        tea_b_amount.setText(Integer.toString(Integer.parseInt(text.substring(6, 8)) * 10));
-                        sb_t_b.setProgress((Integer.parseInt(text.substring(6, 8))));
-
-                    } else if (text.substring(1, 6).equals("05RTS")) {
-                        tea_s_amount.setText(Integer.toString(Integer.parseInt(text.substring(6, 8)) * 10));
-                        sb_t_s.setProgress((Integer.parseInt(text.substring(6, 8))));
-                        pgb.setVisibility(View.GONE);
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    };
-
-
-
 
 
     @Override
@@ -408,7 +369,5 @@ public class amount_change_fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mGattUpdateReceiver, DeviceControlActivity.makeGattUpdateIntentFilter()); //브로드캐스트 등록
-
     }
 }
