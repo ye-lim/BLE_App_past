@@ -19,6 +19,8 @@
     <string name="no_data">데이터 없음</string>
     <string name="connected">연 결 됨</string>
     <string name="disconnected">연 결 안 됨</string>
+    <string name="scanning_d">찾 는 중</string>
+    <string name="scanning_stop">찾 기 중 지</string>
     <string name="title_devices">메디프레소</string>
     <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
 
