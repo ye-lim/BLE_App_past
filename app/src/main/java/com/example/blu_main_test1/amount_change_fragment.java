@@ -61,7 +61,6 @@ public class amount_change_fragment extends Fragment {
     public void onActivityCreated(Bundle b) {
         super.onActivityCreated(b);
 
-        DeviceControlActivity.set_tmr.cancel();
         DeviceControlActivity.main_text.setText("추출량을 자유롭게 변경해보세요.");
 
         DeviceControlActivity.Coffee_small();
