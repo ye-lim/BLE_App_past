@@ -61,7 +61,7 @@ public class amount_change_fragment extends Fragment {
     public void onActivityCreated(Bundle b) {
         super.onActivityCreated(b);
 
-        DeviceControlActivity.tmr.cancel();
+        DeviceControlActivity.set_tmr.cancel();
 
         DeviceControlActivity.Coffee_small();
 
@@ -129,12 +129,21 @@ public class amount_change_fragment extends Fragment {
                 } else {
                     coffee_b_amount.setText("0" + (progress * 10));
                     if (progress <= 3) {
-                        progress = 3;
-                        coffee_b_amount.setText("0" + (progress * 10));
-
+                        if (progress == 3) {
+                            progress = 6;
+                            coffee_b_amount.setText("0" + (progress * 10));
+                        } else if(progress == 2){
+                            progress =5;
+                            coffee_b_amount.setText("0" + (progress * 10));
+                        } else if(progress == 1){
+                            progress = 4;
+                            coffee_b_amount.setText("0" + (progress * 10));
+                        }else{
+                            progress = 3;
+                            coffee_b_amount.setText("0" + (progress * 10));
+                        }
                     }
                 }
-
             }
         });
 
@@ -155,9 +164,19 @@ public class amount_change_fragment extends Fragment {
                 } else {
                     coffee_s_amount.setText("0" + (progress * 10));
                     if (progress <= 3) {
-                        progress = 3;
-                        coffee_s_amount.setText("0" + (progress * 10));
-
+                        if (progress == 3) {
+                            progress = 6;
+                            coffee_s_amount.setText("0" + (progress * 10));
+                        } else if(progress == 2){
+                            progress =5;
+                            coffee_s_amount.setText("0" + (progress * 10));
+                        } else if(progress == 1){
+                            progress = 4;
+                            coffee_s_amount.setText("0" + (progress * 10));
+                        }else{
+                            progress = 3;
+                            coffee_s_amount.setText("0" + (progress * 10));
+                        }
                     }
                 }
 
@@ -181,9 +200,19 @@ public class amount_change_fragment extends Fragment {
                 } else {
                     tea_b_amount.setText("0" + (progress * 10));
                     if (progress <= 3) {
-                        progress = 3;
-                        tea_b_amount.setText("0" + (progress * 10));
-
+                        if (progress == 3) {
+                            progress = 6;
+                            tea_b_amount.setText("0" + (progress * 10));
+                        } else if(progress == 2){
+                            progress =5;
+                            tea_b_amount.setText("0" + (progress * 10));
+                        } else if(progress == 1){
+                            progress = 4;
+                            tea_b_amount.setText("0" + (progress * 10));
+                        }else{
+                            progress = 3;
+                            tea_b_amount.setText("0" + (progress * 10));
+                        }
                     }
                 }
 
@@ -207,9 +236,19 @@ public class amount_change_fragment extends Fragment {
                 } else {
                     tea_s_amount.setText("0" + (progress * 10));
                     if (progress <= 3) {
-                        progress = 3;
-                        tea_s_amount.setText("0" + (progress * 10));
-
+                        if (progress == 3) {
+                            progress = 6;
+                            tea_s_amount.setText("0" + (progress * 10));
+                        } else if(progress == 2){
+                            progress =5;
+                            tea_s_amount.setText("0" + (progress * 10));
+                        } else if(progress == 1){
+                            progress = 4;
+                            tea_s_amount.setText("0" + (progress * 10));
+                        }else{
+                            progress = 3;
+                            tea_s_amount.setText("0" + (progress * 10));
+                        }
                     }
                 }
 
@@ -232,8 +271,11 @@ public class amount_change_fragment extends Fragment {
                                         coffee_b_amount.requestFocus();
                                         return;
                                     }
-                                    String c_value = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2);
-                                    String cb_amount = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2) + DeviceControlActivity.stringToHex(c_value);
+                                   // int coffee_b_amount_ex = Integer.parseInt(coffee_b_amount.getText().toString().substring(0, 2)+02); //임시
+                                    String c_value = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2); //기존
+                                    //String c_value = Integer.toString(coffee_b_amount_ex); //임시
+                                    String cb_amount = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2) + DeviceControlActivity.stringToHex(c_value);//기존
+                                    //String cb_amount = "05TCL" + c_value + DeviceControlActivity.stringToHex(c_value);//임시
                                     byte[] cb_value = {(byte) 0x02, (byte) 0x03};
                                     byte[] cb_temp = cb_amount.getBytes();
                                     byte[] cb_temp_data = new byte[cb_temp.length + 2];
@@ -241,7 +283,6 @@ public class amount_change_fragment extends Fragment {
                                     System.arraycopy(cb_temp, 0, cb_temp_data, 1, cb_temp.length);
                                     System.arraycopy(cb_value, 1, cb_temp_data, cb_temp.length + 1, 1);
                                     DeviceControlActivity.mBluetoothLeService.writeRXCharacteristic(cb_temp_data);
-
                                     DeviceControlActivity.pgb2.setVisibility(View.VISIBLE);
 
                                 }
