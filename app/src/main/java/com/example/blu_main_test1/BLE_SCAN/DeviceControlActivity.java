@@ -108,7 +108,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     public static Timer tmr;
     public static Timer set_tmr;
     public static LinearLayout device_con_view;
-
+    public static TextView main_text;
     private Boolean inflateView = false;
     private String text;
     private String mDeviceName;
@@ -421,6 +421,7 @@ public class DeviceControlActivity extends AppCompatActivity {
         stateView = (TextView) findViewById(R.id.state);
        // temperView = (TextView) findViewById(R.id.temper);
         versionView = (TextView)findViewById(R.id.draw_version);
+        main_text =(TextView)findViewById(R.id.main_text);
         pgb2 = (ProgressBar)findViewById(R.id.progressBar4);
         pgb2.setVisibility(View.VISIBLE);
 
@@ -920,6 +921,7 @@ public class DeviceControlActivity extends AppCompatActivity {
             Fragment nextFragmet = fragmentStack.pop();
             getSupportFragmentManager().beginTransaction().remove(nextFragmet).commit();
             device_con_view.setVisibility(View.VISIBLE);
+            main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
         }else{
             super.onBackPressed();
         }
