@@ -4,15 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@xml/round_edge">
+    android:background="@xml/round_edge"
+    android:layout_gravity="center_vertical" >
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
 
 
             <LinearLayout
@@ -20,7 +19,8 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_margin="15dp"
-                android:weightSum="9.8">
+                android:weightSum="10.0"
+                android:adjustViewBounds="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -735,8 +735,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-        </ScrollView>
 
         <ProgressBar
             android:layout_width="wrap_content"
