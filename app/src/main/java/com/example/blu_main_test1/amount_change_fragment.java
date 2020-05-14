@@ -62,6 +62,7 @@ public class amount_change_fragment extends Fragment {
         super.onActivityCreated(b);
 
         DeviceControlActivity.set_tmr.cancel();
+        DeviceControlActivity.main_text.setText("추출량을 자유롭게 변경해보세요.");
 
         DeviceControlActivity.Coffee_small();
 
@@ -328,6 +329,8 @@ public class amount_change_fragment extends Fragment {
                                 DeviceControlActivity.fragmentStack.pop();
                                 fragmentTransaction.remove(DeviceControlActivity.amount_fragment).commit();
                                 DeviceControlActivity.device_con_view.setVisibility(View.VISIBLE);
+                                DeviceControlActivity.main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
+
 
 
 
