@@ -129,12 +129,21 @@ public class amount_change_fragment extends Fragment {
                 } else {
                     coffee_b_amount.setText("0" + (progress * 10));
                     if (progress <= 3) {
-                        progress = 3;
-                        coffee_b_amount.setText("0" + (progress * 10));
-
+                        if (progress == 3) {
+                            progress = 6;
+                            coffee_b_amount.setText("0" + (progress * 10));
+                        } else if(progress == 2){
+                            progress =5;
+                            coffee_b_amount.setText("0" + (progress * 10));
+                        } else if(progress == 1){
+                            progress = 4;
+                            coffee_b_amount.setText("0" + (progress * 10));
+                        }else{
+                            progress = 3;
+                            coffee_b_amount.setText("0" + (progress * 10));
+                        }
                     }
                 }
-
             }
         });
 
@@ -155,9 +164,19 @@ public class amount_change_fragment extends Fragment {
                 } else {
                     coffee_s_amount.setText("0" + (progress * 10));
                     if (progress <= 3) {
-                        progress = 3;
-                        coffee_s_amount.setText("0" + (progress * 10));
-
+                        if (progress == 3) {
+                            progress = 6;
+                            coffee_s_amount.setText("0" + (progress * 10));
+                        } else if(progress == 2){
+                            progress =5;
+                            coffee_s_amount.setText("0" + (progress * 10));
+                        } else if(progress == 1){
+                            progress = 4;
+                            coffee_s_amount.setText("0" + (progress * 10));
+                        }else{
+                            progress = 3;
+                            coffee_s_amount.setText("0" + (progress * 10));
+                        }
                     }
                 }
 
@@ -180,10 +199,20 @@ public class amount_change_fragment extends Fragment {
                     tea_b_amount.setText("" + (progress * 10));
                 } else {
                     tea_b_amount.setText("0" + (progress * 10));
-                    if (progress <= 0) {
-                        progress = 3;
-                        tea_b_amount.setText("0" + (progress * 10));
-
+                    if (progress <= 3) {
+                        if (progress == 3) {
+                            progress = 6;
+                            tea_b_amount.setText("0" + (progress * 10));
+                        } else if(progress == 2){
+                            progress =5;
+                            tea_b_amount.setText("0" + (progress * 10));
+                        } else if(progress == 1){
+                            progress = 4;
+                            tea_b_amount.setText("0" + (progress * 10));
+                        }else{
+                            progress = 3;
+                            tea_b_amount.setText("0" + (progress * 10));
+                        }
                     }
                 }
 
@@ -207,9 +236,19 @@ public class amount_change_fragment extends Fragment {
                 } else {
                     tea_s_amount.setText("0" + (progress * 10));
                     if (progress <= 3) {
-                        progress = 3;
-                        tea_s_amount.setText("0" + (progress * 10));
-
+                        if (progress == 3) {
+                            progress = 6;
+                            tea_s_amount.setText("0" + (progress * 10));
+                        } else if(progress == 2){
+                            progress =5;
+                            tea_s_amount.setText("0" + (progress * 10));
+                        } else if(progress == 1){
+                            progress = 4;
+                            tea_s_amount.setText("0" + (progress * 10));
+                        }else{
+                            progress = 3;
+                            tea_s_amount.setText("0" + (progress * 10));
+                        }
                     }
                 }
 
