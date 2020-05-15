@@ -76,14 +76,14 @@ public class amount_change_fragment extends Fragment {
         delayHandler2.postDelayed(new Runnable() {
             @Override
             public void run() {
-                DeviceControlActivity.Tea_large();
+                DeviceControlActivity.Tea_small();
             }
         }, 800);
         Handler delayHandler3 = new Handler();
         delayHandler3.postDelayed(new Runnable() {
             @Override
             public void run() {
-                DeviceControlActivity.Tea_small();
+                DeviceControlActivity.Tea_large();
             }
         }, 1200);
 
