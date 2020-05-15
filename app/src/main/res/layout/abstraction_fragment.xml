@@ -67,7 +67,7 @@
             android:layout_weight="3"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:weightSum="10">
+            android:weightSum="9">
 
             <LinearLayout
                 android:id="@+id/presso"
@@ -97,7 +97,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center">
 
@@ -177,7 +177,7 @@
             android:layout_weight="3"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:weightSum="10">
+            android:weightSum="9">
 
             <LinearLayout
                 android:id="@+id/tea_small"
@@ -207,7 +207,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center">
 

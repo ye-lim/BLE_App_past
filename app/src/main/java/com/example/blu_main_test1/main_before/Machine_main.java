@@ -1,6 +1,7 @@
 package com.example.blu_main_test1.main_before;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -10,10 +11,17 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.example.blu_main_test1.BLE_SCAN.DeviceScanActivity;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.BackPressHandler;
+import com.bumptech.glide.Glide;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class Machine_main extends AppCompatActivity {
     Button BLE_Btn;
@@ -47,7 +55,12 @@ public class Machine_main extends AppCompatActivity {
         }
 
         BLE_Btn.setVisibility(View.VISIBLE);
+
+        ImageView iv_frame_ble_start = (ImageView)findViewById(R.id.iv_frame_ble);
+        GlideDrawableImageViewTarget gifImage = new GlideDrawableImageViewTarget(iv_frame_ble_start);
+        Glide.with(this).load(R.raw.ble_start).into(gifImage);
     }
+
 
 
     View.OnClickListener btnListener = new View.OnClickListener() {
