@@ -435,176 +435,12 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/tl_icon02"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="대"
-                        android:textColor="#676767"
-                        android:textSize="10dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="8"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="9dp"
-                        android:orientation="horizontal">
-
-                        <SeekBar
-                            android:layout_centerVertical="true"
-                            android:id="@+id/seek_Tea_big"
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:max="32"
-                            android:thumb="@xml/custom_thumb"
-                            android:progressDrawable="@xml/custom_seekbar"/>
-
-                        <TextView
-                            android:layout_centerVertical="true"
-                            android:layout_marginTop="12dp"
-                            android:id="@+id/tea_b_amount"
-                            android:layout_width="30dp"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="195dp"
-                            android:background="@xml/amount_ch_edit"
-                            android:gravity="center_horizontal"
-                            android:textColor="#FFFFFF"
-                            android:textSize="11dp" />
-
-                        <TextView
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="2dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:layout_toRightOf="@+id/tea_b_amount"
-                            android:text="ml"
-                            android:textColor="#091f3f"
-                            android:textSize="11dp"
-                            android:textStyle="bold" />
-
-                        <View
-                            android:layout_centerVertical="true"
-                            android:layout_width="3dp"
-                            android:layout_height="10dp"
-                            android:background="#091f3f"
-                            android:layout_marginLeft="50dp"/>
-
-
-                        <View
-                            android:layout_centerVertical="true"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="3dp"
-                            android:layout_height="10dp"
-                            android:background="#091f3f"
-                            android:layout_marginLeft="105dp"/>
-
-                        <View
-                            android:layout_centerVertical="true"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="3dp"
-                            android:layout_height="10dp"
-                            android:background="#091f3f"
-                            android:layout_marginLeft="155dp"/>
-
-
-
-                        <RelativeLayout
-                            android:layout_marginTop="8dp"
-                            android:layout_width="220dp"
-                            android:layout_height="match_parent"
-                            android:layout_below="@+id/seek_Tea_big">
-
-                            <TextView
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginTop="5.8dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="30"
-                                android:textSize="9dp"
-                                android:gravity="center"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="100"
-                                android:layout_marginLeft="45dp"
-                                android:layout_marginTop="5dp"
-                                android:textSize="9dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="200"
-                                android:layout_marginLeft="100dp"
-                                android:layout_marginTop="5.5dp"
-                                android:textSize="9dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="300"
-                                android:layout_marginLeft="150dp"
-                                android:layout_marginTop="5.5dp"
-                                android:textSize="9dp" />
-
-                            <TextView
-                                android:layout_marginTop="5.8dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="180dp"
-                                android:text="350"
-                                android:textSize="9dp"
-                                android:gravity="center"/>
-
-
-                        </RelativeLayout>
-
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.7"
-                android:orientation="horizontal"
-                android:weightSum="10.0">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
                         android:src="@drawable/ts_icon02"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="소"
+                        android:text="tea-일반"
                         android:textColor="#676767"
                         android:textSize="10dp"
                         android:textStyle="bold"
@@ -689,6 +525,170 @@
                             android:layout_width="220dp"
                             android:layout_height="match_parent"
                             android:layout_below="@+id/seek_Tea_small">
+
+                            <TextView
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5.8dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="30"
+                                android:textSize="9dp"
+                                android:gravity="center"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="100"
+                                android:layout_marginLeft="45dp"
+                                android:layout_marginTop="5dp"
+                                android:textSize="9dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="200"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginTop="5.5dp"
+                                android:textSize="9dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="300"
+                                android:layout_marginLeft="150dp"
+                                android:layout_marginTop="5.5dp"
+                                android:textSize="9dp" />
+
+                            <TextView
+                                android:layout_marginTop="5.8dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="180dp"
+                                android:text="350"
+                                android:textSize="9dp"
+                                android:gravity="center"/>
+
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.7"
+                android:orientation="horizontal"
+                android:weightSum="10.0">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/tl_icon02"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="tea-대"
+                        android:textColor="#676767"
+                        android:textSize="10dp"
+                        android:textStyle="bold"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="9dp"
+                        android:orientation="horizontal">
+
+                        <SeekBar
+                            android:layout_centerVertical="true"
+                            android:id="@+id/seek_Tea_big"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:max="32"
+                            android:thumb="@xml/custom_thumb"
+                            android:progressDrawable="@xml/custom_seekbar"/>
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="12dp"
+                            android:id="@+id/tea_b_amount"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="195dp"
+                            android:background="@xml/amount_ch_edit"
+                            android:gravity="center_horizontal"
+                            android:textColor="#FFFFFF"
+                            android:textSize="11dp" />
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="2dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_toRightOf="@+id/tea_b_amount"
+                            android:text="ml"
+                            android:textColor="#091f3f"
+                            android:textSize="11dp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_centerVertical="true"
+                            android:layout_width="3dp"
+                            android:layout_height="10dp"
+                            android:background="#091f3f"
+                            android:layout_marginLeft="50dp"/>
+
+
+                        <View
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="3dp"
+                            android:layout_height="10dp"
+                            android:background="#091f3f"
+                            android:layout_marginLeft="105dp"/>
+
+                        <View
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="3dp"
+                            android:layout_height="10dp"
+                            android:background="#091f3f"
+                            android:layout_marginLeft="155dp"/>
+
+
+
+                        <RelativeLayout
+                            android:layout_marginTop="8dp"
+                            android:layout_width="220dp"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/seek_Tea_big">
 
                             <TextView
                                 android:layout_marginLeft="5dp"

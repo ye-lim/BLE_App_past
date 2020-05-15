@@ -323,10 +323,10 @@ public class amount_change_fragment extends Fragment {
                                     }, 2000);  // 1 초 후에 실행
                                 }
                                 DeviceControlActivity.tempTask();
-                                FragmentManager fragmentManager = getFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                DeviceControlActivity.fragmentManager = getFragmentManager();
+                                DeviceControlActivity.fragmentTransaction = DeviceControlActivity.fragmentManager.beginTransaction();
                                 DeviceControlActivity.fragmentStack.pop();
-                                fragmentTransaction.remove(DeviceControlActivity.amount_fragment).commit();
+                                DeviceControlActivity.fragmentTransaction.remove(DeviceControlActivity.amount_fragment).commit();
                                 DeviceControlActivity.device_con_view.setVisibility(View.VISIBLE);
                                 DeviceControlActivity.main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
 
@@ -366,8 +366,4 @@ public class amount_change_fragment extends Fragment {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 }

@@ -70,6 +70,7 @@ import android.widget.Toast;
 import com.example.blu_main_test1.BLE_button.abstraction;
 import com.example.blu_main_test1.Main_page.Main_page2.product_amount;
 import com.example.blu_main_test1.R;
+import com.example.blu_main_test1.abstraction_fragment;
 import com.example.blu_main_test1.amount_change_fragment;
 import com.example.blu_main_test1.main_before.Machine_main;
 import com.example.blu_main_test1.main_before.theMainPage;
@@ -93,7 +94,8 @@ public class DeviceControlActivity extends AppCompatActivity {
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
 
-    public static Stack<Fragment> fragmentStack;
+    public static Stack<Fragment> fragmentStack = new Stack<>();;
+    public static Fragment abstraction_fragment;
     public static Fragment amount_fragment;
 
     private ImageButton back;
@@ -127,6 +129,9 @@ public class DeviceControlActivity extends AppCompatActivity {
     private int coffee_big_number,coffee_small_number,tea_big_number,tea_small_number;
     private SeekBar sb_c_b,sb_c_s,sb_t_b,sb_t_s;
     private boolean waiting = false;
+
+    public static FragmentManager fragmentManager;
+    public static FragmentTransaction fragmentTransaction;
 
     // Code to manage Service lifecycle.
     //서비스가 연결됐을 때, 안됐을 때 관리
@@ -239,10 +244,11 @@ public class DeviceControlActivity extends AppCompatActivity {
                                             }else{
                                                 createNotification();
                                             }
-
-                                        }
+                                        }if(com.example.blu_main_test1.abstraction_fragment.abstraction){
+                                        com.example.blu_main_test1.abstraction_fragment.progressOFF();
+                                        com.example.blu_main_test1.abstraction_fragment.abstraction=false;
+                                    }
                                         waiting = false;
-
                                         break;
                                     case "91":
                                         AlertDialog.Builder alert_confirm = new AlertDialog.Builder(DeviceControlActivity.this);
@@ -548,8 +554,12 @@ public class DeviceControlActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.amount_start:
-                    Intent intent=new Intent(getApplicationContext(), abstraction.class);
-                    startActivity(intent);
+                    device_con_view.setVisibility(View.GONE);
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    abstraction_fragment = new abstraction_fragment();
+                    fragmentStack.push(abstraction_fragment);
+                    fragmentTransaction.replace(R.id.fragment_view, abstraction_fragment).commit();
                     break;
 
                 case R.id.product_amount:
@@ -620,10 +630,9 @@ public class DeviceControlActivity extends AppCompatActivity {
 
                 case R.id.amount_change:
                     device_con_view.setVisibility(View.GONE);
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
                     amount_fragment = new amount_change_fragment();
-                    fragmentStack = new Stack<>();
                     fragmentStack.push(amount_fragment);
                     fragmentTransaction.replace(R.id.fragment_view, amount_fragment).commit();
                     set_tmr.cancel();
