@@ -11,7 +11,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#17233d">
+        android:background="#091f3f">
 
         <!--<ImageView
             android:layout_width="350dp"
@@ -32,7 +32,7 @@
             android:layout_marginRight="70dp"
             android:layout_marginLeft="70dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo_white"/>
+            android:src="@drawable/splash_logo"/>
     </FrameLayout>
 
 

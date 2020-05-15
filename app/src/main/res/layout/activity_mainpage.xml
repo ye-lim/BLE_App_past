@@ -66,7 +66,7 @@
                         android:layout_weight="0.1"
                         android:textSize="15dp"
                         android:text="내 메디프레소 머신"
-                        android:textColor="#646464"/>
+                        android:textColor="#5a5a5a"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -78,14 +78,16 @@
                         android:layout_marginLeft="7dp"
                         android:layout_marginRight="7dp"
                         android:layout_gravity="center"
+                        android:layout_centerInParent="true"
                         android:src="@drawable/to_machine"/>
                     <Button
                         android:id="@+id/to_BLE"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="0.13"
-                        android:backgroundTint="#FECD07"
+                        android:backgroundTint="#FFCD08"
                         android:text="동작하러 가기"
+                        android:textColor="#091f3f"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                     <TextView
@@ -114,14 +116,14 @@
                         android:textSize="25dp"
                         android:text="Site"
                         android:textStyle="bold"
-                        android:textColor="#011E41"/>
+                        android:textColor="#091f3f"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="0.1"
                         android:textSize="15dp"
                         android:text="메디프레소 사이트"
-                        android:textColor="#646464"/>
+                        android:textColor="#5a5a5a"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -131,18 +133,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="0.5"
-                        android:layout_marginLeft="7dp"
-                        android:layout_marginRight="7dp"
+                        android:layout_margin="7dp"
                         android:layout_gravity="center"
                         android:src="@drawable/to_shop"/>
-
                     <Button
                         android:id="@+id/to_shop"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="0.13"
-                        android:backgroundTint="#FECD07"
+                        android:backgroundTint="#FFCD08"
                         android:text="구경하러가기"
+                        android:textColor="#091f3f"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                     <TextView
