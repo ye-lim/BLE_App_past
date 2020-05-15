@@ -16,7 +16,7 @@
             android:layout_margin="80dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_weight="6"
             android:orientation="vertical"
             android:gravity="center"
             android:background="@color/white">
@@ -49,7 +49,7 @@
                 android:onClick="stopclicked"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="20dp"
                 android:text="추출 중지"
                 android:textColor="#414141"
                 android:textSize="15dp"
