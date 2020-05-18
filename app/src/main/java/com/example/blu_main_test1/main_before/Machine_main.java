@@ -1,7 +1,7 @@
 package com.example.blu_main_test1.main_before;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -12,20 +12,20 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.example.blu_main_test1.BLE_SCAN.BottomSheet_scan;
 import com.example.blu_main_test1.BLE_SCAN.DeviceScanActivity;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.BackPressHandler;
 import com.bumptech.glide.Glide;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-
 public class Machine_main extends AppCompatActivity {
     Button BLE_Btn;
     ImageButton btn_back;
+    TextView mTextView;
+    private BluetoothAdapter mBluetoothAdapter; //bluetooth_finding 어댑터
     private BackPressHandler backPressHandler;
 
     @Override
@@ -68,6 +68,8 @@ public class Machine_main extends AppCompatActivity {
         public void onClick(View view){
             switch(view.getId()) {
                 case R.id.BLE_Btn:
+                    //BottomSheet_scan bottomSheet = new BottomSheet_scan();
+                    //bottomSheet.show(getSupportFragmentManager(), "BottomSheet_Scan");
                     Intent intent = new Intent(getApplicationContext(), DeviceScanActivity.class);
                     startActivity(intent);
                     finish();
@@ -80,6 +82,8 @@ public class Machine_main extends AppCompatActivity {
             }
         }
     };
-
-
+    public void onOptionClick(String text) {
+        //change text on click
+        mTextView.setText(text);
+    }
 }
