@@ -15,7 +15,8 @@
             android:layout_width="1px"
             android:layout_height="1px" />
         <FrameLayout
-            xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/logo_color">
             <ImageButton
