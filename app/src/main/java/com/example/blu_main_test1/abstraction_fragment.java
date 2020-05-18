@@ -138,7 +138,7 @@ public class abstraction_fragment extends Fragment {
         getView().findViewById(R.id.presso).setOnClickListener(onClickListener); //에스프레소버튼 리스너
         getView().findViewById(R.id.tea_big).setOnClickListener(onClickListener); //tea대 리스서
         getView().findViewById(R.id.tea_small).setOnClickListener(onClickListener); //tea스몰 리스너
-
+        getView().findViewById(R.id.backclose).setOnClickListener(onClickListener);
 
     }
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -146,6 +146,13 @@ public class abstraction_fragment extends Fragment {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
+                case R.id.backclose:
+                    Fragment nextFragmet = DeviceControlActivity.fragmentStack.pop();
+                    DeviceControlActivity.fragmentManager.beginTransaction().remove(nextFragmet).commit();
+                    DeviceControlActivity.device_con_view.setVisibility(View.VISIBLE);
+                    DeviceControlActivity.main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
+                    break;
+
                 case R.id.rong_coffee:
                     if(DeviceControlActivity.mConnected){
                         String rong_coffee = "03ECL37";

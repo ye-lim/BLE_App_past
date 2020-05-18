@@ -12,18 +12,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="15dp"
-        android:weightSum="13.5">
+        android:weightSum="13">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:orientation="horizontal"
             android:gravity="right">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="match_parent" />
+                android:id="@+id/backclose"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:src ="@drawable/close"/>
 
         </LinearLayout>
 
