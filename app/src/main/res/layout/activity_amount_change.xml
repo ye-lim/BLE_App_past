@@ -17,19 +17,21 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_margin="15dp"
-            android:weightSum="10.0"
+            android:weightSum="10.2"
             android:adjustViewBounds="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.5"
                 android:orientation="horizontal"
                 android:gravity="right">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent" />
+                    android:id="@+id/close_amount"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/close"/>
 
             </LinearLayout>
 

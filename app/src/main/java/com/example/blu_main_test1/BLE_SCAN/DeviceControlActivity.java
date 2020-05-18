@@ -939,7 +939,6 @@ public class DeviceControlActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         if(!fragmentStack.isEmpty()){ //추출량 변화 view 에서 뒤로가기 버튼을 눌렀을 경우 액티비티가 종료되지 않고 뷰만 종료되도록
-            tempTask();
             Fragment nextFragmet = fragmentStack.pop();
             getSupportFragmentManager().beginTransaction().remove(nextFragmet).commit();
             device_con_view.setVisibility(View.VISIBLE);

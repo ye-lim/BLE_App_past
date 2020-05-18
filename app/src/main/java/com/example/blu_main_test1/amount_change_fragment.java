@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -50,6 +51,7 @@ public class amount_change_fragment extends Fragment {
     private int coffee_big_number,coffee_small_number,tea_big_number,tea_small_number;
     public static SeekBar sb_c_b,sb_c_s,sb_t_b,sb_t_s;
     private String text;
+    private ImageView close_amount;
 
     public amount_change_fragment() {
         // Required empty public constructor
@@ -110,13 +112,25 @@ public class amount_change_fragment extends Fragment {
         tea_b_amount = (TextView) getView().findViewById(R.id.tea_b_amount);
         tea_s_amount = (TextView) getView().findViewById(R.id.tea_s_amount);
         sub_amount = (Button) getView().findViewById(R.id.sub_amount);
+        close_amount = (ImageView)getView().findViewById(R.id.close_amount);
         pgb = (ProgressBar) getView().findViewById(R.id.progressBar3);
         pgb.setVisibility(View.VISIBLE);
+
 
         sb_c_b = (SeekBar) getView().findViewById(R.id.seek_coffee_big);
         sb_c_s = (SeekBar) getView().findViewById(R.id.seek_coffee_small);
         sb_t_b = (SeekBar) getView().findViewById(R.id.seek_Tea_big);
         sb_t_s = (SeekBar) getView().findViewById(R.id.seek_Tea_small);
+
+        close_amount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment nextFragmet = DeviceControlActivity.fragmentStack.pop();
+                DeviceControlActivity.fragmentManager.beginTransaction().remove(nextFragmet).commit();
+                DeviceControlActivity.device_con_view.setVisibility(View.VISIBLE);
+                DeviceControlActivity.main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
+            }
+        });
 
 
         sb_c_b.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { //롱고 시크바
