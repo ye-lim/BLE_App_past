@@ -170,8 +170,11 @@ public class DeviceControlActivity extends AppCompatActivity {
                 updateConnectionState(R.string.connected);//연결됨을 ui에서 표시
                 invalidateOptionsMenu(); //onCreateOptionsMenu 호출
                 if(mConnected){
+
                     set_tmr = new Timer();
                     set_tmr.schedule(new State(), 1000, 10000);
+
+
                     Handler delayHandler = new Handler();
                     delayHandler.postDelayed(new Runnable() {
                         @Override
@@ -560,6 +563,10 @@ public class DeviceControlActivity extends AppCompatActivity {
                     abstraction_fragment = new abstraction_fragment();
                     fragmentStack.push(abstraction_fragment);
                     fragmentTransaction.replace(R.id.fragment_view, abstraction_fragment).commit();
+                    if(set_tmr!=null){
+                        set_tmr.cancel();
+                    }
+                    tempTask();
                     break;
 
                 case R.id.product_amount:
@@ -635,7 +642,9 @@ public class DeviceControlActivity extends AppCompatActivity {
                     amount_fragment = new amount_change_fragment();
                     fragmentStack.push(amount_fragment);
                     fragmentTransaction.replace(R.id.fragment_view, amount_fragment).commit();
-                    set_tmr.cancel();
+                    if(set_tmr!=null){
+                        set_tmr.cancel();
+                    }
                     if(tmr!=null){
                         tmr.cancel();
                     }
@@ -941,6 +950,9 @@ public class DeviceControlActivity extends AppCompatActivity {
     }
 
     public static void tempTask(){
+        if(tmr!=null){
+            tmr.cancel();
+        }
         tmr = new Timer();
         tmr.schedule(new State(), 3000, 10000);
     }

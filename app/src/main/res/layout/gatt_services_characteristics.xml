@@ -83,7 +83,7 @@
                                 android:gravity="center"
                                 android:text="블루투스"
                                 android:textColor="@color/black"
-                                android:textSize="12dp"
+                                android:textSize="13dp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -94,7 +94,7 @@
                                 android:gravity="center"
                                 android:text="연결안됨"
                                 android:textColor="@color/yellow"
-                                android:textSize="10dp"
+                                android:textSize="12dp"
                                 android:textStyle="bold" />
 
 
@@ -105,7 +105,7 @@
                                 android:gravity="center"
                                 android:text="머신상태"
                                 android:textColor="@color/black"
-                                android:textSize="12dp"
+                                android:textSize="13dp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -115,7 +115,7 @@
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"
                                 android:textColor="@color/yellow"
-                                android:textSize="10dp"
+                                android:textSize="12dp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -160,7 +160,7 @@
                                 android:layout_marginRight="10dp"
                                 android:background="@xml/disconnect"
                                 android:text="연결끊기"
-                                android:textSize="13dp"
+                                android:textSize="14dp"
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
@@ -518,7 +518,47 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="4.5"
-                                android:background="@xml/round_edge">
+                                android:background="@xml/round_edge"
+                                android:orientation="horizontal"
+                                android:weightSum="10.0">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="9.3"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="60dp"
+                                        android:src="@drawable/icon06" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="간단사용설명서"
+                                        android:textColor="#676767"
+                                        android:textSize="15dp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.7"
+                                    android:orientation="vertical"
+                                    android:gravity="center_vertical">
+
+                                    <ImageView
+                                        android:layout_marginRight="5dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/arrow"/>
+
+                                </LinearLayout>
 
                             </LinearLayout>
 

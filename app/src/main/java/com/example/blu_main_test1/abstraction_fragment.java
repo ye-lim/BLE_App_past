@@ -108,11 +108,25 @@ public class abstraction_fragment extends Fragment {
         }
     }
 
-    public void startProgress() {
-        progressON(getActivity(),"추출중.....");
+    public void rong_coffee_startProgress() {
+        progressON(getActivity(),"룽고를");
         abstraction = true;
     }
 
+    public void presso_startProgress() {
+        progressON(getActivity(),"에스프레소를");
+        abstraction = true;
+    }
+
+    public void tea_big_startProgress() {
+        progressON(getActivity(),"tea-대를");
+        abstraction = true;
+    }
+
+    public void tea_small_startProgress() {
+        progressON(getActivity(),"tea-일반을");
+        abstraction = true;
+    }
 
 
     @Override
@@ -120,7 +134,6 @@ public class abstraction_fragment extends Fragment {
         super.onActivityCreated(b);
 
         DeviceControlActivity.main_text.setText("추출하고싶은 종류의 버튼을 누르면 추출이 됩니다.");
-
         getView().findViewById(R.id.rong_coffee).setOnClickListener(onClickListener); //롱고버튼 리스너
         getView().findViewById(R.id.presso).setOnClickListener(onClickListener); //에스프레소버튼 리스너
         getView().findViewById(R.id.tea_big).setOnClickListener(onClickListener); //tea대 리스서
@@ -143,7 +156,7 @@ public class abstraction_fragment extends Fragment {
                         System.arraycopy(rong_coffee__temp, 0, rong_coffee_temp_data, 1, rong_coffee__temp.length);
                         System.arraycopy(rong_coffee_value, 1, rong_coffee_temp_data, rong_coffee__temp.length + 1, 1);
                         DeviceControlActivity.mBluetoothLeService.writeRXCharacteristic(rong_coffee_temp_data);
-                        startProgress();
+                        rong_coffee_startProgress();
                     } else{
                       //  startToast("블루투스가 연결 되어 있지 않습니다.");
                     }
@@ -162,7 +175,7 @@ public class abstraction_fragment extends Fragment {
                         System.arraycopy(presso_temp, 0, presso_temp_data, 1, presso_temp.length);
                         System.arraycopy(presso_value, 1, presso_temp_data, presso_temp.length + 1, 1);
                         DeviceControlActivity.mBluetoothLeService.writeRXCharacteristic(presso_temp_data);
-                        startProgress();
+                        presso_startProgress();
                     } else{
                        // startToast("블루투스가 연결 되어 있지 않습니다.");
                     }
@@ -180,7 +193,7 @@ public class abstraction_fragment extends Fragment {
                         System.arraycopy(tea_big_temp, 0, tea_big_temp_data, 1, tea_big_temp.length);
                         System.arraycopy(tea_big_value, 1, tea_big_temp_data, tea_big_temp.length + 1, 1);
                         DeviceControlActivity.mBluetoothLeService.writeRXCharacteristic(tea_big_temp_data);
-                        startProgress();
+                        tea_big_startProgress();
                     } else{
                       //  startToast("블루투스가 연결 되어 있지 않습니다.");
                     }
@@ -198,7 +211,7 @@ public class abstraction_fragment extends Fragment {
                         System.arraycopy(tea_small_temp, 0, tea_small_temp_data, 1, tea_small_temp.length);
                         System.arraycopy(tea_small_value, 1, tea_small_temp_data, tea_small_temp.length + 1, 1);
                         DeviceControlActivity.mBluetoothLeService.writeRXCharacteristic(tea_small_temp_data);
-                        startProgress();
+                        tea_small_startProgress();
                     } else{
                         //startToast("블루투스가 연결 되어 있지 않습니다.");
                     }

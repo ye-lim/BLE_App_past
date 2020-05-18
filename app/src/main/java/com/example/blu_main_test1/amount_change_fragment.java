@@ -86,6 +86,13 @@ public class amount_change_fragment extends Fragment {
                 DeviceControlActivity.Tea_large();
             }
         }, 1200);
+        Handler delayHandler4 = new Handler();
+        delayHandler4.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                DeviceControlActivity.tempTask();
+            }
+        }, 1600);
 
 
         LinearLayout.LayoutParams paramlinear = new LinearLayout.LayoutParams(
@@ -223,34 +230,36 @@ public class amount_change_fragment extends Fragment {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             if (DeviceControlActivity.mConnected) {
                                 if (coffee_b_amount.getText().toString().length() != 0) {
-                                    if (Integer.parseInt(coffee_b_amount.getText().toString()) > 990) {
-                                        Toast.makeText(getActivity(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                                        coffee_b_amount.requestFocus();
-                                        return;
+                                    if(DeviceControlActivity.tmr!=null){
+                                        DeviceControlActivity.tmr.cancel();
                                     }
-                                    //int coffee_b_amount_ex = Integer.parseInt(coffee_b_amount.getText().toString().substring(0, 2)); //임시
-                                    String c_value = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2); //기존
-                                    //String c_value = Integer.toString(coffee_b_amount_ex); //임시
-                                    String cb_amount = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2) + DeviceControlActivity.stringToHex(c_value);//기존
-                                    //String cb_amount = "05TCL" + c_value + DeviceControlActivity.stringToHex(c_value);//임시
-                                    byte[] cb_value = {(byte) 0x02, (byte) 0x03};
-                                    byte[] cb_temp = cb_amount.getBytes();
-                                    byte[] cb_temp_data = new byte[cb_temp.length + 2];
-                                    System.arraycopy(cb_value, 0, cb_temp_data, 0, 1);
-                                    System.arraycopy(cb_temp, 0, cb_temp_data, 1, cb_temp.length);
-                                    System.arraycopy(cb_value, 1, cb_temp_data, cb_temp.length + 1, 1);
-                                    DeviceControlActivity.mBluetoothLeService.writeRXCharacteristic(cb_temp_data);
                                     DeviceControlActivity.pgb2.setVisibility(View.VISIBLE);
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                            //int coffee_b_amount_ex = Integer.parseInt(coffee_b_amount.getText().toString().substring(0, 2)); //임시
+                                            String c_value = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2); //기존
+                                            //String c_value = Integer.toString(coffee_b_amount_ex); //임시
+                                            String cb_amount = "05TCL" + coffee_b_amount.getText().toString().substring(0, 2) + DeviceControlActivity.stringToHex(c_value);//기존
+                                            //String cb_amount = "05TCL" + c_value + DeviceControlActivity.stringToHex(c_value);//임시
+                                            byte[] cb_value = {(byte) 0x02, (byte) 0x03};
+                                            byte[] cb_temp = cb_amount.getBytes();
+                                            byte[] cb_temp_data = new byte[cb_temp.length + 2];
+                                            System.arraycopy(cb_value, 0, cb_temp_data, 0, 1);
+                                            System.arraycopy(cb_temp, 0, cb_temp_data, 1, cb_temp.length);
+                                            System.arraycopy(cb_value, 1, cb_temp_data, cb_temp.length + 1, 1);
+                                            DeviceControlActivity.mBluetoothLeService.writeRXCharacteristic(cb_temp_data);
+                                        }
+
+                                    }, 500);  // 1 초 후에 실행
+
 
                                 }
 
 
                                 if (coffee_s_amount.getText().toString().length() != 0) {
-                                    if (Integer.parseInt(coffee_s_amount.getText().toString()) > 990) {
-                                        Toast.makeText(getActivity(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                                        coffee_s_amount.requestFocus();
-                                        return;
-                                    }
+
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -272,11 +281,7 @@ public class amount_change_fragment extends Fragment {
 
 
                                 if (tea_b_amount.getText().toString().length() != 0) {
-                                    if (Integer.parseInt(tea_b_amount.getText().toString()) > 990) {
-                                        Toast.makeText(getActivity(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                                        tea_b_amount.requestFocus();
-                                        return;
-                                    }
+
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -297,11 +302,7 @@ public class amount_change_fragment extends Fragment {
 
 
                                 if (tea_s_amount.getText().toString().length() != 0) {
-                                    if (Integer.parseInt(tea_s_amount.getText().toString()) > 990) {
-                                        Toast.makeText(getActivity(), "0~990사이로 설정해주세요", Toast.LENGTH_SHORT).show();
-                                        tea_s_amount.requestFocus();
-                                        return;
-                                    }
+
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
 
