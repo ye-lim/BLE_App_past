@@ -76,7 +76,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main_page.Main_page2.product_amount">
+        <activity android:name=".Main_page.Main_page2.product_amount"
+            android:theme="@style/join">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -74,6 +74,11 @@ import com.example.blu_main_test1.abstraction_fragment;
 import com.example.blu_main_test1.amount_change_fragment;
 import com.example.blu_main_test1.main_before.Machine_main;
 import com.example.blu_main_test1.main_before.theMainPage;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -132,6 +137,11 @@ public class DeviceControlActivity extends AppCompatActivity {
 
     public static FragmentManager fragmentManager;
     public static FragmentTransaction fragmentTransaction;
+
+    public static List<String> tradition_textList;
+    public static List<String> hancha_textList;
+    public static List<String> blend_textList;
+    public static List<String> all_textList;
 
     // Code to manage Service lifecycle.
     //서비스가 연결됐을 때, 안됐을 때 관리
@@ -434,7 +444,54 @@ public class DeviceControlActivity extends AppCompatActivity {
         pgb2 = (ProgressBar)findViewById(R.id.progressBar4);
         pgb2.setVisibility(View.VISIBLE);
 
+        tradition_textList = new ArrayList<String>();
+        hancha_textList = new ArrayList<String>();
+        blend_textList = new ArrayList<String>();
+
         Handler delayHandler = new Handler();
+
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("BLE_APP")
+                .whereEqualTo("product_kind", "전통") //파이어베이스 전통 종목 리스트에 추가
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                tradition_textList.add(document.getData().get("product_name").toString());
+                            }
+                        }
+                    }
+                });
+
+        db.collection("BLE_APP")
+                .whereEqualTo("product_kind", "한차") //파이어베이스 한차 종목 리스트에 추가
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                hancha_textList.add(document.getData().get("product_name").toString());
+                            }
+                        }
+                    }
+                });
+
+        db.collection("BLE_APP")
+                .whereEqualTo("product_kind", "블렌딩") //파이어베이스 블렌드 종목 리스트에 추가
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                blend_textList.add(document.getData().get("product_name").toString());
+                            }
+                        }
+                    }
+                });
 
         delayHandler.postDelayed(new Runnable() {
             @Override

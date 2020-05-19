@@ -12,26 +12,22 @@ import com.example.blu_main_test1.R;
 
 public class CommonFragment extends Fragment {
 
-   private String  texturl,s_text;
-   public static String image;
-    private TextView number_tv,s_number_tv;
+    private String  texturl;
+    private TextView number_tv;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_common_amount_ch, null);
+        View rootView = inflater.inflate(R.layout.page, null);
      //   MainActivity main = new MainActivity();
         //ImageLoader.getInstance().displayImage(image, main.image);
-        number_tv=(TextView)rootView.findViewById(R.id.number_tv);
-        s_number_tv=(TextView)rootView.findViewById(R.id.s_number_tv);
-        number_tv.setText(texturl);
-        s_number_tv.setText(s_text);
+
+
         return rootView;
     }
 
-    public void bindData(String texturl,String s_text) {
+    public void bindData(String texturl) {
         this.texturl = texturl;
-        this.s_text = s_text;
 
     }
 
