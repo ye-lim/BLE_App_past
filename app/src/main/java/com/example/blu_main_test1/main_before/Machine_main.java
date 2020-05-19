@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
-import com.example.blu_main_test1.BLE_SCAN.BottomSheet_scan;
+//import com.example.blu_main_test1.BLE_SCAN.BottomSheet_scan;
 import com.example.blu_main_test1.BLE_SCAN.DeviceScanActivity;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.BackPressHandler;

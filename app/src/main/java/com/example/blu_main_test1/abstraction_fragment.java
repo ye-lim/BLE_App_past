@@ -88,7 +88,7 @@ public class abstraction_fragment extends Fragment {
 
     }
 
-    public void progressSET(String message) {
+    public static void progressSET(String message) {
 
         if (progressDialog == null || !progressDialog.isShowing()) {
             return;
@@ -141,7 +141,7 @@ public class abstraction_fragment extends Fragment {
         getView().findViewById(R.id.backclose).setOnClickListener(onClickListener);
 
     }
-    View.OnClickListener onClickListener = new View.OnClickListener() {
+    public View.OnClickListener onClickListener = new View.OnClickListener() {
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
         @Override
         public void onClick(View view) {

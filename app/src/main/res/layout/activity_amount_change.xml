@@ -176,52 +176,53 @@
                             android:id="@+id/text"
                             android:layout_width="220dp"
                             android:layout_height="match_parent"
-                            android:layout_below="@+id/seek_coffee_small">
+                            android:layout_below="@+id/seek_coffee_small"
+                            android:layout_marginTop="-44dp">
 
                             <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="5.8dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
+                                android:gravity="center"
                                 android:text="30"
-                                android:textSize="9dp"
-                                android:gravity="center"/>
+                                android:textSize="9dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="100"
                                 android:layout_marginLeft="45dp"
                                 android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="100"
                                 android:textSize="9dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="200"
                                 android:layout_marginLeft="100dp"
                                 android:layout_marginTop="5.5dp"
+                                android:gravity="center"
+                                android:text="200"
                                 android:textSize="9dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="300"
                                 android:layout_marginLeft="150dp"
                                 android:layout_marginTop="5.5dp"
+                                android:gravity="center"
+                                android:text="300"
                                 android:textSize="9dp" />
 
                             <TextView
-                                android:layout_marginTop="5.8dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="180dp"
+                                android:layout_marginTop="5.8dp"
+                                android:gravity="center"
                                 android:text="350"
-                                android:textSize="9dp"
-                                android:gravity="center"/>
+                                android:textSize="9dp" />
 
 
                         </RelativeLayout>
