@@ -29,6 +29,9 @@ import com.example.blu_main_test1.BLE_SCAN.BluetoothLeService;
 import com.example.blu_main_test1.BLE_SCAN.DeviceControlActivity;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.abstraction_fragment;
+import com.example.blu_main_test1.amount_change_viewpager.ImgViewPagerAdapter_blend;
+import com.example.blu_main_test1.amount_change_viewpager.ImgViewPagerAdapter_hancha;
+import com.example.blu_main_test1.amount_change_viewpager.ImgViewPagerAdapter_tradition;
 import com.example.blu_main_test1.amount_change_viewpager.TextViewPagerAdapter_blend;
 import com.example.blu_main_test1.amount_change_viewpager.TextViewPagerAdapter_hancha;
 import com.example.blu_main_test1.amount_change_viewpager.TextViewPagerAdapter_tradition;
@@ -46,9 +49,13 @@ import static com.example.blu_main_test1.abstraction_fragment.progressDialog;
 public class product_amount extends AppCompatActivity {
 
     public static ViewPager tradition_viewpager,hancha_viewpager,blend_viewpager;
+    public static ViewPager tradition_viewpager_img,hancha_viewpager_img,blend_viewpager_img;
     private TextViewPagerAdapter_tradition tradition_pagerAdapter;
     private TextViewPagerAdapter_hancha hancha_pagerAdapter;
     private TextViewPagerAdapter_blend blend_pagerAdapter;
+    private ImgViewPagerAdapter_tradition tradition_pagerAdapter_img;
+    private ImgViewPagerAdapter_hancha hancha_pagerAdapter_img;
+    private ImgViewPagerAdapter_blend blend_pagerAdapter_img;
     private TextView kind, name,amount,origin;
     private Button press_btn ;
     private ImageView left_btn, right_btn;
@@ -59,16 +66,7 @@ public class product_amount extends AppCompatActivity {
 
 
 
-
     private TabLayout tabLayout;
-
-
-
-    private final String[] imageArray = {"assets://ssanghwa.png", "assets://chegam.png", "assets://sipjeon.png", "assets://bugi.png",
-            "assets://gawol.png", "assets://kwaecheong.png", "assets://huyuan.png", "assets://cheonggong.png", "assets://danggam.png","assets://ongi.png",
-            "assets://rooibos.png","assets://chamomile.png","assets://hibi.png"};
-
-
 
 
 
@@ -94,12 +92,12 @@ public class product_amount extends AppCompatActivity {
         tradition_viewpager = findViewById(R.id.tradition_viewpager);
         tradition_viewpager.setClipToPadding(false);
         tradition_viewpager.setOffscreenPageLimit(4);
+
         int dpValue = 60;
         float d = getResources().getDisplayMetrics().density;
         int margin = (int) (dpValue * d);
         tradition_viewpager.setPadding(margin,0, margin, 0);
         tradition_viewpager.setPageMargin(0);
-
 
         hancha_viewpager =findViewById(R.id.hancha_viewpager);
         hancha_viewpager.setClipToPadding(false);
@@ -109,8 +107,7 @@ public class product_amount extends AppCompatActivity {
 
 
         int dpValue_blend = 50;
-        float d_blend = getResources().getDisplayMetrics().density;
-        int margin_blend = (int) (dpValue_blend * d_blend);
+        int margin_blend = (int) (dpValue_blend * d);
         blend_viewpager = findViewById(R.id.blend_viewpager);
         blend_viewpager.setClipToPadding(false);
         blend_viewpager.setOffscreenPageLimit(4);
@@ -131,10 +128,46 @@ public class product_amount extends AppCompatActivity {
         blend_viewpager.setVisibility(View.GONE);
         tradition_value();
 
+
+        tradition_viewpager_img = findViewById(R.id.tradition_viewpagerimg);
+        hancha_viewpager_img = findViewById(R.id.hancha_viewpagerimg);
+        blend_viewpager_img = findViewById(R.id.blend_viewpagerimg);
+
+        tradition_pagerAdapter_img = new ImgViewPagerAdapter_tradition(this);
+        tradition_viewpager_img.setAdapter(tradition_pagerAdapter_img);
+
+        hancha_pagerAdapter_img = new ImgViewPagerAdapter_hancha(this);
+        hancha_viewpager_img.setAdapter(hancha_pagerAdapter_img);
+
+        blend_pagerAdapter_img = new ImgViewPagerAdapter_blend(this);
+        blend_viewpager_img.setAdapter(blend_pagerAdapter_img);
+
+        int dpValue_img = 90;
+        int margin_img = (int)(dpValue_img * d);
+
+        tradition_viewpager_img.setClipToPadding(false);
+        tradition_viewpager_img.setPadding(margin_img,0, margin_img, 0);
+        tradition_viewpager_img.setPageMargin(margin/2);
+        tradition_viewpager_img.setOffscreenPageLimit(4);
+
+        hancha_viewpager_img.setClipToPadding(false);
+        hancha_viewpager_img.setPadding(margin_img,0, margin_img, 0);
+        hancha_viewpager_img.setPageMargin(margin/2);
+        hancha_viewpager_img.setOffscreenPageLimit(4);
+
+        blend_viewpager_img.setClipToPadding(false);
+        blend_viewpager_img.setPadding(margin_img,0, margin_img, 0);
+        blend_viewpager_img.setPageMargin(margin);
+        blend_viewpager_img.setOffscreenPageLimit(4);
+
+
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         Intent bindIntent = new Intent(getApplicationContext(), BluetoothLeService.class);
         bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
+
+        hancha_viewpager_img.setVisibility(View.GONE);
+        blend_viewpager_img.setVisibility(View.GONE);
 
 
 
@@ -158,6 +191,71 @@ public class product_amount extends AppCompatActivity {
             }
         });
 
+        tradition_viewpager_img.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+               kind.setText("전통");
+                name.setText(DeviceControlActivity.tradition_textList.get(i));
+                tradition_viewpager.setCurrentItem(tradition_viewpager_img.getCurrentItem());
+                tradition_value();
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+        hancha_viewpager_img.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                kind.setText("한차");
+                name.setText(DeviceControlActivity.hancha_textList.get(i));
+                hancha_viewpager.setCurrentItem(hancha_viewpager_img.getCurrentItem());
+                hancha_value();
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+        blend_viewpager_img.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                kind.setText("블렌드");
+                name.setText(DeviceControlActivity.blend_textList.get(i));
+                blend_viewpager.setCurrentItem(blend_viewpager_img.getCurrentItem());
+                blend_value();
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+
+
         tradition_viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -168,6 +266,7 @@ public class product_amount extends AppCompatActivity {
             public void onPageSelected(int i) {
                 kind.setText("전통");
                 name.setText(DeviceControlActivity.tradition_textList.get(i));
+                tradition_viewpager_img.setCurrentItem(tradition_viewpager.getCurrentItem());
                 tradition_value();
 
             }
@@ -188,6 +287,7 @@ public class product_amount extends AppCompatActivity {
             public void onPageSelected(int i) {
                 kind.setText("한차");
                 name.setText(DeviceControlActivity.hancha_textList.get(i));
+                hancha_viewpager_img.setCurrentItem(hancha_viewpager.getCurrentItem());
                 hancha_value();
 
             }
@@ -208,8 +308,8 @@ public class product_amount extends AppCompatActivity {
             public void onPageSelected(int i) {
                 kind.setText("블렌드");
                 name.setText(DeviceControlActivity.blend_textList.get(i));
+                blend_viewpager_img.setCurrentItem(blend_viewpager.getCurrentItem());
                 blend_value();
-
             }
 
             @Override
@@ -386,9 +486,9 @@ public class product_amount extends AppCompatActivity {
                 case R.id.right_btn:
                     if(pos==0){
                         tradition_viewpager.setCurrentItem(tradition_viewpager.getCurrentItem()+1);
-                    }else if(pos == 1){
+                    }else if(pos==1){
                         hancha_viewpager.setCurrentItem(hancha_viewpager.getCurrentItem()+1);
-                    }else if(pos ==2){
+                    }else if(pos==2){
                         blend_viewpager.setCurrentItem(blend_viewpager.getCurrentItem()+1);
                     }
                     break;
@@ -465,6 +565,9 @@ public class product_amount extends AppCompatActivity {
                 tradition_viewpager.setVisibility(View.VISIBLE);
                 hancha_viewpager.setVisibility(View.GONE);
                 blend_viewpager.setVisibility(View.GONE);
+                tradition_viewpager_img.setVisibility(View.VISIBLE);
+                hancha_viewpager_img.setVisibility(View.GONE);
+                blend_viewpager_img.setVisibility(View.GONE);
                 kind.setText("전통");
                 name.setText(DeviceControlActivity.tradition_textList.get(tradition_viewpager.getCurrentItem()));
                 tradition_value();
@@ -475,6 +578,9 @@ public class product_amount extends AppCompatActivity {
                 tradition_viewpager.setVisibility(View.GONE);
                 hancha_viewpager.setVisibility(View.VISIBLE);
                 blend_viewpager.setVisibility(View.GONE);
+                tradition_viewpager_img.setVisibility(View.GONE);
+                hancha_viewpager_img.setVisibility(View.VISIBLE);
+                blend_viewpager_img.setVisibility(View.GONE);
                 kind.setText("한차");
                 name.setText(DeviceControlActivity.hancha_textList.get(hancha_viewpager.getCurrentItem()));
                 hancha_value();
@@ -485,6 +591,10 @@ public class product_amount extends AppCompatActivity {
                 tradition_viewpager.setVisibility(View.GONE);
                 hancha_viewpager.setVisibility(View.GONE);
                 blend_viewpager.setVisibility(View.VISIBLE);
+                tradition_viewpager_img.setVisibility(View.GONE);
+                hancha_viewpager_img.setVisibility(View.GONE);
+                blend_viewpager_img.setVisibility(View.VISIBLE);
+
                 kind.setText("블렌드");
                 name.setText(DeviceControlActivity.blend_textList.get(blend_viewpager.getCurrentItem()));
                 blend_value();
