@@ -22,11 +22,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.blu_main_test1.BLE_SCAN.BluetoothLeService;
 import com.example.blu_main_test1.BLE_SCAN.DeviceControlActivity;
 import com.example.blu_main_test1.R;
@@ -45,6 +47,9 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.example.blu_main_test1.abstraction_fragment.progressDialog;
 
 
@@ -60,12 +65,14 @@ public class product_amount extends AppCompatActivity {
     private ImgViewPagerAdapter_blend blend_pagerAdapter_img;
     private TextView kind, name,amount,origin;
     private Button press_btn ;
-    private ImageView left_btn, right_btn;
+    private ImageView left_btn, right_btn,search_btn,select_img;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     BluetoothLeService bluetoothLeService;
     private String text;
     private int pos;
     private ProgressBar pgb;
+    private EditText search_edit;
+    private Boolean success = false;
 
 
     private TabLayout tabLayout;
@@ -88,6 +95,11 @@ public class product_amount extends AppCompatActivity {
         left_btn.setOnClickListener(onClickListener);
         right_btn = (ImageView)findViewById(R.id.right_btn);
         right_btn.setOnClickListener(onClickListener);
+        search_btn = (ImageView)findViewById(R.id.search_image);
+        search_btn.setOnClickListener(onClickListener);
+        search_edit = (EditText)findViewById(R.id.search_edit);
+        select_img = (ImageView)findViewById(R.id.select_img);
+        select_img.setVisibility(View.GONE);
 
 
         tradition_viewpager = findViewById(R.id.tradition_viewpager);
@@ -127,7 +139,6 @@ public class product_amount extends AppCompatActivity {
 
         hancha_viewpager.setVisibility(View.GONE);
         blend_viewpager.setVisibility(View.GONE);
-
 
         Handler delayHandler = new Handler();
         delayHandler.postDelayed(new Runnable() {
@@ -186,6 +197,10 @@ public class product_amount extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 pos = tab.getPosition();
+                select_img.setVisibility(View.GONE);
+                left_btn.setVisibility(View.VISIBLE);
+                right_btn.setVisibility(View.VISIBLE);
+                success = false;
                 chagneView(pos);
 
             }
@@ -328,12 +343,100 @@ public class product_amount extends AppCompatActivity {
             }
         });
 
+    }
 
-       // all_textList = new ArrayList<String>();
+    public void search() {
+        String search = search_edit.getText().toString();
 
-       // all_textList.addAll(tradition_textList);
-       // all_textList.addAll(hancha_textList);
-       // all_textList.addAll(blend_textList);
+        for (int i= 0; i < DeviceControlActivity.tradition_textList.size(); i++) {
+
+            if (search.equals(DeviceControlActivity.tradition_textList.get(i))) {
+                success = true;
+                Glide.with(this).load(DeviceControlActivity.tradition_textList_img.get(i)).into(select_img);
+                kind.setText("전통");
+                name.setText(DeviceControlActivity.tradition_textList.get(i));
+
+                db.collection("BLE_APP")
+                        .whereEqualTo("product_name", DeviceControlActivity.tradition_textList.get(i)) //파이어베이스 전통 종목 리스트에 추가
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        amount.setText(document.getData().get("amount").toString());
+                                        origin.setText(document.getData().get("product_origin").toString());
+                                    }
+                                }
+                            }
+                        });
+            }
+        }
+
+        for (int i= 0; i < DeviceControlActivity.hancha_textList.size(); i++) {
+
+            if (search.equals(DeviceControlActivity.hancha_textList.get(i))) {
+                success = true;
+                Glide.with(this).load(DeviceControlActivity.hancha_textList_img.get(i)).into(select_img);
+                kind.setText("한차");
+                name.setText(DeviceControlActivity.hancha_textList.get(i));
+
+                db.collection("BLE_APP")
+                        .whereEqualTo("product_name", DeviceControlActivity.hancha_textList.get(i)) //파이어베이스 전통 종목 리스트에 추가
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        amount.setText(document.getData().get("amount").toString());
+                                        origin.setText(document.getData().get("product_origin").toString());
+                                    }
+                                }
+                            }
+                        });
+            }
+        }
+
+        for (int i= 0; i < DeviceControlActivity.blend_textList.size(); i++) {
+
+            if (search.equals(DeviceControlActivity.blend_textList.get(i))) {
+                success = true;
+                Glide.with(this).load(DeviceControlActivity.blend_textList_img.get(i)).into(select_img);
+                kind.setText("블렌드");
+                name.setText(DeviceControlActivity.blend_textList.get(i));
+
+                db.collection("BLE_APP")
+                        .whereEqualTo("product_name", DeviceControlActivity.blend_textList.get(i)) //파이어베이스 전통 종목 리스트에 추가
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        amount.setText(document.getData().get("amount").toString());
+                                        origin.setText(document.getData().get("product_origin").toString());
+                                    }
+                                }
+                            }
+                        });
+            }
+        }
+        if(success){
+            tradition_viewpager.setVisibility(View.GONE);
+            hancha_viewpager.setVisibility(View.GONE);
+            blend_viewpager.setVisibility(View.GONE);
+            tradition_viewpager_img.setVisibility(View.GONE);
+            hancha_viewpager_img.setVisibility(View.GONE);
+            blend_viewpager_img.setVisibility(View.GONE);
+            left_btn.setVisibility(View.GONE);
+            right_btn.setVisibility(View.GONE);
+            select_img.setVisibility(View.VISIBLE);
+        }else{
+            Toast.makeText(product_amount.this, "검색결과가 없습니다.", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     public void progressON(Activity activity, String message) {
@@ -502,6 +605,10 @@ public class product_amount extends AppCompatActivity {
                         blend_viewpager.setCurrentItem(blend_viewpager.getCurrentItem()+1);
                     }
                     break;
+
+                case R.id.search_image:
+                    search();
+
             }
         }
     };
@@ -536,40 +643,46 @@ public class product_amount extends AppCompatActivity {
 
     }
 
-    public void hancha_value(){
 
-        db.collection("BLE_APP")
-                .whereEqualTo("product_name", DeviceControlActivity.hancha_textList.get(hancha_viewpager.getCurrentItem())) //파이어베이스 전통 종목 리스트에 추가
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                amount.setText(document.getData().get("amount").toString());
-                                origin.setText(document.getData().get("product_origin").toString());
+
+
+
+    public void hancha_value(){
+        if(DeviceControlActivity.hancha_textList.size() !=0){
+            db.collection("BLE_APP")
+                    .whereEqualTo("product_name", DeviceControlActivity.hancha_textList.get(hancha_viewpager.getCurrentItem())) //파이어베이스 전통 종목 리스트에 추가
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    amount.setText(document.getData().get("amount").toString());
+                                    origin.setText(document.getData().get("product_origin").toString());
+                                }
                             }
                         }
-                    }
-                });
-
+                    });
+        }
     }
 
     public void blend_value(){
-        db.collection("BLE_APP")
-                .whereEqualTo("product_name", DeviceControlActivity.blend_textList.get(blend_viewpager.getCurrentItem())) //파이어베이스 전통 종목 리스트에 추가
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                amount.setText(document.getData().get("amount").toString());
-                                origin.setText(document.getData().get("product_origin").toString());
+        if(DeviceControlActivity.blend_textList.size() != 0){
+            db.collection("BLE_APP")
+                    .whereEqualTo("product_name", DeviceControlActivity.blend_textList.get(blend_viewpager.getCurrentItem())) //파이어베이스 전통 종목 리스트에 추가
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    amount.setText(document.getData().get("amount").toString());
+                                    origin.setText(document.getData().get("product_origin").toString());
+                                }
                             }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     private void chagneView(int index){

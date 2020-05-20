@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
-
         <ImageView
             android:id="@+id/page_img"
             android:layout_width="180dp"
