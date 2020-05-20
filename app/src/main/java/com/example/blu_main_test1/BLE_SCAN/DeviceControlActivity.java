@@ -138,9 +138,9 @@ public class DeviceControlActivity extends AppCompatActivity {
     public static FragmentManager fragmentManager;
     public static FragmentTransaction fragmentTransaction;
 
-    public static List<String> tradition_textList;
-    public static List<String> hancha_textList;
-    public static List<String> blend_textList;
+    public static List<String> tradition_textList,tradition_textList_img;
+    public static List<String> hancha_textList,hancha_textList_img;
+    public static List<String> blend_textList,blend_textList_img;
     public static List<String> all_textList;
 
     // Code to manage Service lifecycle.
@@ -181,6 +181,9 @@ public class DeviceControlActivity extends AppCompatActivity {
                 invalidateOptionsMenu(); //onCreateOptionsMenu 호출
                 if(mConnected){
 
+                    if(set_tmr!=null){
+                        set_tmr.cancel();
+                    }
                     set_tmr = new Timer();
                     set_tmr.schedule(new State(), 1000, 10000);
 
@@ -448,6 +451,9 @@ public class DeviceControlActivity extends AppCompatActivity {
         hancha_textList = new ArrayList<String>();
         blend_textList = new ArrayList<String>();
 
+        tradition_textList_img = new ArrayList<String>();
+        hancha_textList_img = new ArrayList<String>();
+        blend_textList_img = new ArrayList<String>();
         Handler delayHandler = new Handler();
 
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -460,6 +466,7 @@ public class DeviceControlActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 tradition_textList.add(document.getData().get("product_name").toString());
+                                tradition_textList_img.add(document.getData().get("url").toString());
                             }
                         }
                     }
@@ -474,6 +481,7 @@ public class DeviceControlActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 hancha_textList.add(document.getData().get("product_name").toString());
+                                hancha_textList_img.add(document.getData().get("url").toString());
                             }
                         }
                     }
@@ -488,6 +496,7 @@ public class DeviceControlActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 blend_textList.add(document.getData().get("product_name").toString());
+                                blend_textList_img.add(document.getData().get("url").toString());
                             }
                         }
                     }

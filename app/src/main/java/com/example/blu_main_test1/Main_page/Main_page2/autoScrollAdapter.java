@@ -24,13 +24,13 @@ public class autoScrollAdapter extends PagerAdapter  {
         this.context = context;
         this.data = data;
     }
-
+/*
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
 
         //뷰페이지 슬라이딩 할 레이아웃 인플레이션
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.auto_viewpager,null);
+        View v = inflater.inflate(R.layout.page_img,null);
         ImageView image_container = (ImageView) v.findViewById(R.id.image_container);
         Glide.with(context).load(data.get(position)).into(image_container);
         container.addView(v);
@@ -57,7 +57,7 @@ public class autoScrollAdapter extends PagerAdapter  {
         });
         return v;
     }
-
+*/
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
 
@@ -74,4 +74,6 @@ public class autoScrollAdapter extends PagerAdapter  {
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
     }
+
+
 }
