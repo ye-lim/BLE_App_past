@@ -141,7 +141,6 @@ public class DeviceControlActivity extends AppCompatActivity {
     public static List<String> tradition_textList,tradition_textList_img;
     public static List<String> hancha_textList,hancha_textList_img;
     public static List<String> blend_textList,blend_textList_img;
-    public static List<String> all_textList;
 
     // Code to manage Service lifecycle.
     //서비스가 연결됐을 때, 안됐을 때 관리
