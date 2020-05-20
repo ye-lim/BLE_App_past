@@ -167,7 +167,7 @@ public class product_amount extends AppCompatActivity {
 
         blend_viewpager_img.setClipToPadding(false);
         blend_viewpager_img.setPadding(margin_img,0, margin_img, 0);
-        blend_viewpager_img.setPageMargin(margin);
+        blend_viewpager_img.setPageMargin(margin/2);
         blend_viewpager_img.setOffscreenPageLimit(4);
 
 
