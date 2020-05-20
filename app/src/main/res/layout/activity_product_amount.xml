@@ -73,6 +73,7 @@
                         android:hint="제품 이름을 검색하세요"
                         android:textSize="13dp"
                         android:gravity="center"
+                        android:singleLine="true"
                         android:background="@xml/found_edit"/>
 
                     <LinearLayout
