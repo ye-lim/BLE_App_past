@@ -10,6 +10,7 @@ import android.content.ServiceConnection;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -22,6 +23,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,19 +65,18 @@ public class product_amount extends AppCompatActivity {
     BluetoothLeService bluetoothLeService;
     private String text;
     private int pos;
-
+    private ProgressBar pgb;
 
 
     private TabLayout tabLayout;
-
-
-
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_amount);
 
+        pgb = (ProgressBar)findViewById(R.id.progressBar5);
+        pgb.setVisibility(View.VISIBLE);
         kind = (TextView)findViewById(R.id.kind);
         name = (TextView)findViewById(R.id.name);
         amount =(TextView)findViewById(R.id.amount);
@@ -126,7 +127,16 @@ public class product_amount extends AppCompatActivity {
 
         hancha_viewpager.setVisibility(View.GONE);
         blend_viewpager.setVisibility(View.GONE);
-        tradition_value();
+
+
+        Handler delayHandler = new Handler();
+        delayHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                tradition_value();
+                pgb.setVisibility(View.GONE);
+            }
+        },1000);
 
 
         tradition_viewpager_img = findViewById(R.id.tradition_viewpagerimg);
@@ -387,7 +397,7 @@ public class product_amount extends AppCompatActivity {
     }
 
     public void startProgress() {
-        progressON(this,name.getText().toString()+"를");
+        progressON(this,name.getText().toString()+" 을(를)");
         abstraction_fragment.abstraction = true;
     }
 
@@ -507,20 +517,23 @@ public class product_amount extends AppCompatActivity {
     }
 
     public void tradition_value(){
-        db.collection("BLE_APP")
-                .whereEqualTo("product_name", DeviceControlActivity.tradition_textList.get(tradition_viewpager.getCurrentItem())) //파이어베이스 전통 종목 리스트에 추가
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                amount.setText(document.getData().get("amount").toString());
-                                origin.setText(document.getData().get("product_origin").toString());
+        if(DeviceControlActivity.tradition_textList.size()!=0){
+            db.collection("BLE_APP")
+                    .whereEqualTo("product_name", DeviceControlActivity.tradition_textList.get(tradition_viewpager.getCurrentItem())) //파이어베이스 전통 종목 리스트에 추가
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    amount.setText(document.getData().get("amount").toString());
+                                    origin.setText(document.getData().get("product_origin").toString());
+                                }
                             }
                         }
-                    }
-                });
+                    });
+        }
+
     }
 
     public void hancha_value(){

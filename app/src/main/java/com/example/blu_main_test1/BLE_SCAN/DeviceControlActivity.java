@@ -181,6 +181,9 @@ public class DeviceControlActivity extends AppCompatActivity {
                 invalidateOptionsMenu(); //onCreateOptionsMenu 호출
                 if(mConnected){
 
+                    if(set_tmr!=null){
+                        set_tmr.cancel();
+                    }
                     set_tmr = new Timer();
                     set_tmr.schedule(new State(), 1000, 10000);
 
