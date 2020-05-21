@@ -9,9 +9,13 @@ import android.support.v4.content.ContextCompat;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.blu_main_test1.Intro.mIntro01;
+import com.example.blu_main_test1.Intro.mIntro02;
+import com.example.blu_main_test1.Intro.mIntro03;
 import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
 import com.example.blu_main_test1.R;
+import com.example.blu_main_test1.abstraction_fragment;
 import com.example.blu_main_test1.main_before.login;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
@@ -27,15 +31,16 @@ public class onboard extends AppIntro {
       //  setContentView(R.layout.activity_onboard);
         SharedPreferences prefs=getSharedPreferences("isFirstRun", MODE_PRIVATE);
         boolean isFirstRun = prefs.getBoolean("isFirstRun",true);
+        Fragment mintro01 = new mIntro01();
+        Fragment mintro02 = new mIntro02();
+        Fragment mintro03 = new mIntro03();
+
         if(isFirstRun)
         {
 
-            addSlide(AppIntroFragment.newInstance("머신 간편 조작", "블루투스를 이용하여 휴대전화로 간편하게 조작하세요",
-                    R.drawable.machine2, ContextCompat.getColor(getApplicationContext(), R.color.first_onboard)));
-            addSlide(AppIntroFragment.newInstance("조작 기능 소개", "추출량 변화, 솔팅타임, 예열, 인체감지, 슬립시간, 추출 시간 등을 조작 가능합니다.",
-                    R.drawable.machine, ContextCompat.getColor(getApplicationContext(), R.color.first_onboard)));
-            addSlide(AppIntroFragment.newInstance("캡슐 구매, 구독 서비스", "앱과 연동된 홈페이지에서 캡슐 구매와 구독 신청 가능합니다. ",
-                    R.drawable.capsure, ContextCompat.getColor(getApplicationContext(), R.color.three_onboard)));
+            addSlide(mintro01);
+            addSlide(mintro02);
+            addSlide(mintro03);
 
             prefs.edit().putBoolean("isFirstRun",false).apply();
         }
