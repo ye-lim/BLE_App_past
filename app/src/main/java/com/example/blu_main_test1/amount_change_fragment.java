@@ -52,6 +52,7 @@ public class amount_change_fragment extends Fragment {
     public static SeekBar sb_c_b,sb_c_s,sb_t_b,sb_t_s;
     private String text;
     private ImageView close_amount;
+    private Context context;
 
     public amount_change_fragment() {
         // Required empty public constructor
@@ -332,7 +333,7 @@ public class amount_change_fragment extends Fragment {
                                             System.arraycopy(ts_value, 1, ts_temp_data, ts_temp.length + 1, 1);
                                             DeviceControlActivity.mBluetoothLeService.writeRXCharacteristic(ts_temp_data);
                                             DeviceControlActivity.pgb2.setVisibility(View.GONE);
-                                           // Toast.makeText(getActivity(), "추출량이 변경되었습니다.", Toast.LENGTH_SHORT).show(); 예외발생 추후 개선
+                                            Toast.makeText(context,"추출량이 변경되었습니다. ",Toast.LENGTH_SHORT).show();
                                         }
 
                                     }, 2000);  // 1 초 후에 실행
@@ -349,7 +350,7 @@ public class amount_change_fragment extends Fragment {
 
 
                             } else {
-                                Toast.makeText(getActivity(), "블루투스를 재연결해 주세요.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "블루투스를 재연결해 주세요.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -363,7 +364,7 @@ public class amount_change_fragment extends Fragment {
 
                 } catch (Exception e) {
 
-                    Toast.makeText(getActivity(), "블루투스를 재연결해 주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "블루투스를 재연결해 주세요", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -376,7 +377,7 @@ public class amount_change_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        context = container.getContext();
         return inflater.inflate(R.layout.activity_amount_change, container, false);
 
     }

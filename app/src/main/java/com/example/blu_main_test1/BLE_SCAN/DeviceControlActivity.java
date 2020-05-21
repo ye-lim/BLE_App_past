@@ -116,7 +116,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     public static Timer set_tmr;
     public static LinearLayout device_con_view;
     public static TextView main_text;
-    private Boolean inflateView = false;
+    public static  Boolean row_state = false;
     private String text;
     private String mDeviceName;
     private String mDeviceAddress;
@@ -241,13 +241,15 @@ public class DeviceControlActivity extends AppCompatActivity {
                                 switch (text.substring(6, 8)) {
                                     case "00":
                                         stateView.setText("절전모드");
-                                        waiting = true;
+                                        row_state = true;
                                         break;
                                     case "10":
                                         stateView.setText("가열중");
+                                        waiting = true;
                                         break;
                                     case "20":
                                         stateView.setText("추출대기");
+                                        row_state = false;
                                         if(waiting){
                                             if(isActivityTop()){
                                                 AudioManager audio = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);

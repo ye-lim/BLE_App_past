@@ -590,7 +590,7 @@ public class product_amount extends AppCompatActivity {
                     break;
 
                 case R.id.press_btn:
-                    if(DeviceControlActivity.mConnected){
+                    if(DeviceControlActivity.mConnected && !DeviceControlActivity.row_state){
 
                         String press_value = "04ET" + amount.getText().toString().substring(0,2);
                         String press_amount = "04ET" + amount.getText().toString().substring(0,2) + stringToHex(press_value);
@@ -603,8 +603,11 @@ public class product_amount extends AppCompatActivity {
                         bluetoothLeService.writeRXCharacteristic(press_btn_temp_data);
                         startProgress();
 
-                    } else {
-                        Toast.makeText(product_amount.this, "블루투스가 연결 되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
+                    } else if(DeviceControlActivity.row_state){
+                        Toast.makeText(getApplicationContext(),"머신이 절전모드 상태 입니다.",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"블루투스가 연결되어 있지 않습니다",Toast.LENGTH_SHORT).show();
                     }
                     break;
 
