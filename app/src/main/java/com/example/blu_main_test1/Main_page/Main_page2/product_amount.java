@@ -1,9 +1,11 @@
 package com.example.blu_main_test1.Main_page.Main_page2;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -65,7 +67,7 @@ public class product_amount extends AppCompatActivity {
     private ImgViewPagerAdapter_blend blend_pagerAdapter_img;
     private TextView kind, name,amount,origin;
     private Button press_btn ;
-    private ImageView left_btn, right_btn,search_btn,select_img;
+    private ImageView left_btn, right_btn,search_btn,select_img,back_btn;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     BluetoothLeService bluetoothLeService;
     private String text;
@@ -100,6 +102,8 @@ public class product_amount extends AppCompatActivity {
         search_edit = (EditText)findViewById(R.id.search_edit);
         select_img = (ImageView)findViewById(R.id.select_img);
         select_img.setVisibility(View.GONE);
+        back_btn = (ImageView)findViewById(R.id.backclose);
+        back_btn.setOnClickListener(onClickListener);
 
 
         tradition_viewpager = findViewById(R.id.tradition_viewpager);
@@ -432,6 +436,7 @@ public class product_amount extends AppCompatActivity {
             left_btn.setVisibility(View.GONE);
             right_btn.setVisibility(View.GONE);
             select_img.setVisibility(View.VISIBLE);
+            success = false;
         }else{
             Toast.makeText(product_amount.this, "검색결과가 없습니다.", Toast.LENGTH_SHORT).show();
         }
@@ -545,6 +550,34 @@ public class product_amount extends AppCompatActivity {
                     }
                 });
             }
+            else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) { //연결 실패
+                DeviceControlActivity.mConnected = false;
+                Handler delayHandler2 = new Handler();
+                delayHandler2.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(!DeviceControlActivity.mConnected&& !product_amount.this.isFinishing()){
+                            AlertDialog.Builder alert_confirm = new AlertDialog.Builder(product_amount.this);
+                            alert_confirm.setMessage("블루투스 환경이 원활하지 않습니다. \n머신상태를 확인해 주세요").setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    finish();
+                                    Intent intent = new Intent(getApplicationContext(), DeviceControlActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                }
+                            });
+                            alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                            alert_confirm.show();
+                        }
+                    }
+                },5000);
+            }
         }
     };
 
@@ -552,6 +585,10 @@ public class product_amount extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
+                case R.id.backclose:
+                    finish();
+                    break;
+
                 case R.id.press_btn:
                     if(DeviceControlActivity.mConnected){
 
@@ -565,9 +602,6 @@ public class product_amount extends AppCompatActivity {
                         System.arraycopy(press_btn_value, 1, press_btn_temp_data, press_btn__temp.length + 1, 1);
                         bluetoothLeService.writeRXCharacteristic(press_btn_temp_data);
                         startProgress();
-
-
-
 
                     } else {
                         Toast.makeText(product_amount.this, "블루투스가 연결 되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
@@ -608,6 +642,7 @@ public class product_amount extends AppCompatActivity {
 
                 case R.id.search_image:
                     search();
+                    break;
 
             }
         }
@@ -640,7 +675,6 @@ public class product_amount extends AppCompatActivity {
                         }
                     });
         }
-
     }
 
 
