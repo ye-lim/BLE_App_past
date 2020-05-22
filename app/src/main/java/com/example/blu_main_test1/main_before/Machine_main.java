@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 //import com.example.blu_main_test1.BLE_SCAN.BottomSheet_scan;
+import com.example.blu_main_test1.BLE_SCAN.BottomSheet_scan;
 import com.example.blu_main_test1.BLE_SCAN.DeviceScanActivity;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.BackPressHandler;
@@ -68,11 +69,9 @@ public class Machine_main extends AppCompatActivity {
         public void onClick(View view){
             switch(view.getId()) {
                 case R.id.BLE_Btn:
-                    //BottomSheet_scan bottomSheet = new BottomSheet_scan();
-                    //bottomSheet.show(getSupportFragmentManager(), "BottomSheet_Scan");
-                    Intent intent = new Intent(getApplicationContext(), DeviceScanActivity.class);
-                    startActivity(intent);
-                    finish();
+                    BottomSheet_scan bottomSheet = new BottomSheet_scan();
+                    bottomSheet.show(getSupportFragmentManager(),"BottomSheet_scan");
+
                     break;
                 case R.id.btn_back:
                     Intent intent2 = new Intent(getApplicationContext(), theMainPage.class);
