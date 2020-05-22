@@ -54,7 +54,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BLE_SCAN.DeviceScanActivity"
+            android:name=".BLE_SCAN.BottomSheet_scan"
             android:theme="@android:style/Theme.Holo.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
