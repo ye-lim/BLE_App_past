@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp">
         <TextView
+            android:id="@+id/find_text"
             android:text="머신을 찾는 중입니다."
             style="@style/TextAppearance.AppCompat.Headline"
             android:textColor="#091f3f"
