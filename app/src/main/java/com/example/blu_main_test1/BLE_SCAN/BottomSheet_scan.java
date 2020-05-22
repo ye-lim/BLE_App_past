@@ -36,6 +36,7 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
     private boolean mScanning; //스캐닝 확인 값
     private Handler mHandler; // 핸들러
     private String mDeviceAddress, mDeviceName;
+    private TextView textView;
 
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
@@ -50,6 +51,7 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
 
         Button scan = (Button) getView().findViewById(R.id.menu_scan);
         ble_scan_item = (ListView)getView().findViewById(R.id.ble_scan_item);
+        textView = (TextView)getView().findViewById(R.id.find_text);
         mLeDeviceListAdapter = new LeDeviceListAdapter();
         ble_scan_item.setAdapter(mLeDeviceListAdapter);
 
@@ -212,6 +214,14 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
                 public void run() {
                     mScanning = false;
                     mBluetoothAdapter.stopLeScan(mLeScanCallback);
+                    ImageView start_device_scanning = (ImageView)getView().findViewById(R.id.bluetooth_finding);
+                    Glide.with(getContext()).load(R.drawable.ble_mark).into(start_device_scanning);
+                    textView.setText("사용하실 머신을 눌러주세요.");
+                    if(mLeDeviceListAdapter.getCount() == 0){
+                        Toast.makeText(getContext(), "연결 가능한 머신이 없습니다.", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    }
+
                 }
             }, SCAN_PERIOD);
             // 스캔 시작
