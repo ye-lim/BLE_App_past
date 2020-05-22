@@ -24,31 +24,41 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/bluetooth_finding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:src="@drawable/bluetooth"
+        android:layout_marginBottom="15dp"
         android:layout_gravity="center"/>
 
     <!--listitem_device.xml-->
-
-
     <ListView
         android:id="@+id/ble_scan_item"
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="wrap_content"/>
 
-    <!--향후 weight 0.1, button 개수 한 개 될 예정 -->
-    <Button
-        android:id="@+id/menu_scan"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="찾  기" />
-
-    <Button
-        android:id="@+id/menu_stop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="찾기중지" />
-
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"/>
+        <Button
+            android:id="@+id/menu_scan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:text="찾기중지"
+            android:textSize="20sp"
+            android:background="@xml/main_bnt" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"/>
+    </LinearLayout>
 </LinearLayout>

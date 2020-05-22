@@ -1,5 +1,3 @@
-//BottomSheet_scan.java
-
 package com.example.blu_main_test1.BLE_SCAN;
 
 import android.app.Activity;
@@ -19,30 +17,29 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.example.blu_main_test1.R;
-import com.example.blu_main_test1.BLE_SCAN.DeviceScanActivity;
 
 import java.util.ArrayList;
 
 
 public class BottomSheet_scan extends BottomSheetDialogFragment {
-    private BottomSheetListener mBottomSheetListener;
     private ListView ble_scan_item;
     private LeDeviceListAdapter mLeDeviceListAdapter; //스캔 리스트 어댑터
     private BluetoothAdapter mBluetoothAdapter; //블루투스 어댑터
     private boolean mScanning; //스캐닝 확인 값
     private Handler mHandler; // 핸들러
+    private String mDeviceAddress, mDeviceName;
 
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000; //스캔주기
-
-    private String mDeviceAddress, mDeviceName;
 
     public BottomSheet_scan() {
 
@@ -52,7 +49,6 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
         super.onActivityCreated(b);
 
         Button scan = (Button) getView().findViewById(R.id.menu_scan);
-        Button stop = (Button) getView().findViewById(R.id.menu_stop);
         ble_scan_item = (ListView)getView().findViewById(R.id.ble_scan_item);
         mLeDeviceListAdapter = new LeDeviceListAdapter();
         ble_scan_item.setAdapter(mLeDeviceListAdapter);
@@ -100,56 +96,38 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
         // Checks if Bluetooth is supported on the device.
         if (mBluetoothAdapter == null) {
             Toast.makeText(getContext(), R.string.error_bluetooth_not_supported, Toast.LENGTH_SHORT).show();
-
             return;
         }
 
         if (DeviceControlActivity.mConnected){
             Intent intent = new Intent(getContext(),DeviceControlActivity.class);
             startActivity(intent);
-
         }
-
-
-
-
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mLeDeviceListAdapter.clear();
-                scanLeDevice(true);
-            }
-        });
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 scanLeDevice(false);
+                dismiss();
+                //scanLeDevice(false);
             }
         });
 
+        ImageView start_device_scanning = (ImageView)getView().findViewById(R.id.bluetooth_finding);
+        GlideDrawableImageViewTarget gifImage = new GlideDrawableImageViewTarget(start_device_scanning);
+        Glide.with(this).load(R.raw.bluetooth_finding).into(gifImage);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
         return inflater.inflate(R.layout.fragment_bottom_sheet, container, false);
     }
 
-    public interface BottomSheetListener {
-        void onOptionClick(String text);
-    }
-
-
-
     private class LeDeviceListAdapter extends BaseAdapter {
         private ArrayList<BluetoothDevice> mLeDevices;
-        private LayoutInflater mInflater;
 
         public LeDeviceListAdapter() {
             super();
             mLeDevices = new ArrayList<BluetoothDevice>();
-            //mInflater = DeviceScanActivity.this.getLayoutInflater();
         }
 
         public void addDevice(BluetoothDevice device) {
@@ -183,7 +161,6 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
             return i;
         }
 
-
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             View v = View.inflate(getContext(),R.layout.listitem_device,null);
@@ -215,7 +192,6 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
         }
 
         // Initializes list view adapter.
-
         scanLeDevice(true); //start scanning
     }
 
@@ -236,7 +212,6 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
                 public void run() {
                     mScanning = false;
                     mBluetoothAdapter.stopLeScan(mLeScanCallback);
-                    //invalidateOptionsMenu();  // onCreateOptionsMenu 메소드를 다시 호출해줌.
                 }
             }, SCAN_PERIOD);
             // 스캔 시작
@@ -247,7 +222,6 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
             mScanning = false;
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
         }
-        // invalidateOptionsMenu();
     }
 
     private BluetoothAdapter.LeScanCallback mLeScanCallback = //새로운 장치가 발견될때마다 onLeScan을 호출.
