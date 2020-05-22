@@ -485,7 +485,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
-                                        android:text="추출량변화"
+                                        android:text="추출량세팅"
                                         android:textColor="#676767"
                                         android:textSize="15dp"
                                         android:textStyle="bold" />
