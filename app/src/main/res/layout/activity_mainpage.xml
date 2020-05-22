@@ -58,7 +58,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="0.1"
                         android:textSize="24dp"
-                        android:text="My Machine"
+                        android:text="MY MACHINE"
                         android:textStyle="bold"
                         android:textColor="#011E41" />
                     <TextView
@@ -121,7 +121,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="0.1"
                         android:textSize="24dp"
-                        android:text="Site"
+                        android:text="SITE"
                         android:textStyle="bold"
                         android:textColor="#091f3f"/>
                     <TextView
@@ -153,7 +153,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="0.15"
                         android:background="@xml/disconnect"
-                        android:text="구경하러가기"
+                        android:text="구매하러가기"
                         android:textColor="#091f3f"
                         android:textSize="15dp"
                         android:fontFamily="@font/font_light"
