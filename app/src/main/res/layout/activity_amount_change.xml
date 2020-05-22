@@ -119,33 +119,9 @@
                             android:id="@+id/seek_coffee_small"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content"
-                            android:max="32"
+                            android:max="22"
                             android:thumb="@xml/custom_thumb"
                             android:progressDrawable="@xml/custom_seekbar"/>
-
-                        <View
-                            android:layout_centerVertical="true"
-                            android:layout_width="3dp"
-                            android:layout_height="10dp"
-                            android:background="#091f3f"
-                            android:layout_marginLeft="50dp"/>
-
-
-                        <View
-                            android:layout_centerVertical="true"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="3dp"
-                            android:layout_height="10dp"
-                            android:background="#091f3f"
-                            android:layout_marginLeft="105dp"/>
-
-                        <View
-                            android:layout_centerVertical="true"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="3dp"
-                            android:layout_height="10dp"
-                            android:background="#091f3f"
-                            android:layout_marginLeft="155dp"/>
 
                         <TextView
                             android:layout_centerVertical="true"
@@ -171,13 +147,37 @@
                             android:textSize="11dp"
                             android:textStyle="bold" />
 
+                        <View
+                            android:layout_centerVertical="true"
+                            android:layout_width="3dp"
+                            android:layout_height="10dp"
+                            android:background="#091f3f"
+                            android:layout_marginLeft="65dp"/>
+
+
+                        <View
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="3dp"
+                            android:layout_height="10dp"
+                            android:background="#091f3f"
+                            android:layout_marginLeft="105dp"/>
+
+                        <View
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="3dp"
+                            android:layout_height="10dp"
+                            android:background="#091f3f"
+                            android:layout_marginLeft="145dp"/>
+
+
 
                         <RelativeLayout
                             android:id="@+id/text"
                             android:layout_width="220dp"
                             android:layout_height="match_parent"
-                            android:layout_below="@+id/seek_coffee_small"
-                            android:layout_marginTop="-44dp">
+                            android:layout_below="@+id/seek_coffee_small">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -191,7 +191,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:layout_marginLeft="45dp"
+                                android:layout_marginLeft="55dp"
                                 android:layout_marginTop="5dp"
                                 android:gravity="center"
                                 android:text="100"
@@ -203,16 +203,16 @@
                                 android:layout_marginLeft="100dp"
                                 android:layout_marginTop="5.5dp"
                                 android:gravity="center"
-                                android:text="200"
+                                android:text="150"
                                 android:textSize="9dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:layout_marginLeft="150dp"
+                                android:layout_marginLeft="140dp"
                                 android:layout_marginTop="5.5dp"
                                 android:gravity="center"
-                                android:text="300"
+                                android:text="200"
                                 android:textSize="9dp" />
 
                             <TextView
@@ -221,7 +221,7 @@
                                 android:layout_marginLeft="180dp"
                                 android:layout_marginTop="5.8dp"
                                 android:gravity="center"
-                                android:text="350"
+                                android:text="250"
                                 android:textSize="9dp" />
 
 
@@ -285,7 +285,7 @@
                             android:id="@+id/seek_coffee_big"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content"
-                            android:max="32"
+                            android:max="22"
                             android:thumb="@xml/custom_thumb"
                             android:progressDrawable="@xml/custom_seekbar"/>
 
@@ -318,7 +318,7 @@
                             android:layout_width="3dp"
                             android:layout_height="10dp"
                             android:background="#091f3f"
-                            android:layout_marginLeft="50dp"/>
+                            android:layout_marginLeft="65dp"/>
 
 
                         <View
@@ -335,7 +335,7 @@
                             android:layout_width="3dp"
                             android:layout_height="10dp"
                             android:background="#091f3f"
-                            android:layout_marginLeft="155dp"/>
+                            android:layout_marginLeft="145dp"/>
 
 
 
@@ -357,28 +357,28 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_marginLeft="55dp"
+                                android:layout_marginTop="5dp"
                                 android:gravity="center"
                                 android:text="100"
-                                android:layout_marginLeft="45dp"
-                                android:layout_marginTop="5dp"
                                 android:textSize="9dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="200"
                                 android:layout_marginLeft="100dp"
                                 android:layout_marginTop="5.5dp"
+                                android:gravity="center"
+                                android:text="150"
                                 android:textSize="9dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="300"
-                                android:layout_marginLeft="150dp"
+                                android:layout_marginLeft="140dp"
                                 android:layout_marginTop="5.5dp"
+                                android:gravity="center"
+                                android:text="200"
                                 android:textSize="9dp" />
 
                             <TextView
@@ -386,7 +386,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="180dp"
-                                android:text="350"
+                                android:text="250"
                                 android:textSize="9dp"
                                 android:gravity="center"/>
 
@@ -469,7 +469,7 @@
                             android:id="@+id/seek_Tea_small"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content"
-                            android:max="32"
+                            android:max="22"
                             android:thumb="@xml/custom_thumb"
                             android:progressDrawable="@xml/custom_seekbar"/>
 
@@ -502,7 +502,7 @@
                             android:layout_width="3dp"
                             android:layout_height="10dp"
                             android:background="#091f3f"
-                            android:layout_marginLeft="50dp"/>
+                            android:layout_marginLeft="65dp"/>
 
 
                         <View
@@ -519,7 +519,7 @@
                             android:layout_width="3dp"
                             android:layout_height="10dp"
                             android:background="#091f3f"
-                            android:layout_marginLeft="155dp"/>
+                            android:layout_marginLeft="145dp"/>
 
 
 
@@ -541,28 +541,28 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_marginLeft="55dp"
+                                android:layout_marginTop="5dp"
                                 android:gravity="center"
                                 android:text="100"
-                                android:layout_marginLeft="45dp"
-                                android:layout_marginTop="5dp"
                                 android:textSize="9dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="200"
                                 android:layout_marginLeft="100dp"
                                 android:layout_marginTop="5.5dp"
+                                android:gravity="center"
+                                android:text="150"
                                 android:textSize="9dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="300"
-                                android:layout_marginLeft="150dp"
+                                android:layout_marginLeft="140dp"
                                 android:layout_marginTop="5.5dp"
+                                android:gravity="center"
+                                android:text="200"
                                 android:textSize="9dp" />
 
                             <TextView
@@ -570,7 +570,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="180dp"
-                                android:text="350"
+                                android:text="250"
                                 android:textSize="9dp"
                                 android:gravity="center"/>
 
@@ -607,7 +607,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="tea-대"
+                        android:text="한방차"
                         android:textColor="#676767"
                         android:textSize="10dp"
                         android:textStyle="bold"
@@ -633,7 +633,7 @@
                             android:id="@+id/seek_Tea_big"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content"
-                            android:max="32"
+                            android:max="22"
                             android:thumb="@xml/custom_thumb"
                             android:progressDrawable="@xml/custom_seekbar"/>
 
@@ -666,7 +666,7 @@
                             android:layout_width="3dp"
                             android:layout_height="10dp"
                             android:background="#091f3f"
-                            android:layout_marginLeft="50dp"/>
+                            android:layout_marginLeft="65dp"/>
 
 
                         <View
@@ -683,7 +683,7 @@
                             android:layout_width="3dp"
                             android:layout_height="10dp"
                             android:background="#091f3f"
-                            android:layout_marginLeft="155dp"/>
+                            android:layout_marginLeft="145dp"/>
 
 
 
@@ -705,28 +705,28 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_marginLeft="55dp"
+                                android:layout_marginTop="5dp"
                                 android:gravity="center"
                                 android:text="100"
-                                android:layout_marginLeft="45dp"
-                                android:layout_marginTop="5dp"
                                 android:textSize="9dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="200"
                                 android:layout_marginLeft="100dp"
                                 android:layout_marginTop="5.5dp"
+                                android:gravity="center"
+                                android:text="150"
                                 android:textSize="9dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="300"
-                                android:layout_marginLeft="150dp"
+                                android:layout_marginLeft="140dp"
                                 android:layout_marginTop="5.5dp"
+                                android:gravity="center"
+                                android:text="200"
                                 android:textSize="9dp" />
 
                             <TextView
@@ -734,7 +734,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="180dp"
-                                android:text="350"
+                                android:text="250"
                                 android:textSize="9dp"
                                 android:gravity="center"/>
 

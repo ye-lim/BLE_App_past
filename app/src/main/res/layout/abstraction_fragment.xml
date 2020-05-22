@@ -239,7 +239,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="tea-대"
+                    android:text="한방차"
                     android:textColor="#787878"
                     android:textSize="13dp"
                     android:textStyle="bold" />
