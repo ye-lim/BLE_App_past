@@ -3,6 +3,6 @@
     <font
         android:fontStyle = "normal"
         android:fontWeight="400"
-        android:font = "@font/notosanscjkkrbold"/>
+        android:font = "@font/notosansckkkr_thin"/>
 
 </font-family>

@@ -62,13 +62,14 @@
                         android:textStyle="bold"
                         android:textColor="#011E41" />
                     <TextView
+                        android:layout_marginTop="-5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="0.1"
                         android:textSize="14dp"
                         android:text="내 메디프레소 머신"
                         android:textColor="#5a5a5a"
-                        android:fontFamily="@font/font_bold"/>
+                        android:fontFamily="@font/font_light"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -90,10 +91,10 @@
                         android:layout_height="0dp"
                         android:layout_weight="0.15"
                         android:background="@xml/disconnect"
-                        android:text="동작하러 가기"
+                        android:text="동작하러가기"
                         android:textColor="#091f3f"
                         android:textSize="15dp"
-                        android:fontFamily="@font/font_bold"
+                        android:fontFamily="@font/font_light"
                         android:letterSpacing="0.2"/>
                     <TextView
                         android:layout_width="match_parent"
@@ -124,13 +125,14 @@
                         android:textStyle="bold"
                         android:textColor="#091f3f"/>
                     <TextView
+                        android:layout_marginTop="-5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="0.1"
                         android:textSize="14dp"
                         android:text="메디프레소 사이트"
                         android:textColor="#5a5a5a"
-                        android:fontFamily="@font/font_bold"/>
+                        android:fontFamily="@font/font_light"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -154,7 +156,7 @@
                         android:text="구경하러가기"
                         android:textColor="#091f3f"
                         android:textSize="15dp"
-                        android:fontFamily="@font/font_bold"
+                        android:fontFamily="@font/font_light"
                         android:letterSpacing="0.1"/>
                     <TextView
                         android:layout_width="match_parent"
