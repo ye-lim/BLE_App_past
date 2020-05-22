@@ -15,8 +15,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.blu_main_test1.BLE_SCAN.BluetoothLeService;
-import com.example.blu_main_test1.BLE_SCAN.DeviceScanActivity;
 import com.example.blu_main_test1.BLE_button.abstraction;
 import com.example.blu_main_test1.R;
 
@@ -92,16 +90,6 @@ public class MainActivity extends Fragment {
         state=(TextView)view.findViewById(R.id.state);
         temper=(TextView)view.findViewById(R.id.temper);
 
-
-        //블루투스 버튼
-        blu_connect.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent= new Intent(getActivity(), DeviceScanActivity.class);
-            startActivity(intent);
-        }
-
-    });
         amount_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
