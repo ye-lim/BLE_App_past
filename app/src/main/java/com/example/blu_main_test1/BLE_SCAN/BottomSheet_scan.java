@@ -1,6 +1,7 @@
 package com.example.blu_main_test1.BLE_SCAN;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -25,8 +26,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.example.blu_main_test1.R;
+import com.example.blu_main_test1.main_before.Machine_main;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class BottomSheet_scan extends BottomSheetDialogFragment {
@@ -37,10 +40,12 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
     private Handler mHandler; // 핸들러
     private String mDeviceAddress, mDeviceName;
     private TextView textView;
+    private ImageView start_device_scanning;
+    private Context context = null;
 
     private static final int REQUEST_ENABLE_BT = 1;
     // Stops scanning after 10 seconds.
-    private static final long SCAN_PERIOD = 10000; //스캔주기
+    private static final long SCAN_PERIOD = 5000; //스캔주기
 
     public BottomSheet_scan() {
 
@@ -114,7 +119,7 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
             }
         });
 
-        ImageView start_device_scanning = (ImageView)getView().findViewById(R.id.bluetooth_finding);
+        start_device_scanning = (ImageView)getView().findViewById(R.id.bluetooth_finding);
         GlideDrawableImageViewTarget gifImage = new GlideDrawableImageViewTarget(start_device_scanning);
         Glide.with(this).load(R.raw.bluetooth_finding).into(gifImage);
     }
@@ -205,6 +210,7 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
     }
 
 
+
     private void scanLeDevice(final boolean enable) {
         if (enable) {
             // Stops scanning after a pre-defined scan period.
@@ -214,10 +220,12 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
                 public void run() {
                     mScanning = false;
                     mBluetoothAdapter.stopLeScan(mLeScanCallback);
-                    ImageView start_device_scanning = (ImageView)getView().findViewById(R.id.bluetooth_finding);
-                    Glide.with(getContext()).load(R.drawable.ble_mark).into(start_device_scanning);
-                    textView.setText("사용하실 머신을 눌러주세요.");
-                    if(mLeDeviceListAdapter.getCount() == 0){
+                    if(getContext() != null)
+                        Glide.with(getContext()).load(R.drawable.ble_mark).into(start_device_scanning);
+                        textView.setText("사용하실 머신을 눌러주세요.");
+
+
+                    if(mLeDeviceListAdapter.getCount() == 0 && getContext() != null){
                         Toast.makeText(getContext(), "연결 가능한 머신이 없습니다.", Toast.LENGTH_SHORT).show();
                         dismiss();
                     }
