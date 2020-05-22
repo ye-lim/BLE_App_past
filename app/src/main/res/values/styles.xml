@@ -6,6 +6,8 @@
         <item name="colorPrimary">#b3ffffff</item>  <!--타이틀바-->
         <item name="colorPrimaryDark">#00FFFFFF</item> <!--상태바-->
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
     </style>
     <style name="join" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -42,6 +44,16 @@
         <item name="android:shadowColor">#7F000000</item>
         <item name="android:shadowDy">-3.5</item>
         <item name="android:shadowRadius">2</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@xml/round_dialog</item>
     </style>
 
 </resources>
