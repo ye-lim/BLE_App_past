@@ -44,6 +44,7 @@
                     android:scaleType="fitXY"/>
 
                 <TextView
+                    android:includeFontPadding="false"
                     android:fontFamily="@font/font_medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -53,10 +54,11 @@
                     android:gravity="center"
                     android:text="머신 간편 조작"
                     android:textColor="@color/white"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:includeFontPadding="false"
                     android:fontFamily="@font/font_demi_light"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -66,7 +68,7 @@
                     android:gravity="center"
                     android:text="블루투스를 이용하여 휴대전화로\n 간편하게 조작하세요."
                     android:textColor="@color/white"
-                    android:textSize="14dp"
+                    android:textSize="15sp"
                     android:lineSpacingExtra="5dp"/>
 
 

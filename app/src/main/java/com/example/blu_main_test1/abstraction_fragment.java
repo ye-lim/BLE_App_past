@@ -151,7 +151,13 @@ public class abstraction_fragment extends Fragment {
                     Fragment nextFragmet = DeviceControlActivity.fragmentStack.pop();
                     DeviceControlActivity.fragmentManager.beginTransaction().remove(nextFragmet).commit();
                     DeviceControlActivity.device_con_view.setVisibility(View.VISIBLE);
-                    DeviceControlActivity.main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
+                    if(DeviceControlActivity.stateView.getText().toString().equals("가열중")){
+                        DeviceControlActivity.main_text.setText("머신이 예열중입니다. 잠시만 기다려 주세요.");
+                    }else if(DeviceControlActivity.stateView.getText().toString().equals("절전모드")){
+                        DeviceControlActivity.main_text.setText("추출을 원하시면 예열버튼을 눌러주세요.");
+                    }else{
+                        DeviceControlActivity.main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
+                    }
                     break;
 
                 case R.id.rong_coffee:

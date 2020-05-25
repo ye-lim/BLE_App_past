@@ -38,6 +38,8 @@
                         android:paddingLeft="5dp" />
 
                     <TextView
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/font_demi_light"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
@@ -45,7 +47,7 @@
                         android:text="내 머신"
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
-                        android:textSize="25dp" />
+                        android:textSize="25sp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -78,44 +80,52 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_medium"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="블루투스"
                                 android:textColor="@color/black"
-                                android:textSize="13dp"
+                                android:textSize="15sp"
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:id="@+id/connection_state"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
+                                android:layout_marginTop="5dp"
                                 android:gravity="center"
                                 android:text="연결안됨"
                                 android:textColor="@color/yellow"
-                                android:textSize="12dp"
+                                android:textSize="14sp"
                                 android:textStyle="bold" />
 
 
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="20dp"
-                                android:gravity="center"
-                                android:text="머신상태"
-                                android:textColor="@color/black"
-                                android:textSize="13dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/state"
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_medium"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"
+                                android:text="머신상태"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
+                                android:id="@+id/state"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
                                 android:textColor="@color/yellow"
-                                android:textSize="12dp"
+                                android:textSize="14sp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -135,6 +145,8 @@
                                 android:src="@drawable/machine01" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_regular"
                                 android:id="@+id/draw_version"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
@@ -142,7 +154,7 @@
                                 android:layout_weight="1"
                                 android:color="#646464"
                                 android:gravity="center"
-                                android:textSize="10dp" />
+                                android:textSize="12sp" />
 
                         </LinearLayout>
 
@@ -160,7 +172,7 @@
                                 android:layout_marginRight="10dp"
                                 android:background="@xml/disconnect"
                                 android:text="연결끊기"
-                                android:textSize="14dp"
+                                android:textSize="15sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
@@ -193,6 +205,8 @@
                             android:background="#ebebeb"/>
                     </LinearLayout>
                     <TextView
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/font_demi_light"
                         android:id="@+id/main_text"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
@@ -201,7 +215,7 @@
                         android:background="@xml/round_edge"
                         android:gravity="center"
                         android:text="머신을 취향에 맞게 자유롭게 조절해 보세요."
-                        android:textSize="11dp" />
+                        android:textSize="12sp" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -254,17 +268,19 @@
                                     <ImageView
                                         android:id="@+id/state_start"
                                         android:layout_width="match_parent"
-                                        android:layout_height="60dp"
+                                        android:layout_height="65dp"
                                         android:src="@drawable/icon01" />
 
                                     <TextView
+                                        android:includeFontPadding="false"
+                                        android:fontFamily="@font/font_medium"
                                         android:gravity="center"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="예열"
                                         android:textColor="#676767"
                                         android:textStyle="bold"
-                                        android:textSize="15dp"/>
+                                        android:textSize="16sp"/>
 
                                 </LinearLayout>
 
@@ -308,17 +324,19 @@
                                     <ImageView
                                         android:id="@+id/low_start"
                                         android:layout_width="match_parent"
-                                        android:layout_height="60dp"
+                                        android:layout_height="65dp"
                                         android:src="@drawable/icon02"/>
 
                                     <TextView
+                                        android:includeFontPadding="false"
+                                        android:fontFamily="@font/font_medium"
                                         android:gravity="center"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="절전모드"
                                         android:textColor="#676767"
                                         android:textStyle="bold"
-                                        android:textSize="15dp"/>
+                                        android:textSize="16sp"/>
 
                                 </LinearLayout>
 
@@ -362,17 +380,19 @@
                                     <ImageView
                                         android:id="@+id/amount_start"
                                         android:layout_width="match_parent"
-                                        android:layout_height="60dp"
+                                        android:layout_height="65dp"
                                         android:src="@drawable/icon03"/>
 
                                     <TextView
+                                        android:includeFontPadding="false"
+                                        android:fontFamily="@font/font_medium"
                                         android:gravity="center"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="일반추출"
                                         android:textColor="#676767"
                                         android:textStyle="bold"
-                                        android:textSize="15dp"/>
+                                        android:textSize="16sp"/>
 
                                 </LinearLayout>
 
@@ -418,17 +438,19 @@
                                     <ImageView
                                         android:id="@+id/product_amount"
                                         android:layout_width="match_parent"
-                                        android:layout_height="60dp"
+                                        android:layout_height="65dp"
                                         android:src="@drawable/icon04"/>
 
                                     <TextView
+                                        android:includeFontPadding="false"
+                                        android:fontFamily="@font/font_medium"
                                         android:gravity="center"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="제품별추출"
                                         android:textColor="#676767"
                                         android:textStyle="bold"
-                                        android:textSize="15dp"/>
+                                        android:textSize="16sp"/>
 
                                 </LinearLayout>
 
@@ -478,16 +500,18 @@
                                     <ImageView
                                         android:id="@+id/amount_change"
                                         android:layout_width="match_parent"
-                                        android:layout_height="60dp"
+                                        android:layout_height="65dp"
                                         android:src="@drawable/icon05" />
 
                                     <TextView
+                                        android:includeFontPadding="false"
+                                        android:fontFamily="@font/font_medium"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:text="추출량세팅"
                                         android:textColor="#676767"
-                                        android:textSize="15dp"
+                                        android:textSize="16sp"
                                         android:textStyle="bold" />
 
                                 </LinearLayout>
@@ -531,16 +555,18 @@
 
                                     <ImageView
                                         android:layout_width="match_parent"
-                                        android:layout_height="60dp"
+                                        android:layout_height="65dp"
                                         android:src="@drawable/icon06" />
 
                                     <TextView
+                                        android:includeFontPadding="false"
+                                        android:fontFamily="@font/font_medium"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:text="간단사용설명서"
                                         android:textColor="#676767"
-                                        android:textSize="15dp"
+                                        android:textSize="16sp"
                                         android:textStyle="bold" />
 
                                 </LinearLayout>

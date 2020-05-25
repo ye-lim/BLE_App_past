@@ -16,6 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp">
         <TextView
+            android:fontFamily="@font/font_medium"
+            android:includeFontPadding="false"
             android:id="@+id/find_text"
             android:text="머신을 찾는 중입니다."
             style="@style/TextAppearance.AppCompat.Headline"
