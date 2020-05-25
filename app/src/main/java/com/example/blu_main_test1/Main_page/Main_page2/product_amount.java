@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -66,8 +67,8 @@ public class product_amount extends AppCompatActivity {
     private ImgViewPagerAdapter_hancha hancha_pagerAdapter_img;
     private ImgViewPagerAdapter_blend blend_pagerAdapter_img;
     private TextView kind, name,amount,origin;
-    private Button press_btn ;
-    private ImageView left_btn, right_btn,search_btn,select_img,back_btn;
+    private Button press_btn;
+    private ImageView left_btn, right_btn,search_btn,select_img,back_btn, plus_btn, minus_btn;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     BluetoothLeService bluetoothLeService;
     private String text;
@@ -92,6 +93,10 @@ public class product_amount extends AppCompatActivity {
         origin =(TextView)findViewById(R.id.origin);
         press_btn = (Button)findViewById(R.id.press_btn);
         press_btn.setOnClickListener(onClickListener);
+        plus_btn = (ImageView)findViewById(R.id.plus_amount);
+        plus_btn.setOnClickListener(onClickListener);
+        minus_btn = (ImageView)findViewById(R.id.minus_amount);
+        minus_btn.setOnClickListener(onClickListener);
 
         left_btn = (ImageView)findViewById(R.id.left_btn);
         left_btn.setOnClickListener(onClickListener);
@@ -194,8 +199,6 @@ public class product_amount extends AppCompatActivity {
         hancha_viewpager_img.setVisibility(View.GONE);
         blend_viewpager_img.setVisibility(View.GONE);
 
-
-
         tabLayout = (TabLayout)findViewById(R.id.tabs);
         tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
@@ -205,8 +208,7 @@ public class product_amount extends AppCompatActivity {
                 left_btn.setVisibility(View.VISIBLE);
                 right_btn.setVisibility(View.VISIBLE);
                 success = false;
-                chagneView(pos);
-
+                changeView(pos);
             }
 
             @Override
@@ -223,7 +225,6 @@ public class product_amount extends AppCompatActivity {
         tradition_viewpager_img.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-
             }
 
             @Override
@@ -232,19 +233,16 @@ public class product_amount extends AppCompatActivity {
                 name.setText(DeviceControlActivity.tradition_textList.get(i));
                 tradition_viewpager.setCurrentItem(tradition_viewpager_img.getCurrentItem());
                 tradition_value();
-
             }
 
             @Override
             public void onPageScrollStateChanged(int i) {
-
             }
         });
 
         hancha_viewpager_img.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-
             }
 
             @Override
@@ -253,19 +251,16 @@ public class product_amount extends AppCompatActivity {
                 name.setText(DeviceControlActivity.hancha_textList.get(i));
                 hancha_viewpager.setCurrentItem(hancha_viewpager_img.getCurrentItem());
                 hancha_value();
-
             }
 
             @Override
             public void onPageScrollStateChanged(int i) {
-
             }
         });
 
         blend_viewpager_img.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-
             }
 
             @Override
@@ -274,12 +269,10 @@ public class product_amount extends AppCompatActivity {
                 name.setText(DeviceControlActivity.blend_textList.get(i));
                 blend_viewpager.setCurrentItem(blend_viewpager_img.getCurrentItem());
                 blend_value();
-
             }
 
             @Override
             public void onPageScrollStateChanged(int i) {
-
             }
         });
 
@@ -297,7 +290,6 @@ public class product_amount extends AppCompatActivity {
                 name.setText(DeviceControlActivity.tradition_textList.get(i));
                 tradition_viewpager_img.setCurrentItem(tradition_viewpager.getCurrentItem());
                 tradition_value();
-
             }
 
             @Override
@@ -318,7 +310,6 @@ public class product_amount extends AppCompatActivity {
                 name.setText(DeviceControlActivity.hancha_textList.get(i));
                 hancha_viewpager_img.setCurrentItem(hancha_viewpager.getCurrentItem());
                 hancha_value();
-
             }
 
             @Override
@@ -403,7 +394,6 @@ public class product_amount extends AppCompatActivity {
         }
 
         for (int i= 0; i < DeviceControlActivity.blend_textList.size(); i++) {
-
             if (search.equals(DeviceControlActivity.blend_textList.get(i))) {
                 success = true;
                 Glide.with(this).load(DeviceControlActivity.blend_textList_img.get(i)).into(select_img);
@@ -440,8 +430,6 @@ public class product_amount extends AppCompatActivity {
         }else{
             Toast.makeText(product_amount.this, "검색결과가 없습니다.", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     public void progressON(Activity activity, String message) {
@@ -449,20 +437,15 @@ public class product_amount extends AppCompatActivity {
         if (activity == null || activity.isFinishing()) {
             return;
         }
-
-
         if (progressDialog != null && progressDialog.isShowing()) {
             progressSET(message);
         } else {
-
             progressDialog = new AppCompatDialog(activity);
             progressDialog.setCancelable(false);
             progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             progressDialog.setContentView(R.layout.loading);
             progressDialog.show();
-
         }
-
 
         final ImageView img_loading_frame = (ImageView) progressDialog.findViewById(R.id.iv_frame_loading);
         final AnimationDrawable frameAnimation = (AnimationDrawable) img_loading_frame.getBackground();
@@ -479,23 +462,17 @@ public class product_amount extends AppCompatActivity {
         }
         Button stop_btn = (Button)progressDialog.findViewById(R.id.stop_Btn);
         stop_btn.setOnClickListener(onClickListener);
-
-
-
     }
 
     public static void progressSET(String message) {
-
         if (progressDialog == null || !progressDialog.isShowing()) {
             return;
         }
-
 
         TextView tv_progress_message = (TextView) progressDialog.findViewById(R.id.tv_progress_message);
         if (!TextUtils.isEmpty(message)) {
             tv_progress_message.setText(message);
         }
-
     }
 
     public void progressOFF() {
@@ -510,14 +487,11 @@ public class product_amount extends AppCompatActivity {
     }
 
     private ServiceConnection mServiceConnection = new ServiceConnection() {
-
         public void onServiceConnected(ComponentName className, IBinder rawBinder) {
             bluetoothLeService = ((BluetoothLeService.LocalBinder) rawBinder).getService();
-
             if (!bluetoothLeService.initialize()) {
             }
         }
-
 
         public void onServiceDisconnected(ComponentName classname) {
             if(bluetoothLeService != null) {
@@ -647,6 +621,26 @@ public class product_amount extends AppCompatActivity {
                     search();
                     break;
 
+                case R.id.plus_amount:
+                    success = true;
+                    String plus = amount.getText().toString().substring(0,2);
+                    int plus_int = Integer.parseInt(plus);
+                    if(plus_int > 30)
+                        plus = amount.getText().toString().substring(0,1);
+                    if(Integer.parseInt(plus) >= 3 && Integer.parseInt(plus) < 25)
+                        amount.setText(amount.getText().toString().replace(plus, String.valueOf(Integer.parseInt(plus)+ 1)));
+                    else Toast.makeText(getApplicationContext(), "30ml에서 250ml만 추출 가능합니다.", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case R.id.minus_amount:
+                    success = true;
+                    String minus = amount.getText().toString().substring(0,2);
+                    int minus_int = Integer.parseInt(minus);
+                    if(minus_int > 30) minus = amount.getText().toString().substring(0,1);
+                    if(Integer.parseInt(minus) > 3 && Integer.parseInt(minus) <= 25)
+                        amount.setText(amount.getText().toString().replace(minus, String.valueOf(Integer.parseInt(minus)- 1)));
+                    else Toast.makeText(getApplicationContext(), "30ml에서 250ml만 추출 가능합니다.", Toast.LENGTH_SHORT).show();
+                    break;
             }
         }
     };
@@ -679,9 +673,6 @@ public class product_amount extends AppCompatActivity {
                     });
         }
     }
-
-
-
 
 
     public void hancha_value(){
@@ -722,7 +713,7 @@ public class product_amount extends AppCompatActivity {
         }
     }
 
-    private void chagneView(int index){
+    private void changeView(int index){
         switch (index) {
             case 0 :
                 tradition_viewpager.setVisibility(View.VISIBLE);
@@ -762,11 +753,9 @@ public class product_amount extends AppCompatActivity {
                 name.setText(DeviceControlActivity.blend_textList.get(blend_viewpager.getCurrentItem()));
                 blend_value();
 
+                break;
         }
-
     }
-
-
 
 
     @Override
@@ -787,8 +776,5 @@ public class product_amount extends AppCompatActivity {
     protected void onPause() { //리시버를 해제
         super.onPause();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mGattUpdateReceiver);
-
     }
-
-
 }
