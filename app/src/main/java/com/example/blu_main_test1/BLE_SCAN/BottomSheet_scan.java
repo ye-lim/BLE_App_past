@@ -229,6 +229,19 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
                         Toast.makeText(getContext(), "연결 가능한 머신이 없습니다.", Toast.LENGTH_SHORT).show();
                         dismiss();
                     }
+                    if(mLeDeviceListAdapter.getCount() == 1 && getContext() != null){
+                        final BluetoothDevice device = mLeDeviceListAdapter.getDevice(0); // 그 위치의 디바이스
+                        final Intent intent = new Intent(getContext(), DeviceControlActivity.class);
+                        mDeviceName = device.getName();
+                        mDeviceAddress = device.getAddress();
+                        SharedPreferences autodevice = getContext().getSharedPreferences("autodevice", Activity.MODE_PRIVATE);
+                        SharedPreferences.Editor autoconnect = autodevice.edit();
+                        autoconnect.putString("address",mDeviceAddress);
+                        autoconnect.putString("devicename",mDeviceName);
+                        autoconnect.commit();
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
 
                 }
             }, SCAN_PERIOD);
