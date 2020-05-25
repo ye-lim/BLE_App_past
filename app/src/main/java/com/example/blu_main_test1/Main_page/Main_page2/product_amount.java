@@ -93,10 +93,6 @@ public class product_amount extends AppCompatActivity {
         origin =(TextView)findViewById(R.id.origin);
         press_btn = (Button)findViewById(R.id.press_btn);
         press_btn.setOnClickListener(onClickListener);
-        plus_btn = (ImageView)findViewById(R.id.plus_amount);
-        plus_btn.setOnClickListener(onClickListener);
-        minus_btn = (ImageView)findViewById(R.id.minus_amount);
-        minus_btn.setOnClickListener(onClickListener);
 
         left_btn = (ImageView)findViewById(R.id.left_btn);
         left_btn.setOnClickListener(onClickListener);
@@ -109,7 +105,10 @@ public class product_amount extends AppCompatActivity {
         select_img.setVisibility(View.GONE);
         back_btn = (ImageView)findViewById(R.id.backclose);
         back_btn.setOnClickListener(onClickListener);
-
+        plus_btn = (ImageView)findViewById(R.id.plus_amount);
+        plus_btn.setOnClickListener(onClickListener);
+        minus_btn = (ImageView)findViewById(R.id.minus_amount);
+        minus_btn.setOnClickListener(onClickListener);
 
         tradition_viewpager = findViewById(R.id.tradition_viewpager);
         tradition_viewpager.setClipToPadding(false);
@@ -625,7 +624,7 @@ public class product_amount extends AppCompatActivity {
                     success = true;
                     String plus = amount.getText().toString().substring(0,2);
                     int plus_int = Integer.parseInt(plus);
-                    if(plus_int > 30)
+                    if(plus_int >= 30)
                         plus = amount.getText().toString().substring(0,1);
                     if(Integer.parseInt(plus) >= 3 && Integer.parseInt(plus) < 25)
                         amount.setText(amount.getText().toString().replace(plus, String.valueOf(Integer.parseInt(plus)+ 1)));
