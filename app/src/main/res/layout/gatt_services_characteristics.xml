@@ -25,7 +25,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="1">
 
@@ -38,12 +38,12 @@
                         android:paddingLeft="5dp" />
 
                     <TextView
-                        android:includeFontPadding="false"
-                        android:fontFamily="@font/font_demi_light"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="0.76"
+                        android:fontFamily="@font/font_demi_light"
+                        android:includeFontPadding="false"
                         android:text="내 머신"
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
