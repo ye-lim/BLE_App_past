@@ -220,15 +220,6 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
                 public void run() {
                     mScanning = false;
                     mBluetoothAdapter.stopLeScan(mLeScanCallback);
-                    if(getContext() != null)
-                        Glide.with(getContext()).load(R.drawable.ble_mark).into(start_device_scanning);
-                        textView.setText("사용하실 머신을 눌러주세요.");
-
-
-                    if(mLeDeviceListAdapter.getCount() == 0 && getContext() != null){
-                        Toast.makeText(getContext(), "연결 가능한 머신이 없습니다.", Toast.LENGTH_SHORT).show();
-                        dismiss();
-                    }
                     if(mLeDeviceListAdapter.getCount() == 1 && getContext() != null){
                         final BluetoothDevice device = mLeDeviceListAdapter.getDevice(0); // 그 위치의 디바이스
                         final Intent intent = new Intent(getContext(), DeviceControlActivity.class);
@@ -241,6 +232,12 @@ public class BottomSheet_scan extends BottomSheetDialogFragment {
                         autoconnect.commit();
                         startActivity(intent);
                         getActivity().finish();
+                    } else if(mLeDeviceListAdapter.getCount() == 0 && getContext() != null){
+                        Toast.makeText(getContext(), "연결 가능한 머신이 없습니다.", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    } else if( getContext() != null){
+                        Glide.with(getContext()).load(R.drawable.ble_mark).into(start_device_scanning);
+                        textView.setText("사용하실 머신을 눌러주세요.");
                     }
 
                 }

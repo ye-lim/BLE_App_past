@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_margin="15dp"
-            android:weightSum="10.2"
+            android:weightSum="10.5"
             android:adjustViewBounds="true">
 
             <LinearLayout
@@ -38,15 +38,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.5"
+                android:layout_weight="0.7"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
                 <TextView
+                    android:fontFamily="@font/font_medium"
+                    android:includeFontPadding="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="추출량 세팅"
-                    android:textSize="12dp"
+                    android:textSize="19sp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:gravity="center"/>
@@ -56,16 +58,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
                 <TextView
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/font_regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Coffee"
                     android:textColor="@color/black"
-                    android:textSize="11dp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -91,12 +95,14 @@
                         android:src="@drawable/cs_icon02"/>
 
                     <TextView
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/font_demi_light"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="에스프레소"
                         android:textColor="#676767"
-                        android:textSize="10dp"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -124,6 +130,8 @@
                             android:progressDrawable="@xml/custom_seekbar"/>
 
                         <TextView
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/font_demi_light"
                             android:layout_centerVertical="true"
                             android:layout_marginTop="12dp"
                             android:id="@+id/coffee_s_amount"
@@ -136,6 +144,8 @@
                             android:textSize="11dp" />
 
                         <TextView
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/font_demi_light"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="2dp"
                             android:layout_width="wrap_content"
@@ -180,6 +190,8 @@
                             android:layout_below="@+id/seek_coffee_small">
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="5dp"
@@ -189,6 +201,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="55dp"
@@ -198,6 +212,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="100dp"
@@ -207,6 +223,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="140dp"
@@ -216,6 +234,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="180dp"
@@ -255,11 +275,13 @@
                         android:src="@drawable/cl_icon02"/>
 
                     <TextView
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/font_demi_light"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="룽고"
                         android:textColor="#676767"
-                        android:textSize="10dp"
+                        android:textSize="11sp"
                         android:textStyle="bold"
                         android:gravity="center"/>
 
@@ -290,6 +312,8 @@
                             android:progressDrawable="@xml/custom_seekbar"/>
 
                         <TextView
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/font_demi_light"
                             android:layout_centerVertical="true"
                             android:layout_marginTop="12dp"
                             android:id="@+id/coffee_b_amount"
@@ -302,6 +326,8 @@
                             android:textSize="11dp" />
 
                         <TextView
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/font_demi_light"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="2dp"
                             android:layout_width="wrap_content"
@@ -346,6 +372,8 @@
                             android:layout_below="@+id/seek_coffee_big">
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="5.8dp"
                                 android:layout_width="wrap_content"
@@ -355,6 +383,8 @@
                                 android:gravity="center"/>
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="55dp"
@@ -364,6 +394,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="100dp"
@@ -373,6 +405,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="140dp"
@@ -382,6 +416,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_marginTop="5.8dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -406,15 +442,17 @@
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
                 <TextView
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/font_regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tea"
-                    android:textSize="11dp"
+                    android:textSize="16sp"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -441,11 +479,13 @@
                         android:src="@drawable/ts_icon02"/>
 
                     <TextView
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/font_demi_light"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="tea-일반"
                         android:textColor="#676767"
-                        android:textSize="10dp"
+                        android:textSize="11sp"
                         android:textStyle="bold"
                         android:gravity="center"/>
 
@@ -474,6 +514,8 @@
                             android:progressDrawable="@xml/custom_seekbar"/>
 
                         <TextView
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/font_demi_light"
                             android:layout_centerVertical="true"
                             android:layout_marginTop="12dp"
                             android:id="@+id/tea_s_amount"
@@ -486,6 +528,8 @@
                             android:textSize="11dp" />
 
                         <TextView
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/font_demi_light"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="2dp"
                             android:layout_width="wrap_content"
@@ -530,6 +574,8 @@
                             android:layout_below="@+id/seek_Tea_small">
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="5.8dp"
                                 android:layout_width="wrap_content"
@@ -539,6 +585,8 @@
                                 android:gravity="center"/>
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="55dp"
@@ -548,6 +596,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="100dp"
@@ -557,6 +607,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="140dp"
@@ -566,6 +618,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_marginTop="5.8dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -605,13 +659,15 @@
                         android:src="@drawable/tl_icon02"/>
 
                     <TextView
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/font_demi_light"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="한방차"
                         android:textColor="#676767"
-                        android:textSize="10dp"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -638,6 +694,8 @@
                             android:progressDrawable="@xml/custom_seekbar"/>
 
                         <TextView
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/font_demi_light"
                             android:layout_centerVertical="true"
                             android:layout_marginTop="12dp"
                             android:id="@+id/tea_b_amount"
@@ -650,6 +708,8 @@
                             android:textSize="11dp" />
 
                         <TextView
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/font_demi_light"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="2dp"
                             android:layout_width="wrap_content"
@@ -694,6 +754,8 @@
                             android:layout_below="@+id/seek_Tea_big">
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="5.8dp"
                                 android:layout_width="wrap_content"
@@ -703,6 +765,8 @@
                                 android:gravity="center"/>
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="55dp"
@@ -712,6 +776,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="100dp"
@@ -721,6 +787,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="140dp"
@@ -730,6 +798,8 @@
                                 android:textSize="9dp" />
 
                             <TextView
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/font_demi_light"
                                 android:layout_marginTop="5.8dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -766,7 +836,7 @@
                     android:backgroundTint="#FECD07"
                     android:text="적용하기"
                     android:textColor="@color/black"
-                    android:textSize="13dp"
+                    android:textSize="14dp"
                     android:textStyle="bold"/>
 
             </LinearLayout>

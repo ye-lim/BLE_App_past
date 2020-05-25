@@ -109,7 +109,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     private FrameLayout sub_background;
     public Button sub_amount;
     private TextView versionView;
-    private TextView stateView;
+    public static TextView stateView;
    // private TextView temperView;
     private TextView mConnectionState;
     public static Timer tmr;
@@ -241,14 +241,23 @@ public class DeviceControlActivity extends AppCompatActivity {
                                 switch (text.substring(6, 8)) {
                                     case "00":
                                         stateView.setText("절전모드");
+                                        if(fragmentStack.isEmpty()){
+                                            main_text.setText("추출을 원하시면 예열버튼을 눌러주세요.");
+                                        }
                                         row_state = true;
                                         break;
                                     case "10":
                                         stateView.setText("가열중");
+                                        if(fragmentStack.isEmpty()){
+                                            main_text.setText("머신이 예열중입니다. 잠시만 기다려 주세요.");
+                                        }
                                         waiting = true;
                                         break;
                                     case "20":
                                         stateView.setText("추출대기");
+                                        if(fragmentStack.isEmpty()){
+                                            main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
+                                        }
                                         row_state = false;
                                         if(waiting){
                                             if(isActivityTop()){
@@ -1009,7 +1018,13 @@ public class DeviceControlActivity extends AppCompatActivity {
             Fragment nextFragmet = fragmentStack.pop();
             getSupportFragmentManager().beginTransaction().remove(nextFragmet).commit();
             device_con_view.setVisibility(View.VISIBLE);
-            main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
+            if(stateView.getText().toString().equals("가열중")){
+                main_text.setText("머신이 예열중입니다. 잠시만 기다려 주세요.");
+            }else if(stateView.getText().toString().equals("절전모드")){
+                main_text.setText("추출을 원하시면 예열버튼을 눌러주세요.");
+            }else{
+                main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
+            }
         }else{
             super.onBackPressed();
         }

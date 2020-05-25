@@ -22,6 +22,7 @@
             android:background="@color/white">
 
             <TextView
+                android:includeFontPadding="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="메디프레소 앱이란?"
@@ -52,6 +53,7 @@
                     android:scaleType="fitXY"/>
 
                 <TextView
+                    android:includeFontPadding="false"
                     android:fontFamily="@font/font_demi_light"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,7 +63,7 @@
                     android:gravity="center"
                     android:text="추출량 변화·솔링타임·예열\n슬립시간·추출시간 등을\n 조작 가능합니다."
                     android:textColor="@color/white"
-                    android:textSize="14dp"
+                    android:textSize="15sp"
                     android:lineSpacingExtra="5dp"/>
 
 
