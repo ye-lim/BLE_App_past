@@ -3,20 +3,12 @@
 <item>
 <shape>
     <gradient
-        android:endColor="#FECD07"
-        android:centerColor="#FECD07"
-        android:startColor="#FECD07"
+        android:endColor="#FFCE08"
+        android:centerColor="#FFCE08"
+        android:startColor="#FFCE08"
         android:angle="270" />
     <corners
-        android:bottomLeftRadius="10dp"
-        android:bottomRightRadius="10dp"
-        android:topLeftRadius="10dp"
-        android:topRightRadius="10dp" />
-    <padding
-        android:left="0dp"
-        android:top="0dp"
-        android:right="0dp"
-        android:bottom="0dp" />
+        android:radius="40dp" />
 </shape>
 </item>
 </layer-list>
