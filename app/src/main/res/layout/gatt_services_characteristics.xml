@@ -110,7 +110,8 @@
                                 android:textColor="@color/yellow"
                                 android:textSize="12sp"
                                 android:includeFontPadding="false"
-                                android:fontFamily="@font/font_demi_light" />
+                                android:fontFamily="@font/font_demi_light"
+                                android:textStyle="bold"/>
                             </LinearLayout>
                             <View
                                 android:layout_width="wrap_content"
@@ -142,6 +143,7 @@
                                 android:textAlignment="center"
                                 android:textColor="@color/yellow"
                                 android:textSize="12sp"
+                                android:textStyle="bold"
                                 android:includeFontPadding="false"
                                 android:fontFamily="@font/font_demi_light" />
                             </LinearLayout>
@@ -293,37 +295,47 @@
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="0.6"
+                                    android:layout_weight="0.7"
                                     android:orientation="vertical"
                                     android:gravity="center_vertical"/>
 
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="8.8"
+                                    android:layout_weight="8.6"
                                     android:gravity="center_vertical"
-                                    android:orientation="vertical">
-
+                                    android:orientation="vertical"
+                                    android:weightSum="1">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.15"/>
                                     <ImageView
                                         android:id="@+id/state_start"
                                         android:layout_width="match_parent"
-                                        android:layout_height="65dp"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.45"
                                         android:src="@drawable/icon01" />
 
                                     <TextView
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.3"
                                         android:gravity="center"
                                         android:text="예열"
                                         android:textColor="#676767"
-                                        android:textSize="16sp"
+                                        android:textSize="13sp"
                                         android:includeFontPadding="false"
                                         android:fontFamily="@font/font_medium" />
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.1"/>
                                 </LinearLayout>
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="0.6"
+                                    android:layout_weight="0.7"
                                     android:orientation="vertical"
                                     android:gravity="center_vertical"/>
                             </LinearLayout>
@@ -351,21 +363,32 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="8.6"
                                     android:gravity="center_vertical"
-                                    android:orientation="vertical">
+                                    android:orientation="vertical"
+                                    android:weightSum="1">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.15"/>
                                     <ImageView
                                         android:id="@+id/low_start"
                                         android:layout_width="match_parent"
-                                        android:layout_height="65dp"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.45"
                                         android:src="@drawable/icon02"/>
                                     <TextView
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.3"
                                         android:gravity="center"
                                         android:text="절전모드"
                                         android:textColor="#676767"
-                                        android:textSize="16sp"
+                                        android:textSize="13sp"
                                         android:includeFontPadding="false"
                                         android:fontFamily="@font/font_medium" />
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.1"/>
                                 </LinearLayout>
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -404,22 +427,34 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="8.6"
                                     android:gravity="center_vertical"
-                                    android:orientation="vertical">
+                                    android:orientation="vertical"
+                                    android:weightSum="1">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.15"/>
+
                                     <ImageView
                                         android:id="@+id/amount_start"
                                         android:layout_width="match_parent"
-                                        android:layout_height="65dp"
-                                        android:src="@drawable/icon03"/>
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.45"
+                                        android:src="@drawable/icon03" />
 
                                     <TextView
-                                        android:includeFontPadding="false"
-                                        android:fontFamily="@font/font_medium"
-                                        android:gravity="center"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.3"
+                                        android:gravity="center"
                                         android:text="일반추출"
                                         android:textColor="#676767"
-                                        android:textSize="16sp"/>
+                                        android:textSize="13sp"
+                                        android:includeFontPadding="false"
+                                        android:fontFamily="@font/font_medium" />
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.1"/>
 
                                 </LinearLayout>
 
@@ -461,23 +496,34 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="8.6"
                                     android:gravity="center_vertical"
-                                    android:orientation="vertical">
+                                    android:orientation="vertical"
+                                    android:weightSum="1">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.15"/>
 
                                     <ImageView
                                         android:id="@+id/product_amount"
                                         android:layout_width="match_parent"
-                                        android:layout_height="65dp"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.45"
                                         android:src="@drawable/icon04"/>
 
                                     <TextView
-                                        android:includeFontPadding="false"
-                                        android:fontFamily="@font/font_medium"
-                                        android:gravity="center"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.3"
+                                        android:gravity="center"
                                         android:text="제품별추출"
                                         android:textColor="#676767"
-                                        android:textSize="16sp"/>
+                                        android:textSize="13sp"
+                                        android:includeFontPadding="false"
+                                        android:fontFamily="@font/font_medium" />
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.1"/>
 
                                 </LinearLayout>
 
@@ -528,23 +574,33 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="8.6"
                                     android:gravity="center_vertical"
-                                    android:orientation="vertical">
-
+                                    android:orientation="vertical"
+                                    android:weightSum="1">
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.15"/>
                                     <ImageView
                                         android:id="@+id/amount_change"
                                         android:layout_width="match_parent"
-                                        android:layout_height="65dp"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.45"
                                         android:src="@drawable/icon05" />
 
                                     <TextView
-                                        android:includeFontPadding="false"
-                                        android:fontFamily="@font/font_medium"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.3"
                                         android:gravity="center"
                                         android:text="추출량 변화"
                                         android:textColor="#676767"
-                                        android:textSize="16sp" />
+                                        android:textSize="13sp"
+                                        android:includeFontPadding="false"
+                                        android:fontFamily="@font/font_medium"  />
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.1"/>
 
                                 </LinearLayout>
 
@@ -589,21 +645,29 @@
                                     android:layout_weight="8.6"
                                     android:gravity="center_vertical"
                                     android:orientation="vertical">
-
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.15"/>
                                     <ImageView
                                         android:layout_width="match_parent"
-                                        android:layout_height="65dp"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.45"
                                         android:src="@drawable/icon06" />
-
                                     <TextView
                                         android:includeFontPadding="false"
                                         android:fontFamily="@font/font_medium"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.3"
                                         android:gravity="center"
                                         android:text="간단사용설명서"
                                         android:textColor="#676767"
-                                        android:textSize="16sp" />
+                                        android:textSize="13sp" />
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="0.1"/>
                                 </LinearLayout>
 
                                 <LinearLayout
