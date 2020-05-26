@@ -169,8 +169,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"
-                android:text="연동하기"
-                android:textSize="20sp"
+                android:text="연 동 하 기"
+                android:textSize="15sp"
                 android:background="@xml/main_bnt" />
             <LinearLayout
                 android:layout_width="0dp"
