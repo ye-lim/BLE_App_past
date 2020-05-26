@@ -134,8 +134,7 @@
                                 android:textSize="15sp"
                                 android:includeFontPadding="false"
                                 android:fontFamily="@font/font_medium" />
-
-                            <TextView
+                                <TextView
                                 android:id="@+id/state"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
