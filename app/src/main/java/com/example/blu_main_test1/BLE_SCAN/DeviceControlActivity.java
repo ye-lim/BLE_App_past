@@ -141,6 +141,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     public static List<String> tradition_textList,tradition_textList_img;
     public static List<String> hancha_textList,hancha_textList_img;
     public static List<String> blend_textList,blend_textList_img;
+    public static List<String> total_textList,total_textList_img;
 
     // Code to manage Service lifecycle.
     //서비스가 연결됐을 때, 안됐을 때 관리
@@ -460,10 +461,13 @@ public class DeviceControlActivity extends AppCompatActivity {
         tradition_textList = new ArrayList<String>();
         hancha_textList = new ArrayList<String>();
         blend_textList = new ArrayList<String>();
+        total_textList = new ArrayList<String>();
 
         tradition_textList_img = new ArrayList<String>();
         hancha_textList_img = new ArrayList<String>();
         blend_textList_img = new ArrayList<String>();
+        total_textList_img = new ArrayList<String>();
+
         Handler delayHandler = new Handler();
 
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -511,6 +515,22 @@ public class DeviceControlActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+        db.collection("BLE_APP")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                total_textList.add(document.getData().get("product_name").toString());
+                                total_textList_img.add(document.getData().get("url").toString());
+                            }
+                        }
+                    }
+                });
+
+
 
         delayHandler.postDelayed(new Runnable() {
             @Override

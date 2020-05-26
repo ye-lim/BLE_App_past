@@ -13,12 +13,14 @@
         android:gravity="center">
 
         <TextView
+            android:fontFamily="@font/font_demi_light"
+            android:includeFontPadding="false"
             android:id="@+id/page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#3a3a3a"
             android:text="text"
-            android:textSize="12dp"
+            android:textSize="12sp"
             android:gravity="center"/>
 
     </LinearLayout>
