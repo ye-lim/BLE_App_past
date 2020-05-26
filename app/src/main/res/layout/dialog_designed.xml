@@ -10,25 +10,25 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:fontFamily="@font/font_medium"
-        android:text="알 림"
-        android:textColor="#fbb100"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:fontFamily="@font/font_medium"
+            android:text="알 림"
+            android:textColor="#fbb100"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:fontFamily="@font/font_demi_light"
-        android:text="작업을 취소하시겠습니까?"
-        android:textColor="#1e1e1e"
-        android:textSize="16dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:fontFamily="@font/font_demi_light"
+            android:text="작업을 취소하시겠습니까?"
+            android:textColor="#1e1e1e"
+            android:textSize="16dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -65,4 +65,3 @@
 
     </LinearLayout>
 </LinearLayout>
-
