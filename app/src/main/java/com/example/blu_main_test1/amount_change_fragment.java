@@ -1,47 +1,24 @@
 package com.example.blu_main_test1;
 
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.media.AudioManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Vibrator;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.blu_main_test1.BLE_SCAN.BluetoothLeService;
+import com.example.blu_main_test1.BLE_SCAN.DesignedDialog;
 import com.example.blu_main_test1.BLE_SCAN.DeviceControlActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
 
 public class amount_change_fragment extends Fragment {
 
@@ -65,7 +42,6 @@ public class amount_change_fragment extends Fragment {
         super.onActivityCreated(b);
 
         DeviceControlActivity.main_text.setText("추출량을 자유롭게 변경해보세요.");
-
         DeviceControlActivity.Coffee_small();
 
         Handler delayHandler = new Handler();
@@ -99,9 +75,7 @@ public class amount_change_fragment extends Fragment {
 
 
         LinearLayout.LayoutParams paramlinear = new LinearLayout.LayoutParams(
-
                 LinearLayout.LayoutParams.MATCH_PARENT,
-
                 LinearLayout.LayoutParams.MATCH_PARENT
         );
 
@@ -123,19 +97,14 @@ public class amount_change_fragment extends Fragment {
         sb_t_b = (SeekBar) getView().findViewById(R.id.seek_Tea_big);
         sb_t_s = (SeekBar) getView().findViewById(R.id.seek_Tea_small);
 
+
         close_amount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment nextFragmet = DeviceControlActivity.fragmentStack.pop();
-                DeviceControlActivity.fragmentManager.beginTransaction().remove(nextFragmet).commit();
-                DeviceControlActivity.device_con_view.setVisibility(View.VISIBLE);
-                if(DeviceControlActivity.stateView.getText().toString().equals("가열중")){
-                    DeviceControlActivity.main_text.setText("머신이 예열중입니다. 잠시만 기다려 주세요.");
-                }else if(DeviceControlActivity.stateView.getText().toString().equals("절전모드")){
-                    DeviceControlActivity.main_text.setText("추출을 원하시면 예열버튼을 눌러주세요.");
-                }else{
-                    DeviceControlActivity.main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
-                }
+                final DesignedDialog mDesignedDialog = new DesignedDialog(context);
+                mDesignedDialog.setContentView(R.layout.dialog_designed);
+                mDesignedDialog.setCancelable(true);
+                mDesignedDialog.show();
             }
         });
 
