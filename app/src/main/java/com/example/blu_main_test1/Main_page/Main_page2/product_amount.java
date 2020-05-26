@@ -134,7 +134,7 @@ public class product_amount extends AppCompatActivity {
         hancha_viewpager.setPageMargin(0);
 
 
-        int dpValue_blend = 50;
+        int dpValue_blend = 55;
         int margin_blend = (int) (dpValue_blend * d);
         blend_viewpager = findViewById(R.id.blend_viewpager);
         blend_viewpager.setClipToPadding(false);
