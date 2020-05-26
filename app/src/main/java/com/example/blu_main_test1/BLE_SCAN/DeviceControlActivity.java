@@ -606,7 +606,7 @@ public class DeviceControlActivity extends AppCompatActivity {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id");
 
-        builder.setSmallIcon(R.drawable.launcher_icon);
+        builder.setSmallIcon(R.drawable.medipresso_launcher_logo);
         builder.setContentTitle("MEDIPRESSO");
         builder.setContentText("추출 준비가 완료되었습니다.");
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
