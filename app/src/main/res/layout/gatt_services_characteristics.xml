@@ -26,6 +26,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal"
                     android:weightSum="1">
 
@@ -60,9 +61,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="14dp"
                     android:background="@xml/round_edge"
                     android:orientation="vertical">
 
@@ -126,7 +127,6 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
                                 android:text="머신상태"
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
