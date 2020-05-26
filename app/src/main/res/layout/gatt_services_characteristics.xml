@@ -141,7 +141,7 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="6"
+                                android:layout_weight="7"
                                 android:src="@drawable/machine01" />
 
                             <TextView
@@ -151,7 +151,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_marginTop="10dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.5"
                                 android:color="#646464"
                                 android:gravity="center"
                                 android:textSize="12sp" />
