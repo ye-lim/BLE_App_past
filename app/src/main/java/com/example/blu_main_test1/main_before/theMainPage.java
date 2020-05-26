@@ -55,6 +55,12 @@ public class theMainPage extends AppCompatActivity {
 
         to_BLE.setVisibility(View.VISIBLE);
         to_shop.setVisibility(View.VISIBLE);
+
+
+
+
+
+
     }
 
 
