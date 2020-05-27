@@ -84,7 +84,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:src="@drawable/ab_cs_icon01"/>
+                    android:src="@drawable/ab_cs_icon"/>
 
                 <TextView
                     android:fontFamily="@font/font_demi_light"
@@ -126,7 +126,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:src="@drawable/ab_cl_icon01"/>
+                    android:src="@drawable/ab_cl_icon"/>
 
                 <TextView
                     android:fontFamily="@font/font_demi_light"
@@ -200,7 +200,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:src="@drawable/ab_ts_icon01"/>
+                    android:src="@drawable/ab_tn_icon"/>
 
                 <TextView
                     android:fontFamily="@font/font_demi_light"
@@ -242,7 +242,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:src="@drawable/ab_tl_icon01"/>
+                    android:src="@drawable/ab_th_icon"/>
 
                 <TextView
                     android:fontFamily="@font/font_demi_light"
