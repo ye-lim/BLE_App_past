@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -38,19 +40,25 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class theMainPage extends AppCompatActivity {
     Button to_BLE, to_shop;
     private BackPressHandler backPressHandler;
     private String mDeviceName;
     private String mDeviceAddress;
+    private String serial_number_get;
     private String serial_number;
     private String serial_using;
+    private Boolean using = false;
     private ImageView coupon;
-
+    private String key;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
@@ -80,46 +88,48 @@ public class theMainPage extends AppCompatActivity {
         to_BLE.setVisibility(View.VISIBLE);
         to_shop.setVisibility(View.VISIBLE);
 
-        SharedPreferences prefs=getSharedPreferences("isFirstserial", MODE_PRIVATE);
+        prefs=getSharedPreferences("isFirstserial", MODE_PRIVATE);
         boolean isFirstRun = prefs.getBoolean("isFirstserial",true);
-
         if(isFirstRun){
-
-            while(true){
-                String num = Integer.toString((int)(Math.random()*5000)+1);
-                final FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("serial_number")
-                        .whereEqualTo("num", num)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        serial_number = document.getData().get("serial").toString();
-                                        serial_using = document.getData().get("using").toString();
-                                    }
-                                }
-                            }
-                        });
-                if(true){ //seria_using.equals("true")
-                    SharedPreferences serialdevice = getSharedPreferences("serial_num", Activity.MODE_PRIVATE);
-                    SharedPreferences.Editor serialconnect = serialdevice.edit();
-                    serialconnect.putString("serial","serial_number");
-                    serialconnect.commit();
-                    break;
-                }
-            }
-            coupon();
-            prefs.edit().putBoolean("isFirstserial",false).apply();
+            create_serial();
 
         }
 
 
+    }
+    private void create_serial(){
 
+       // String num = Integer.toString((int)(Math.random()*5000)+1);
+
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("serial_number")
+                .whereEqualTo("using","true")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                serial_number = document.getData().get("serial").toString();
+                                serial_using = document.getData().get("using").toString();
+                                SharedPreferences serialdevice = getSharedPreferences("serial_num", Activity.MODE_PRIVATE);
+                                SharedPreferences.Editor serialconnect = serialdevice.edit();
+                                serialconnect.putString("serial",serial_number);
+                                serialconnect.commit();
+                                break;
+                            }
+                        }
+                    }
+                });
+
+        prefs.edit().putBoolean("isFirstserial",false).apply();
 
     }
 
+
+    private void startToast(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
 
     View.OnClickListener btnListener = new View.OnClickListener() {
         @Override
@@ -152,9 +162,9 @@ public class theMainPage extends AppCompatActivity {
 
     public void coupon(){
         SharedPreferences serialdevice = getSharedPreferences("serial_num", Activity.MODE_PRIVATE);
-        serial_number= serialdevice.getString("serial",null);
+        serial_number_get= serialdevice.getString("serial",null);
         AlertDialog.Builder alert_confirm = new AlertDialog.Builder(theMainPage.this);
-        alert_confirm.setMessage(serial_number).setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+        alert_confirm.setMessage("쿠폰발행 \n\n"+serial_number_get).setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
