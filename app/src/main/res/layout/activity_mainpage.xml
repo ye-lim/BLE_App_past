@@ -45,7 +45,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="7dp"
             android:background="@xml/round_edge"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="vertical"
             android:weightSum="0.8">
             <TextView
@@ -109,7 +109,7 @@
             android:layout_marginLeft="7dp"
             android:layout_marginRight="20dp"
             android:background="@xml/round_edge"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="vertical"
             android:weightSum="0.8">
 
