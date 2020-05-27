@@ -1,7 +1,9 @@
 package com.example.blu_main_test1.main_before;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 //import com.example.blu_main_test1.BLE_SCAN.BottomSheet_scan;
@@ -27,7 +30,6 @@ public class Machine_main extends AppCompatActivity {
     TextView mTextView;
     private BluetoothAdapter mBluetoothAdapter; //bluetooth_finding 어댑터
     private BackPressHandler backPressHandler;
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
@@ -59,8 +61,13 @@ public class Machine_main extends AppCompatActivity {
         ImageView iv_frame_ble_start = (ImageView)findViewById(R.id.iv_frame_ble);
         GlideDrawableImageViewTarget gifImage = new GlideDrawableImageViewTarget(iv_frame_ble_start);
         Glide.with(this).load(R.raw.ble_start).into(gifImage);
+
     }
 
+
+    private void startToast(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
 
 
     View.OnClickListener btnListener = new View.OnClickListener() {

@@ -71,6 +71,7 @@ public class onboard extends AppIntro {
             else{
 
             }
+
             addSlide(mintro01);
             addSlide(mintro02);
             addSlide(mintro03);
