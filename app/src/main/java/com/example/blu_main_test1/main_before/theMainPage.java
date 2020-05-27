@@ -102,14 +102,15 @@ public class theMainPage extends AppCompatActivity {
                                 }
                             }
                         });
-                if(true){
+                if(true){ //seria_using.equals("true")
                     SharedPreferences serialdevice = getSharedPreferences("serial_num", Activity.MODE_PRIVATE);
                     SharedPreferences.Editor serialconnect = serialdevice.edit();
-                    serialconnect.putString("serial",serial_number);
+                    serialconnect.putString("serial","serial_number");
                     serialconnect.commit();
                     break;
                 }
             }
+            coupon();
             prefs.edit().putBoolean("isFirstserial",false).apply();
 
         }

@@ -68,6 +68,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.blu_main_test1.BLE_button.abstraction;
+import com.example.blu_main_test1.GuideActivity;
 import com.example.blu_main_test1.Main_page.Main_page2.product_amount;
 import com.example.blu_main_test1.R;
 import com.example.blu_main_test1.abstraction_fragment;
@@ -580,7 +581,7 @@ public class DeviceControlActivity extends AppCompatActivity {
         findViewById(R.id.amount_change).setOnClickListener(onClickListener);
         findViewById(R.id.disconnect).setOnClickListener(onClickListener);
         findViewById(R.id.back).setOnClickListener(onClickListener);
-
+        findViewById(R.id.guide_btn).setOnClickListener(onClickListener);
 
 
 
@@ -656,6 +657,11 @@ public class DeviceControlActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
+                case R.id.guide_btn:
+                    Intent intent_guide = new Intent(getApplicationContext(), GuideActivity.class);
+                    startActivity(intent_guide);
+                    break;
+
                 case R.id.amount_start:
                     device_con_view.setVisibility(View.GONE);
                     fragmentManager = getSupportFragmentManager();
