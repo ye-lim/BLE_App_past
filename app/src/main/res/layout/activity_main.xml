@@ -23,13 +23,13 @@
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@xml/main_bnt"
+                    android:background="@xml/main_btn"
                     >
                     <ImageButton
                         android:layout_width="273dp"
                         android:layout_height="316.98dp"
                         android:background="@drawable/machine"
-                        android:src="@xml/main_bnt"
+                        android:src="@xml/main_btn"
                         />
 
                     <ImageView
@@ -199,7 +199,7 @@
                     <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@xml/main_bnt"
+                        android:background="@xml/main_btn"
                         >
                         <ImageButton
                             android:id="@+id/blu_connect"
@@ -244,7 +244,7 @@
                     <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@xml/main_bnt"
+                        android:background="@xml/main_btn"
                         >
                         <ImageButton
                             android:onClick="ble_click"
@@ -298,7 +298,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@xml/main_bnt"
+                android:background="@xml/main_btn"
                 >
                 <ImageButton
                     android:onClick="ble_click"
@@ -343,7 +343,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@xml/main_bnt"
+                android:background="@xml/main_btn"
                 >
                 <ImageButton
                     android:onClick="ble_click"
@@ -387,7 +387,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@xml/main_bnt"
+                android:background="@xml/main_btn"
                 >
                 <ImageButton
                     android:id="@+id/amount_start"
@@ -434,7 +434,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@xml/main_bnt"
+                android:background="@xml/main_btn"
                 >
                 <ImageButton
                     android:id="@+id/product_amount"
@@ -478,7 +478,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@xml/main_bnt"
+                android:background="@xml/main_btn"
                 >
 
                 <ImageButton
