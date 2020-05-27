@@ -448,6 +448,10 @@ public class DeviceControlActivity extends AppCompatActivity {
         device_con_view = findViewById(R.id.device_con_view);
 
 
+
+
+
+
         // Sets up UI references.
         //((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
