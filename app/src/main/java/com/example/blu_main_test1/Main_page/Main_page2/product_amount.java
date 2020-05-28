@@ -169,7 +169,7 @@ public class product_amount extends AppCompatActivity {
         delayHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                tradition_value();
+                total_value();
                 pgb.setVisibility(View.GONE);
             }
         },1000);
@@ -224,7 +224,6 @@ public class product_amount extends AppCompatActivity {
         tradition_viewpager_img.setVisibility(View.GONE);
         hancha_viewpager_img.setVisibility(View.GONE);
         blend_viewpager_img.setVisibility(View.GONE);
-        total_value();
 
         tabLayout = (TabLayout)findViewById(R.id.tabs);
         tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
