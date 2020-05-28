@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.blu_main_test1.BLE_SCAN.DeviceControlActivity;
+import com.example.blu_main_test1.CustomDialog;
 import com.example.blu_main_test1.Main_page.MainActivity;
 import com.example.blu_main_test1.Main_page.Main_page2.Main_page_2;
 import com.example.blu_main_test1.Main_page.Main_view_pager;
@@ -48,11 +49,8 @@ public class theMainPage extends AppCompatActivity {
     private BackPressHandler backPressHandler;
     private String mDeviceName;
     private String mDeviceAddress;
-    private String serial_number_get;
-    private String serial_number;
-    private String serial_using;
-    private Boolean using = false;
-    private ImageView coupon;
+    public static String serial_number_get;
+    public static  ImageView coupon;
     private String key;
     private SharedPreferences prefs;
 
@@ -91,45 +89,15 @@ public class theMainPage extends AppCompatActivity {
         prefs=getSharedPreferences("isFirstserial", MODE_PRIVATE);
         boolean isFirstRun = prefs.getBoolean("isFirstserial",true);
         if(isFirstRun){
-            create_serial();
-
+            coupon();
+            CustomDialog customDialog = new CustomDialog(theMainPage.this);
+            customDialog.callFunction();
+            prefs.edit().putBoolean("isFirstserial",false).apply();
         }
 
 
     }
-    private void create_serial(){
 
-       // String num = Integer.toString((int)(Math.random()*5000)+1);
-
-        final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("serial_number")
-                .whereEqualTo("using","true")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                serial_number = document.getData().get("serial").toString();
-                                serial_using = document.getData().get("using").toString();
-                                SharedPreferences serialdevice = getSharedPreferences("serial_num", Activity.MODE_PRIVATE);
-                                SharedPreferences.Editor serialconnect = serialdevice.edit();
-                                serialconnect.putString("serial",serial_number);
-                                serialconnect.commit();
-                                break;
-                            }
-                        }
-                    }
-                });
-
-        prefs.edit().putBoolean("isFirstserial",false).apply();
-
-    }
-
-
-    private void startToast(String msg){
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
-    }
 
     View.OnClickListener btnListener = new View.OnClickListener() {
         @Override
@@ -154,6 +122,8 @@ public class theMainPage extends AppCompatActivity {
                     break;
                 case R.id.coupon:
                     coupon();
+                    CustomDialog customDialog = new CustomDialog(theMainPage.this);
+                    customDialog.callFunction();
                     break;
 
             }
@@ -163,20 +133,7 @@ public class theMainPage extends AppCompatActivity {
     public void coupon(){
         SharedPreferences serialdevice = getSharedPreferences("serial_num", Activity.MODE_PRIVATE);
         serial_number_get= serialdevice.getString("serial",null);
-        AlertDialog.Builder alert_confirm = new AlertDialog.Builder(theMainPage.this);
-        alert_confirm.setMessage("쿠폰발행 \n\n"+serial_number_get).setCancelable(false).setPositiveButton("확인", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
 
-            }
-        });
-        alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        alert_confirm.show();
 
     }
 
