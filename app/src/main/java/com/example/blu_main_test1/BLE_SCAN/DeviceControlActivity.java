@@ -103,6 +103,7 @@ public class DeviceControlActivity extends AppCompatActivity {
     public static Stack<Fragment> fragmentStack = new Stack<>();;
     public static Fragment abstraction_fragment;
     public static Fragment amount_fragment;
+    public static Fragment nextFragmet;
 
     private ImageButton back;
     private TextView coffee_b_amount,coffee_s_amount,tea_b_amount,tea_s_amount;
@@ -1045,16 +1046,24 @@ public class DeviceControlActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         if(!fragmentStack.isEmpty()){ //추출량 변화 view 에서 뒤로가기 버튼을 눌렀을 경우 액티비티가 종료되지 않고 뷰만 종료되도록
-            Fragment nextFragmet = fragmentStack.pop();
-            getSupportFragmentManager().beginTransaction().remove(nextFragmet).commit();
-            device_con_view.setVisibility(View.VISIBLE);
-            if(stateView.getText().toString().equals("가열중")){
-                main_text.setText("머신이 예열중입니다. 잠시만 기다려 주세요.");
-            }else if(stateView.getText().toString().equals("절전모드")){
-                main_text.setText("추출을 원하시면 예열버튼을 눌러주세요.");
-            }else{
-                main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
+            if(fragmentStack.peek() == amount_fragment){
+                final DesignedDialog mDesignedDialog = new DesignedDialog(DeviceControlActivity.this);
+                mDesignedDialog.setContentView(R.layout.dialog_designed);
+                mDesignedDialog.setCancelable(true);
+                mDesignedDialog.show();
+            }else if(fragmentStack.peek() == abstraction_fragment){
+                nextFragmet = fragmentStack.pop();
+                getSupportFragmentManager().beginTransaction().remove(nextFragmet).commit();
+                device_con_view.setVisibility(View.VISIBLE);
+                if(stateView.getText().toString().equals("가열중")){
+                    main_text.setText("머신이 예열중입니다. 잠시만 기다려 주세요.");
+                }else if(stateView.getText().toString().equals("절전모드")){
+                    main_text.setText("추출을 원하시면 예열버튼을 눌러주세요.");
+                }else{
+                    main_text.setText("머신을 취향에 맞게 자유롭게 조절해 보세요.");
+                }
             }
+
         }else{
             super.onBackPressed();
         }

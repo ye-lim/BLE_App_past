@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#1e1e1e"
-            android:text="  '메디프레소 홈페이지 > 마이페이지(로그인후)   "
+            android:text="  '메디프레소 홈페이지 > 마이페이지(로그인후) "
             android:fontFamily="@font/font_light"
             android:includeFontPadding="false"
             android:textSize="13sp"/>
