@@ -584,18 +584,30 @@ public class product_amount extends AppCompatActivity {
 
                 case R.id.press_btn:
                     if(DeviceControlActivity.mConnected && !DeviceControlActivity.row_state){
-
-                        String press_value = "04ET" + amount.getText().toString().substring(0,2);
-                        String press_amount = "04ET" + amount.getText().toString().substring(0,2) + stringToHex(press_value);
-                        byte[] press_btn_value = {(byte) 0x02, (byte) 0x03 };
-                        byte[] press_btn__temp = press_amount.getBytes();
-                        byte[] press_btn_temp_data = new byte[press_btn__temp.length + 2];
-                        System.arraycopy(press_btn_value, 0, press_btn_temp_data, 0, 1);
-                        System.arraycopy(press_btn__temp, 0, press_btn_temp_data, 1, press_btn__temp.length);
-                        System.arraycopy(press_btn_value, 1, press_btn_temp_data, press_btn__temp.length + 1, 1);
-                        bluetoothLeService.writeRXCharacteristic(press_btn_temp_data);
-                        startProgress();
-
+                        if(Integer.parseInt(amount.getText().toString().substring(0,2))<30) {
+                            String press_value = "04ET" + amount.getText().toString().substring(0, 2);
+                            String press_amount = "04ET" + amount.getText().toString().substring(0,2) + stringToHex(press_value);
+                            byte[] press_btn_value = {(byte) 0x02, (byte) 0x03 };
+                            byte[] press_btn__temp = press_amount.getBytes();
+                            byte[] press_btn_temp_data = new byte[press_btn__temp.length + 2];
+                            System.arraycopy(press_btn_value, 0, press_btn_temp_data, 0, 1);
+                            System.arraycopy(press_btn__temp, 0, press_btn_temp_data, 1, press_btn__temp.length);
+                            System.arraycopy(press_btn_value, 1, press_btn_temp_data, press_btn__temp.length + 1, 1);
+                            bluetoothLeService.writeRXCharacteristic(press_btn_temp_data);
+                            startProgress();
+                        }
+                        else {
+                            String press_value = "04ET0" + amount.getText().toString().substring(0,1);
+                            String press_amount = "04ET0" + amount.getText().toString().substring(0,1) + stringToHex(press_value);
+                            byte[] press_btn_value = {(byte) 0x02, (byte) 0x03 };
+                            byte[] press_btn__temp = press_amount.getBytes();
+                            byte[] press_btn_temp_data = new byte[press_btn__temp.length + 2];
+                            System.arraycopy(press_btn_value, 0, press_btn_temp_data, 0, 1);
+                            System.arraycopy(press_btn__temp, 0, press_btn_temp_data, 1, press_btn__temp.length);
+                            System.arraycopy(press_btn_value, 1, press_btn_temp_data, press_btn__temp.length + 1, 1);
+                            bluetoothLeService.writeRXCharacteristic(press_btn_temp_data);
+                            startProgress();
+                        }
                     } else if(DeviceControlActivity.row_state){
                         Toast.makeText(getApplicationContext(),"머신이 절전모드 상태 입니다.",Toast.LENGTH_SHORT).show();
                     }
