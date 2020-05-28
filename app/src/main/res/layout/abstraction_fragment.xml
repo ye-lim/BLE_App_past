@@ -5,19 +5,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@xml/round_edge"
-    android:layout_gravity="center_vertical" >
+    android:layout_gravity="center_vertical"
+    android:layout_marginBottom="15dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="15dp"
-        android:weightSum="13">
+        android:weightSum="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.05"
             android:orientation="horizontal"
             android:gravity="right">
 
@@ -32,43 +33,34 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_weight="0.16"
+            android:gravity="bottom"
+            android:orientation="vertical">
 
             <TextView
-                android:fontFamily="@font/font_regular"
-                android:includeFontPadding="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/font_regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
                 android:text="Coffee"
-                android:textSize="20sp"
                 android:textColor="#091f3f"
-                android:textStyle="bold"
-                android:gravity="center"/>
+                android:textSize="19sp"
+                android:textStyle="bold" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="#dcdcdc" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.25"
-            android:orientation="horizontal"
-            android:gravity="bottom">
-
-            <View
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#dcdcdc"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:weightSum="9">
@@ -83,19 +75,20 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="8dp"
                     android:src="@drawable/ab_cs_icon"/>
 
                 <TextView
                     android:fontFamily="@font/font_demi_light"
                     android:includeFontPadding="false"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="에스프레소"
                     android:textColor="#787878"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -106,7 +99,6 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center">
-
 
                 <View
                     android:layout_width="0.5dp"
@@ -125,32 +117,35 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="8dp"
                     android:src="@drawable/ab_cl_icon"/>
 
                 <TextView
                     android:fontFamily="@font/font_demi_light"
                     android:includeFontPadding="false"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="룽고"
                     android:textColor="#787878"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
-
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_weight="0.09"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.16"
+            android:gravity="bottom"
+            android:orientation="vertical">
 
             <TextView
                 android:fontFamily="@font/font_regular"
@@ -158,33 +153,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tea"
-                android:textSize="20sp"
+                android:textSize="19sp"
                 android:textColor="#091f3f"
                 android:textStyle="bold"
                 android:gravity="center"/>
-
+            <View
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#dcdcdc"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.25"
-            android:orientation="horizontal"
-            android:gravity="bottom">
-
-            <View
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#dcdcdc"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:weightSum="9">
@@ -199,19 +184,20 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="8dp"
                     android:src="@drawable/ab_tn_icon"/>
 
                 <TextView
                     android:fontFamily="@font/font_demi_light"
                     android:includeFontPadding="false"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="tea-일반"
                     android:textColor="#787878"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -222,7 +208,6 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center">
-
 
                 <View
                     android:layout_width="0.5dp"
@@ -241,25 +226,27 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="8dp"
                     android:src="@drawable/ab_th_icon"/>
 
                 <TextView
                     android:fontFamily="@font/font_demi_light"
                     android:includeFontPadding="false"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="tea-한방"
                     android:textColor="#787878"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
-
         </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.09"/>
     </LinearLayout>
-
 </LinearLayout>
