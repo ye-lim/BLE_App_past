@@ -28,7 +28,7 @@ public class amount_change_fragment extends Fragment {
     private int coffee_big_number,coffee_small_number,tea_big_number,tea_small_number;
     public static SeekBar sb_c_b,sb_c_s,sb_t_b,sb_t_s;
     private String text;
-    private ImageView close_amount;
+    private ImageView close_amount, refresh_amount;
     private Context context;
 
     public amount_change_fragment() {
@@ -88,6 +88,7 @@ public class amount_change_fragment extends Fragment {
         tea_s_amount = (TextView) getView().findViewById(R.id.tea_s_amount);
         sub_amount = (Button) getView().findViewById(R.id.sub_amount);
         close_amount = (ImageView)getView().findViewById(R.id.close_amount);
+        refresh_amount = (ImageView)getView().findViewById(R.id.refresh_amount);
         pgb = (ProgressBar) getView().findViewById(R.id.progressBar3);
         pgb.setVisibility(View.VISIBLE);
 
@@ -105,6 +106,14 @@ public class amount_change_fragment extends Fragment {
                 mDesignedDialog.setContentView(R.layout.dialog_designed);
                 mDesignedDialog.setCancelable(true);
                 mDesignedDialog.show();
+            }
+        });
+
+        //공정 초기화
+        refresh_amount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
