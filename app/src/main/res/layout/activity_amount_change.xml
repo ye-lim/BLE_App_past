@@ -16,8 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_margin="10dp"
-            android:weightSum="10.5"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:weightSum="10.6"
             android:adjustViewBounds="true">
 
             <LinearLayout
@@ -38,7 +40,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.8"
+                android:layout_weight="0.7"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -439,7 +441,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.6"
@@ -822,7 +823,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.9"
+                android:layout_weight="1.0"
                 android:orientation="horizontal"
                 android:gravity="center">
                 <ImageView

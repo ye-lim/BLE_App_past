@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+    android:layout_width="320dp"
     android:layout_height="wrap_content"
     android:gravity="center"
     android:background="@xml/round_edge">
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#1e1e1e"
-            android:text="  '메디프레소 홈페이지 > 마이페이지(로그인후) "
+            android:text="'메디프레소 홈페이지 > 마이페이지(로그인후)"
             android:fontFamily="@font/font_light"
             android:includeFontPadding="false"
             android:textSize="13sp"/>
