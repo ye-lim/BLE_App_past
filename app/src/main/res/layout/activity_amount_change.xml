@@ -823,20 +823,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.9"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:gravity="center">
-
+                <ImageView
+                    android:id="@+id/refresh_amount"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/refresh"/>
                 <Button
                     android:id="@+id/sub_amount"
                     android:layout_width="100dp"
                     android:layout_height="29dp"
-                    android:background="@xml/login_id"
+                    android:background="@xml/main_btn"
                     android:backgroundTint="#FECD07"
                     android:text="적용하기"
                     android:textColor="@color/black"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
-
+                <LinearLayout
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
         </LinearLayout>
