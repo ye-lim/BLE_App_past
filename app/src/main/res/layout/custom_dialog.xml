@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@xml/round_edge">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_medium"
+            android:includeFontPadding="false"
+            android:text ="20% 할인 쿠폰 발급!"
+            android:textColor="#fbb100"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/serial_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#1e1e1e"
+            android:text="시리얼 번호를 발급중입니다.."
+            android:fontFamily="@font/font_demi_light"
+            android:includeFontPadding="false"
+            android:textSize="16sp"
+            android:enabled="true"
+            android:textIsSelectable="true"
+            android:focusable="true"
+            android:longClickable="true"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#1e1e1e"
+            android:text="      '메디프레소 홈페이지 > 마이페이지 > 쿠폰'      "
+            android:fontFamily="@font/font_light"
+            android:includeFontPadding="false"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#1e1e1e"
+            android:text="에서 쿠폰인증번호를 등록하세요."
+            android:fontFamily="@font/font_light"
+            android:includeFontPadding="false"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#1e1e1e"
+            android:text="( 이 쿠폰은 계정당 1개만 사용 가능합니다 )"
+            android:fontFamily="@font/font_light"
+            android:includeFontPadding="false"
+            android:textSize="11sp"/>
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:fontFamily="@font/font_medium"
+                android:includeFontPadding="false"
+                android:id="@+id/cancelButton"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="다시 보지 않음"
+                android:textColor="#ffffff"
+                android:textSize="16dp"
+                android:background="#555555"/>
+
+
+            <Button
+                android:fontFamily="@font/font_medium"
+                android:includeFontPadding="false"
+                android:id="@+id/okButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="확인"
+                android:textColor="#091f3f"
+                android:textSize="16dp"
+                android:background="#ffce08"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
