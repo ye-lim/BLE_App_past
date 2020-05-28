@@ -16,6 +16,7 @@ public class DesignedDialog extends Dialog implements View.OnClickListener {
     private Context mContext;
     private TextView btn_cancel;
     private TextView btn_ok;
+    private Fragment nextFragment;
 
     public DesignedDialog(@NonNull Context context) {
         super(context);
@@ -43,7 +44,7 @@ public class DesignedDialog extends Dialog implements View.OnClickListener {
 
             case R.id.btn_ok:
                 dismiss();
-                Fragment nextFragment = DeviceControlActivity.fragmentStack.pop();
+                nextFragment = DeviceControlActivity.fragmentStack.pop();
                 DeviceControlActivity.fragmentManager.beginTransaction().remove(nextFragment).commit();
                 DeviceControlActivity.device_con_view.setVisibility(View.VISIBLE);
                 if(DeviceControlActivity.stateView.getText().toString().equals("가열중")){
@@ -56,4 +57,5 @@ public class DesignedDialog extends Dialog implements View.OnClickListener {
                 break;
         }
     }
+
 }
